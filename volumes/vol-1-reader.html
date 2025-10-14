@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBM Magazine Reader</title>
+  <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+  <link rel="preconnect" href="https://use.typekit.net">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(230, 0, 38, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 71, 187, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 209, 0, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #root {
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes pageFlip {
+      0% { transform: perspective(2000px) rotateY(0deg); opacity: 1; }
+      50% { transform: perspective(2000px) rotateY(-90deg); opacity: 0.7; }
+      100% { transform: perspective(2000px) rotateY(-180deg); opacity: 0; }
+    }
+
+    @keyframes pageFlipIn {
+      0% { transform: perspective(2000px) rotateY(180deg); opacity: 0; }
+      50% { transform: perspective(2000px) rotateY(90deg); opacity: 0.7; }
+      100% { transform: perspective(2000px) rotateY(0deg); opacity: 1; }
+    }
+
+    .page-flip-out {
+      animation: pageFlip 0.6s ease-in-out forwards;
+    }
+
+    .page-flip-in {
+      animation: pageFlipIn 0.6s ease-in-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const PDFPage = ({ pdf, pageNum, className }) => {
+      const canvasRef = useRef(null);
+
+      useEffect(() => {
+        if (pdf && pageNum && canvasRef.current) {
+          pdf.getPage(pageNum).then(page => {
+            const scale = 2.5;
+            const viewport = page.getViewport({ scale });
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            page.render({
+              canvasContext: context,
+              viewport: viewport
+            });
+          }).catch(err => console.error('Error rendering page:', err));
+        }
+      }, [pdf, pageNum]);
+
+      return <canvas ref={canvasRef} className={className} />;
+    };
+
+    const PDFMagazineReader = () => {
+      const [pdf, setPdf] = useState(null);
+      const [numPages, setNumPages] = useState(0);
+      const [currentPage, setCurrentPage] = useState(1); // Current PDF page
+      const [zoom, setZoom] = useState(1);
+      const [isFullscreen, setIsFullscreen] = useState(false);
+      const [showThumbnails, setShowThumbnails] = useState(false);
+      const [isFlipping, setIsFlipping] = useState(false);
+      const [flipDirection, setFlipDirection] = useState('');
+      const containerRef = useRef(null);
+      const [loading, setLoading] = useState(true);
+      const [thumbnails, setThumbnails] = useState([]);
+
+      useEffect(() => {
+        loadPDF();
+      }, []);
+
+      // Add keyboard navigation
+      useEffect(() => {
+        const handleKeyPress = (e) => {
+          if (showThumbnails) return; // Don't navigate when thumbnails are open
+          
+          if (e.key === 'ArrowRight' && !isFlipping && currentPage < numPages) {
+            nextPage();
+          } else if (e.key === 'ArrowLeft' && !isFlipping && currentPage > 1) {
+            prevPage();
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+      }, [currentPage, numPages, isFlipping, showThumbnails]);
+
+      const loadPDF = async () => {
+        try {
+          const pdfjsLib = window['pdfjs-dist/build/pdf'];
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+          const response = await fetch('./fbm-issue-1.pdf');
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const fileData = await response.arrayBuffer();
+          const loadingTask = pdfjsLib.getDocument({ data: fileData });
+          const pdfDoc = await loadingTask.promise;
+          
+          setPdf(pdfDoc);
+          setNumPages(pdfDoc.numPages);
+          
+          const thumbPromises = [];
+          for (let i = 1; i <= pdfDoc.numPages; i++) {
+            thumbPromises.push(renderThumbnail(pdfDoc, i));
+          }
+          const renderedThumbs = await Promise.all(thumbPromises);
+          setThumbnails(renderedThumbs);
+
+          setLoading(false);
+        } catch (error) {
+          console.error('Error loading PDF:', error);
+          alert('Error loading PDF: ' + error.message);
+          setLoading(false);
+        }
+      };
+      
+      const renderThumbnail = async (pdfDoc, pageNum) => {
+        const page = await pdfDoc.getPage(pageNum);
+        const scale = 0.5;
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        return canvas.toDataURL();
+      };
+
+      const nextPage = () => {
+        if (currentPage < numPages) {
+          setFlipDirection('next');
+          setIsFlipping(true);
+          setTimeout(() => {
+            setCurrentPage(currentPage + 1);
+            setIsFlipping(false);
+          }, 600);
+        }
+      };
+
+      const prevPage = () => {
+        if (currentPage > 1) {
+          setFlipDirection('prev');
+          setIsFlipping(true);
+          setTimeout(() => {
+            setCurrentPage(currentPage - 1);
+            setIsFlipping(false);
+          }, 600);
+        }
+      };
+
+      const goToPage = (pageIndex) => {
+        setCurrentPage(pageIndex + 1);
+        setShowThumbnails(false);
+      };
+
+      const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.25, 2));
+      const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.25, 0.5));
+
+      const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+          containerRef.current?.requestFullscreen();
+          setIsFullscreen(true);
+        } else {
+          document.exitFullscreen();
+          setIsFullscreen(false);
+        }
+      };
+
+      const ChevronLeft = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>);
+      const ChevronRight = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>);
+      const ZoomIn = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" /></svg>);
+      const ZoomOut = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" /></svg>);
+      const Maximize = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>);
+      const Grid = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>);
+      const X = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>);
+
+      if (loading) {
+        return (
+          <div className="flex items-center justify-center h-screen">
+            <div className="text-center animate-float">
+              <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-yellow-400 mx-auto mb-6"></div>
+              <p className="text-white text-2xl font-bold tracking-wide" style={{ fontFamily: '"alfarn", serif' }}>Loading Magazine...</p>
+              <p className="text-gray-300 text-sm mt-2" style={{ fontFamily: '"neue-kabel", sans-serif' }}>Preparing your reading experience</p>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
+          {/* Top Controls */}
+          <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/90 via-black/60 to-transparent backdrop-blur-md p-6">
+            <div className="flex items-center justify-between max-w-7xl mx-auto">
+              <a 
+                href="https://faunbymoonlight.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white font-bold text-2xl tracking-wide hover:opacity-80 transition-opacity cursor-pointer" 
+                style={{ fontFamily: '"alfarn", serif', textDecoration: 'none' }}
+              >
+                <span style={{ color: '#E60026' }}>Faun</span>{' '}
+                <span style={{ color: '#0047BB' }}>by</span>{' '}
+                <span style={{ color: '#FFD100' }}>Moonlight</span>
+              </a>
+              <div className="flex items-center gap-3 bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+                <button onClick={handleZoomOut} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110" disabled={zoom <= 0.5}>
+                  <ZoomOut className="w-5 h-5 text-white" />
+                </button>
+                <span className="text-white px-2 font-semibold min-w-[60px] text-center" style={{ fontFamily: '"neue-kabel", sans-serif' }}>{Math.round(zoom * 100)}%</span>
+                <button onClick={handleZoomIn} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110" disabled={zoom >= 2}>
+                  <ZoomIn className="w-5 h-5 text-white" />
+                </button>
+                <div className="w-px h-6 bg-white/20 mx-1"></div>
+                <button onClick={() => setShowThumbnails(!showThumbnails)} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110">
+                  <Grid className="w-5 h-5 text-white" />
+                </button>
+                <button onClick={toggleFullscreen} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110">
+                  <Maximize className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Single PDF Page Display */}
+          <div className="flex items-center justify-center h-full pt-24 pb-24">
+            <div
+              className={`relative ${isFlipping ? (flipDirection === 'next' ? 'page-flip-out' : 'page-flip-in') : ''}`}
+              style={{
+                transform: `scale(${zoom})`,
+                transition: isFlipping ? 'none' : 'transform 0.3s ease',
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              <PDFPage 
+                pdf={pdf} 
+                pageNum={currentPage} 
+                className="h-[75vh] w-auto shadow-2xl rounded-sm"
+              />
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1 || isFlipping}
+            className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full transition-all disabled:opacity-20 disabled:cursor-not-allowed z-10 border border-white/20 hover:scale-110 hover:border-white/40"
+          >
+            <ChevronLeft className="w-8 h-8 text-white" />
+          </button>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === numPages || isFlipping}
+            className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full transition-all disabled:opacity-20 disabled:cursor-not-allowed z-10 border border-white/20 hover:scale-110 hover:border-white/40"
+          >
+            <ChevronRight className="w-8 h-8 text-white" />
+          </button>
+
+          {/* Bottom Page Counter */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent backdrop-blur-md p-6">
+            <div className="text-center">
+              <div className="inline-block bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
+                <span className="text-white font-semibold text-lg" style={{ fontFamily: '"neue-kabel", sans-serif' }}>
+                  Spread {currentPage} of {numPages}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Thumbnails Panel */}
+          {showThumbnails && (
+            <div className="absolute inset-0 bg-black/95 backdrop-blur-xl z-30 overflow-auto p-8">
+              <button onClick={() => setShowThumbnails(false)} className="fixed top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm border border-white/20 transition-all hover:scale-110">
+                <X className="w-6 h-6 text-white" />
+              </button>
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 max-w-7xl mx-auto mt-16">
+                {thumbnails.map((thumbSrc, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToPage(index)}
+                    className={`relative group cursor-pointer transition-all hover:scale-105 ${
+                      currentPage === index + 1
+                        ? 'ring-4 ring-yellow-400 shadow-lg shadow-yellow-400/50'
+                        : 'hover:ring-2 hover:ring-white/30'
+                    } rounded-lg overflow-hidden`}
+                  >
+                    <img src={thumbSrc} alt={`Spread ${index + 1}`} className="w-full h-auto" />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent text-white text-center py-2 text-sm font-semibold">
+                      Spread {index + 1}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+    
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<PDFMagazineReader />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Urgent - Faun by Moonlight</title>
+    <meta name="title" content="Urgent - Faun by Moonlight">
+    <meta name="description" content="Join Faun by Moonlight in supporting the Palestine Children's Relief Fund to provide medical care and humanitarian relief to children in Gaza.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://faunbymoonlight.com/urgent">
+    <meta property="og:title" content="Urgent - Faun by Moonlight">
+    <meta property="og:description" content="Help us support children in Gaza through the Palestine Children's Relief Fund.">
+    <meta property="og:image" content="https://faunbymoonlight.com/images/2.png">
+    
+    <!-- Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://use.typekit.net">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f8f8f8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            
+            background-image: url('images/2.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        @media screen and (max-width: 1400px) {
+            body {
+                background-size: auto 100vh;
+                background-position: center center;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            body {
+                background-size: 120vw auto;
+                background-position: center center;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            body {
+                background-image: url('images/2-mobile.png');
+                background-size: cover;
+                background-position: center center;
+                background-attachment: scroll;
+                min-height: 100vh;
+                min-height: 100svh;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                background-size: 150vw auto;
+                background-position: center center;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            body {
+                background-size: 200vw auto;
+                background-position: center center;
+            }
+        }
+
+        @media screen and (max-width: 280px) {
+            body {
+                background-size: contain;
+                background-position: center top;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .nav-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: none;
+            border: none;
+            color: #d0d0d0;
+            padding: 12px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff;
+            text-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.8),
+                0 0 12px rgba(255, 255, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: #f8f8f8;
+            transition: all 0.3s ease;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+            padding: 60px 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .text-box {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 4px solid #ffffff;
+            border-radius: 12px;
+            padding: 50px;
+            max-width: 900px;
+            text-align: left;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .word-faun { color: #E60026; }
+        .word-by { color: #0047BB; }
+        .word-moonlight { color: #FFD100; }
+
+        .content-text {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e8e8e8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-align: justify;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-text a {
+            color: #4A9EFF;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .content-text a:hover {
+            color: #ffffff;
+        }
+
+        .content-text ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-text strong {
+            color: #ffffff;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .signature {
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        .resources-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .resources-section h3 {
+            font-family: "alfarn", serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .resources-section h4 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .resources-section ul {
+            margin: 0 0 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .resources-section li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .resources-section a {
+            color: #4A9EFF;
+            text-decoration: underline;
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+
+        .resources-section a:hover {
+            color: #ffffff;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: #d0d0d0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            body::before {
+                background: rgba(0, 0, 0, 0.75);
+            }
+
+            .nav-header {
+                padding: 20px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-tabs {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                text-align: center;
+            }
+
+            #nav-toggle:checked + .nav-tabs {
+                display: flex;
+            }
+
+            .main-wrapper {
+                padding: 40px 15px;
+            }
+
+            .text-box {
+                padding: 30px;
+                max-width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                border-width: 3px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .content-text {
+                font-size: 1.2rem;
+                text-align: left;
+            }
+
+            .resources-section h3 {
+                font-size: 1.5rem;
+            }
+            
+            .resources-section h4 {
+                font-size: 1.2rem;
+                margin-top: 1.5rem;
+            }
+            
+            .resources-section ul {
+                padding-left: 1rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .text-box {
+                padding: 20px;
+                border-radius: 8px;
+                background: rgba(0, 0, 0, 0.85);
+                border-width: 3px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .content-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-header">
+        <a href="/" class="logo" id="logo">Faun by Moonlight</a>
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle">
+        <div class="nav-tabs">
+            <a href="/who-we-are" class="nav-tab">Who We Are</a>
+            <a href="/issues" class="nav-tab">Issues</a>
+            <a href="/submissions" class="nav-tab">Submit Your Work</a>
+            <a href="/faq" class="nav-tab">FAQ</a>
+            <a href="/support-us" class="nav-tab">Support Us</a>
+            <a href="/urgent" class="nav-tab active">Urgent Appeal</a>
+            <a href="/contact" class="nav-tab">Contact</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+        <article class="text-box">
+            <h1 class="page-title">Urgent</h1>
+            <div class="content-text">
+                <p>When we look at history, hindsight likes to tell us we would've acted better, more humanely in the face of great tragedies, more urgently if those suffering asked for our help.</p>
+                
+                <p>More than 50,000 children have been killed or wounded in Palestine since October 7th, 2023. This means at least one Palestinian child has been killed or wounded every hour, on average, over nearly 23 months of war. By mid-December 2023, 1,000 children had already lost one or both legs, and at least 21,000 children have been left permanently disabled.</p>
+                
+                <p>These children are asking for your help. We, at Faun by Moonlight, are asking for your help.</p>
+                
+                <img src="images/2.jpg" alt="Support Palestine's Children" class="content-image">
+                
+                <p>We encourage you to donate to the Palestine Children's Relief Fund (PCRF) at <a href="https://www.pcrf.net/donate" target="_blank" rel="noopener">https://www.pcrf.net/donate</a>. The PCRF is a nonprofit humanitarian organization dedicated to providing medical care and humanitarian relief to children in the Middle East, regardless of their religion or nationality. Since 1991, they've been sending volunteer medical teams to provide free surgeries and treatments, sponsoring children who need specialized care abroad, building pediatric cancer departments, providing medical equipment and humanitarian aid, and training local doctors and nurses. In Gaza specifically, the PCRF is one of the few organizations still able to provide critical medical supplies, emergency care, and life-saving treatment to injured and sick children.</p>
+                
+                <p>Readers who send us proof of their donation will be included in our "FBM THANKS" section recognizing you as part of a community that chose to act, as well as a personal email from our editor-in-chief thanking you for your contribution. If you donate $100 or more, we will offer you:</p>
+                
+                <ul>
+                    <li>One full year of free monthly issues</li>
+                    <li>Free access to all planned future exclusive content</li>
+                    <li>Your name in our "FBM THANKS" section, mentioning your invaluable contribution</li>
+                    <li>A personal thank you message from our editor-in-chief</li>
+                </ul>
+                
+                <p>If you are kind enough to donate 200 dollars or more, you will receive access to all benefits above, plus:</p>
+                
+                <ul>
+                    <li>Free line edits for your work, short story or novel, even if it is not published by us.</li>
+                    <li>A letter of recommendation for your future submissions to other magazines</li>
+                </ul>
+                
+                <p>If you donated but don't wish to be named, you can still enjoy all other benefits above.</p>
+                
+                <p>We understand if you are unable to donate—Times are tough, cost of living is high, and the realities of each of our daily lives can prohibit us from acting the way our hearts wish us to. In these cases, engage and share content discussing these atrocities. Awareness is a powerful tool in its own right.</p>
+                
+                <p>We hope that you decide to act. We hope we never again need to wait for hindsight to understand what must be done.</p>
+                
+                <p class="signature">Thank you,<br>
+                Faun by Moonlight Team</p>
+                
+                <img src="images/1.webp" alt="Faun by Moonlight" class="content-image">
+                
+                <div class="resources-section">
+                    <h3>You can find more information on the ongoing humanitarian crisis in Palestine here:</h3>
+                    
+                    <h4>Children in Gaza</h4>
+                    <ul>
+                        <li>UNICEF - Children in Gaza need lifesaving support: <a href="https://www.unicef.org/emergencies/children-gaza-need-lifesaving-support" target="_blank" rel="noopener">https://www.unicef.org/emergencies/children-gaza-need-lifesaving-support</a></li>
+                        <li>UNICEF - 50,000+ children killed or injured: <a href="https://www.unicef.org/press-releases/unimaginable-horrors-more-50000-children-reportedly-killed-or-injured-gaza-strip" target="_blank" rel="noopener">https://www.unicef.org/press-releases/unimaginable-horrors-more-50000-children-reportedly-killed-or-injured-gaza-strip</a></li>
+                    </ul>
+                    
+                    <h4>Attacks on Hospitals</h4>
+                    <ul>
+                        <li>UN OHCHR report on hospital attacks: <a href="https://www.ohchr.org/en/press-releases/2024/12/pattern-israeli-attacks-gaza-hospitals-raises-grave-concerns-report" target="_blank" rel="noopener">https://www.ohchr.org/en/press-releases/2024/12/pattern-israeli-attacks-gaza-hospitals-raises-grave-concerns-report</a></li>
+                        <li>WHO - Health system at breaking point: <a href="https://www.who.int/news/item/22-05-2025-health-system-at-breaking-point-as-hostilities-further-intensify--who-warns" target="_blank" rel="noopener">https://www.who.int/news/item/22-05-2025-health-system-at-breaking-point-as-hostilities-further-intensify--who-warns</a></li>
+                    </ul>
+                    
+                    <h4>Journalists Killed</h4>
+                    <ul>
+                        <li>Committee to Protect Journalists - Gaza casualties tracker: <a href="https://cpj.org/2023/10/journalist-casualties-in-the-israel-gaza-conflict/" target="_blank" rel="noopener">https://cpj.org/2023/10/journalist-casualties-in-the-israel-gaza-conflict/</a></li>
+                        <li>CPJ - 2024 deadliest year for journalists: <a href="https://cpj.org/special-reports/2024-is-deadliest-year-for-journalists-in-cpj-history-almost-70-percent-killed-by-israel/" target="_blank" rel="noopener">https://cpj.org/special-reports/2024-is-deadliest-year-for-journalists-in-cpj-history-almost-70-percent-killed-by-israel/</a></li>
+                    </ul>
+                    
+                    <h4>Starvation and Famine</h4>
+                    <ul>
+                        <li>WHO - Famine confirmed in Gaza: <a href="https://www.who.int/news/item/22-08-2025-famine-confirmed-for-first-time-in-gaza" target="_blank" rel="noopener">https://www.who.int/news/item/22-08-2025-famine-confirmed-for-first-time-in-gaza</a></li>
+                        <li>WHO - Aid blockade causing deaths: <a href="https://www.who.int/news/item/12-05-2025-people-in-gaza-starving--sick-and-dying-as-aid-blockade-continues" target="_blank" rel="noopener">https://www.who.int/news/item/12-05-2025-people-in-gaza-starving--sick-and-dying-as-aid-blockade-continues</a></li>
+                    </ul>
+                    
+                    <h4>International Court of Justice Genocide Case</h4>
+                    <ul>
+                        <li>ICJ case page: <a href="https://www.icj-cij.org/case/192" target="_blank" rel="noopener">https://www.icj-cij.org/case/192</a></li>
+                        <li>Human Rights Watch - ICJ orders Israel to prevent genocide: <a href="https://www.hrw.org/news/2024/01/26/gaza-world-court-orders-israel-prevent-genocide" target="_blank" rel="noopener">https://www.hrw.org/news/2024/01/26/gaza-world-court-orders-israel-prevent-genocide</a></li>
+                    </ul>
+                    
+                    <h4>The Palestine Children's Relief Fund</h4>
+                    <ul>
+                        <li>Donate to PCRF: <a href="https://www.pcrf.net/donate" target="_blank" rel="noopener">https://www.pcrf.net/donate</a></li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
+            <a href="/contact" class="footer-link" aria-label="Contact us">✉</a>
+        </div>
+        <div class="copyright">
+            © 2025 Faun by Moonlight. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function colorLogo() {
+            const logo = document.getElementById('logo');
+            const colors = ['word-faun', 'word-by', 'word-moonlight'];
+            const words = logo.textContent.split(' ');
+            logo.innerHTML = words.map((word, i) => 
+                `<span class="${colors[i]}">${word}</span>`
+            ).join(' ');
+        }
+
+        window.addEventListener('load', () => {
+            colorLogo();
+        });
+    </script>
+</body>
+</html>
