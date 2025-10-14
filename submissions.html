@@ -382,7 +382,6 @@
             text-decoration: none;
         }
         
-        /* --- NEW CSS FOR PAYMENT OPTIONS --- */
         .payment-options-container {
             display: flex;
             flex-direction: column;
@@ -395,14 +394,15 @@
             padding: 1.5rem;
             border-radius: 8px;
             width: 100%;
-            position: relative; /* Needed for the badge */
+            position: relative;
         }
         
+        /* --- COLOR FIX STARTS HERE --- */
         .payment-option.preferred {
-            border: 3px solid #005eff;
+            border: 3px solid #0047BB; /* Changed color */
             background: rgba(0, 71, 187, 0.15);
-            transform: scale(1.02); /* Make it slightly bigger */
-            box-shadow: 0 0 20px rgba(0, 110, 255, 0.4);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 71, 187, 0.4); /* Changed color */
         }
 
         .preferred-badge {
@@ -410,7 +410,7 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: #005eff;
+            background: #0047BB; /* Changed color */
             color: #ffffff;
             padding: 5px 15px;
             border-radius: 20px;
@@ -419,6 +419,7 @@
             font-family: "dunbar-tall", sans-serif;
             letter-spacing: 1px;
         }
+        /* --- COLOR FIX ENDS HERE --- */
 
         .payment-option.secondary {
             border: 2px solid #555;
@@ -457,8 +458,6 @@
             height: 1px;
             background: #555;
         }
-        /* --- END OF NEW CSS --- */
-
 
         .footer {
             position: relative;
@@ -491,7 +490,6 @@
             color: #b0b0b0;
         }
 
-        /* Mobile Styles */
         @media (max-width: 768px) {
             .nav-header {
                 padding: 15px 20px;
@@ -749,8 +747,8 @@
                                         <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.6;">
                                             Our Inaugural November 2025 issue is right around the corner! Pre-order now and be the first to read Issue Nº1 of Faun by Moonlight. You will also be featured in our "FBM Thanks" section!
                                         </p>
-                                        <a href="https://faunbymoonlight.store/products/november-2025-faun-by-moonlight-issue" target="_blank" style="display: inline-block; background: #005eff; color: #ffffff; padding: 12px 30px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: 2px solid #005eff;">Pre-Order →</a>
-                                        <div class="payment-note" style="border-left-color: #005eff; margin-top: 1.5rem;">
+                                        <a href="https://faunbymoonlight.store/products/november-2025-faun-by-moonlight-issue" target="_blank" style="display: inline-block; background: #0047BB; color: #ffffff; padding: 12px 30px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: 2px solid #0047BB;">Pre-Order →</a>
+                                        <div class="payment-note" style="border-left-color: #0047BB; margin-top: 1.5rem;">
                                             <strong>IMPORTANT:</strong> We'll automatically match your submission to your payment using your email address. If you used different emails for your submission and payment, don't worry—we can match them using your name instead. If you submit under a pen name, please include your legal name in your email so we can connect your payment.
                                         </div>
                                     </div>
