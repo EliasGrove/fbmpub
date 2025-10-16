@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read Volume 1 - Faun by Moonlight Literary Magazine</title>
+    <title>Volume 1 - Faun by Moonlight Literary Magazine</title>
     <meta name="description" content="Read Volume 1: The Tyranny of Narrative from Faun by Moonlight.">
+    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <link rel="preconnect" href="https://use.typekit.net">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
-        /* --- Basic Page Styles (Same as before) --- */
+        /* --- Styles from your main site --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "neue-kabel", sans-serif; 
@@ -17,7 +25,7 @@
             display: flex; 
             flex-direction: column; 
             position: relative;
-            background-image: url('../images/4.png'); 
+            background-image: url('images/4.png'); 
             background-repeat: no-repeat;
             background-position: center center; 
             background-attachment: fixed; 
@@ -25,260 +33,281 @@
             isolation: isolate;
         }
         body::before { 
-            content: ''; position: fixed; inset: 0; 
-            background: rgba(0, 0, 0, 0.6); z-index: -1; 
+            content: ''; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0, 0, 0, 0.6); 
+            z-index: -1; 
         }
-        .nav-header { padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); z-index: 10; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
-        .footer { margin-top: 40px; padding: 20px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); text-align: center; }
-        .main-wrapper { padding: 40px 20px; text-align: center; flex: 1; z-index: 2; }
-        .content-container { max-width: 1200px; margin: 0 auto; }
-        .volume-header { text-align: center; margin-bottom: 40px; }
-        .volume-title { font-family: "alfarn", serif; font-size: 2.5rem; }
-        
-        /* --- Reader Styles (Same as before) --- */
-        .reader-container {
-            position: relative; width: 100%; height: 0;
-            padding-top: max(60%, 400px); margin: 0 auto;
-            border-radius: 8px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        .nav-header { 
+            padding: 20px 40px; 
+            background: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(10px); 
+            position: relative;
+            z-index: 10;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
         }
-        .reader-iframe {
-            position: absolute; top: 0; left: 0; width: 100%;
-            height: 100%; border: none;
+        .logo { 
+            font-family: "alfarn", serif; 
+            font-size: 1.8rem; 
+            color: #f8f8f8; 
+            text-decoration: none; 
         }
-
-        /* --- NEW Dropdown Download Button Styles --- */
-        .download-section {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .dropdown-button-container {
-            position: relative; /* Crucial for positioning dropdown and tooltip */
-        }
-        .main-button {
-            padding: 15px 35px;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 220px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-        .main-button.pdf-button { background-color: #E60026; /* Bauhaus Red */ }
-        .main-button.epub-button { background-color: #0047BB; /* Bauhaus Blue */ }
-        .main-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: rgba(30, 30, 30, 0.95);
-            backdrop-filter: blur(5px);
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            z-index: 100;
-            overflow: hidden;
-        }
-        .dropdown-button-container:hover .dropdown-content {
-            display: block; /* Show on desktop hover */
-        }
-        .dropdown-content a {
-            display: block;
-            padding: 15px 20px;
-            color: #d0d0d0;
-            text-decoration: none;
-            font-family: "neue-kabel", sans-serif;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-        .dropdown-content a:hover {
-            background-color: #FFD100; /* Bauhaus Yellow */
-            color: #1a1a1a;
-        }
-
-        /* --- NEW Tooltip Styles --- */
-        .tooltip-text {
-            visibility: hidden;
-            opacity: 0;
-            width: 250px;
-            background-color: #1a1a1a;
-            color: #fff;
+        .footer { 
+            padding: 15px 40px; 
+            background: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(15px); 
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            position: relative;
+            z-index: 2;
             text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 101;
-            bottom: 115%; /* Position above the button */
-            left: 50%;
-            margin-left: -125px; /* Use half of the width to center */
-            transition: opacity 0.3s;
-            border: 1px solid #FFD100;
-            font-size: 0.9rem;
         }
-        .tooltip-text.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-        /* Show tooltip on desktop hover */
-        .dropdown-button-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
 
-        /* --- NEW E-INK Notice Styles --- */
-        .e-ink-notice {
-            margin-top: 25px;
-            font-size: 0.9rem;
-            color: #c0c0c0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+        /* --- NEW: Container to hold the reader --- */
+        #reader-container {
+            flex: 1; /* Allows the reader to fill the available space */
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Style for the reader's root element */
+        #root {
+            height: 100%;
+            width: 100%;
         }
 
-        /* --- Password Protection Styles (Same as before) --- */
-        #password-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
-            z-index: 9999; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff;
+        /* Animation from the reader code */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
-        #password-box { background: rgba(20, 20, 20, 0.5); padding: 40px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        #password-box h2 { margin-bottom: 20px; font-family: "dunbar-tall", sans-serif; }
-        #password-input { padding: 12px; width: 250px; border: 1px solid #555; border-radius: 5px; background: #333; color: #fff; font-size: 1rem; margin-right: 10px; }
-        #password-submit { padding: 12px 20px; border: none; border-radius: 5px; background: #FFD100; color: #1a1a1a; font-weight: bold; cursor: pointer; }
-        #password-error { margin-top: 15px; color: #E60026; font-weight: bold; display: none; }
-        #protected-content { display: none; }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
-    <div id="password-overlay">
-        <div id="password-box">
-            <h2>Enter Password to Access</h2>
-            <form id="password-form">
-                <input type="password" id="password-input" placeholder="Password...">
-                <button type="submit" id="password-submit">Unlock</button>
-            </form>
-            <p id="password-error">Incorrect Password. Please try again.</p>
+    <nav class="nav-header">
+        <a href="index.html" class="logo">Faun by Moonlight</a>
+        </nav>
+    
+    <main class="main-wrapper">
+        <div id="reader-container">
+            <div id="root"></div>
         </div>
-    </div>
+    </main>
 
-    <div id="protected-content">
-        <nav class="nav-header">
-             <a href="../index.html" class="logo">Faun by Moonlight</a>
-             </nav>
-        
-        <main class="main-wrapper">
-            <div class="content-container">
-                <div class="volume-header">
-                    <h1 class="volume-title">Read Volume 1: The Tyranny of Narrative</h1>
-                </div>
-                
-                <div class="reader-container">
-                    <iframe class="reader-iframe" src="https://online.fliphtml5.com/faunbymoonlight/pkeb/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" ></iframe>
-                </div>
+    <footer class="footer">
+        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
 
-                <div class="download-section">
-                    <div class="dropdown-button-container">
-                        <button class="main-button pdf-button">Download PDF ▼</button>
-                        <div class="dropdown-content">
-                            <a href="#" id="pdf-original-link" download>Original</a>
-                            <a href="#" id="pdf-comfort-link" download>Comfort Reading</a>
-                        </div>
-                    </div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-                    <div class="dropdown-button-container" id="epub-tooltip-parent">
-                        <span class="tooltip-text" id="epub-tooltip">Design EPUBs work great with Apple Books, Google Books, and Rakuten Kobo. For e-ink readers, select the "E-ink version" for a better experience.</span>
-                        <button class="main-button epub-button">Download EPUB ▼</button>
-                        <div class="dropdown-content">
-                            <a href="#" id="epub-design-link" download>Design EPUB</a>
-                            <a href="#" id="epub-eink-link" download>E-INK device EPUB</a>
-                        </div>
-                    </div>
-                </div>
+        // The PDFPage component remains the same
+        const PDFPage = ({ pdf, pageNum, className }) => {
+            const canvasRef = useRef(null);
+            useEffect(() => {
+                if (pdf && pageNum && canvasRef.current) {
+                    pdf.getPage(pageNum).then(page => {
+                        const scale = 2.5;
+                        const viewport = page.getViewport({ scale });
+                        const canvas = canvasRef.current;
+                        const context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        page.render({ canvasContext: context, viewport: viewport });
+                    }).catch(err => console.error('Error rendering page:', err));
+                }
+            }, [pdf, pageNum]);
+            return <canvas ref={canvasRef} className={className} />;
+        };
 
-                <p class="e-ink-notice">
-                    <strong>Notice:</strong> Due to the technical limitations of E-INK devices, we are unable to preserve the magazine's original design in that format. The E-INK version is plain text to ensure maximum readability and compatibility.
-                </p>
+        const PDFMagazineReader = () => {
+            // All the state variables (useState) remain the same
+            const [pdf, setPdf] = useState(null);
+            const [numPages, setNumPages] = useState(0);
+            const [currentPage, setCurrentPage] = useState(0);
+            const [zoom, setZoom] = useState(1);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [showThumbnails, setShowThumbnails] = useState(false);
+            const [isFlipping, setIsFlipping] = useState(false);
+            const [flipDirection, setFlipDirection] = useState('');
+            const containerRef = useRef(null);
+            const [loading, setLoading] = useState(true);
+            const [thumbnails, setThumbnails] = useState([]);
 
-            </div>
-        </main>
-        
-        <footer class="footer">
-            <p>© 2025 Faun by Moonlight. All rights reserved.</p>
-        </footer>
-    </div>
+            useEffect(() => {
+                loadPDF();
+            }, []);
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Password Protection Logic ---
-            const passwordForm = document.getElementById('password-form');
-            const passwordOverlay = document.getElementById('password-overlay');
-            const protectedContent = document.getElementById('protected-content');
-            const passwordInput = document.getElementById('password-input');
-            const passwordError = document.getElementById('password-error');
+            const loadPDF = async () => {
+                try {
+                    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-            // --- Your Base64 encoded password ---
-            const encodedPass = 'RmF1bjIwMjUh'; // PASTE YOUR ENCODED PASSWORD HERE
+                    // --- MODIFICATION: Load from obfuscated Google Drive link ---
+                    // 1. Get your direct download link: https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
+                    // 2. Prepend the CORS proxy: https://api.allorigins.win/raw?url=
+                    // 3. Encode the full URL using a Base64 encoder and paste it below.
+                    const encodedUrl = aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xcmQ3c25tOEVlcENiZ0NzZ3M5SUE3QzliMnhsQy1SZTgvdmlldz91c3A9c2hhcmVfbGluaw;
+                    const pdfUrl = atob(encodedUrl);
 
-            // --- Your Base64 encoded download links ---
-            const encodedPdfOriginal = '#'; // PASTE ENCODED PDF (ORIGINAL) LINK HERE
-            const encodedPdfComfort = '#';  // PASTE ENCODED PDF (COMFORT) LINK HERE
-            const encodedEpubDesign = '#';  // PASTE ENCODED EPUB (DESIGN) LINK HERE
-            const encodedEpubEink = '#';    // PASTE ENCODED EPUB (E-INK) LINK HERE
+                    const response = await fetch(pdfUrl);
+                    // --- END MODIFICATION ---
 
-            passwordForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const correctPassword = atob(encodedPass); 
+                    const fileData = await response.arrayBuffer();
+                    const loadingTask = pdfjsLib.getDocument({ data: fileData });
+                    const pdfDoc = await loadingTask.promise;
+                    
+                    setPdf(pdfDoc);
+                    setNumPages(pdfDoc.numPages);
+                    
+                    const thumbPromises = [];
+                    for (let i = 1; i <= pdfDoc.numPages; i++) {
+                        thumbPromises.push(renderThumbnail(pdfDoc, i));
+                    }
+                    const renderedThumbs = await Promise.all(thumbPromises);
+                    setThumbnails(renderedThumbs);
 
-                if (passwordInput.value === correctPassword) {
-                    // Password Correct
-                    passwordOverlay.style.display = 'none';
-                    protectedContent.style.display = 'flex';
-                    protectedContent.style.flexDirection = 'column';
-                    protectedContent.style.minHeight = '100vh';
-
-                    // Set the real download links after decoding
-                    document.getElementById('pdf-original-link').href = atob(encodedPdfOriginal);
-                    document.getElementById('pdf-comfort-link').href = atob(encodedPdfComfort);
-                    document.getElementById('epub-design-link').href = atob(encodedEpubDesign);
-                    document.getElementById('epub-eink-link').href = atob(encodedEpubEink);
-
+                    setLoading(false);
+                } catch (error) {
+                    console.error('Error loading PDF:', error);
+                    setLoading(false);
+                }
+            };
+            
+            // All other functions (renderThumbnail, nextPage, prevPage, etc.) remain the same
+            const renderThumbnail = async (pdfDoc, pageNum) => {
+                const page = await pdfDoc.getPage(pageNum);
+                const scale = 0.5;
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                return canvas.toDataURL();
+            };
+            const nextPage = () => { if (currentPage < numPages - 2) { setFlipDirection('next'); setIsFlipping(true); setTimeout(() => { setCurrentPage(currentPage + 2); setIsFlipping(false); }, 600); } };
+            const prevPage = () => { if (currentPage > 0) { setFlipDirection('prev'); setIsFlipping(true); setTimeout(() => { setCurrentPage(currentPage - 2); setIsFlipping(false); }, 600); } };
+            const goToPage = (pageIndex) => { setCurrentPage(pageIndex % 2 === 0 ? pageIndex : pageIndex - 1); setShowThumbnails(false); };
+            const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.25, 2));
+            const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.25, 0.5));
+            const toggleFullscreen = () => {
+                const readerElement = document.getElementById('reader-container');
+                if (!document.fullscreenElement) {
+                    readerElement?.requestFullscreen();
+                    setIsFullscreen(true);
                 } else {
-                    // Password Wrong
-                    passwordError.style.display = 'block';
-                    passwordInput.value = '';
+                    document.exitFullscreen();
+                    setIsFullscreen(false);
                 }
-            });
+            };
 
-            // --- Tooltip Logic for Mobile ---
-            const epubParent = document.getElementById('epub-tooltip-parent');
-            const epubTooltip = document.getElementById('epub-tooltip');
+            // All the SVG icon components remain the same
+            const ChevronLeft = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>);
+            const ChevronRight = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>);
+            const ZoomIn = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" /></svg>);
+            const ZoomOut = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" /></svg>);
+            const Maximize = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>);
+            const Grid = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>);
+            const X = ({ className }) => (<svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>);
 
-            epubParent.addEventListener('click', function() {
-                // This will toggle the tooltip on tap for touch devices
-                if (window.innerWidth <= 1024) { // Target tablets and phones
-                     const isVisible = epubTooltip.classList.contains('visible');
-                     if (isVisible) {
-                         epubTooltip.classList.remove('visible');
-                     } else {
-                         epubTooltip.classList.add('visible');
-                     }
-                }
-            });
-        });
+            if (loading) {
+                // The loading animation component remains the same
+                return (
+                    <div className="flex items-center justify-center h-full w-full" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
+                        <div className="text-center animate-float">
+                            <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-yellow-400 mx-auto mb-6"></div>
+                            <p className="text-white text-2xl font-bold tracking-wide">Loading Magazine...</p>
+                            <p className="text-gray-300 text-sm mt-2">Preparing your reading experience</p>
+                        </div>
+                    </div>
+                );
+            }
+            
+            // The main return statement with all the JSX remains the same
+            const commonPageClass = "h-[75vh] w-auto shadow-2xl rounded-sm";
+            return (
+                <div ref={containerRef} className="relative w-full h-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
+                    <style>{`
+                        @keyframes flip-left { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(-180deg); } }
+                        @keyframes flip-right { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(180deg); } }
+                        @keyframes flip-left-reverse { 0% { transform: rotateY(-180deg); } 100% { transform: rotateY(0deg); } }
+                        @keyframes flip-right-reverse { 0% { transform: rotateY(180deg); } 100% { transform: rotateY(0deg); } }
+                        .animate-flip-left { animation: flip-left 0.6s ease-in-out; }
+                        .animate-flip-right { animation: flip-right 0.6s ease-in-out; }
+                        .animate-flip-left-reverse { animation: flip-left-reverse 0.6s ease-in-out; }
+                        .animate-flip-right-reverse { animation: flip-right-reverse 0.6s ease-in-out; }
+                    `}</style>
+                    <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/90 via-black/60 to-transparent backdrop-blur-md p-6">
+                        <div className="flex items-center justify-between max-w-7xl mx-auto">
+                            <div className="text-white font-bold text-2xl tracking-wide">
+                                <span className="text-red-500">Faun</span> <span className="text-blue-500">by</span> <span className="text-yellow-400">Moonlight</span>
+                            </div>
+                            <div className="flex items-center gap-3 bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+                                <button onClick={handleZoomOut} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110" disabled={zoom <= 0.5}><ZoomOut className="w-5 h-5 text-white" /></button>
+                                <span className="text-white px-2 font-semibold min-w-[60px] text-center">{Math.round(zoom * 100)}%</span>
+                                <button onClick={handleZoomIn} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110" disabled={zoom >= 2}><ZoomIn className="w-5 h-5 text-white" /></button>
+                                <div className="w-px h-6 bg-white/20 mx-1"></div>
+                                <button onClick={() => setShowThumbnails(!showThumbnails)} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110"><Grid className="w-5 h-5 text-white" /></button>
+                                <button onClick={toggleFullscreen} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all hover:scale-110"><Maximize className="w-5 h-5 text-white" /></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center h-full pt-24 pb-24">
+                        <div className="relative flex gap-2" style={{ transform: `scale(${zoom})`, transition: 'transform 0.3s ease' }}>
+                            {currentPage < numPages && (
+                                <div className={`relative ${isFlipping && flipDirection === 'next' ? 'animate-flip-left' : ''} ${isFlipping && flipDirection === 'prev' ? 'animate-flip-left-reverse' : ''}`} style={{ transformStyle: 'preserve-3d', perspective: '2000px' }}>
+                                    <PDFPage pdf={pdf} pageNum={currentPage + 1} className={commonPageClass} />
+                                </div>
+                            )}
+                            {currentPage + 1 < numPages && (
+                                <div className={`relative ${isFlipping && flipDirection === 'next' ? 'animate-flip-right' : ''} ${isFlipping && flipDirection === 'prev' ? 'animate-flip-right-reverse' : ''}`} style={{ transformStyle: 'preserve-3d', perspective: '2000px' }}>
+                                    <PDFPage pdf={pdf} pageNum={currentPage + 2} className={commonPageClass} />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <button onClick={prevPage} disabled={currentPage === 0 || isFlipping} className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full transition-all disabled:opacity-20 disabled:cursor-not-allowed z-10 border border-white/20 hover:scale-110 hover:border-white/40"><ChevronLeft className="w-8 h-8 text-white" /></button>
+                    <button onClick={nextPage} disabled={currentPage >= numPages - 2 || isFlipping} className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 hover:bg-black/80 backdrop-blur-md rounded-full transition-all disabled:opacity-20 disabled:cursor-not-allowed z-10 border border-white/20 hover:scale-110 hover:border-white/40"><ChevronRight className="w-8 h-8 text-white" /></button>
+                    <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent backdrop-blur-md p-6">
+                        <div className="text-center">
+                            <div className="inline-block bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
+                                <span className="text-white font-semibold text-lg">Pages {currentPage + 1}-{Math.min(currentPage + 2, numPages)} of {numPages}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {showThumbnails && (
+                        <div className="absolute inset-0 bg-black/95 backdrop-blur-xl z-30 overflow-auto p-8">
+                            <button onClick={() => setShowThumbnails(false)} className="fixed top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm border border-white/20 transition-all hover:scale-110"><X className="w-6 h-6 text-white" /></button>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 max-w-7xl mx-auto mt-16">
+                                {thumbnails.map((thumbSrc, index) => (
+                                    <button key={index} onClick={() => goToPage(index)} className={`relative group cursor-pointer transition-all hover:scale-105 ${index === currentPage || index === currentPage + 1 ? 'ring-4 ring-yellow-400 shadow-lg shadow-yellow-400/50' : 'hover:ring-2 hover:ring-white/30'} rounded-lg overflow-hidden`}>
+                                        <img src={thumbSrc} alt={`Page ${index + 1}`} className="w-full h-auto" />
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent text-white text-center py-2 text-sm font-semibold">{index + 1}</div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+        
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PDFMagazineReader />);
     </script>
 </body>
 </html>
