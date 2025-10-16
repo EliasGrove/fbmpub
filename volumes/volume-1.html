@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volume 1 - Faun by Moonlight Literary Magazine</title>
-    <meta name="description" content="The Tyranny of Narrative - Faun by Moonlight's first volume featuring stories by Oly Weary and Eduardo Garcia, plus an essay by our editor in chief.">
+    <title>Read Volume 1 - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Read Volume 1: The Tyranny of Narrative from Faun by Moonlight.">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <style>
+        /* --- Basic Page Styles (Same as before) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "neue-kabel", sans-serif; 
@@ -16,7 +17,7 @@
             display: flex; 
             flex-direction: column; 
             position: relative;
-            background-image: url('images/4.png'); 
+            background-image: url('../images/4.png'); 
             background-repeat: no-repeat;
             background-position: center center; 
             background-attachment: fixed; 
@@ -24,401 +25,259 @@
             isolation: isolate;
         }
         body::before { 
-            content: ''; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0, 0, 0, 0.6); 
-            z-index: -1; 
+            content: ''; position: fixed; inset: 0; 
+            background: rgba(0, 0, 0, 0.6); z-index: -1; 
         }
+        .nav-header { padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); z-index: 10; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
+        .footer { margin-top: 40px; padding: 20px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); text-align: center; }
+        .main-wrapper { padding: 40px 20px; text-align: center; flex: 1; z-index: 2; }
+        .content-container { max-width: 1200px; margin: 0 auto; }
+        .volume-header { text-align: center; margin-bottom: 40px; }
+        .volume-title { font-family: "alfarn", serif; font-size: 2.5rem; }
         
-        /* Navigation */
-        .nav-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px 40px; 
-            background: rgba(0, 0, 0, 0.5); 
-            backdrop-filter: blur(10px); 
-            position: relative;
-            z-index: 10;
+        /* --- Reader Styles (Same as before) --- */
+        .reader-container {
+            position: relative; width: 100%; height: 0;
+            padding-top: max(60%, 400px); margin: 0 auto;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
-        .logo { 
-            font-family: "alfarn", serif; 
-            font-weight: 400; 
-            font-size: 1.8rem; 
-            color: #f8f8f8; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-            text-decoration: none; 
-            letter-spacing: 1px; 
+        .reader-iframe {
+            position: absolute; top: 0; left: 0; width: 100%;
+            height: 100%; border: none;
         }
-        .word-faun { color: #E60026; } 
-        .word-by { color: #0047BB; } 
-        .word-moonlight { color: #FFD100; }
-        
-        .nav-tabs { 
-            display: flex; 
-            gap: 30px; 
-            align-items: center;
+
+        /* --- NEW Dropdown Download Button Styles --- */
+        .download-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .nav-tab { 
-            font-family: "dunbar-tall", sans-serif; 
-            font-weight: 700; 
-            font-size: 1.1rem; 
-            letter-spacing: 1px; 
-            background: none; 
-            border: none; 
-            color: #d0d0d0; 
-            padding: 12px 20px; 
-            cursor: pointer; 
-            text-decoration: none; 
-            transition: all 0.3s ease; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
+        .dropdown-button-container {
+            position: relative; /* Crucial for positioning dropdown and tooltip */
         }
-        .nav-tab:hover, .nav-tab.active { 
-            color: #ffffff; 
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); 
-            transform: translateY(-1px); 
+        .main-button {
+            padding: 15px 35px;
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 220px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
-        
-        /* Dropdown for Volumes */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        .main-button.pdf-button { background-color: #E60026; /* Bauhaus Red */ }
+        .main-button.epub-button { background-color: #0047BB; /* Bauhaus Blue */ }
+        .main-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .dropdown-content {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
-            z-index: 20;
-            border-radius: 4px;
-            margin-top: 5px;
+            right: 0;
+            background-color: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            z-index: 100;
+            overflow: hidden;
         }
-        .dropdown:hover .dropdown-content {
+        .dropdown-button-container:hover .dropdown-content {
+            display: block; /* Show on desktop hover */
+        }
+        .dropdown-content a {
             display: block;
-        }
-        .dropdown-item {
+            padding: 15px 20px;
             color: #d0d0d0;
-            padding: 12px 20px;
             text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-        .dropdown-arrow {
-            font-size: 0.8em;
-            margin-left: 5px;
-        }
-        
-        /* Mobile Navigation */
-        .hamburger { 
-            display: none; 
-            flex-direction: column; 
-            justify-content: space-around; 
-            width: 30px; 
-            height: 25px; 
-            cursor: pointer; 
-        }
-        .hamburger span { 
-            width: 100%; 
-            height: 3px; 
-            background-color: #f8f8f8; 
-            transition: all 0.3s ease; 
-        }
-        #nav-toggle { display: none; }
-        
-        /* Main Content */
-        .main-wrapper { 
-            padding: 60px 20px; 
-            text-align: center; 
-            flex: 1; 
-            position: relative;
-            z-index: 2;
-        }
-        .content-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .volume-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .volume-number {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #FFD100;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-        .volume-title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-        }
-        .volume-subtitle {
             font-family: "neue-kabel", sans-serif;
-            font-size: 1.4rem;
-            color: #d0d0d0;
-            font-style: italic;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-        
-        .cover-section {
-            margin: 40px 0;
-        }
-        .issue-cover {
-            display: block;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 550px; /* <-- INCREASED FROM 400px */
-            height: auto;
-            border-radius: 8px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), 
-                        0 0 60px rgba(255, 215, 0, 0.2), 
-                        0 10px 25px rgba(0, 0, 0, 0.8);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .issue-cover:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), 
-                        0 0 70px rgba(255, 215, 0, 0.25), 
-                        0 12px 30px rgba(0, 0, 0, 0.85);
-        }
-        
-        .description-box {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 35px;
-            margin: 40px auto;
+            transition: all 0.2s ease;
             text-align: left;
         }
-        .description-text {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #e8e8e8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            margin-bottom: 25px;
-        }
-        .contributors {
-            font-family: "dunbar-tall", sans-serif;
-            font-size: 1.1rem;
-            color: #FFD100;
-            text-align: center;
-            margin-top: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-        
-        .purchase-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .purchase-button {
-            display: inline-block;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
+        .dropdown-content a:hover {
+            background-color: #FFD100; /* Bauhaus Yellow */
             color: #1a1a1a;
-            text-decoration: none;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, #FFD100, #ffed4e);
-            border: 3px solid #FFD100;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 15px rgba(255, 209, 0, 0.4), 
-                        0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        .purchase-button:hover {
-            background: linear-gradient(135deg, #ffed4e, #FFD100);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 209, 0, 0.5), 
-                        0 4px 8px rgba(0, 0, 0, 0.35);
+
+        /* --- NEW Tooltip Styles --- */
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 250px;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 101;
+            bottom: 115%; /* Position above the button */
+            left: 50%;
+            margin-left: -125px; /* Use half of the width to center */
+            transition: opacity 0.3s;
+            border: 1px solid #FFD100;
+            font-size: 0.9rem;
         }
-        
-        /* Footer */
-        .footer { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 40px; 
-            background: rgba(0, 0, 0, 0.6); 
-            backdrop-filter: blur(15px); 
-            border-top: 1px solid rgba(255, 255, 255, 0.1); 
-            position: relative;
-            z-index: 2;
+        .tooltip-text.visible {
+            visibility: visible;
+            opacity: 1;
         }
-        .footer-links { 
-            display: flex; 
-            gap: 20px; 
-            align-items: center; 
+        /* Show tooltip on desktop hover */
+        .dropdown-button-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
-        .footer-link { 
-            color: #d0d0d0; 
-            text-decoration: none; 
-            font-size: 1.2rem; 
-            padding: 8px 12px; 
-            border-radius: 4px; 
-            transition: all 0.3s ease; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
+
+        /* --- NEW E-INK Notice Styles --- */
+        .e-ink-notice {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #c0c0c0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
-        .footer-link:hover { 
-            color: #ffffff; 
-            background: rgba(255, 255, 255, 0.1); 
+
+        /* --- Password Protection Styles (Same as before) --- */
+        #password-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            z-index: 9999; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff;
         }
-        .copyright { 
-            font-family: "neue-kabel", sans-serif; 
-            font-weight: 400; 
-            font-size: 0.9rem; 
-            color: #b0b0b0; 
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
-        }
-        
-        /* Responsive */
-        @media (max-width: 767px) {
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            .nav-tabs { 
-                display: none; 
-                flex-direction: column; 
-                gap: 10px; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: rgba(0, 0, 0, 0.9); 
-                backdrop-filter: blur(10px); 
-                padding: 20px; 
-                text-align: center; 
-            }
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .dropdown-content {
-                position: static;
-                display: none;
-                margin-top: 10px;
-                background: rgba(255, 255, 255, 0.05);
-            }
-            .dropdown:hover .dropdown-content,
-            .dropdown.mobile-open .dropdown-content {
-                display: block;
-            }
-            .main-wrapper { padding: 40px 15px; }
-            .volume-title { font-size: 2.5rem; }
-            .description-box { padding: 25px; }
-            .description-text { font-size: 1.1rem; }
-            .issue-cover { max-width: 300px; }
-        }
+        #password-box { background: rgba(20, 20, 20, 0.5); padding: 40px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        #password-box h2 { margin-bottom: 20px; font-family: "dunbar-tall", sans-serif; }
+        #password-input { padding: 12px; width: 250px; border: 1px solid #555; border-radius: 5px; background: #333; color: #fff; font-size: 1rem; margin-right: 10px; }
+        #password-submit { padding: 12px 20px; border: none; border-radius: 5px; background: #FFD100; color: #1a1a1a; font-weight: bold; cursor: pointer; }
+        #password-error { margin-top: 15px; color: #E60026; font-weight: bold; display: none; }
+        #protected-content { display: none; }
     </style>
 </head>
 <body>
-    <nav class="nav-header">
-        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
-            <span></span><span></span><span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <div class="dropdown">
-                <a href="#" class="nav-tab active" onclick="return false;">Volumes<span class="dropdown-arrow">▼</span></a>
-                <div class="dropdown-content">
-                    <a href="volumes/volume-1.html" class="dropdown-item">Volume 1</a>
+    <div id="password-overlay">
+        <div id="password-box">
+            <h2>Enter Password to Access</h2>
+            <form id="password-form">
+                <input type="password" id="password-input" placeholder="Password...">
+                <button type="submit" id="password-submit">Unlock</button>
+            </form>
+            <p id="password-error">Incorrect Password. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="protected-content">
+        <nav class="nav-header">
+             <a href="../index.html" class="logo">Faun by Moonlight</a>
+             </nav>
+        
+        <main class="main-wrapper">
+            <div class="content-container">
+                <div class="volume-header">
+                    <h1 class="volume-title">Read Volume 1: The Tyranny of Narrative</h1>
                 </div>
-            </div>
-            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="faq.html" class="nav-tab">FAQ</a>
-            <a href="support-us.html" class="nav-tab">Support Us</a>
-            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="contact.html" class="nav-tab">Contact</a>
-        </div>
-    </nav>
-    
-    <main class="main-wrapper">
-        <div class="content-container">
-            <div class="volume-header">
-                <div class="volume-number">Volume 1</div>
-                <h1 class="volume-title">The Tyranny of Narrative</h1>
-                <div class="volume-subtitle">November 2025</div>
-            </div>
-            
-            <div class="cover-section">
-            <img src="../images/first_issue_cove.png" 
-     alt="Faun by Moonlight Volume 1 Cover" 
-     class="issue-cover">
-            </div>
-            
-            <div class="description-box">
-                <p class="description-text">
-                    A man being interrogated who's more concerned about his captors than the torture they inflict on him. A centenary vampire who writes a scathing letter to a judge complaining someone else is taking credit for his crimes. An exploration on the power of symbols that connects the Bauhaus to Hitler, to Renaissance chairs to metal chopsticks—what do these things all have in common? The Tyranny of Narrative.
-                </p>
-                <p class="description-text">
-                    Our first volume of Faun by Moonlight is now out with short stories from Oly Weary and Eduardo Garcia, and an essay by our very own editor in chief.
-                </p>
-                <div class="contributors">
-                    Featuring works by Oly Weary, Eduardo Garcia, and our Editor in Chief
+                
+                <div class="reader-container">
+                    <iframe class="reader-iframe" src="https://online.fliphtml5.com/faunbymoonlight/pkeb/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" ></iframe>
                 </div>
+
+                <div class="download-section">
+                    <div class="dropdown-button-container">
+                        <button class="main-button pdf-button">Download PDF ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" id="pdf-original-link" download>Original</a>
+                            <a href="#" id="pdf-comfort-link" download>Comfort Reading</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-button-container" id="epub-tooltip-parent">
+                        <span class="tooltip-text" id="epub-tooltip">Design EPUBs work great with Apple Books, Google Books, and Rakuten Kobo. For e-ink readers, select the "E-ink version" for a better experience.</span>
+                        <button class="main-button epub-button">Download EPUB ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" id="epub-design-link" download>Design EPUB</a>
+                            <a href="#" id="epub-eink-link" download>E-INK device EPUB</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="e-ink-notice">
+                    <strong>Notice:</strong> Due to the technical limitations of E-INK devices, we are unable to preserve the magazine's original design in that format. The E-INK version is plain text to ensure maximum readability and compatibility.
+                </p>
+
             </div>
-            
-            <div class="purchase-section">
-                <a href="https://faunbymoonlight.store/products/november-2025-faun-by-moonlight-issue" 
-                   target="_blank" 
-                   rel="noopener" 
-                   class="purchase-button">
-                   Buy Volume 1
-                </a>
-            </div>
-        </div>
-    </main>
-    
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
-        </div>
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
-    </footer>
-    
+        </main>
+        
+        <footer class="footer">
+            <p>© 2025 Faun by Moonlight. All rights reserved.</p>
+        </footer>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Logo color effect
-            const logo = document.getElementById('logo');
-            if (logo) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => 
-                    `<span class="${colors[i]}">${word}</span>`
-                ).join(' ');
-            }
-            
-            // Mobile dropdown handling
-            const dropdown = document.querySelector('.dropdown');
-            if (dropdown && window.innerWidth <= 767) {
-                dropdown.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    dropdown.classList.toggle('mobile-open');
-                });
-            }
+            // --- Password Protection Logic ---
+            const passwordForm = document.getElementById('password-form');
+            const passwordOverlay = document.getElementById('password-overlay');
+            const protectedContent = document.getElementById('protected-content');
+            const passwordInput = document.getElementById('password-input');
+            const passwordError = document.getElementById('password-error');
+
+            // --- Your Base64 encoded password ---
+            const encodedPass = 'RmF1bjIwMjUh'; // PASTE YOUR ENCODED PASSWORD HERE
+
+            // --- Your Base64 encoded download links ---
+            const encodedPdfOriginal = '#'; // PASTE ENCODED PDF (ORIGINAL) LINK HERE
+            const encodedPdfComfort = '#';  // PASTE ENCODED PDF (COMFORT) LINK HERE
+            const encodedEpubDesign = '#';  // PASTE ENCODED EPUB (DESIGN) LINK HERE
+            const encodedEpubEink = '#';    // PASTE ENCODED EPUB (E-INK) LINK HERE
+
+            passwordForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const correctPassword = atob(encodedPass); 
+
+                if (passwordInput.value === correctPassword) {
+                    // Password Correct
+                    passwordOverlay.style.display = 'none';
+                    protectedContent.style.display = 'flex';
+                    protectedContent.style.flexDirection = 'column';
+                    protectedContent.style.minHeight = '100vh';
+
+                    // Set the real download links after decoding
+                    document.getElementById('pdf-original-link').href = atob(encodedPdfOriginal);
+                    document.getElementById('pdf-comfort-link').href = atob(encodedPdfComfort);
+                    document.getElementById('epub-design-link').href = atob(encodedEpubDesign);
+                    document.getElementById('epub-eink-link').href = atob(encodedEpubEink);
+
+                } else {
+                    // Password Wrong
+                    passwordError.style.display = 'block';
+                    passwordInput.value = '';
+                }
+            });
+
+            // --- Tooltip Logic for Mobile ---
+            const epubParent = document.getElementById('epub-tooltip-parent');
+            const epubTooltip = document.getElementById('epub-tooltip');
+
+            epubParent.addEventListener('click', function() {
+                // This will toggle the tooltip on tap for touch devices
+                if (window.innerWidth <= 1024) { // Target tablets and phones
+                     const isVisible = epubTooltip.classList.contains('visible');
+                     if (isVisible) {
+                         epubTooltip.classList.remove('visible');
+                     } else {
+                         epubTooltip.classList.add('visible');
+                     }
+                }
+            });
         });
     </script>
 </body>
