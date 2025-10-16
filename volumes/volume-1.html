@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Volume 1 - Faun by Moonlight Literary Magazine</title>
     <meta name="description" content="Read Volume 1: The Tyranny of Narrative from Faun by Moonlight.">
     
@@ -15,17 +15,19 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Critical for preventing scroll on mobile */
+        }
         body {
             font-family: "neue-kabel", sans-serif; 
             background-color: #1a1a1a; 
             color: #f8f8f8;
-            min-height: 100vh; 
             background-image: url('../images/4.png'); 
             background-repeat: no-repeat;
             background-position: center center; 
             background-attachment: fixed; 
             background-size: cover;
-            overflow: hidden; /* Prevent scrolling on the body */
         }
         body::before { 
             content: ''; position: fixed; inset: 0; 
@@ -50,30 +52,34 @@
             flex-direction: column; opacity: 0;
             transition: opacity 0.5s ease-in;
         }
-        .nav-header, .footer { padding: 15px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); position: relative; z-index: 50; }
-        .nav-header { display: flex; justify-content: space-between; align-items: center; }
+        .nav-header { padding: 15px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
         .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
         .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; }
-        .footer { text-align: center; }
         #reader-container { flex: 1; position: relative; }
         #root { height: 100%; width: 100%; }
 
-        /* --- NEW: SOPHISTICATED PAGE FLIP ANIMATION --- */
-        @keyframes flip-next {
-            0% { transform: perspective(2000px) rotateY(0deg); }
-            100% { transform: perspective(2000px) rotateY(-180deg); }
+        /* --- NEW ANIMATION STYLES --- */
+        .page-canvas { transition: opacity 0.3s ease-in-out; }
+        .page-exit-left { animation: exit-left 0.4s ease-in forwards; }
+        .page-enter-right { animation: enter-right 0.4s ease-out forwards; }
+        .page-exit-right { animation: exit-right 0.4s ease-in forwards; }
+        .page-enter-left { animation: enter-left 0.4s ease-out forwards; }
+
+        @keyframes exit-left {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-50px); }
         }
-        @keyframes flip-prev {
-            0% { transform: perspective(2000px) rotateY(0deg); }
-            100% { transform: perspective(2000px) rotateY(180deg); }
+        @keyframes enter-right {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-        .flipping-page-next {
-            transform-origin: left center;
-            animation: flip-next 0.8s ease-in-out forwards;
+        @keyframes exit-right {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(50px); }
         }
-        .flipping-page-prev {
-            transform-origin: right center;
-            animation: flip-prev 0.8s ease-in-out forwards;
+        @keyframes enter-left {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
@@ -94,14 +100,9 @@
         <nav class="nav-header">
             <a href="../index.html" class="logo">Faun by Moonlight</a>
         </nav>
-        
         <main class="main-wrapper">
             <div id="reader-container"><div id="root"></div></div>
         </main>
-        
-        <footer class="footer">
-            <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
-        </footer>
     </div>
 
     <script type="text/babel">
@@ -109,70 +110,42 @@
 
         const PDFPage = ({ pdf, pageNum }) => {
             const canvasRef = useRef(null);
+
             useEffect(() => {
-                if (pdf && pageNum > 0 && pageNum <= pdf.numPages) {
-                    pdf.getPage(pageNum).then(page => {
-                        const canvas = canvasRef.current;
-                        const container = canvas.parentElement;
-                        const scale = container.clientHeight / page.getViewport({ scale: 1 }).height;
-                        const viewport = page.getViewport({ scale });
-                        
-                        const context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        
-                        page.render({ canvasContext: context, viewport: viewport });
-                    });
-                }
+                if (!pdf || !canvasRef.current) return;
+                
+                pdf.getPage(pageNum).then(page => {
+                    const canvas = canvasRef.current;
+                    const container = canvas.parentElement;
+                    const viewport = page.getViewport({ scale: 1 });
+
+                    // --- NEW: CORRECT SCALING LOGIC ---
+                    const scaleX = container.clientWidth / viewport.width;
+                    const scaleY = container.clientHeight / viewport.height;
+                    const scale = Math.min(scaleX, scaleY) * 0.95; // Use 95% of scale for padding
+
+                    const scaledViewport = page.getViewport({ scale });
+                    const context = canvas.getContext('2d');
+                    canvas.height = scaledViewport.height;
+                    canvas.width = scaledViewport.width;
+                    
+                    page.render({ canvasContext: context, viewport: scaledViewport });
+                });
             }, [pdf, pageNum]);
-            return <canvas ref={canvasRef} className="shadow-2xl" />;
+
+            return <canvas ref={canvasRef} className="page-canvas shadow-2xl" />;
         };
 
         const PDFMagazineReader = ({ pdfUrl }) => {
             const [pdf, setPdf] = useState(null);
             const [numPages, setNumPages] = useState(0);
-            const [currentPage, setCurrentPage] = useState(1); // Start at page 1
-            const [isFlipping, setIsFlipping] = useState(false);
-            const [flipDirection, setFlipDirection] = useState('next');
+            const [currentPage, setCurrentPage] = useState(1);
+            const [isAnimating, setIsAnimating] = useState(false);
+            const [animationClass, setAnimationClass] = useState('');
             const [loading, setLoading] = useState(true);
             const readerRef = useRef(null);
-
-            // --- NEW: Handle Keyboard Arrows and Mobile Swipes ---
-            useEffect(() => {
-                const handleKeyDown = (e) => {
-                    if (e.key === 'ArrowRight') nextPage();
-                    if (e.key === 'ArrowLeft') prevPage();
-                };
-
-                let touchStartX = 0;
-                const handleTouchStart = (e) => {
-                    touchStartX = e.touches[0].clientX;
-                };
-                const handleTouchEnd = (e) => {
-                    const touchEndX = e.changedTouches[0].clientX;
-                    if (touchStartX - touchEndX > 50) { // Swiped left
-                        nextPage();
-                    } else if (touchEndX - touchStartX > 50) { // Swiped right
-                        prevPage();
-                    }
-                };
-
-                window.addEventListener('keydown', handleKeyDown);
-                const readerEl = readerRef.current;
-                if (readerEl) {
-                    readerEl.addEventListener('touchstart', handleTouchStart);
-                    readerEl.addEventListener('touchend', handleTouchEnd);
-                }
-
-                return () => {
-                    window.removeEventListener('keydown', handleKeyDown);
-                    if (readerEl) {
-                        readerEl.removeEventListener('touchstart', handleTouchStart);
-                        readerEl.removeEventListener('touchend', handleTouchEnd);
-                    }
-                };
-            }, [currentPage, numPages, isFlipping]);
-
+            
+            // Load PDF
             useEffect(() => {
                 const loadPDF = async () => {
                     if (!pdfUrl) return;
@@ -191,69 +164,81 @@
                 loadPDF();
             }, [pdfUrl]);
 
-            const nextPage = () => {
-                if (isFlipping || currentPage >= numPages) return;
-                setIsFlipping(true);
-                setFlipDirection('next');
-                setTimeout(() => {
-                    setCurrentPage(prev => prev + 1);
-                    setIsFlipping(false);
-                }, 800); // Match animation duration
-            };
+            // --- NEW: REWRITTEN NAVIGATION LOGIC ---
+            const changePage = (newPage) => {
+                if (isAnimating || newPage < 1 || newPage > numPages) return;
 
-            const prevPage = () => {
-                if (isFlipping || currentPage <= 1) return;
-                setIsFlipping(true);
-                setFlipDirection('prev');
+                setIsAnimating(true);
+                const direction = newPage > currentPage ? 'next' : 'prev';
+                setAnimationClass(direction === 'next' ? 'page-exit-left' : 'page-exit-right');
+
                 setTimeout(() => {
-                    setCurrentPage(prev => prev - 1);
-                    setIsFlipping(false);
-                }, 800); // Match animation duration
+                    setCurrentPage(newPage);
+                    setAnimationClass(direction === 'next' ? 'page-enter-right' : 'page-enter-left');
+                }, 200); // Halfway through animation
+
+                setTimeout(() => {
+                    setIsAnimating(false);
+                    setAnimationClass('');
+                }, 400); // Full animation duration
             };
+            
+            const nextPage = () => changePage(currentPage + 1);
+            const prevPage = () => changePage(currentPage - 1);
+            
+            // Handle Keyboard and Touch Controls
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight') nextPage();
+                    if (e.key === 'ArrowLeft') prevPage();
+                };
+
+                let touchStartX = 0;
+                const handleTouchStart = (e) => { touchStartX = e.touches[0].clientX; };
+                const handleTouchEnd = (e) => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    if (touchStartX - touchEndX > 50) nextPage();
+                    if (touchEndX - touchStartX > 50) prevPage();
+                };
+
+                window.addEventListener('keydown', handleKeyDown);
+                const readerEl = readerRef.current;
+                if (readerEl) {
+                    readerEl.addEventListener('touchstart', handleTouchStart);
+                    readerEl.addEventListener('touchend', handleTouchEnd);
+                }
+
+                return () => {
+                    window.removeEventListener('keydown', handleKeyDown);
+                    if (readerEl) {
+                        readerEl.removeEventListener('touchstart', handleTouchStart);
+                        readerEl.removeEventListener('touchend', handleTouchEnd);
+                    }
+                };
+            }, [currentPage, numPages, isAnimating]); // Rerun when state changes
 
             if (loading) {
-                return (
-                    <div className="flex items-center justify-center h-full w-full">
-                        <div className="text-center">
-                            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-400 mx-auto mb-4"></div>
-                            <p className="text-white text-xl font-bold">Loading Magazine...</p>
-                        </div>
-                    </div>
-                );
+                return ( <div className="flex items-center justify-center h-full w-full"> <div className="text-center"> <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-400 mx-auto mb-4"></div> <p className="text-white text-xl font-bold">Loading Magazine...</p> </div> </div> );
             }
-
+            
             return (
-                <div ref={readerRef} className="w-full h-full flex items-center justify-center overflow-hidden" style={{ perspective: '2000px' }}>
-                    <div className="relative w-auto h-full flex items-center">
-                        {/* Static page underneath */}
-                        <div className="relative h-full">
-                             <PDFPage pdf={pdf} pageNum={flipDirection === 'next' ? currentPage + 1 : currentPage - 1} />
-                        </div>
-                        
-                        {/* The flipping page on top */}
-                        {isFlipping && (
-                            <div className="absolute top-0 left-0 w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-                                <div className={flipDirection === 'next' ? 'flipping-page-next' : 'flipping-page-prev'}>
-                                    <PDFPage pdf={pdf} pageNum={flipDirection === 'next' ? currentPage : currentPage} />
-                                </div>
-                            </div>
-                        )}
-                        
-                        {/* The current visible page when not flipping */}
-                        {!isFlipping && (
-                            <div className="relative h-full">
-                                <PDFPage pdf={pdf} pageNum={currentPage} />
-                            </div>
-                        )}
+                <div ref={readerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
+                    <div className={`relative flex items-center justify-center h-full w-full ${animationClass}`}>
+                        <PDFPage pdf={pdf} pageNum={currentPage} />
                     </div>
 
                     {/* Navigation Arrows */}
-                    <button onClick={prevPage} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full z-20 hover:bg-black/60 transition-colors disabled:opacity-20" disabled={isFlipping || currentPage <= 1}>
-                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                    <button onClick={prevPage} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full z-20 hover:bg-black/60 transition-colors disabled:opacity-20" disabled={isAnimating || currentPage <= 1}>
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     </button>
-                    <button onClick={nextPage} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full z-20 hover:bg-black/60 transition-colors disabled:opacity-20" disabled={isFlipping || currentPage >= numPages}>
+                    <button onClick={nextPage} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 rounded-full z-20 hover:bg-black/60 transition-colors disabled:opacity-20" disabled={isAnimating || currentPage >= numPages}>
                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                     </button>
+                    
+                    {/* Page counter */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/40 text-white text-sm px-4 py-2 rounded-full">
+                        Spread {currentPage} of {numPages}
+                    </div>
                 </div>
             );
         };
@@ -273,19 +258,16 @@
             passwordForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 if (passwordInput.value === atob(encodedPass)) {
-                    // Password Correct
                     passwordOverlay.style.opacity = '0';
                     setTimeout(() => { passwordOverlay.style.display = 'none'; }, 500);
 
                     protectedContent.style.display = 'flex';
                     setTimeout(() => { protectedContent.style.opacity = '1'; }, 50);
 
-                    // Initialize and Render the React Reader
                     const root = ReactDOM.createRoot(document.getElementById('root'));
                     root.render(React.createElement(PDFMagazineReader, { pdfUrl: pdfPath }));
 
                 } else {
-                    // Password Wrong
                     passwordError.style.display = 'block';
                     passwordInput.value = '';
                 }
