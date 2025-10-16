@@ -160,7 +160,7 @@
                     // 1. Get your direct download link: https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
                     // 2. Prepend the CORS proxy: https://api.allorigins.win/raw?url=
                     // 3. Encode the full URL using a Base64 encoder and paste it below.
-                    const encodedUrl = 'aHR0cHM6Ly9hcGkuYWxsb3JpZ2lucy53aW4vcmF3P3VybD1odHRwczovL2RyaXZlLmdvb2dsZS5jb20vdWM/ZXhwb3J0PWRvd25sb2FkJmlkPTFyZDdzbm04RWVwQ2JfQ19DdzlJQTdDOWIyeGxDLVJlOA==';
+                    const encodedUrl = 'aHR0cHM6Ly9jb3JzLWFueXdoZXJlLmhlcm9rdWFwcC5jb20vaHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL3VjP2V4cG9ydD1kb3dubG9hZCZpZD0xcmQ3c25tOEVlcENiX0NfQ3dzOUlBN0M5YjJ4bEMtUmU4';
                     const pdfUrl = atob(encodedUrl);
 
                     const response = await fetch(pdfUrl);
