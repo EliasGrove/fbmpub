@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/volume-1">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <style>
-        /* --- General, Nav, Footer, and Lightbox Styles (Copied from your main page for consistency) --- */
+        /* --- General, Nav, Footer Styles --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8; min-height: 100vh; display: flex; flex-direction: column; position: relative; background-image: url('../images/4.png'); background-repeat: no-repeat; background-position: center center; background-attachment: fixed; background-size: cover; isolation: isolate; }
         body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
@@ -21,14 +21,12 @@
         .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
         .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
         .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 1200px; width: 95%; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 1.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); }
-        .button { display: inline-block; font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #f0f0f0; text-decoration: none; padding: 15px 30px; border-radius: 8px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); letter-spacing: 1px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); border: 3px solid transparent; }
+        .button { display: block; width: 100%; text-align: center; font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #f0f0f0; text-decoration: none; padding: 15px 30px; border-radius: 8px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); letter-spacing: 1px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); border: 3px solid transparent; }
         .button.primary { background-color: #0047BB; border-color: #0047BB; }
+        /* ✨ NEW STYLE FOR THE YELLOW BUTTON ✨ */
+        .button.accent { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; text-shadow: none; }
         .button:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15); filter: brightness(1.1); }
         .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
         .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
 
         /* --- STYLES for this page --- */
@@ -36,13 +34,11 @@
         .volume-cover-large img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
         .volume-info h1 { font-family: "dunbar-tall", sans-serif; font-size: 3rem; color: #ffd700; margin-bottom: 1rem; }
         .volume-info .description { font-size: 1.2rem; line-height: 1.7; color: #e0e0e0; }
-        .purchase-box { background: rgba(0, 71, 187, 0.15); border: 2px solid #0047BB; border-radius: 10px; padding: 25px; margin-top: 2rem; }
+        .purchase-box { background: rgba(0, 71, 187, 0.15); border: 2px solid #0047BB; border-radius: 10px; padding: 25px; margin-top: 2rem; display: flex; flex-direction: column; gap: 15px; /* ✨ ADDED for button spacing ✨ */ }
         .reviews-section { margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 2.5rem; text-align: left; }
         .reviews-section h2 { font-family: "dunbar-tall", sans-serif; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; }
         
-        @media (max-width: 900px) {
-            .volume-detail-layout { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 900px) { .volume-detail-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -50,7 +46,7 @@
 
     <nav class="nav-header">
         <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
-        </nav>
+    </nav>
     
     <main class="main-wrapper">
         <div class="text-box">
@@ -61,12 +57,13 @@
                 <div class="volume-info">
                     <h1>Volume 1: November 2025</h1>
                     <p class="description">
-                        This is it—our inaugural issue! We've poured our hearts into curating a collection of breathtaking new fiction, evocative poetry, and stunning artwork. This volume features emerging and established voices that challenge, inspire, and transport.
+                        A man more concerned about his tortures, than their torture. A vampire's letter complaining about stolen identity. An exploration of how Nazis didn't like lamps. Get it all here in the very first volume of Faun by Moonlight!
                     </p>
 
                     <div class="purchase-box">
-                        <a href="https://faunbymoonlight.store" target="_blank" rel="noopener" class="button primary" style="width: 100%; text-align: center;">Pre-Order Now ($4.99)</a>
-                        </div>
+                        <a href="https://faunbymoonlight.store" target="_blank" rel="noopener" class="button primary">Buy Now</a>
+                        <a href="/volumes/vol-1-reader.html" class="button accent">Read Now</a>
+                    </div>
                 </div>
             </div>
 
@@ -78,7 +75,8 @@
     </main>
 
     <footer class="footer">
-         </footer>
+         <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
