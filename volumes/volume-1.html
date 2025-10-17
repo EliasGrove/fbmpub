@@ -36,9 +36,7 @@
         .purchase-box { background: rgba(0, 71, 187, 0.15); border: 2px solid #0047BB; border-radius: 10px; padding: 25px; margin-top: 2rem; display: flex; flex-direction: column; gap: 15px; }
         .reviews-section { margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 2.5rem; text-align: left; }
         .reviews-section h2 { font-family: "dunbar-tall", sans-serif; font-size: 2.5rem; text-align: center; margin-bottom: 2rem; }
-        /* ✨ NEW STYLE TO CENTER THE RATING WIDGET ✨ */
-        .rating-widget-container { text-align: center; margin-bottom: 2rem; }
-
+        
         @media (max-width: 900px) { .volume-detail-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -69,20 +67,7 @@
 
             <section class="reviews-section">
                 <h2>Reader Reviews</h2>
-
-                <div class="rating-widget-container">
-                    <div id="pd_rating_holder_12345678"></div> 
-                    <script type="text/javascript">
-                        // This is the configuration for the rating widget
-                        PDRTJS_settings_12345678 = {
-                            "id" : "12345678", // IMPORTANT: REPLACE 12345678 with YOUR rating ID from Crowdsignal
-                            "unique_id" : "faun-by-moonlight-vol-1", // This identifies the item being rated
-                            "title" : "Volume 1: November 2025", // This is for your reports
-                            "permalink" : "https://www.faunbymoonlight.com/volumes/volume-1.html" // A link back to this page
-                        };
-                    </script>
-                </div>
-
+                
                 <div class="commonninja_component pid-f4e08b6e-9e95-47fa-801e-0fcdf9dba8bf"></div>
             </section>
         </div>
@@ -103,6 +88,5 @@
         });
     </script>
     
-    <script language='javascript' src='https://app.crowdsignal.com/js/rating/rating.js'></script>
-</body>
+    </body>
 </html>
