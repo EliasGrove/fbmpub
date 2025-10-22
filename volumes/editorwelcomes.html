@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor's Welcome - Faun by Moonlight</title>
+    <meta name="description" content="An editor's welcome from Faun by Moonlight, discussing the state of modern literature and the magazine's mission.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/editorwelcomes.html">
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <style>
+        /* --- General, Nav, Footer Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8; min-height: 100vh; display: flex; flex-direction: column; position: relative; background-image: url('../images/4.png'); background-repeat: no-repeat; background-position: center center; background-attachment: fixed; background-size: cover; isolation: isolate; }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
+        .nav-header, .main-wrapper, .footer { position: relative; z-index: 2; }
+        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
+        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
+        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 1200px; width: 95%; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+        .button { display: block; width: 100%; text-align: center; font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #f0f0f0; text-decoration: none; padding: 15px 30px; border-radius: 8px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); letter-spacing: 1px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); border: 3px solid transparent; }
+        .button.primary { background-color: #0047BB; border-color: #0047BB; }
+        .button.accent { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; text-shadow: none; }
+        .button:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15); filter: brightness(1.1); }
+        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+
+        /* --- STYLES for this page --- */
+        .welcome-content {
+            text-align: left; /* Override .text-box's center alignment for essay */
+            max-width: 900px; /* Constrain line length for readability */
+            margin: 0 auto;   /* Center the content block */
+        }
+        .welcome-content h1 {
+            font-family: "dunbar-tall", sans-serif;
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .welcome-content p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+         .welcome-content .theme-announcement {
+             font-family: "dunbar-tall", sans-serif;
+             font-size: 1.8rem;
+             color: #ffd700;
+             text-align: center;
+             margin-top: 3rem;
+             line-height: 1.4;
+        }
+        
+        @media (max-width: 900px) { 
+            .text-box { padding: 30px 20px; }
+            .welcome-content h1 { font-size: 2.5rem; }
+            .welcome-content p { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+
+    <nav class="nav-header">
+        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
+    </nav>
+    
+    <main class="main-wrapper">
+        <div class="text-box">
+            
+            <div class="welcome-content">
+                <h1>WELCOME</h1>
+
+                <p>Literature is going through somewhat of a difficult phase at the moment.</p>
+                <p>It has been split into two camps: the MFA workshops and establishment publications, that mostly recycle the same safe, sanitized, and perfectly neat work—which works well in essence but fundamentally lacks substance, charisma, or identity—or the wild west of the self-publishing world, where literature, sometimes exceptional, goes to die a slow lonely death amid the sheer quantity of work competing for attention.</p>
+                <p>In between sits the freelance writer.</p>
+                <p>While reviewing the works submitted to us, I've often been amazed by the sheer creativity, sensitivity, and brilliance of some. Deeply personal, lived works that can be as strange as a vampire's legal complaint or a conventional summer romance but that, nevertheless, tell a complex and rich story that can't really fit into a neat literary category.</p>
+                <p>They can be messy, yes. They can be confusing at times, of course. They can make little sense at first, sure—but such is life, is it not? Strange, disjointed, confusing, and often terribly unpleasant, but in this there is its own beauty. A beauty that resides in its uniqueness.</p>
+                <p>I'm obviously ignoring the AI, low-effort, and shotgun submitters looking for an easy paycheck. This isn't about them, although they unfortunately constitute the majority of free submissions.</p>
+                <p>So where can these great writers take their great stories?</p>
+                <p>Well... without (serious) prior publishing credits, contacts, or great agents, they simply won't be published by any establishment literary journals, regardless of the quality of their work. Those that meet the above criteria, would rather not push their luck and lose their opportunity, and so the same stale, repetitive, perfectly polished prose that means as well as it does nothing, gets published.</p>
+                <p>A few days ago I saw a piece of "experimental poetry" published in a well-regarded journal which consisted of four stanzas in a grid repeating the same line over and over again with a single sentence variation. If you or I were to submit something like that, they'd probably insult us...then blacklist us.</p>
+                <p>And yet, even in this "experimentation" it is uninspired and it is safe, for it has been done ad nauseum early in the new century and has become the go-to poetic device for the uninspired. It provokes and it challenges only its contenders.</p>
+                <p>Looking for smaller and independent publications is a nightmare in and of itself.</p>
+                <p>There is a strange (often self-imposed) pressure for magazines to always keep their submissions free of charge and open their inboxes to the flood of low-effort and AI slop in the interest of "poor and disadvantaged writers."</p>
+                <p>The result is that most small-to-micro magazines can't handle the volume and so have to close their submissions. And then neither the disadvantaged nor the advantaged (an advantage of $3–$5, mind you) can get published. Those magazines that do have them open are then swarmed; those that have them open and pay are crushed.</p>
+                <p>And so the good writer researches a magazine that may be a good fit, prepares the submission, prepares the cover letter and finds them closed. The writer then submits to the few that are open and is rejected six weeks later because, in the few seconds the slush pile reader (often the editor-in-chief) had to read their submission at 1 a.m. on a Tuesday night, it didn't grab their attention and so they pass.</p>
+                <p>And so here too, common beats, safe narratives and technically brilliant, but empty prose usually takes priority over complex material that may take a significant amount of editorial time, or require the editor to seriously engage with a particularly challenging submission.</p>
+                <p>When I started Faun by Moonlight, I had three main goals: 1. I would always give feedback to every submission, no matter the length or outcome. 2. I would blind all submissions and evaluate the work based on quality of craft, not accolades. 3. I would welcome these writers to submit their best work, no matter how strange or out there it may seem, and finally allow it to see the light of day.</p>
+                <p>To achieve this, it quickly became apparent that there were a few things we had to do differently.</p>
+                <p>First was to charge for submissions. The charge is purchasing one of our issues. This would be, in a way, an investment by the writer on the magazine in which they wish to be published. It is a nominal price ($4.99) and it has radically improved the amount of attention I can afford to each submission.</p>
+                <p>Secondly, commercial appeal had to become a second priority. The question became less "will people like this" and more "what does this work have to say, and how does it say it?" I wanted literature that trusted its reader's intelligence and its own.</p>
+                <p>Finally, this fee meant that there would be days where we have many visitors and no submissions. That is fantastic. This means I have the time to curate these complex and intricate stories, let them sit, review with the writer, and then publish without external pressures.</p>
+                <p>My focus was first and foremost on the writer, rather than the reader. Firstly because these are often one and the same, but also because it is by giving these voices the platform they deserve that allows our readers to experience a unique kind of literature. Works that can be equal parts weird, sad, loving, scary. They can be all of these things at once and never lose their focus; they can be none and still be compelling. Works that never quite fit a mold, that don't answer to traditional story beats or conventional structure.</p>
+                <p>Works like the ones you will read today.</p>
+                <p>So step in, get yourself comfortable, and enjoy the very first issue of Faun by Moonlight.</p>
+                
+                <p class="theme-announcement">
+                    This month's theme is:<br>
+                    THE TYRANNY OF NARRATIVE
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+         <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logo');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
+        });
+    </script>
+    
+    </body>
+</html>
