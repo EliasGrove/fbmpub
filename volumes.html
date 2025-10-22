@@ -1,269 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volumes - Faun by Moonlight Literary Magazine</title>
-    <meta name="description" content="Explore all volumes of Faun by Moonlight. Pre-order our inaugural November 2025 issue and submit your work for future editions.">
-    <link rel="canonical" href="https://www.faunbymoonlight.com/Volumes">
-    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <style>
-        /* --- General Styles --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative;
-            background-image: url('images/4.png'); background-repeat: no-repeat;
-            background-position: center center; background-attachment: fixed; background-size: cover;
-            isolation: isolate;
-        }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
-        .nav-header, .main-wrapper, .footer { position: relative; z-index: 2; }
-        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volumes - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/Volumes">
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <style>
+        /* --- General Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
+            min-height: 100vh; display: flex; flex-direction: column; position: relative;
+            background-image: url('images/4.png'); background-repeat: no-repeat;
+            background-position: center center; background-attachment: fixed; background-size: cover;
+            isolation: isolate;
+        }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
+        .nav-header, .main-wrapper, .footer { position: relative; z-index: 2; }
+        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
 
-        /* --- Navigation --- */
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
+        /* --- Navigation --- */
+        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
 
-        /* --- Main Content Wrapper --- */
-        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
-        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 1200px; width: 95%; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); }
+        /* --- Main Content Wrapper --- */
+        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
+        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 1200px; width: 95%; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); }
 
-        /* --- ✨ Volumes Grid Styles ✨ --- */
-        .volumes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
+        /* --- ✨ Volumes Grid Styles ✨ --- */
+        .volumes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
 
-        .volume-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* ADDED for alignment */
-            flex-direction: column; /* ADDED for alignment */
-        }
+        .volume-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* ADDED for alignment */
+            flex-direction: column; /* ADDED for alignment */
+        }
 
-        .volume-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
+        .volume-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
 
-        .volume-cover {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 2 / 3; /* ADDED for consistent shape */
-            object-fit: cover;   /* ADDED to prevent stretching */
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.28);
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-            cursor: zoom-in;
-        }
-        
-        .volume-title {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-        }
+        .volume-cover {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 3; /* ADDED for consistent shape */
+            object-fit: cover;   /* ADDED to prevent stretching */
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.28);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+            cursor: zoom-in;
+        }
+        
+        .volume-title {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
 
-        .volume-subtitle {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e8e8e8;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            margin-bottom: 2rem;
-            min-height: 50px;
-        }
-        
-        .volume-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: auto; /* ADDED to push buttons to the bottom */
-        }
+        .volume-subtitle {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e8e8e8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 2rem;
+            min-height: 50px;
+        }
+        
+        .volume-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto; /* ADDED to push buttons to the bottom */
+        }
 
-        .button {
-            display: inline-block;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #f0f0f0;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            letter-spacing: 1px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
-            border: 3px solid transparent;
-        }
-        
-        .button.primary {
-             background-color: #0047BB;
-             border-color: #0047BB;
-        }
+        .button {
+            display: inline-block;
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        
+        .button.primary {
+             background-color: #0047BB;
+             border-color: #0047BB;
+        }
 
-        .button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
-        }
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
 
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15);
-            filter: brightness(1.1);
-        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.1);
+        }
 
-        /* --- Lightbox --- */
-        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
-        .lightbox.active { display: flex; }
-        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
-        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 10px 20px; border-radius: 50%; line-height: 1; transition: all 0.3s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
+        /* --- Lightbox --- */
+        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
+        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 10px 20px; border-radius: 50%; line-height: 1; transition: all 0.3s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
 
-        /* --- Footer --- */
-        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
-        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
-        
-        /* --- Responsive Styles --- */
-        @media (max-width: 1024px) {
-            .text-box { padding: 40px; }
-            .volumes-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        }
-        @media (max-width: 767px) {
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .main-wrapper { padding: 40px 15px; }
-            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
-            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
-            .volumes-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 480px) {
-            .logo { font-size: 1.4rem; }
-            .text-box { padding: 20px; background: rgba(0,0,0,0.85); border-width: 3px; }
-            .page-title { font-size: 2rem; }
-            .volume-title { font-size: 1.8rem; }
-            .button { font-size: 1rem; padding: 12px 24px; }
-        }
-    </style>
+        /* --- Footer --- */
+        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+        
+        /* --- Responsive Styles --- */
+        @media (max-width: 1024px) {
+            .text-box { padding: 40px; }
+            .volumes-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        }
+        @media (max-width: 767px) {
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
+            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            .main-wrapper { padding: 40px 15px; }
+            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
+            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
+            .volumes-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .logo { font-size: 1.4rem; }
+            .text-box { padding: 20px; background: rgba(0,0,0,0.85); border-width: 3px; }
+            .page-title { font-size: 2rem; }
+            .volume-title { font-size: 1.8rem; }
+            .button { font-size: 1rem; padding: 12px 24px; }
+        }
+    </style>
 </head>
 <body>
-    <nav class="nav-header">
-        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
-            <span></span><span></span><span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="volumes.html" class="nav-tab active" aria-current="page">Volumes</a>
-            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="faq.html" class="nav-tab">FAQ</a>
-            <a href="support-us.html" class="nav-tab">Support Us</a>
-            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="contact.html" class="nav-tab">Contact</a>
-        </div>
-    </nav>
+    <nav class="nav-header">
+        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
+        <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle">
+        <div class="nav-tabs">
+            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
+            <a href="volumes.html" class="nav-tab active" aria-current="page">Volumes</a>
+            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
+            <a href="faq.html" class="nav-tab">FAQ</a>
+            <a href="support-us.html" class="nav-tab">Support Us</a>
+            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
+            <a href="contact.html" class="nav-tab">Contact</a>
+        </div>
+    </nav>
 
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-        <img src="" alt="" class="lightbox-content" id="lightbox-img">
-    </div>
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+        <img src="" alt="" class="lightbox-content" id="lightbox-img">
+    </div>
 
-    <main class="main-wrapper">
-        <div class="text-box">
-            <h1 class="page-title">Our Volumes</h1>
-            
-            <div class="volumes-grid">
+    <main class="main-wrapper">
+        <div class="text-box">
+            <h1 class="page-title">Our Volumes</h1>
+            
+            <div class="volumes-grid">
 
-                <div class="volume-card">
-                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">November 2025</h2>
-                    <p class="volume-subtitle">The first issue of Faun by Moonlight is right around the corner! We couldn't be more excited to share the exceptional works we've selected.</p>
-                    <div class="volume-actions">
-                         <a href="https://faunbymoonlight.store" target="_blank" rel="noopener" class="button primary">Pre-Order Now</a>
-                    </div>
-                </div> <div class="volume-card">
-                    <img src="images/coming-soon.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">December 2025</h2>
-                    <p class="volume-subtitle">Now accepting submissions for our second volume. No specific theme required—send us your best work!</p>
-                    <div class="volume-actions">
-                        <a href="submissions.html" class="button primary">Submit Your Work</a>
-                    </div>
-                </div>
+                <div class="volume-card">
+                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue (Issue Nº1)" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">Issue Nº1: November 2025</h2>
+                    <p class="volume-subtitle">Our inaugural issue is **available now!** Explore the groundbreaking stories and poetry that launched *Faun by Moonlight*.</p>
+                    <div class="volume-actions">
+                         <a href="/volumes/volume-1.html" class="button primary">Find Out More</a>
+                    </div>
+                </div> <div class="volume-card">
+                    <img src="images/coming-soon.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">December 2025</h2>
+                    <p class="volume-subtitle">Now accepting submissions for our second volume. No specific theme required—send us your best work!</p>
+                    <div class="volume-actions">
+                        <a href="submissions.html" class="button primary">Submit Your Work</a>
+                    </div>
+                </div>
 
-            </div>
-        </div>
-    </main>
+            </div>
+        </div>
+    </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
-        </div>
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
-    </footer>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+        </div>
+        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const logo = document.getElementById('logo');
-            if (logo) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logo');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const coverImages = document.querySelectorAll('.volume-cover');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const coverImages = document.querySelectorAll('.volume-cover');
 
-            if (lightbox && coverImages.length > 0) {
-                const lightboxClose = document.getElementById('lightbox-close');
-                
-                const openLightbox = (e) => {
-                    lightboxImg.src = e.target.src;
-                    lightbox.classList.add('active');
-                };
-                
-                const closeLightbox = () => {
-                    lightbox.classList.remove('active');
-                };
-                
-                coverImages.forEach(img => img.addEventListener('click', openLightbox));
-                
-                lightboxClose.addEventListener('click', closeLightbox);
-                lightbox.addEventListener('click', closeLightbox);
-                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                        closeLightbox();
-                    }
-                });
-            }
-        });
-    </script>
+            if (lightbox && coverImages.length > 0) {
+                const lightboxClose = document.getElementById('lightbox-close');
+                
+                const openLightbox = (e) => {
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.add('active');
+                };
+                
+                const closeLightbox = () => {
+                    lightbox.classList.remove('active');
+                };
+                
+                coverImages.forEach(img => img.addEventListener('click', openLightbox));
+                
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', closeLightbox);
+                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
