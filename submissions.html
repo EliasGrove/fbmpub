@@ -445,7 +445,7 @@
             font-weight: 700;
             font-size: 1.3rem;
             color: #aaa;
-            display: flex;
+            display: none; /* Hide OR divider since there's only one option now */
             align-items: center;
             gap: 1rem;
             width: 80%;
@@ -688,7 +688,6 @@
                 </div>
             </div>
 
-                      
             <section class="section section-divider">
                 <h2 class="section-title">What We're Looking For</h2>
                 <div class="section-content">
@@ -735,51 +734,36 @@
                 <div class="section-content">
                     <div class="submit-instructions">
                         <div class="submission-step payment-step">
-                            <div class="step-title">Step 1: Choose Your Submission Path</div>
+                            <div class="step-title">Step 1: Buy Our Issues (Waived Fee)</div>
                             <div class="step-content">
-                                <p style="margin-bottom: 2rem; text-align: center; font-weight: 600;">We want to offer our writers the opportunity to become something more—our readers! Pre-order our inaugural issue to support our launch and get your submission fee waived entirely.</p>
+                                <p style="margin-bottom: 2rem; text-align: center; font-weight: 600;">Support our magazine and get your submission fee **waived** entirely by purchasing any of our released issues. We love it when our writers are also our readers!</p>
                                 
                                 <div class="payment-options-container">
                                     
                                     <div class="payment-option preferred">
                                         <div class="preferred-badge">RECOMMENDED</div>
-                                        <p class="payment-option-title">Pre-Order Our First Issue (Fee Waived)</p>
+                                        <p class="payment-option-title">Buy Our Issues (Fee Waived)</p>
                                         <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.6;">
-                                            Our Inaugural November 2025 issue is right around the corner! Pre-order now and be the first to read Issue Nº1 of Faun by Moonlight. You will also be featured in our "FBM Thanks" section!
+                                            Our issues are available now! Purchase any issue of Faun by Moonlight to support us and receive a full fee waiver for your submission. You will also be featured in our "FBM Thanks" section!
                                         </p>
-                                        <a href="https://faunbymoonlight.store/products/november-2025-faun-by-moonlight-issue" target="_blank" style="display: inline-block; background: #0047BB; color: #ffffff; padding: 12px 30px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: 2px solid #0047BB;">Pre-Order →</a>
+                                        <a href="https://faunbymoonlight.store" target="_blank" style="display: inline-block; background: #0047BB; color: #ffffff; padding: 12px 30px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: 2px solid #0047BB;">Buy Now →</a>
                                         <div class="payment-note" style="border-left-color: #0047BB; margin-top: 1.5rem;">
                                             <strong>IMPORTANT:</strong> We'll automatically match your submission to your payment using your email address. If you used different emails for your submission and payment, don't worry—we can match them using your name instead. If you submit under a pen name, please include your legal name in your email so we can connect your payment.
                                         </div>
                                     </div>
-                                    
-                                    <div class="or-divider">OR</div>
-
-                                    <div class="payment-option secondary">
-                                        <p class="payment-option-title">Pay the Standard $5 Submission Fee</p>
-                                        <div style="text-align: center; margin: 1rem 0;">
-                                            <a href="https://www.buymeacoffee.com/faunbymoonlight" target="_blank">
-                                                <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important; width: 217px !important;">
-                                            </a>
-                                        </div>
-                                        <div class="payment-note">
-                                            <strong>IMPORTANT:</strong> Include your story title in the note field and <strong>click "make this a private note"</strong> to help us match your payment to your manuscript.
-                                        </div>
                                     </div>
-
-                                </div>
                             </div>
                         </div>
 
                         <div class="submission-step">
                             <div class="step-title">Step 2: Send Your Manuscript</div>
                             <div class="step-content">
-                                <p style="margin-bottom: 1rem;">Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or pre-order information in the email body.</p>
+                                <p style="margin-bottom: 1rem;">Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or issue purchase information in the email body.</p>
                                 
                                 <div class="email-reveal-container">
                                     <div class="checkbox-container">
                                         <input type="checkbox" id="payment-checkbox">
-                                        <label for="payment-checkbox">I have paid my submission fee or pre-ordered the first issue</label>
+                                        <label for="payment-checkbox">I have purchased an issue (fee waived)</label>
                                     </div>
                                     
                                     <div id="email-button" class="email-button">
