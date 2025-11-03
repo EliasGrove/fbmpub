@@ -37,7 +37,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            z-index: 1; /* Changed from -1 to 1 */
         }
 
         .nav-header {
@@ -76,7 +76,6 @@
         .nav-tabs {
             display: flex;
             gap: 30px;
-            /* Added for dropdown alignment */
             align-items: center; 
         }
 
@@ -93,7 +92,6 @@
             text-decoration: none;
             transition: all 0.3s ease;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            /* Added for vertical alignment with dropdown */
             display: inline-block; 
         }
 
@@ -198,16 +196,28 @@
             color: #b0b0b0;
         }
 
-        /* --- START: NEW STYLES FOR AUTHOR PAGE --- */
+        /* --- START: STYLES FOR AUTHOR PAGE --- */
         .section-divider {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 1.8rem;
         }
 
         .author-bio {
-            font-style: italic;
+            /* font-style: italic; */ /* REMOVED */
             color: #e0e0e0;
             margin-bottom: 1.5rem;
+        }
+
+        /* --- ADDED: Author Cover Image Style --- */
+        .author-cover {
+            display: block;
+            width: 100%;
+            max-width: 350px; /* Adjust size as needed */
+            height: auto;
+            margin: 2rem auto; /* Centers the image */
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .editor-note {
@@ -229,23 +239,20 @@
 
         .author-contact {
             margin-top: 1.5rem;
-            font-style: italic;
+            /* font-style: italic; */ /* REMOVED */
             text-align: center;
             color: #ccc;
             font-size: 1.1rem; 
         }
-        /* --- END: NEW STYLES FOR AUTHOR PAGE --- */
+        /* --- END: STYLES FOR AUTHOR PAGE --- */
 
-        /* --- START: NEW STYLES FOR DROPDOWN NAV --- */
+        /* --- START: STYLES FOR DROPDOWN NAV --- */
         .nav-dropdown {
             position: relative;
             display: inline-block;
         }
 
-        /* Style the "Volumes" text just like other tabs */
         .nav-dropdown .nav-tab {
-            /* Remove transform on hover for the parent, 
-               so the dropdown menu doesn't jitter */
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
         .nav-dropdown:hover .nav-tab {
@@ -255,7 +262,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 90%; /* Position it just below the tab */
+            top: 90%;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
@@ -264,7 +271,7 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             z-index: 100;
             border-radius: 8px;
-            overflow: hidden; /* To keep border-radius */
+            overflow: hidden; 
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -286,18 +293,15 @@
             color: #ffffff;
         }
 
-        /* Style for the active link within the dropdown */
         .dropdown-content a.active {
             color: #ffffff;
-            /* Using the blue color from your site */
             background-color: rgba(0, 71, 187, 0.4); 
         }
 
-        /* Show the dropdown on hover */
         .nav-dropdown:hover .dropdown-content {
             display: block;
         }
-        /* --- END: NEW STYLES FOR DROPDOWN NAV --- */
+        /* --- END: STYLES FOR DROPDOWN NAV --- */
 
 
         @media (max-width: 768px) {
@@ -316,7 +320,6 @@
                 width: 100%;
                 gap: 0;
                 margin-top: 15px;
-                /* Reset alignment for mobile */
                 align-items: stretch; 
             }
             .nav-tabs.active {
@@ -368,17 +371,15 @@
                 width: 100%;
             }
             
-            /* The "Volumes" tab in the mobile menu */
             .nav-dropdown .nav-tab {
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 text-align: center;
             }
             
-            /* The dropdown content on mobile */
             .dropdown-content {
-                display: block; /* Always show in mobile nav */
-                position: static; /* Not absolute */
-                transform: none; /* Reset transform */
+                display: block; 
+                position: static; 
+                transform: none;
                 width: 100%;
                 background: none;
                 backdrop-filter: none;
@@ -388,7 +389,6 @@
             }
 
             .dropdown-content a {
-                /* Style to look like sub-items */
                 background-color: rgba(0, 0, 0, 0.2);
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 text-align: center;
@@ -426,16 +426,27 @@
         
     </style>
 </head>
-    </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="volumes.html" class="nav-tab">Volumes</a>
-            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="faq.html" class="nav-tab">FAQ</a>
-            <a href="support-us.html" class="nav-tab">Support Us</a>
-            <a href="urgent.html" class="nav-tab active">Urgent Appeal</a>
-            <a href="contact.html" class="nav-tab">Contact</a>
+<body>
+
+    <nav class="nav-header">
+        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+        <div class="nav-tabs" id="nav-tabs">
+            <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
+            
+            <div class="nav-dropdown">
+                <span class="nav-tab active">Volumes ▼</span>
+                <div class="dropdown-content">
+                    <a href="../volumes.html">All Volumes</a>
+                    <a href="authors.html" class="active">Our Authors</a>
+                </div>
+            </div>
+            
+            <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
+            <a href="../faq.html" class="nav-tab">FAQ</a>
+            <a href="../support-us.html" class="nav-tab">Support Us</a>
+            <a href="../urgent.html" class="nav-tab">Urgent Appeal</a>
+            <a href="../contact.html" class="nav-tab">Contact</a>
         </div>
     </nav>
 
@@ -451,6 +462,8 @@
                         Oly Weary has never been published until now. He’s a British-born, Spanish-residing writer who loves to create absurdist stories like the one you will
                         read today.
                     </p>
+
+                    <img src="olycover.png" alt="Author Oly Weary" class="author-cover">
                     
                     <div class="editor-note">
                         <p>
@@ -478,6 +491,8 @@
                         Eduardo Garcia has been published twice in a local magazine, which is no longer in operation. He
                         hails from Argentina and likes to write in his spare time.
                     </p>
+
+                    <img src="garciacover.png" alt="Author Eduardo Garcia" class="author-cover">
                     
                     <div class="editor-note">
                         <p>
