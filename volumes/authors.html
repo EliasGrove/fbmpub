@@ -3,547 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Authors - Faun by Moonlight Literary Magazine</title>
+    <title>Volumes - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/Volumes">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://use.typekit.net">
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- General Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "neue-kabel", sans-serif;
-            background-color: #1a1a1a;
-            color: #f8f8f8;
-            min-height: 100vh;
+            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
+            min-height: 100vh; display: flex; flex-direction: column; position: relative;
+            background-image: url('images/4.png'); background-repeat: no-repeat;
+            background-position: center center; background-attachment: fixed; background-size: cover;
+            isolation: isolate;
+        }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
+        .nav-header, .main-wrapper, .footer { position: relative; z-index: 2; }
+        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
+
+        /* --- Navigation --- */
+        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        
+        /* Nav dropdown styles */
+        .nav-tabs { display: flex; gap: 30px; align-items: center; }
+        .nav-tab { 
+            font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; 
+            background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; 
+            transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); display: inline-block;
+        }
+        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
+        
+        .nav-dropdown { position: relative; display: inline-block; }
+        .nav-dropdown .nav-tab { transition: color 0.3s ease, text-shadow 0.3s ease; }
+        .nav-dropdown:hover .nav-tab { transform: none; }
+        .dropdown-content {
+            display: none; position: absolute; top: 90%; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3); z-index: 100; border-radius: 8px;
+            overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dropdown-content a {
+            font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1rem; color: #d0d0d0;
+            padding: 14px 20px; text-decoration: none; display: block; text-align: left;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); transition: all 0.3s ease;
+        }
+        .dropdown-content a:hover { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+        .dropdown-content a.active { color: #ffffff; background-color: rgba(0, 71, 187, 0.4); }
+        .nav-dropdown:hover .dropdown-content { display: block; }
+        
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+
+        /* --- Main Content Wrapper --- */
+        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
+        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 1200px; width: 95%; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); }
+
+        /* --- Volumes Grid Styles (Vertical) --- */
+        .volumes-grid {
             display: flex;
             flex-direction: column;
-            /* UPDATED PATH: Added ../ to go up one directory */
-            background-image: url('../images/3.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        .nav-header {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
+            gap: 40px;
         }
 
-        .logo {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 1.8rem;
-            color: #f8f8f8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            font-size: 1.5rem;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 30px;
-            /* Added for dropdown alignment */
-            align-items: center; 
-        }
-
-        .nav-tab {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: none;
-            border: none;
-            color: #d0d0d0;
-            padding: 12px 20px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            /* Added for vertical alignment with dropdown */
-            display: inline-block; 
-        }
-
-        .nav-tab:hover,
-        .nav-tab.active {
-            color: #ffffff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6);
-            transform: translateY(-1px);
-        }
-
-        .main-wrapper {
-            position: relative;
-            z-index: 2;
-            padding: 60px 20px;
-            text-align: center;
-            flex: 1;
-        }
-
-        .text-box {
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border: 4px solid #ffffff;
+        .volume-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
-            padding: 50px;
-            max-width: 900px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .page-title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            padding: 25px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            max-width: 550px;
+            width: 100%;
         }
 
-        .word-faun { color: #E60026; }
-        .word-by { color: #0047BB; }
-        .word-moonlight { color: #FFD100; }
+        .volume-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .volume-cover {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 3; 
+            object-fit: cover; 
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.28);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+            cursor: zoom-in;
+        }
         
-        .section {
-            margin-bottom: 1.8rem;
-        }
-
-        .section-title {
+        .volume-title {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
+            font-size: 2rem;
+            margin-bottom: 1rem;
             letter-spacing: 1px;
-            color: #ffffff;
+            color: #ffd700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
 
-        .section-content {
+        .volume-subtitle {
             font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.3rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.6;
             color: #e8e8e8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            text-align: justify;
-        }
-
-        .section-content p {
-            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 2rem;
+            min-height: 50px;
         }
         
-        .footer {
-            position: relative;
-            z-index: 10;
+        .volume-actions {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 15px;
+            margin-top: auto; 
         }
 
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-link {
-            color: #d0d0d0;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 8px 12px;
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
-
-        /* --- START: NEW STYLES FOR AUTHOR PAGE --- */
-        .section-divider {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1.8rem;
-        }
-
-        .author-bio {
-            font-style: italic;
-            color: #e0e0e0;
-            margin-bottom: 1.5rem;
-        }
-
-        .editor-note {
-            margin-top: 1.5rem;
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid #0047BB; 
-            border-radius: 4px;
-        }
-        
-        .editor-note p {
-            margin-bottom: 1rem;
-            text-align: left; 
-        }
-        
-        .editor-note p:last-child {
-            margin-bottom: 0;
-        }
-
-        .author-contact {
-            margin-top: 1.5rem;
-            font-style: italic;
-            text-align: center;
-            color: #ccc;
-            font-size: 1.1rem; 
-        }
-        /* --- END: NEW STYLES FOR AUTHOR PAGE --- */
-
-        /* --- START: NEW STYLES FOR DROPDOWN NAV --- */
-        .nav-dropdown {
-            position: relative;
+        .button {
             display: inline-block;
-        }
-
-        /* Style the "Volumes" text just like other tabs */
-        .nav-dropdown .nav-tab {
-            /* Remove transform on hover for the parent, 
-               so the dropdown menu doesn't jitter */
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-        .nav-dropdown:hover .nav-tab {
-            transform: none;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 90%; /* Position it just below the tab */
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            z-index: 100;
-            border-radius: 8px;
-            overflow: hidden; /* To keep border-radius */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .dropdown-content a {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
-            font-size: 1rem;
-            color: #d0d0d0;
-            padding: 14px 20px;
+            font-size: 1.1rem;
+            color: #f0f0f0;
             text-decoration: none;
-            display: block;
-            text-align: left;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-
-        /* Style for the active link within the dropdown */
-        .dropdown-content a.active {
-            color: #ffffff;
-            /* Using the blue color from your site */
-            background-color: rgba(0, 71, 187, 0.4); 
-        }
-
-        /* Show the dropdown on hover */
-        .nav-dropdown:hover .dropdown-content {
-            display: block;
-        }
-        /* --- END: NEW STYLES FOR DROPDOWN NAV --- */
-
-
-        @media (max-width: 768px) {
-            .nav-header {
-                padding: 15px 20px;
-            }
-            .logo {
-                font-size: 1.4rem;
-            }
-            .mobile-menu-toggle {
-                display: block;
-            }
-            .nav-tabs {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-                margin-top: 15px;
-                /* Reset alignment for mobile */
-                align-items: stretch; 
-            }
-            .nav-tabs.active {
-                display: flex;
-            }
-            .nav-tab {
-                width: 100%;
-                text-align: center;
-                padding: 15px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                font-size: 1rem;
-            }
-            .main-wrapper {
-                padding: 30px 15px;
-            }
-            .text-box {
-                padding: 25px 20px;
-                border-width: 2px;
-            }
-            .page-title {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-                letter-spacing: 1px;
-            }
-            .section-title {
-                font-size: 1.2rem;
-            }
-            .section-content {
-                font-size: 1.1rem;
-                text-align: left;
-            }
-            .footer {
-                padding: 15px 20px;
-                justify-content: center;
-                text-align: center;
-            }
-            .footer-links {
-                width: 100%;
-                justify-content: center;
-            }
-            .copyright {
-                width: 100%;
-                text-align: center;
-                font-size: 0.8rem;
-            }
-
-            /* --- START: DROPDOWN MOBILE STYLES --- */
-            .nav-dropdown {
-                width: 100%;
-            }
-            
-            /* The "Volumes" tab in the mobile menu */
-            .nav-dropdown .nav-tab {
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                text-align: center;
-            }
-            
-            /* The dropdown content on mobile */
-            .dropdown-content {
-                display: block; /* Always show in mobile nav */
-                position: static; /* Not absolute */
-                transform: none; /* Reset transform */
-                width: 100%;
-                background: none;
-                backdrop-filter: none;
-                box-shadow: none;
-                border-radius: 0;
-                border: none;
-            }
-
-            .dropdown-content a {
-                /* Style to look like sub-items */
-                background-color: rgba(0, 0, 0, 0.2);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                text-align: center;
-                font-size: 0.95rem;
-                color: #ccc;
-                padding: 12px 20px;
-            }
-            
-            .dropdown-content a.active {
-                background-color: rgba(0, 71, 187, 0.4);
-                color: #ffffff;
-            }
-            
-            .dropdown-content a:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: #ffffff;
-            }
-            /* --- END: DROPDOWN MOBILE STYLES --- */
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.2rem;
-            }
-            .page-title {
-                font-size: 1.6rem;
-            }
-            .text-box {
-                padding: 20px 15px;
-            }
-            .section-content {
-                font-size: 1rem;
-            }
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
         }
         
+        .button.primary {
+             background-color: #0047BB;
+             border-color: #0047BB;
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .button.red {
+            background-color: #E60026; 
+            border-color: #E60026;
+        }
+
+        .button.yellow {
+            background-color: #FFD100;
+            border-color: #FFD100;
+            color: #1a1a1a;
+            text-shadow: none;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.1);
+        }
+        
+        /* This style is no longer needed at the bottom, but might be useful elsewhere */
+        /* .section-divider {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2.5rem 0;
+        } */
+
+        /* --- Lightbox --- */
+        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
+        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 10px 20px; border-radius: 50%; line-height: 1; transition: all 0.3s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
+
+        /* --- Footer --- */
+        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+        
+        /* --- Responsive Styles --- */
+        @media (max-width: 1024px) {
+            .text-box { padding: 40px; }
+        }
+        @media (max-width: 767px) {
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
+            .nav-tabs { 
+                display: none; flex-direction: column; gap: 0; 
+                position: absolute; top: 100%; left: 0; right: 0; 
+                background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); 
+                padding: 0; text-align: center; 
+            }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            .nav-tab { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); }
+            
+            /* Mobile Dropdown styles */
+            .nav-dropdown { width: 100%; }
+            .nav-dropdown .nav-tab { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+            .dropdown-content {
+                display: block; position: static; transform: none; width: 100%;
+                background: none; backdrop-filter: none; box-shadow: none;
+                border-radius: 0; border: none;
+            }
+            .dropdown-content a {
+                background-color: rgba(0, 0, 0, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center; font-size: 0.95rem; color: #ccc; padding: 12px 20px;
+            }
+            .dropdown-content a.active { background-color: rgba(0, 71, 187, 0.4); }
+            .dropdown-content a:hover { background-color: rgba(255, 255, 255, 0.1); }
+            /* End Mobile Dropdown */
+
+            .main-wrapper { padding: 40px 15px; }
+            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
+            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .logo { font-size: 1.4rem; }
+            .text-box { padding: 20px; background: rgba(0,0,0,0.85); border-width: 3px; }
+            .page-title { font-size: 2rem; }
+            .volume-title { font-size: 1.8rem; }
+            .button { font-size: 1rem; padding: 12px 24px; }
+        }
     </style>
 </head>
 <body>
     
-    <nav class="nav-header">
-        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
-        <div class="nav-tabs" id="nav-tabs">
-            <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
-            
-            <div class="nav-dropdown">
-                <span class="nav-tab active">Volumes ▼</span>
-                <div class="dropdown-content">
-                    <a href="../volumes.html">All Volumes</a>
-                    <a href="authors.html" class="active">Our Authors</a>
-                </div>
+  <nav class="nav-header">
+    <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
+    
+    <input type="checkbox" id="nav-toggle">
+    <label for="nav-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    
+    <div class="nav-tabs" id="nav-tabs">
+        <a href="who-we-are.html" class="nav-tab">Who We Are</a>
+        
+        <div class="nav-dropdown">
+            <span class="nav-tab active">Volumes ▼</span>
+            <div class="dropdown-content">
+                <a href="volumes.html" class="active">All Volumes</a>
+                <a href="volumes/authors.html">Our Authors</a>
             </div>
-            <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="../faq.html" class="nav-tab">FAQ</a>
-            <a href="../support-us.html" class="nav-tab">Support Us</a>
-            <a href="../urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="../contact.html" class="nav-tab">Contact</a>
         </div>
-    </nav>
+        <a href="submissions.html" class="nav-tab">Submit Your Work</a>
+        <a href="faq.html" class="nav-tab">FAQ</a>
+        <a href="support-us.html" class="nav-tab">Support Us</a>
+        <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
+        <a href="contact.html" class="nav-tab">Contact</a>
+    </div>
+  </nav>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+        <img src="" alt="" class="lightbox-content" id="lightbox-img">
+    </div>
 
     <main class="main-wrapper">
         <div class="text-box">
+            <h1 class="page-title">Our Volumes</h1>
             
-            <h1 class="page-title">Our Authors</h1>
-            
-            <section class="section section-divider">
-                <h2 class="section-title">Oly Weary</h2>
-                <div class="section-content">
-                    <p class="author-bio">
-                        Oly Weary has never been published until now. He’s a British-born, Spanish-residing writer who loves to create absurdist stories like the one you will
-                        read today.
-                    </p>
-                    
-                    <div class="editor-note">
-                        <p>
-                            I was compelled by this story for how it manages to subvert the Absurdist genre. In the works of
-                            Camus, Kafka, Beckett or Ionesco there has always been a distinction between the absurd and the
-                            character. These were individuals confronted with the absurd of their circumstances, their reactions
-                            constituted the core of the story.
-                        </p>
-                        <p>
-                            ‘Interrogation’ is absurdism where the subject and the absurd has been completely defeated. Resis-
-                            tance isn’t futile, it’s simply incomprehensible.
-                        </p>
-                    </div>
-                    
-                    <p class="author-contact">
-                        If you wish to speak to Oly, feel free to send us a message and we’ll put him through.
-                    </p>
-                </div>
-            </section>
+            <div class="volumes-grid">
 
-            <section class="section"> 
-                <h2 class="section-title">Eduardo Garcia</h2>
-                <div class="section-content">
-                    <p class="author-bio">
-                        Eduardo Garcia has been published twice in a local magazine, which is no longer in operation. He
-                        hails from Argentina and likes to write in his spare time.
-                    </p>
-                    
-                    <div class="editor-note">
-                        <p>
-                            In the story you will read today, a vampire writes a formal complaint to a county court judge claiming
-                            to be the victim of identity theft. It’s a delightful exploration of the 19th-century high-society fascina-
-                            tion with all things occult and supernatural, when the lines between science and fantasy were still be-
-                            ing drawn.
-                        </p>
-                        <p>
-                            It speaks of agency, identity, celebrity culture, and an immigrant’s persistent anxiety that there are in-
-                            visible networks of belonging he’ll never access, no matter how qualified he becomes. An anxiety of-
-                            ten misdirected toward other immigrants, by immigrants.
-                        </p>
+                <div class="volume-card">
+                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">November 2025</h2>
+                    <p class="volume-subtitle">Our inaugural issue is now available! We are incredibly proud to share the exceptional works we've selected.</p>
+                    <div class="volume-actions">
+                         <a href="/volumes/volume-1.html" class="button primary">Find Out More</a>
+                         <a href="/volumes/who-we-are.html" class="button red">Read our Opinion Piece: Who We Are</a>
+                         <a href="volumes/authors.html" class="button yellow">Meet Our Authors</a>
+                         </div>
+                </div> 
+                <div class="volume-card">
+                    <img src="images/coming-soon.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">December 2025</h2>
+                    <p class="volume-subtitle">Now accepting submissions for our second volume. No specific theme required—send us your best work!</p>
+                    <div class="volume-actions">
+                        <a href="submissions.html" class="button primary">Submit Your Work</a>
                     </div>
-                    
-                    <p class="author-contact">
-                        If you wish to contact Eduardo, feel free to get in touch and I’ll put you through.
-                    </p>
                 </div>
-            </section>
 
-        </div>
-    </main>
+            </div> </div> </main>
 
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank">𝕏</a>
-            <a href="../contact.html" class="footer-link">✉</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
         </div>
         <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
     </footer>
 
     <script>
-        function colorLogo() {
+        document.addEventListener('DOMContentLoaded', () => {
             const logo = document.getElementById('logo');
             if (logo) {
                 const colors = ['word-faun', 'word-by', 'word-moonlight'];
                 const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => 
-                    `<span class="${colors[i]}">${word}</span>`
-                ).join(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            colorLogo();
-            
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const navTabs = document.getElementById('nav-tabs');
-            
-            if (mobileMenuToggle && navTabs) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    navTabs.classList.toggle('active');
-                    mobileMenuToggle.textContent = navTabs.classList.contains('active') ? '✕' : '☰';
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const coverImages = document.querySelectorAll('.volume-cover');
+
+            if (lightbox && coverImages.length > 0) {
+                const lightboxClose = document.getElementById('lightbox-close');
+                
+                const openLightbox = (e) => {
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.add('active');
+                };
+                
+                const closeLightbox = () => {
+                    lightbox.classList.remove('active');
+                };
+                
+                coverImages.forEach(img => img.addEventListener('click', openLightbox));
+                
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', closeLightbox);
+                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                        closeLightbox();
+                    }
                 });
             }
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-tab, .dropdown-content a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('nav-toggle').checked = false;
+                });
+            });
         });
     </script>
 </body>
