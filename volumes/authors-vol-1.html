@@ -21,7 +21,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* UPDATED PATH: Added ../ to go up one directory */
             background-image: url('../images/3.png');
             background-repeat: no-repeat;
             background-position: center center;
@@ -37,7 +36,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.6);
-            z-index: 1; /* Changed from -1 to 1 */
+            z-index: 1;
         }
 
         .nav-header {
@@ -76,7 +75,7 @@
         .nav-tabs {
             display: flex;
             gap: 30px;
-            align-items: center; 
+            /* REMOVED: align-items: center; */
         }
 
         .nav-tab {
@@ -92,7 +91,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            display: inline-block; 
+            /* REMOVED: display: inline-block; */
         }
 
         .nav-tab:hover,
@@ -196,25 +195,23 @@
             color: #b0b0b0;
         }
 
-        /* --- START: STYLES FOR AUTHOR PAGE --- */
+        /* --- STYLES FOR AUTHOR PAGE --- */
         .section-divider {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 1.8rem;
         }
 
         .author-bio {
-            /* font-style: italic; */ /* REMOVED */
             color: #e0e0e0;
             margin-bottom: 1.5rem;
         }
 
-        /* --- ADDED: Author Cover Image Style --- */
         .author-cover {
             display: block;
             width: 100%;
-            max-width: 350px; /* Adjust size as needed */
+            max-width: 350px;
             height: auto;
-            margin: 2rem auto; /* Centers the image */
+            margin: 2rem auto;
             border-radius: 8px;
             border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -239,69 +236,13 @@
 
         .author-contact {
             margin-top: 1.5rem;
-            /* font-style: italic; */ /* REMOVED */
             text-align: center;
             color: #ccc;
             font-size: 1.1rem; 
         }
-        /* --- END: STYLES FOR AUTHOR PAGE --- */
+        /* --- END STYLES FOR AUTHOR PAGE --- */
 
-        /* --- START: STYLES FOR DROPDOWN NAV --- */
-        .nav-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .nav-dropdown .nav-tab {
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-        .nav-dropdown:hover .nav-tab {
-            transform: none;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 90%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            z-index: 100;
-            border-radius: 8px;
-            overflow: hidden; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .dropdown-content a {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #d0d0d0;
-            padding: 14px 20px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-
-        .dropdown-content a.active {
-            color: #ffffff;
-            background-color: rgba(0, 71, 187, 0.4); 
-        }
-
-        .nav-dropdown:hover .dropdown-content {
-            display: block;
-        }
-        /* --- END: STYLES FOR DROPDOWN NAV --- */
+        /* --- REMOVED ALL DROPDOWN NAV STYLES --- */
 
 
         @media (max-width: 768px) {
@@ -320,7 +261,7 @@
                 width: 100%;
                 gap: 0;
                 margin-top: 15px;
-                align-items: stretch; 
+                /* REMOVED: align-items: stretch; */
             }
             .nav-tabs.active {
                 display: flex;
@@ -366,47 +307,7 @@
                 font-size: 0.8rem;
             }
 
-            /* --- START: DROPDOWN MOBILE STYLES --- */
-            .nav-dropdown {
-                width: 100%;
-            }
-            
-            .nav-dropdown .nav-tab {
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                text-align: center;
-            }
-            
-            .dropdown-content {
-                display: block; 
-                position: static; 
-                transform: none;
-                width: 100%;
-                background: none;
-                backdrop-filter: none;
-                box-shadow: none;
-                border-radius: 0;
-                border: none;
-            }
-
-            .dropdown-content a {
-                background-color: rgba(0, 0, 0, 0.2);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                text-align: center;
-                font-size: 0.95rem;
-                color: #ccc;
-                padding: 12px 20px;
-            }
-            
-            .dropdown-content a.active {
-                background-color: rgba(0, 71, 187, 0.4);
-                color: #ffffff;
-            }
-            
-            .dropdown-content a:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: #ffffff;
-            }
-            /* --- END: DROPDOWN MOBILE STYLES --- */
+            /* --- REMOVED ALL MOBILE DROPDOWN STYLES --- */
         }
 
         @media (max-width: 480px) {
@@ -433,15 +334,8 @@
         <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
         <div class="nav-tabs" id="nav-tabs">
             <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
-            
-            <div class="nav-dropdown">
-                <span class="nav-tab active">Volumes ▼</span>
-                <div class="dropdown-content">
-                    <a href="../volumes.html">All Volumes</a>
-                    <a href="authors.html" class="active">Our Authors</a>
-                </div>
-            </div>
-            
+            <a href="../volumes.html" class="nav-tab">Volumes</a>
+            <a href="authors.html" class="nav-tab active">Our Authors</a>
             <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
             <a href="../faq.html" class="nav-tab">FAQ</a>
             <a href="../support-us.html" class="nav-tab">Support Us</a>
@@ -519,7 +413,7 @@
 
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank">𝕏</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="blank">𝕏</a>
             <a href="../contact.html" class="footer-link">✉</a>
         </div>
         <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
