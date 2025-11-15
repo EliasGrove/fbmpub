@@ -1,239 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Faun by Moonlight</title>
-    <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions. For submissions, please visit our submissions page.">
-    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative;
-            background-image: url('images/7.png'); background-repeat: no-repeat;
-            background-position: center center; background-attachment: fixed; background-size: cover;
-            isolation: isolate;
-        }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
-        .nav-header { position: relative; z-index: 10; }
-        .main-wrapper, .footer { position: relative; z-index: 2; }
-        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Faun by Moonlight</title>
+    <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions. For submissions, please visit our submissions page.">
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3ETBBLP43M');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
+            min-height: 100vh; display: flex; flex-direction: column; position: relative;
+            background-image: url('images/7.png'); background-repeat: no-repeat;
+            background-position: center center; background-attachment: fixed; background-size: cover;
+            isolation: isolate;
+        }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
+        .nav-header { position: relative; z-index: 10; }
+        .main-wrapper, .footer { position: relative; z-index: 2; }
+        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
 
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
-        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
-        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 700px; text-align: left; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); text-align: center; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .intro-text { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; color: #e8e8e8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: justify; margin-bottom: 2rem; }
-        
-        /* UPDATED .social-section */
-        .social-section { 
-            text-align: center; 
-            margin-bottom: 2rem; 
-            padding: 1.5rem; 
-            background: rgba(255, 255, 255, 0.1); 
-            border: 3px solid #ffffff; 
-            border-radius: 8px; 
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); 
-            /* Added for multiple icons */
+        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
+        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 700px; text-align: left; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); text-align: center; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .intro-text { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; color: #e8e8e8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: justify; margin-bottom: 2rem; }
+        
+        /* --- MODIFICATION ---
+           Changed .social-section to use flexbox for better alignment of multiple buttons
+        */
+        .social-section {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Renamed .x-link to .social-link */
-        .social-link { 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 8px; 
-            font-family: "dunbar-tall", sans-serif; 
-            font-weight: 700; 
-            font-size: 1.1rem; 
-            color: #ffffff; 
-            text-decoration: none; 
-            padding: 10px 20px; 
-            background: rgba(255, 255, 255, 0.1); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            border-radius: 4px; 
-            transition: all 0.3s ease; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-            letter-spacing: 1px; 
+        .x-link { display: inline-flex; align-items: center; gap: 8px; font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #ffffff; text-decoration: none; padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); letter-spacing: 1px; }
+        .x-link:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); transform: translateY(-1px); }
+        .x-icon { width: 18px; height: 18px; fill: currentColor; }
+        
+        .contact-form { background: rgba(255, 255, 255, 0.1); border: 3px solid #ffffff; border-radius: 8px; padding: 2rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1rem; color: #ffffff; display: block; margin-bottom: 0.5rem; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .form-input, .form-textarea { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 4px; color: #ffffff; transition: all 0.3s ease; }
+        .form-input:focus, .form-textarea:focus { outline: none; background: rgba(255, 255, 255, 0.15); border-color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+        .form-input::placeholder, .form-textarea::placeholder { color: rgba(255, 255, 255, 0.5); font-style: italic; }
+        .form-textarea { min-height: 120px; resize: vertical; }
+        .submit-button { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: rgba(255, 255, 255, 0.1); border: 2px solid #ffffff; border-radius: 4px; color: #ffffff; padding: 12px 30px; cursor: pointer; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); width: 100%; }
+        .submit-button:hover { background: rgba(255, 255, 255, 0.2); border-color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
+        .disclaimer { background: rgba(139, 69, 19, 0.3); border-left: 4px solid rgba(210, 180, 140, 0.6); padding: 1rem; margin-top: 2rem; border-radius: 0 4px 4px 0; font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; color: #e8e8e8; }
+        .disclaimer .emphasis { color: #ffd700; font-style: italic; }
+        .disclaimer a { color: #e8e8e8; text-decoration: underline; transition: color 0.3s ease; }
+        .disclaimer a:hover { color: #ffffff; }
+        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+        @media (max-width: 768px) {
+            body::before { background: rgba(0, 0, 0, 0.75); }
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
+            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            .main-wrapper { padding: 40px 15px; }
+            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
+            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
+            .intro-text { font-size: 1.2rem; text-align: left; }
+            .contact-form, .social-section { padding: 1.5rem; border-width: 3px; }
+            .footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
         }
-        /* Renamed .x-link:hover to .social-link:hover */
-        .social-link:hover { 
-            background: rgba(255, 255, 255, 0.2); 
-            border-color: rgba(255, 255, 255, 0.4); 
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); 
-            transform: translateY(-1px); 
+        @media (max-width: 480px) {
+            .logo { font-size: 1.4rem; }
+            .text-box { padding: 20px; border-radius: 8px; background: rgba(0, 0, 0, 0.85); border-width: 3px; }
+            .page-title { font-size: 2rem; }
+            .intro-text { font-size: 1.1rem; }
+            .contact-form, .social-section { padding: 1rem; border-width: 3px; }
+            .x-link { font-size: 1rem; padding: 8px 16px; }
         }
-        /* Renamed .x-icon to .social-icon */
-        .social-icon { 
-            width: 18px; 
-            height: 18px; 
-            fill: currentColor; 
-        }
-
-        .contact-form { background: rgba(255, 255, 255, 0.1); border: 3px solid #ffffff; border-radius: 8px; padding: 2rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-label { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1rem; color: #ffffff; display: block; margin-bottom: 0.5rem; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .form-input, .form-textarea { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 4px; color: #ffffff; transition: all 0.3s ease; }
-        .form-input:focus, .form-textarea:focus { outline: none; background: rgba(255, 255, 255, 0.15); border-color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
-        .form-input::placeholder, .form-textarea::placeholder { color: rgba(255, 255, 255, 0.5); font-style: italic; }
-        .form-textarea { min-height: 120px; resize: vertical; }
-        .submit-button { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: rgba(255, 255, 255, 0.1); border: 2px solid #ffffff; border-radius: 4px; color: #ffffff; padding: 12px 30px; cursor: pointer; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); width: 100%; }
-        .submit-button:hover { background: rgba(255, 255, 255, 0.2); border-color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
-        .disclaimer { background: rgba(139, 69, 19, 0.3); border-left: 4px solid rgba(210, 180, 140, 0.6); padding: 1rem; margin-top: 2rem; border-radius: 0 4px 4px 0; font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; color: #e8e8e8; }
-        .disclaimer .emphasis { color: #ffd700; font-style: italic; }
-        .disclaimer a { color: #e8e8e8; text-decoration: underline; transition: color 0.3s ease; }
-        .disclaimer a:hover { color: #ffffff; }
-        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
-        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
-        
-        /* Added for footer social icons */
-        .footer-icon {
-            width: 1.2rem;
-            height: 1.2rem;
-        _   vertical-align: middle;
-            fill: currentColor;
-        }
-
-        @media (max-width: 768px) {
-            body::before { background: rgba(0, 0, 0, 0.75); }
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .main-wrapper { padding: 40px 15px; }
-            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
-            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
-            .intro-text { font-size: 1.2rem; text-align: left; }
-            .contact-form, .social-section { padding: 1.5rem; border-width: 3px; }
-            .footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .logo { font-size: 1.4rem; }
-            .text-box { padding: 20px; border-radius: 8px; background: rgba(0, 0, 0, 0.85); border-width: 3px; }
-            .page-title { font-size: 2rem; }
-            .intro-text { font-size: 1.1rem; }
-            .contact-form, .social-section { padding: 1rem; border-width: 3px; }
-            /* Updated from .x-link */
-            .social-link { font-size: 1rem; padding: 8px 16px; }
-        }
-    </style>
+    </style>
 </head>
 <body>
-    <nav class="nav-header">
-        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <label for="nav-toggle" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="volumes.html" class="nav-tab">Volumes</a>
-            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="faq.html" class="nav-tab">FAQ</a>
-            <a href="support-us.html" class="nav-tab">Support Us</a>
-            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="contact.html" class="nav-tab active">Contact</a>
-        </div>
-    </nav>
-    <main class="main-wrapper">
-        <div class="text-box">
-            <h1 class="page-title">Contact</h1>
-            <p class="intro-text">
-                For general inquiries, business matters, or questions about Faun by Moonlight, please reach out to us using the form below.
-            </p>
-            
-                        <section class="social-section">
-    ...                         <a href="https://x.com/faunbymoonlight" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Faun by Moonlight on X">
-  ...                                   <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    @faunbymoonlight
-                </a>
-                
-                                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Faun by Moonlight on Bluesky">
-                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.671 9.401c-.131.061-.261.121-.392.182-.412.192-.835.393-1.27.604-.509.252-1.03.513-1.564.785-.31.162-.625.323-.945.494-.282.151-.568.303-.859.454a.79.79 0 01-.703 0c-.291-.151-.577-.303-.859-.454-.32-.171-.635-.332-1.03-.513-.534-.272-1.055-.533-1.564-.785-.435-.211-.858-.412-1.27-.604-.131-.061-.261-.121-.392-.182a.79.79 0 01-.351-1.008c.111-.322.362-.583.673-.704.131-.051.272-.091.413-.131.402-.121.815-.222 1.238-.303.509-.101 1.02-.182 1.543-.242.3.01.615-.01.917-.01.302 0 .616 0 .917.01.523.06.635.101 1.543.242.423.081.836.182 1.238.303.141.04.282.081.413.131.31.121.562.383.673.704a.79.79 0 01-.351 1.008zm-6.671 6.94c-.161.222-.343.434-.524.645a.79.79 0 01-1.16-.081c-.192-.222-.373-.443-.554-.665-.565-.685-1.129-1.37-1.683-2.062a.79.79 0 01.121-1.119c.192-.151.423-.222.653-.222.2 0 .392.05.574.141.494.242.988.484 1.482.726.625.303 1.25.605 1.885.907.03 0 .061.01.091.02a.79.79 0 01.373.373c.01.03.02.061.02.091.303-.625.605-1.25.907-1.885.242-.494.484-.988.726-1.482.141-.292.333-.523.605-.664.31-.161.665-.181.988-.081a.79.79 0 01.574 1.008c-.211.594-.433 1.189-.654 1.783-.232.615-.464 1.23-.706 1.844a.79.79 0 01-1.089.443c-.191-.091-.373-.202-.544-.313a11.1 11.1 0 00-.514-.323c-.171-.111-.342-.222-.514-.323-.171.101-.342.212-.514.323-.171.101-.342.212-.514.323-.171.111-.353.222-.544.313a.79.79 0 01-1.089-.443c-.242-.614-.474-1.23-.706-1.844-.221-.594-.443-1.189-.654-1.783a.79.79 0 01.574-1.008c.323-.101.677-.081.988.081.272.141.464.373.605.664.242.494.484-.988.726 1.482.302.635.605 1.26.907 1.885.03-.03.061-.061.091-.091a.79.79 0 01.373-.373c0-.03.01-.061.02-.091.635-.302 1.26-.604 1.885.907.494-.242.988-.484 1.482.726.181-.091.373-.141.574-.141.231 0 .463.07.653.222a.79.79 0 01.121 1.119c-.554.692-1.119 1.377-1.683 2.062-.181.222-.363.443-.554.665a.79.79 0 01-1.16.081c-.181-.211-.363-.423-.524-.645a1..." d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.671 9.401c-.131.061-.261.121-.392.182-.412.192-.835.393-1.27.604-.509.252-1.03.513-1.564.785-.31.162-.625.323-.945.494-.282.151-.568.303-.859.454a.79.79 0 01-.703 0c-.291-.151-.577-.303-.859-.454-.32-.171-.635-.332-1.03-.513-.534-.272-1.055-.533-1.564-.785-.435-.211-.858-.412-1.27-.604-.131-.061-.261-.121-.392-.182a.79.79 0 01-.351-1.008c.111-.322.362-.583.673-.704.131-.051.272-.091.413-.131.402-.121.815-.222 1.238-.303.509-.101 1.02-.182 1.543-.242.3.01.615-.01.917-.01.302 0 .616 0 .917.01.523.06.635.101 1.543.242.423.081.836.182 1.238.303.141.04.282.081.413.131.31.121.562.383.673.704a.79.79 0 01-.351 1.008zm-6.671 6.94c-.161.222-.343.434-.524.645a.79.79 0 01-1.16-.081c-.192-.222-.373-.443-.554-.665-.565-.685-1.129-1.37-1.683-2.062a.79.79 0 01.121-1.119c.192-.151.423-.222.653-.222.2 0 .392.05.574.141.494.242.988.484 1.482.726.625.303 1.25.605 1.885.907.03 0 .061.01.091.02a.79.79 0 01.373.373c.01.03.02.061.02.091.303-.625.605-1.25.907-1.885.242-.494.484-.988.726-1.482.141-.292.333-.523.605-.664.31-.161.665-.181.988-.081a.79.79 0 01.574 1.008c-.211.594-.433 1.189-.654 1.783-.232.615-.464 1.23-.706 1.844a.79.79 0 01-1.089.443c-.191-.091-.373-.202-.544-.313a11.1 11.1 0 00-.514-.323c-.171-.111-.342-.222-.514-.323-.171.101-.342.212-.514.323-.171.101-.342.212-.514.323-.171.111-.353.222-.544.313a.79.79 0 01-1.089-.443c-.242-.614-.474-1.23-.706-1.844-.221-.594-.443-1.189-.654-1.783a.79.79 0 01.574-1.008c.323-.101.677-.081.988.081.272.141.464.373.605.664.242.494.484-.988.726 1.482.302.635.605 1.26.907 1.885.03-.03.061-.061.091-.091a.79.79 0 01.373-.373c0-.03.01-.061.02-.091.635-.302 1.26-.604 1.885.907.494-.242.988-.484 1.482.726.181-.091.373-.141.574-.141.231 0 .463.07.653.222a.79.79 0 01.121 1.119c-.554.692-1.119 1.377-1.683 2.062-.181.222-.363.443-.554.665a.79.79 0 01-1.16.081c-.181-.211-.363-.423-.524-.645a13.3 13.3 0 00-.534-.695c-.171-.222-.353-.443-.534-.665-.181.222-.363.443-.534.665-.181.262-.363.523-.534.695z"/></svg>
-                    @faunbymoonlight
-                </a>
-            </section>
-                        
-            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="40095b04-f218-4f3a-8532-5fbec80bee19">
-                <input type="hidden" name="subject" value="Contact Form - Faun by Moonlight">
-                <div class="form-group">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="inquiry-type" class="form-label">Inquiry Type</label>
-                    <select id="inquiry-type" name="inquiry_type" class="form-input" required>
-                        <option value="">Select inquiry type</option>
-                        <option value="general">General Question</option>
-                        <option value="business">Business Inquiry</option>
-                        <option value="collaboration">Collaboration</option>
-                        <option value="press">Press & Media</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea id="message" name="message" class="form-textarea" placeholder="Please share your inquiry or message..." required></textarea>
-section         </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-            <div class="disclaimer">
-                <p><span class="emphasis">Please note:</span> This form is for general inquiries and business matters only. For manuscript submissions, please visit our <a href="submissions.html">Submissions</a> page for proper submission guidelines and email address.</p>
-            </div>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="httpsax.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
-            
-                        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.671 9.401c-.131.061-.261.121-.392.182-.412.192-.835.393-1.27.604-.509.252-1.03.513-1.564.785-.31.162-.625.323-.945.494-.282.151-.568.303-.859.454a.79.79 0 01-.703 0c-.291-.151-.577-.303-.859-.454-.32-.171-.635-.332-1.03-.513-.534-.272-1.055-.533-1.564-.785-.435-.211-.858-.412-1.27-.604-.131-.061-.261-.121-.392-.182a.79.79 0 01-.351-1.008c.111-.322.362-.583.673-.704.131-.051.272-.091.413-.131.402-.121.815-.222 1.238-.303.509-.101 1.02-.182 1.543-.242.3.01.615-.01.917-.01.302 0 .616 0 .917.01.523.06.635.101 1.543.242.423.081.836.182 1.238.303.141.04.282.081.413.131.31.121.562.383.673.704a.79.79 0 01-.351 1.008zm-6.671 6.94c-.161.222-.343.434-.524.645a.79.79 0 01-1.16-.081c-.192-.222-.373-.443-.554-.665-.565-.685-1.129-1.37-1.683-2.062a.79.79 0 01.121-1.119c.192-.151.423-.222.653-.222.2 0 .392.05.574.141.494.242.988.484 1.482.726.625.303 1.25.605 1.885.907.03 0 .061.01.091.02a.79.79 0 01.373.373c.01.03.02.061.02.091.303-.625.605-1.25.907-1.885.242-.494.484-.988.726-1.482.141-.292.333-.523.605-.664.31-.161.665-.181.988-.081a.79.79 0 01.574 1.008c-.211.594-.433 1.189-.654 1.783-.232.615-.464 1.23-.706 1.844a.79.79 0 01-1.089.443c-.191-.091-.373-.202-.544-.313a11.1 11.1 0 00-.514-.323c-.171-.111-.342-.222-.514-.323-.171.101-.342.212-.514.323-.171.101-.342.212-.514.323-.171.111-.353.222-.544.313a.79.79 0 01-1.089-.443c-.242-.614-.474-1.23-.706-1.844-.221-.594-.443-1.189-.654-1.783a.79.79 0 01.574-1.008c.323-.101.677-.081.988.081.272.141.464.373.605.664.242.494.484-.988.726 1.482.302.635.605 1.26.907 1.885.03-.03.061-.061.091-.091a.79.79 0 01.373-.373c0-.03.01-.061.02-.091.635-.302 1.26-.604 1.885.907.494-.242.988-.484 1.482.726.181-.091.373-.141.574-.141.231 0 .463.07.653.222a.79.79 0 01.121 1.119c-.554.692-1.119 1.377-1.683 2.062-.181.222-.363.443-.554.665a.79.79 0 01-1.16.081c-.181-.211-.363-.423-.524-.645a13.3 13.3 0 00-.534-.695c-.171-.222-.353-.443-.534-.665-.181.222-.363.443-.534.665-.181.262-.363.523-.534.695z"/></svg>
-            </a>
+    <nav class="nav-header">
+        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle">
+        <div class="nav-tabs">
+            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
+            <a href="volumes.html" class="nav-tab">Volumes</a>
+            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
+            <a href="faq.html" class="nav-tab">FAQ</a>
+            <a href="support-us.html" class="nav-tab">Support Us</a>
+            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
+            <a href="contact.html" class="nav-tab active">Contact</a>
+        </div>
+    </nav>
+    <main class="main-wrapper">
+        <div class="text-box">
+            <h1 class="page-title">Contact</h1>
+            <p class="intro-text">
+                For general inquiries, business matters, or questions about Faun by Moonlight, please reach out to us using the form below.
+            </p>
+            <section class="social-section">
+                <a href="https://x.com/faunbymoonlight" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="Follow Faun by Moonlight on X">
+                    <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    @faunbymoonlight
+                </a>
+                
+                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="Follow Faun by Moonlight on Bluesky">
+                    <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/></svg>
+                    @faunbymoonlight.bsky.social
+                </a>
+            </section>
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="40095b04-f218-4f3a-8532-5fbec80bee19">
+                <input type="hidden" name="subject" value="Contact Form - Faun by Moonlight">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry-type" class="form-label">Inquiry Type</label>
+                    <select id="inquiry-type" name="inquiry_type" class="form-input" required>
+                        <option value="">Select inquiry type</option>
+                        <option value="general">General Question</option>
+                        <option value="business">Business Inquiry</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="press">Press & Media</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" class="form-textarea" placeholder="Please share your inquiry or message..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+            <div class="disclaimer">
+                <p><span class="emphasis">Please note:</span> This form is for general inquiries and business matters only. For manuscript submissions, please visit our <a href="submissions.html">Submissions</a> page for proper submission guidelines and email address.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
+            
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
+                <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; display: inline-block;">
+                    <path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/>
+                </svg>
+            </a>
 
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
-        </div>
-        <div class="copyright">
-            © 2025 Faun by Moonlight. All rights reserved.
-read     </div>
-    </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const logo = document.getElementById('logo');
-            if (logo) {
-    _           const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-css           }
-        });
-    </script>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+        </div>
+        <div class="copyright">
+            © 2025 Faun by Moonlight. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logo');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
+        });
+    </script>
 </body>
 </html>
