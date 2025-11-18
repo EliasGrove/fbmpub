@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Work - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Submission guidelines for Faun by Moonlight. Read our requirements and submit your literary fiction.">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3ETBBLP43M');
+    </script>
 
+    <style>
+        /* --- CORE RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: "neue-kabel", sans-serif;
             background-color: #1a1a1a;
-            color: #f8f8f8;
+            color: #f0f0f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,96 +34,88 @@
             background-size: cover;
         }
 
+        /* Darker overlay for better contrast */
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
         }
 
+        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+
+        /* --- ANNOUNCEMENT BAR --- */
+        .announcement-bar {
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
         .nav-header {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
-
         .logo {
             font-family: "alfarn", serif;
-            font-weight: 400;
             font-size: 1.8rem;
             color: #f8f8f8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             text-decoration: none;
             letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            font-size: 1.5rem;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-tabs { display: flex; gap: 30px; }
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            background: none;
-            border: none;
-            color: #d0d0d0;
-            padding: 12px 20px;
+            background: none; border: none;
+            color: #a0a0a0;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
-
-        .nav-tab:hover,
-        .nav-tab.active {
+        .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             transform: translateY(-1px);
         }
 
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+
+        /* --- MAIN CONTENT LAYOUT --- */
         .main-wrapper {
-            position: relative;
-            z-index: 2;
             padding: 60px 20px;
-            text-align: center;
             flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
+        /* --- THE "GLASS" BOX --- */
         .text-box {
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border: 4px solid #ffffff;
-            border-radius: 12px;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
             padding: 50px;
             max-width: 900px;
             width: 100%;
             text-align: left;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .page-title {
@@ -125,101 +123,35 @@
             font-weight: 400;
             font-size: 3.5rem;
             margin-bottom: 2.5rem;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
             text-align: center;
+            color: #f8f8f8;
         }
 
-        .word-faun { color: #E60026; }
-        .word-by { color: #0047BB; }
-        .word-moonlight { color: #FFD100; }
-
+        /* --- ALERTS & CALLOUTS --- */
         .december-callout {
-            border: 3px solid #FFD100;
-            border-radius: 8px;
+            border: 1px solid rgba(255, 209, 0, 0.3);
+            background: rgba(255, 209, 0, 0.08); /* Subtle gold tint */
+            border-radius: 12px;
             padding: 1.5rem;
             margin: 0 0 2rem 0;
-            background: rgba(255, 209, 0, 0.15);
-            backdrop-filter: blur(10px);
             text-align: center;
         }
 
         .december-title {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #FFD100;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-        }
-
-        .december-content {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.2rem;
-            line-height: 1.7;
-            color: #f0f0f0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .section {
-            margin-bottom: 1.8rem;
-        }
-
-        .section-title {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-        }
-
-        .section-content {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #e8e8e8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            text-align: justify;
-        }
-
-        .section-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .section-content ul {
-            margin: 1.5rem 0 1.5rem 1.5rem;
-        }
-
-        .section-content li {
-            margin-bottom: 0.8rem;
-        }
-
-        .section-content a {
-            color: #e8e8e8;
-            text-decoration: underline;
-        }
-
-        .emphasis {
-            font-style: italic;
-        }
-
-        .section-divider {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1.8rem;
-            margin-bottom: 1.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .content-policy-disclaimer {
-            border: 3px solid #E60026;
-            border-radius: 8px;
+            border: 1px solid rgba(230, 0, 38, 0.3);
+            background: rgba(230, 0, 38, 0.08); /* Subtle red tint */
+            border-radius: 12px;
             padding: 1.5rem;
-            margin: 2rem 0 1rem 0;
-            background: rgba(230, 0, 38, 0.1);
-            backdrop-filter: blur(10px);
+            margin: 2rem 0;
         }
 
         .content-policy-title {
@@ -228,51 +160,53 @@
             font-size: 1.2rem;
             color: #E60026;
             margin-bottom: 0.8rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
         }
 
-        .content-policy-title::before {
-            content: "⚠";
+        .content-policy-title::before { content: "⚠"; font-size: 1.4rem; }
+
+        /* --- SECTIONS --- */
+        .section { margin-bottom: 2.5rem; }
+        
+        .section-title {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
             font-size: 1.4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
         }
 
-        .content-policy-content {
+        .section-content {
             font-family: "neue-kabel", sans-serif;
             font-weight: 400;
             font-size: 1.1rem;
-            line-height: 1.6;
-            color: #f0f0f0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            line-height: 1.7;
+            color: #d0d0d0;
         }
+        .section-content p { margin-bottom: 1rem; }
+        .section-content ul { margin: 1rem 0 1rem 1.5rem; }
+        .section-content li { margin-bottom: 0.5rem; }
+        .emphasis { color: #FFD100; font-style: normal; font-weight: 600; }
+        .section-content a { color: #e8e8e8; text-decoration: underline; }
 
-        .content-policy-content p {
-            margin-bottom: 1rem;
-        }
-
-        .content-policy-content p:last-child {
-            margin-bottom: 0;
-        }
-
-        .submit-instructions {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+        /* --- SUBMISSION STEPS --- */
+        .submit-instructions { display: flex; flex-direction: column; gap: 1.5rem; }
 
         .submission-step {
-            border: 3px solid #ffffff;
-            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.3);
             width: 100%;
         }
 
+        /* Step 1: Payment Specifics */
         .payment-step {
-            border-color: #FFD100;
-            background: rgba(255, 209, 0, 0.08);
+            border: 1px solid rgba(0, 71, 187, 0.4);
+            background: rgba(0, 71, 187, 0.1);
         }
 
         .step-title {
@@ -283,370 +217,111 @@
             margin-bottom: 1.2rem;
             text-align: center;
         }
+        .payment-step .step-title { color: #80b4ff; }
 
-        .payment-step .step-title {
-            color: #FFD100;
-        }
-
-        .step-content {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.7;
-            color: #f0f0f0;
-        }
-
-        .payment-note {
-            font-size: 1rem;
-            line-height: 1.6;
+        .buy-btn {
+            display: inline-block;
+            background: #0047BB;
             color: #ffffff;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            border-left: 4px solid #FFD100;
-        }
-
-        .payment-note strong {
-            color: #FFD100;
+            padding: 12px 35px;
+            border-radius: 50px;
             font-weight: 700;
-        }
-
-        .email-reveal-container {
-            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
             margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 71, 187, 0.4);
+        }
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            background: #005ce6;
+            color: #fff;
         }
 
+        /* --- EMAIL REVEAL --- */
         .checkbox-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
             margin-bottom: 1.5rem;
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-
         .checkbox-container input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
+            width: 18px; height: 18px;
+            accent-color: #E60026;
             cursor: pointer;
-            accent-color: #FFD100;
         }
-
-        .checkbox-container label {
-            font-size: 1.1rem;
-            cursor: pointer;
-            user-select: none;
-            color: #ffffff;
-            font-weight: 600;
-        }
+        .checkbox-container label { cursor: pointer; color: #d0d0d0; font-size: 1rem; }
 
         .email-button {
             display: inline-block;
-            background: #666666;
-            color: #999999;
-            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.05);
+            color: #666;
+            padding: 12px 25px;
             border-radius: 6px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: not-allowed;
             transition: all 0.3s ease;
-            border: 2px solid #666666;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-
         .email-button.enabled {
-            background: #000000;
-            color: #ffffff;
+            background: #f0f0f0;
+            color: #1a1a1a;
             cursor: pointer;
-            border-color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.15);
         }
-
-        .email-button.enabled:hover {
-            transform: translateY(-2px);
-            background: #222222;
-        }
+        .email-button.enabled:hover { transform: translateY(-2px); background: #fff; }
 
         .email-display {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-top: 1rem;
-            display: none;
-            word-break: break-all;
+            font-size: 1.3rem; font-weight: 700; color: #FFD100;
+            margin-top: 1.5rem; display: none;
         }
+        .email-display a { color: #FFD100; text-decoration: none; border-bottom: 1px dotted #FFD100; }
+        .email-display a:hover { color: #fff; border-color: #fff; }
 
-        .email-display a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        
-        .payment-options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .payment-option {
-            text-align: center;
-            padding: 1.5rem;
-            border-radius: 8px;
-            width: 100%;
-            position: relative;
-        }
-        
-        /* --- COLOR FIX STARTS HERE --- */
-        .payment-option.preferred {
-            border: 3px solid #0047BB; /* Changed color */
-            background: rgba(0, 71, 187, 0.15);
-            /* Removed transform and box-shadow to de-emphasize */
-        }
-
-        /* Removed .preferred-badge styling as the element is gone */
-
-        /* --- COLOR FIX ENDS HERE --- */
-
-        .payment-option.secondary {
-            border: 2px solid #555;
-            background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .payment-option-title {
-            margin-bottom: 1rem;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        .payment-option.preferred .payment-option-title {
-            color: #ffffff;
-        }
-
-        .payment-option.secondary .payment-option-title {
-            color: #FFD100;
-        }
-
-        .or-divider {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #aaa;
-            display: none; /* Hide OR divider since there's only one option now */
-            align-items: center;
-            gap: 1rem;
-            width: 80%;
-        }
-
-        .or-divider::before,
-        .or-divider::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background: #555;
-        }
-
+        /* --- FOOTER --- */
         .footer {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-            gap: 15px;
         }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-link {
-            color: #d0d0d0;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 8px 12px;
-        }
-
-        .copyright {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            .nav-header {
-                padding: 15px 20px;
-            }
-
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
             .nav-tabs {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-                margin-top: 15px;
+                display: none; flex-direction: column; gap: 15px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: #111; padding: 30px; text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
-
-            .nav-tabs.active {
-                display: flex;
-            }
-
-            .nav-tab {
-                width: 100%;
-                text-align: center;
-                padding: 15px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                font-size: 1rem;
-            }
-
-            .main-wrapper {
-                padding: 30px 15px;
-            }
-
-            .text-box {
-                padding: 25px 20px;
-                border-width: 2px;
-            }
-
-            .page-title {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-                letter-spacing: 1px;
-            }
-
-            .december-title {
-                font-size: 1.3rem;
-            }
-
-            .december-content {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.2rem;
-            }
-
-            .section-content {
-                font-size: 1.1rem;
-                text-align: left;
-            }
-
-            .section-content ul {
-                margin-left: 1rem;
-            }
-
-            .content-policy-title {
-                font-size: 1.1rem;
-            }
-
-            .content-policy-content {
-                font-size: 1rem;
-            }
-
-            .submission-step {
-                padding: 1.5rem;
-            }
-
-            .step-title {
-                font-size: 1.1rem;
-            }
-
-            .step-content {
-                font-size: 1rem;
-            }
-
-            .payment-note {
-                font-size: 0.9rem;
-            }
-
-            .checkbox-container {
-                flex-direction: column;
-                gap: 0.6rem;
-                padding: 1rem;
-            }
-
-            .checkbox-container label {
-                font-size: 1rem;
-                text-align: center;
-            }
-
-            .email-button {
-                font-size: 1rem;
-                padding: 0.8rem 1.5rem;
-            }
-
-            .email-display {
-                font-size: 1rem;
-            }
-
-            .footer {
-                padding: 15px 20px;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .footer-links {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .copyright {
-                width: 100%;
-                text-align: center;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .page-title {
-                font-size: 1.6rem;
-            }
-
-            .text-box {
-                padding: 20px 15px;
-            }
-
-            .december-callout,
-            .content-policy-disclaimer,
-            .submission-step {
-                padding: 1rem;
-            }
-
-            .section-content {
-                font-size: 1rem;
-            }
-
-            .checkbox-container label {
-                font-size: 0.95rem;
-            }
-
-            img[alt="Buy Me A Coffee"] {
-                height: 50px !important;
-                width: auto !important;
-            }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            
+            .text-box { padding: 30px 20px; }
+            .page-title { font-size: 2.5rem; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
+    <div id="global-announcement"></div>
+
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
-        <div class="nav-tabs" id="nav-tabs">
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle">
+        <div class="nav-tabs">
             <a href="who-we-are.html" class="nav-tab">Who We Are</a>
             <a href="volumes.html" class="nav-tab">Volumes</a>
             <a href="submissions.html" class="nav-tab active">Submit Your Work</a>
@@ -663,26 +338,26 @@
             
             <div class="december-callout">
                 <div class="december-title">📖 Now Reading for December 2025 Issue!</div>
-                <div class="december-content">
+                <div class="section-content" style="margin-bottom:0;">
                     We're actively selecting stories for our December issue. We're not particularly concerned with Christmas themes, so feel free to share your best work regardless of theme.
                 </div>
             </div>
             
             <div class="content-policy-disclaimer">
                 <div class="content-policy-title">Please Note</div>
-                <div class="content-policy-content">
-                    <p>We at Faun by Moonlight are willing to publish difficult and challenging themes; however, we will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors or severe psychological abuse will also be immediately discarded.</p>
+                <div class="section-content" style="color: #f0f0f0; margin-bottom:0;">
+                    We at Faun by Moonlight are willing to publish difficult and challenging themes; however, we will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors or severe psychological abuse will also be immediately discarded.
                 </div>
             </div>
 
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">What We're Looking For</h2>
                 <div class="section-content">
                     <p>Please consult our <a href="faq.html" class="emphasis">FAQ</a> for detailed information about the works we are interested in.</p>
                 </div>
             </section>
 
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">Manuscript Requirements</h2>
                 <div class="section-content">
                     <ul>
@@ -695,71 +370,66 @@
                 </div>
             </section>
             
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">Payment</h2>
                 <div class="section-content">
                     <p>We pay $20 for stories under 5,000 words, $50 for stories 5,000+ words, paid upon acceptance.</p>
                 </div>
             </section>
 
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">Cover Letter</h2>
                 <div class="section-content">
                     <p>Keep your cover letter brief. You may include a synopsis or brief introduction, but this is optional. We prefer to let the work speak for itself.</p>
                 </div>
             </section>
 
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">AI Policy</h2>
                 <div class="section-content">
                     <p>We accept submissions that have utilized AI tools for research or editing. However, works primarily generated by AI will not be considered. The creative voice must be authentically yours.</p>
                 </div>
             </section>
 
-            <section class="section section-divider">
+            <section class="section">
                 <h2 class="section-title">How to Submit</h2>
                 <div class="section-content">
                     <div class="submit-instructions">
+                        
                         <div class="submission-step payment-step">
-                            <div class="step-title">Step 1: Buy Our Issues </div>
-                            <div class="step-content">
-                                
-                                <div class="payment-options-container">
-                                    
-                                    <div class="payment-option preferred">
-                                        <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.6;">
-                                            We believe our writers should also be our readers. Your readership keeps the lights on and pays our talented writers. It also ensures you receive detailed, personalized feedback on every submission, regardless of outcome, by deterring AI-generated and shotgun submissions.
-                                        </p>
-                                        <a href="https://faunbymoonlight.store" target="_blank" style="display: inline-block; background: #0047BB; color: #ffffff; padding: 12px 30px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: 2px solid #0047BB;">Buy Now →</a>
-                                        <div class="payment-note" style="border-left-color: #0047BB; margin-top: 1.5rem;">
-                                            <strong>IMPORTANT:</strong> We'll automatically match your submission to your payment using your email address. If you used different emails for your submission and payment, don't worry—we can match them using your name instead. If you submit under a pen name, please include your legal name in your email so we can connect your payment.
-                                        </div>
-                                    </div>
-                                    </div>
+                            <div class="step-title">Step 1: Buy Our Issues</div>
+                            <div style="text-align: center;">
+                                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.6; color: #d0d0d0;">
+                                    We believe our writers should also be our readers. Your readership keeps the lights on and pays our talented writers. It also ensures you receive detailed, personalized feedback on every submission.
+                                </p>
+                                <a href="https://faunbymoonlight.store" target="_blank" class="buy-btn">Buy Now →</a>
+                                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #80b4ff;">
+                                    <strong>IMPORTANT:</strong> We'll match your submission to your payment using your email address.
+                                </p>
                             </div>
                         </div>
 
                         <div class="submission-step">
                             <div class="step-title">Step 2: Send Your Manuscript</div>
-                            <div class="step-content">
-                                <p style="margin-bottom: 1rem;">Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or issue purchase information in the email body.</p>
+                            <div style="text-align: center;">
+                                <p style="margin-bottom: 1.5rem;">Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or issue purchase information in the email body.</p>
                                 
-                                <div class="email-reveal-container">
-                                    <div class="checkbox-container">
-                                        <input type="checkbox" id="payment-checkbox">
-                                        <label for="payment-checkbox">I have purchased an issue</label>
-                                    </div>
-                                    
-                                    <div id="email-button" class="email-button">
-                                        Click to Reveal Submission Email
-                                    </div>
-                                    <div id="email-display" class="email-display"></div>
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="payment-checkbox">
+                                    <label for="payment-checkbox">I have purchased an issue</label>
                                 </div>
+                                
+                                <div id="email-button" class="email-button">
+                                    Click to Reveal Submission Email
+                                </div>
+                                <div id="email-display" class="email-display"></div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
+
             <section class="section">
                 <h2 class="section-title">Response Time</h2>
                 <div class="section-content">
@@ -771,20 +441,44 @@
 
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank">𝕏</a>
-            <a href="contact.html" class="footer-link">✉</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
         </div>
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+        <div class="copyright">
+            © 2025 Faun by Moonlight. All rights reserved.
+        </div>
     </footer>
 
     <script>
+        fetch('announcement.html')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('global-announcement').style.display = 'none';
+            });
+
         function colorLogo() {
             const logo = document.getElementById('logo');
-            const colors = ['word-faun', 'word-by', 'word-moonlight'];
-            const words = logo.textContent.split(' ');
-            logo.innerHTML = words.map((word, i) => 
-                `<span class="${colors[i]}">${word}</span>`
-            ).join(' ');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -793,14 +487,14 @@
             const emailButton = document.getElementById('email-button');
             const emailDisplay = document.getElementById('email-display');
             const paymentCheckbox = document.getElementById('payment-checkbox');
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const navTabs = document.getElementById('nav-tabs');
             
             paymentCheckbox.addEventListener('change', function() {
                 if (this.checked) {
                     emailButton.classList.add('enabled');
+                    emailButton.textContent = "Reveal Submission Email";
                 } else {
                     emailButton.classList.remove('enabled');
+                    emailButton.textContent = "Click to Reveal Submission Email";
                     emailDisplay.style.display = 'none';
                 }
             });
@@ -810,11 +504,6 @@
                     emailDisplay.innerHTML = '<a href="mailto:submissions@faunbymoonlight.com">submissions@faunbymoonlight.com</a>';
                     emailDisplay.style.display = 'block';
                 }
-            });
-
-            mobileMenuToggle.addEventListener('click', function() {
-                navTabs.classList.toggle('active');
-                mobileMenuToggle.textContent = navTabs.classList.contains('active') ? '✕' : '☰';
             });
         });
     </script>
