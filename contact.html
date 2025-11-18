@@ -6,6 +6,7 @@
     <title>Contact - Faun by Moonlight</title>
     <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions. For submissions, please visit our submissions page.">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -13,6 +14,7 @@
         gtag('js', new Date());
         gtag('config', 'G-3ETBBLP43M');
     </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,6 +28,28 @@
         .nav-header { position: relative; z-index: 10; }
         .main-wrapper, .footer { position: relative; z-index: 2; }
         @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
+
+        /* Announcement Bar Styles */
+        .announcement-bar {
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 20px;
+            font-family: "neue-kabel", sans-serif;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .announcement-bar a {
+            color: #FFD100;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .announcement-bar a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
 
         .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
         .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
@@ -41,9 +65,6 @@
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
         .intro-text { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; color: #e8e8e8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: justify; margin-bottom: 2rem; }
         
-        /* --- MODIFICATION ---
-           Changed .social-section to use flexbox for better alignment of multiple buttons
-        */
         .social-section {
             display: flex;
             flex-wrap: wrap;
@@ -73,11 +94,13 @@
         .disclaimer .emphasis { color: #ffd700; font-style: italic; }
         .disclaimer a { color: #e8e8e8; text-decoration: underline; transition: color 0.3s ease; }
         .disclaimer a:hover { color: #ffffff; }
+        
         .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
         .footer-links { display: flex; gap: 20px; align-items: center; }
         .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
         .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
         .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+        
         @media (max-width: 768px) {
             body::before { background: rgba(0, 0, 0, 0.75); }
             .nav-header { padding: 20px; }
@@ -102,6 +125,8 @@
     </style>
 </head>
 <body>
+    <div id="global-announcement"></div>
+
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
         <label for="nav-toggle" class="hamburger">
@@ -172,11 +197,21 @@
     </main>
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
             
             <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; display: inline-block;">
-                    <path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/>
+                </svg>
+            </a>
+
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                 </svg>
             </a>
 
@@ -187,6 +222,20 @@
         </div>
     </footer>
     <script>
+        // Script to fetch the announcement banner
+        fetch('announcement.html')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                console.log('Announcement system:', error.message);
+                document.getElementById('global-announcement').style.display = 'none';
+            });
+
         document.addEventListener('DOMContentLoaded', () => {
             const logo = document.getElementById('logo');
             if (logo) {
