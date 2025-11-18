@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Welcome</title>
+  <title>Welcome - Faun by Moonlight</title>
   <meta name="title" content="Faun by Moonlight - Literary Magazine for Exceptional Fiction">
-  <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist genre classification, bend rules, and embrace creative unconventionality. Launching November 2025.">
+  <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist genre classification. Launching November 2025.">
   <meta name="keywords" content="literary magazine, literary fiction, short stories, creative writing, literary journal, fiction magazine, independent press, emerging writers, literary publishing, contemporary literature">
   <meta name="author" content="Faun by Moonlight">
   <meta name="robots" content="index, follow">
@@ -31,7 +31,6 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Faun by Moonlight",
-    "alternateName": "FBM Literary Magazine",
     "url": "https://faunbymoonlight.com",
     "logo": "https://faunbymoonlight.com/images/Cover.png",
     "description": "Online literary magazine dedicated to exceptional literary fiction that resists genre classification",
@@ -41,22 +40,7 @@
       "@type": "ContactPoint",
       "contactType": "Editorial",
       "email": "submissions@faunbymoonlight.com"
-    },
-    "publishingPrinciples": "We publish works that resist simple genre classification and embrace creative unconventionality"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Periodical",
-    "name": "Faun by Moonlight",
-    "issn": "Pending",
-    "publisher": { "@type": "Organization", "name": "Faun by Moonlight" },
-    "genre": "Literary Fiction",
-    "inLanguage": "en-US",
-    "about": "Literary magazine featuring exceptional fiction",
-    "audience": { "@type": "Audience", "audienceType": "Literary fiction readers and writers" }
+    }
   }
   </script>
 
@@ -65,21 +49,24 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Faun by Moonlight",
-    "url": "https://faunbymoonlight.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://faunbymoonlight.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://faunbymoonlight.com"
   }
   </script>
 
-  <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3ETBBLP43M');
+  </script>
 
+  <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://use.typekit.net">
 
   <style>
+    /* --- CORE RESET --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body { height: 100%; overflow: hidden; }
@@ -87,12 +74,11 @@
     .container {
       height: 100vh;
       display: flex;
-      align-items: center;          /* vertical center */
-      justify-content: center;      /* horizontal center */
+      align-items: center;
+      justify-content: center;
       text-align: center;
       position: relative;
-      background-color: #000000;
-      /* --- FIX: Removed the leading '/' from the image path --- */
+      background-color: #050505;
       background-image: url('images/index.png');
       background-size: cover;
       background-position: center center;
@@ -100,85 +86,104 @@
       min-width: 320px;
     }
 
+    /* Gradient Overlay for better text focus */
     .container::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(0, 0, 0, 0.3); /* Dark overlay for text readability */
+      background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
       z-index: 1;
     }
 
     .content {
       position: relative; z-index: 2;
       color: #f8f8f8;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
       width: 100%;
       max-width: 1200px;
       padding: 0 20px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
+    /* --- TITLE STYLING --- */
     .title {
       font-family: "alfarn", serif;
       font-weight: 400;
-      font-size: 6rem;
-      margin: 0 0 1.5rem 0;
-      letter-spacing: 3px;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+      font-size: 6.5rem;
+      margin: 0 0 2rem 0;
+      letter-spacing: 2px;
+      /* Soft, modern shadow instead of hard black outline */
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      line-height: 1.1;
     }
 
     .word-faun { color: #E60026; }
     .word-by { color: #0047BB; }
     .word-moonlight { color: #FFD100; }
 
+    /* --- ENTER BUTTON (Text) --- */
     .enter-button {
       font-family: "dunbar-tall", sans-serif;
       font-weight: 900;
-      font-size: 1.5rem;
-      letter-spacing: 1.5px;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
       background: none;
       border: none;
       color: #f8f8f8;
-      padding: 20px 40px;
+      padding: 15px 30px;
       cursor: pointer;
-      position: relative;
-      transition: all 0.3s ease;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
       text-decoration: none;
       display: inline-block;
+      opacity: 0.9;
+      transition: all 0.4s ease;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      text-transform: uppercase;
     }
+    
     .enter-button:hover {
       color: #ffffff;
-      text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-      transform: translateY(-2px);
+      opacity: 1;
+      transform: scale(1.05);
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
     }
 
-    .spotlight-wrap { margin-top: 22px; }
+    /* --- SPOTLIGHT CTA (Glass Pill) --- */
+    .spotlight-wrap { margin-top: 40px; }
+    
     .spotlight-cta {
       display: inline-block;
-      font-family: "dunbar-tall", sans-serif;
-      font-weight: 900;
-      font-size: 1.05rem;
+      font-family: "neue-kabel", sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
       letter-spacing: 1px;
-      color: #f8f8f8;
+      color: #ffffff;
       text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 2px solid rgba(255,255,255,0.85);
-      background: rgba(0,0,0,0.45);
+      padding: 12px 24px;
+      
+      /* Glassmorphism */
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
       backdrop-filter: blur(10px);
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-      box-shadow: 0 0 24px rgba(255, 215, 0, 0.45), 0 10px 26px rgba(0,0,0,0.75);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .spotlight-cta:hover {
-      transform: translateY(-2px);
-      border-color: #ffffff;
-      box-shadow: 0 0 34px rgba(255, 215, 0, 0.6), 0 14px 34px rgba(0,0,0,0.85);
+      -webkit-backdrop-filter: blur(10px);
+      
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
     }
 
+    .spotlight-cta:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
-      .title { font-size: 4rem; margin-bottom: 2rem; letter-spacing: 2px; }
-      .spotlight-cta { font-size: 0.98rem; padding: 11px 16px; }
+      .title { font-size: 3.8rem; margin-bottom: 1.5rem; }
+      .enter-button { font-size: 1.5rem; }
+      .spotlight-cta { font-size: 0.9rem; padding: 10px 20px; }
     }
     @media (max-width: 480px) {
       .title { font-size: 2.8rem; letter-spacing: 1px; }
@@ -196,10 +201,11 @@
   <div class="container">
     <main class="content">
       <h1 class="title" id="title">Faun by Moonlight</h1>
-      <a href="who-we-are.html" class="enter-button" id="enter-btn">Enter</a>
+      
+      <a href="who-we-are.html" class="enter-button" id="enter-btn" aria-label="Enter Site">Enter</a>
 
       <div class="spotlight-wrap">
-        <a href="volumes.html" class="spotlight-cta" aria-label="See our first issue cover">
+        <a href="volumes.html" class="spotlight-cta" aria-label="Read our Inaugural Issue">
           Read our Inaugural Issue
         </a>
       </div>
@@ -217,41 +223,12 @@
     </nav>
     <article>
       <h2>About Faun by Moonlight Literary Magazine</h2>
-      <p>Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist simple genre classification and aren't scared to bend rules, be unconventional, and above all, creative.</p>
+      <p>Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction.</p>
       <section>
         <h3>Our Mission</h3>
         <p>We present readers with literature that both challenges and exceeds expectations. Our specialty is the exceptionally unmarketable - fiction that pushes boundaries and defies easy categorization.</p>
       </section>
-      <section>
-        <h3>What We Publish</h3>
-        <p>Literary fiction, short stories, novellas, and experimental prose. We seek character-driven narratives with complex themes, unconventional storytelling, and creative innovation. We welcome works that blend genres while maintaining literary quality.</p>
-      </section>
-      <section>
-        <h3>Submission Guidelines</h3>
-        <p>We accept unagented submissions up to 10,000 words. Standard manuscript format required. Submit via email to submissions@faunbymoonlight.com. Response time: 2 weeks. No submission fees.</p>
-        <p>Payment: $20 for pieces under 5,000 words, $50 for pieces 5,000+ words. We acquire first serial rights with a three-month exclusive period.</p>
-      </section>
-      <section>
-        <h3>Publication Schedule</h3>
-        <p>Monthly digital Volumes featuring 2-3 short stories published through Amazon Kindle. Debut issue launching November 2025. Annual print collections featuring exclusive content, artwork, and essays.</p>
-      </section>
-      <section>
-        <h3>For Writers</h3>
-        <p>No submission fees. Year-round reading period. Quick response times. Payment for accepted work. Helping writers enter the paying market. Building credentials for literary careers.</p>
-      </section>
     </article>
-    <section>
-      <h2>Contact Information</h2>
-      <p>Editorial Email: submissions@faunbymoonlight.com</p>
-      <p>General Inquiries: Use contact form</p>
-      <p>Social Media: @faunbymoonlight on X (Twitter)</p>
-      <p>Location: Online Literary Magazine</p>
-      <p>Founded: 2025</p>
-    </section>
-    <section>
-      <h2>Keywords for AI and Search</h2>
-      <p>literary magazine, literary fiction, short story magazine, fiction journal, independent press, emerging writers, literary publishing, contemporary literature, experimental fiction, creative writing magazine, literary journal submissions, paying literary market, new literary magazine, online fiction magazine, literary fiction submissions, short story submissions, literary magazine 2025, independent literary press, literary fiction journal, fiction magazine submissions</p>
-    </section>
   </div>
 
   <script>
@@ -266,14 +243,17 @@
       const button = document.getElementById('enter-btn');
       const languages = ['Enter', 'Entrar', 'Entrer', '入る', '进入', 'Войти'];
       let index = 0;
+      
       setInterval(() => {
-        button.style.opacity = '0.3';
+        button.style.opacity = '0.2'; // Fade out
+        
         setTimeout(() => {
-          button.textContent = languages[index];
           index = (index + 1) % languages.length;
-          button.style.opacity = '1';
-        }, 300);
-      }, 3000);
+          button.textContent = languages[index];
+          button.style.opacity = '1'; // Fade in
+        }, 400); // Wait for fade out to mostly complete
+        
+      }, 3500); // Slightly slower cycle for better readability
     }
 
     window.addEventListener('load', () => {
