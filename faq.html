@@ -21,88 +21,231 @@
     </script>
 
     <style>
+        /* --- CORE RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative;
-            background-image: url('images/5.png'); background-repeat: no-repeat;
-            background-position: center center; background-attachment: fixed; background-size: cover;
-            isolation: isolate;
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/5.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
         }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
-        .nav-header { position: relative; z-index: 10; }
-        .main-wrapper, .footer { position: relative; z-index: 2; }
-        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
 
-        /* Announcement Bar Styles */
+        /* Darker overlay for better contrast */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
+        }
+
+        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+
+        /* --- ANNOUNCEMENT BAR --- */
         .announcement-bar {
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 10px 20px;
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1001;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a {
-            color: #FFD100;
-            text-decoration: underline;
-            font-weight: bold;
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
-        .announcement-bar a:hover {
-            color: #ffffff;
+        .logo {
+            font-family: "alfarn", serif;
+            font-size: 1.8rem;
+            color: #f8f8f8;
             text-decoration: none;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: none; border: none;
+            color: #a0a0a0;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
         }
 
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
         .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
-        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
-        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 900px; text-align: left; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); text-align: center; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .faq-section { border: 4px solid #ffffff; border-radius: 8px; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); transition: all 0.3s ease; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
-        .faq-section:hover { background: rgba(0, 0, 0, 0.3); }
-        .faq-section:last-child { margin-bottom: 0; }
-        .faq-question { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.4rem; letter-spacing: 1px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); width: 100%; background: none; border: none; text-align: left; padding: 1.5rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center; }
-        .faq-question:hover { background: rgba(255, 255, 255, 0.05); }
-        .faq-question-text { flex: 1; }
-        .toggle-icon { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.2rem; color: #ffffff; margin-left: 1rem; transition: transform 0.3s ease; }
-        .faq-section.active .toggle-icon { transform: rotate(180deg); }
-        .faq-answer-container { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .faq-section.active .faq-answer-container { max-height: 1000px; padding: 0 1.5rem 1.5rem; }
-        .faq-answer { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); color: #e8e8e8; text-align: justify; }
-        .faq-answer:last-child { margin-bottom: 0; }
-        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .main-wrapper {
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* --- THE "GLASS" BOX (UX Optimized) --- */
+        .text-box {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+            text-align: center;
+            color: #f8f8f8;
+        }
+
+        /* --- FAQ SPECIFIC STYLES (Accordion) --- */
+        .faq-section {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-section:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Active State - slight highlight */
+        .faq-section.active {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #E60026; /* Brand color accent */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question-text {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .toggle-icon {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .faq-section.active .toggle-icon {
+            transform: rotate(180deg);
+            color: #E60026;
+        }
+
+        .faq-answer-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-section.active .faq-answer-container {
+            max-height: 1000px; /* Arbitrary large number for animation */
+        }
+
+        .faq-answer {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #d0d0d0;
+            padding: 0 25px 25px 25px;
+            margin: 0;
+        }
+
+        .faq-answer a {
+            color: #FFD100;
+            text-decoration: underline;
+        }
+        .faq-answer a:hover { color: #ffffff; }
+
+        .faq-answer p { margin-bottom: 1rem; }
+        .faq-answer p:last-child { margin-bottom: 0; }
+
+
+        /* --- FOOTER --- */
+        .footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
         .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
-        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
-        
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
+            .nav-tabs {
+                display: none; flex-direction: column; gap: 15px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: #111; padding: 30px; text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .text-box { padding: 30px; max-width: 100%; }
+            
+            .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
-            .faq-question { font-size: 1.3rem; padding: 1.2rem; }
-            .faq-answer { font-size: 1.2rem; text-align: left; }
-            .footer { flex-direction: column; gap: 10px; padding: 20px; }
-        }
-        @media (max-width: 480px) {
-            .logo { font-size: 1.4rem; }
-            .text-box { padding: 20px; }
-            .page-title { font-size: 2rem; }
-            .faq-question { font-size: 1.2rem; padding: 1rem; }
-            .faq-answer { font-size: 1.1rem; }
+            
+            .faq-question-text { font-size: 1.1rem; }
+            .faq-answer { font-size: 1rem; }
+
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
@@ -127,96 +270,193 @@
             <a href="contact.html" class="nav-tab">Contact</a>
         </div>
     </nav>
+
     <main class="main-wrapper">
         <div class="text-box">
             <h1 class="page-title">Frequently Asked Questions</h1>
+            
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What is Faun by Moonlight?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Faun by Moonlight is a literary magazine that publishes literary fiction.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What is Faun by Moonlight?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Faun by Moonlight is a literary magazine that publishes literary fiction.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Where can I buy the magazine?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer"> You can buy our Volumes directly from our store at <a href="https://faunbymoonlight.store" target="_blank" rel="noopener noreferrer">faunbymoonlight.store</a>. With your purchase, you will receive a high-quality PDF and a high-quality EPUB, DRM-free, subscription-free and ready to read anywhere. </p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Where can I buy the magazine?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">
+                        You can buy our Volumes directly from our store at <a href="https://faunbymoonlight.store" target="_blank" rel="noopener noreferrer">faunbymoonlight.store</a>. With your purchase, you will receive a high-quality PDF and a high-quality EPUB, DRM-free, subscription-free and ready to read anywhere.
+                    </div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Do you have a print option?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer"> No. At this stage we are a digital only magazine, altough we are planning on moving onto print eventually. </p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do you have a print option?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">No. At this stage we are a digital only magazine, although we are planning on moving onto print eventually.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What works are you looking for?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We look for stories that feature complex characters, trust the intelligence of their readers, and defy easy categorization. Unmarketable is our specialty.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What works are you looking for?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We look for stories that feature complex characters, trust the intelligence of their readers, and defy easy categorization. Unmarketable is our specialty.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What is literary fiction?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Literary fiction is a genre that prioritizes depth and complexity through character-driven narratives, over any particular thematic focus. It has no defined format, storytelling device, or pre-determined "must-haves". However, this frees your work from specific genre constraints, not the need for a story. We're looking for works that tell a meaningful story; how you wish you tell that story is up to you.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What is literary fiction?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Literary fiction is a genre that prioritizes depth and complexity through character-driven narratives, over any particular thematic focus. It has no defined format, storytelling device, or pre-determined "must-haves". However, this frees your work from specific genre constraints, not the need for a story. We're looking for works that tell a meaningful story; how you wish you tell that story is up to you.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Will you consider other genres?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Our publication's focus is on literary fiction. Your story can contain elements of other genres, but these should only complement, not define it.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Will you consider other genres?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Our publication's focus is on literary fiction. Your story can contain elements of other genres, but these should only complement, not define it.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Do you accept unagented submissions?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Yes. You are free to submit your work without representation.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do you accept unagented submissions?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Yes. You are free to submit your work without representation.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Do you pay contributors?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Yes, we pay writers for accepted work. We pay $20 for pieces under 5,000 words and $50 for pieces 5,000 words and above. While we are aware this is a token amount, it helps writers become credentialed in the paying market, which is valuable for their writing careers and future submissions to higher-paying publications. Still, we aim to increase these payment rates as our publication grows.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do you pay contributors?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Yes, we pay writers for accepted work. We pay $20 for pieces under 5,000 words and $50 for pieces 5,000 words and above. While we are aware this is a token amount, it helps writers become credentialed in the paying market, which is valuable for their writing careers and future submissions to higher-paying publications. Still, we aim to increase these payment rates as our publication grows.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What is your submission schedule?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We accept submissions year-round. There are no reading periods.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What is your submission schedule?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We accept submissions year-round. There are no reading periods.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">How quickly do you respond to submissions?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Fee-supported submissions receive responses within two weeks and include detailed, personalized feedback.</p><p class="faq-answer">For free submissions, we are working through our current backlog but cannot guarantee a specific timeline at this time.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">How quickly do you respond to submissions?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">
+                        <p>Fee-supported submissions receive responses within two weeks and include detailed, personalized feedback.</p>
+                        <p>For free submissions, we are working through our current backlog but cannot guarantee a specific timeline at this time.</p>
+                    </div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What is your publication schedule?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We publish monthly digital Volumes featuring 2-3 short stories through our dedicated store Our first issue is scheduled for release on the 1st November 2025.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What is your publication schedule?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We publish monthly digital Volumes featuring 2-3 short stories through our dedicated store. Our first issue is scheduled for release on November 1st, 2025.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Do I have to pay to submit my work?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We have implemented a $5 submission fee. This helps us maintain quality review time for each submission and supports our ongoing operations.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do I have to pay to submit my work?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We have implemented a $5 submission fee. This helps us maintain quality review time for each submission and supports our ongoing operations.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What do I get for the submission fee?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">All fee-supported submissions receive priority consideration and detailed, personalized feedback on your work—whether your piece is accepted or not. This feedback is crafted to help you understand our editorial perspective and strengthen your writing for future submissions.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What do I get for the submission fee?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">All fee-supported submissions receive priority consideration and detailed, personalized feedback on your work—whether your piece is accepted or not. This feedback is crafted to help you understand our editorial perspective and strengthen your writing for future submissions.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">Do you accept simultaneous submissions?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">Yes, we accept simultaneous submissions. We only ask that if your story is accepted elsewhere, please notify us immediately by email so we can withdraw it from consideration.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do you accept simultaneous submissions?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">Yes, we accept simultaneous submissions. We only ask that if your story is accepted elsewhere, please notify us immediately by email so we can withdraw it from consideration.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">What rights do you acquire when you publish my story?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We acquire first serial rights only. This means we have the right to publish your story for the first time in our magazine. After publication, we retain non-exclusive archival rights to keep your story accessible in our digital archives and back Volumes. All other rights remain with you, and you're free to republish your work elsewhere after our exclusive period ends.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What rights do you acquire when you publish my story?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We acquire first serial rights only. This means we have the right to publish your story for the first time in our magazine. After publication, we retain non-exclusive archival rights to keep your story accessible in our digital archives and back Volumes. All other rights remain with you, and you're free to republish your work elsewhere after our exclusive period ends.</div>
+                </div>
             </section>
+
             <section class="faq-section">
-                <button class="faq-question" aria-expanded="false"><span class="faq-question-text">How long is your exclusive period?</span><span class="toggle-icon">▼</span></button>
-                <div class="faq-answer-container"><p class="faq-answer">We request a three-month exclusive period following publication. During this time, your story cannot be republished elsewhere. After three months, you may submit or republish your work anywhere while we maintain our non-exclusive archival rights.</p></div>
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">How long is your exclusive period?</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+                <div class="faq-answer-container">
+                    <div class="faq-answer">We request a three-month exclusive period following publication. During this time, your story cannot be republished elsewhere. After three months, you may submit or republish your work anywhere while we maintain our non-exclusive archival rights.</div>
+                </div>
             </section>
+
         </div>
     </main>
+
     <footer class="footer">
         <div class="footer-links">
             <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            
             <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
             </a>
-
             <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
             </a>
-
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
         </div>
         <div class="copyright">
             © 2025 Faun by Moonlight. All rights reserved.
@@ -245,19 +485,24 @@
                 logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
         }
+
         document.addEventListener('DOMContentLoaded', function() {
             colorLogo();
             const faqQuestions = document.querySelectorAll('.faq-question');
+            
             faqQuestions.forEach(question => {
                 question.addEventListener('click', function() {
                     const faqSection = this.parentElement;
                     const isActive = faqSection.classList.contains('active');
+                    
+                    // Close other open FAQs (optional, but keeps UX clean)
                     document.querySelectorAll('.faq-section.active').forEach(section => {
                         if (section !== faqSection) {
                             section.classList.remove('active');
                             section.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                         }
                     });
+                    
                     if (isActive) {
                         faqSection.classList.remove('active');
                         this.setAttribute('aria-expanded', 'false');
