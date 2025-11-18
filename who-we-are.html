@@ -6,7 +6,7 @@
     
     <title>Who We Are - Faun by Moonlight Literary Magazine</title>
     <meta name="title" content="Who We Are - Faun by Moonlight Literary Magazine">
-    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to literary fiction that resists genre classification. We publish exceptionally unmarketable works that push creative boundaries. Currently reading for December 2025.">
+    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to literary fiction that resists genre classification. We publish exceptionally unmarketable works.">
     <meta name="keywords" content="literary magazine about, independent literary press, online fiction magazine, literary journal mission, contemporary literature magazine, experimental fiction journal, who we are, editorial philosophy, literary magazine vision">
     <meta name="author" content="Faun by Moonlight">
     <meta name="robots" content="index, follow">
@@ -18,7 +18,6 @@
     <meta property="og:description" content="Online literary magazine dedicated to publishing fiction that defies conventions and pushes creative boundaries.">
     <meta property="og:image" content="https://faunbymoonlight.com/images/2.png">
     <meta property="og:site_name" content="Faun by Moonlight">
-    
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://faunbymoonlight.com/who-we-are">
     <meta property="twitter:title" content="Who We Are - Faun by Moonlight">
@@ -66,7 +65,6 @@
     </script>
 
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    
     <link rel="preconnect" href="https://use.typekit.net">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -83,20 +81,16 @@
     <meta name="google-adsense-account" content="ca-pub-6209354407417435">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- CORE RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: "neue-kabel", sans-serif;
             background-color: #1a1a1a;
-            color: #f8f8f8;
+            color: #f0f0f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            
             background-image: url('images/2.png');
             background-repeat: no-repeat;
             background-position: center center;
@@ -104,150 +98,88 @@
             background-size: cover;
         }
 
-        @media screen and (max-width: 1400px) {
-            body {
-                background-size: auto 100vh;
-                background-position: center center;
-            }
-        }
-
-        @media screen and (max-width: 1024px) {
-            body {
-                background-size: 120vw auto;
-                background-position: center center;
-            }
-        }
-
-        @media screen and (max-width: 767px) {
-            body {
-                background-image: url('images/2-mobile.png');
-                background-size: cover;
-                background-position: center center;
-                background-attachment: scroll;
-                min-height: 100vh;
-                min-height: 100svh;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            body {
-                background-size: 150vw auto;
-                background-position: center center;
-            }
-        }
-
-        @media screen and (max-width: 320px) {
-            body {
-                background-size: 200vw auto;
-                background-position: center center;
-            }
-        }
-
-        @media screen and (max-width: 280px) {
-            body {
-                background-size: contain;
-                background-position: center top;
-            }
-        }
-
+        /* Darker overlay for better contrast */
         body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
         }
 
+        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+
+        /* --- ANNOUNCEMENT BAR --- */
+        .announcement-bar {
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
         .nav-header {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
-
         .logo {
             font-family: "alfarn", serif;
-            font-weight: 400;
             font-size: 1.8rem;
             color: #f8f8f8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             text-decoration: none;
             letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
-        .nav-tabs {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-tabs { display: flex; gap: 30px; }
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            background: none;
-            border: none;
-            color: #d0d0d0;
-            padding: 12px 20px;
+            background: none; border: none;
+            color: #a0a0a0;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
-
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 
-                3px 3px 6px rgba(0, 0, 0, 0.8),
-                0 0 12px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             transform: translateY(-1px);
         }
 
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 25px;
-            cursor: pointer;
-        }
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
 
-        .hamburger span {
-            width: 100%;
-            height: 3px;
-            background-color: #f8f8f8;
-            transition: all 0.3s ease;
-        }
-
-        #nav-toggle {
-            display: none;
-        }
-
+        /* --- MAIN CONTENT LAYOUT --- */
         .main-wrapper {
-            position: relative;
-            z-index: 2;
             padding: 60px 20px;
-            text-align: center;
             flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
+        /* --- THE "GLASS" BOX (UX Optimized) --- */
         .text-box {
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border: 4px solid #ffffff;
-            border-radius: 12px;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
             padding: 50px;
             max-width: 800px;
+            width: 100%;
             text-align: left;
-            box-shadow:
-                0 2px 4px rgba(0, 0, 0, 0.2),
-                0 8px 16px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .page-title {
@@ -255,350 +187,71 @@
             font-weight: 400;
             font-size: 3.5rem;
             margin-bottom: 2.5rem;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
             text-align: center;
+            color: #f8f8f8;
         }
 
-        .word-faun { color: #E60026; }
-        .word-by { color: #0047BB; }
-        .word-moonlight { color: #FFD100; }
-
+        /* --- CONTENT STYLES --- */
         .content-text {
             font-family: "neue-kabel", sans-serif;
             font-weight: 400;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.8;
-            color: #e8e8e8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: #d0d0d0;
             text-align: justify;
         }
 
-        .content-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .content-text p:last-child {
-            margin-bottom: 0;
-        }
+        .content-text p { margin-bottom: 1.5rem; }
+        .content-text p:last-child { margin-bottom: 0; }
 
         .content-text a {
-            color: #e8e8e8;
+            color: #4A9EFF;
             text-decoration: underline;
             transition: color 0.3s ease;
         }
+        .content-text a:hover { color: #ffffff; }
 
-        .content-text a:hover {
-            color: #ffffff;
+        /* --- HIDDEN CONTENT (SEO) --- */
+        .hidden-content {
+            position: absolute !important; width: 1px !important; height: 1px !important;
+            padding: 0 !important; margin: -1px !important; overflow: hidden !important;
+            clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important;
         }
 
-        .adblock-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .adblock-content {
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .adblock-title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 2.5rem;
-            color: #f8f8f8;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .adblock-title .word-faun { color: #E60026; }
-        .adblock-title .word-by { color: #0047BB; }
-        .adblock-title .word-moonlight { color: #FFD100; }
-
-        .adblock-text {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #d0d0d0;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .adblock-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .adblock-btn {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .adblock-btn-primary {
-            background: #E60026;
-            color: white;
-        }
-
-        .adblock-btn-primary:hover {
-            background: #c50020;
-            transform: translateY(-2px);
-        }
-
-        .adblock-btn-secondary {
-            background: transparent;
-            color: #d0d0d0;
-            border: 2px solid #666;
-        }
-
-        .adblock-btn-secondary:hover {
-            background: #666;
-            color: white;
-        }
-
-        .adblock-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-        }
-
-        .adblock-close:hover {
-            color: #fff;
-        }
-
-        .ads-test {
-            position: absolute;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            background: transparent;
-        }
-
+        /* --- FOOTER --- */
         .footer {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
 
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .footer-link {
-            color: #d0d0d0;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        .footer-link:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .copyright {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .hidden-content {
-            position: absolute !important;
-            width: 1px !important;
-            height: 1px !important;
-            padding: 0 !important;
-            margin: -1px !important;
-            overflow: hidden !important;
-            clip: rect(0,0,0,0) !important;
-            white-space: nowrap !important;
-            border: 0 !important;
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            body::before {
-                background: rgba(0, 0, 0, 0.75);
-            }
-
-            .nav-header {
-                padding: 20px;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
             .nav-tabs {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(10px);
-                padding: 20px;
-                text-align: center;
+                display: none; flex-direction: column; gap: 15px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: #111; padding: 30px; text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
-
-            #nav-toggle:checked + .nav-tabs {
-                display: flex;
-            }
-
-            .main-wrapper {
-                padding: 40px 15px;
-            }
-
-            .text-box {
-                padding: 30px;
-                max-width: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(20px);
-                border-width: 3px;
-            }
-
-            .page-title {
-                font-size: 2.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .content-text {
-                font-size: 1.2rem;
-                text-align: left;
-            }
-
-            .adblock-content {
-                padding: 30px 20px;
-            }
-
-            .adblock-title {
-                font-size: 2rem;
-            }
-
-            .adblock-text {
-                font-size: 1rem;
-            }
-
-            .adblock-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .adblock-btn {
-                width: 100%;
-                max-width: 250px;
-            }
-
-            .footer {
-                flex-direction: column;
-                gap: 10px;
-                padding: 20px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .text-box {
-                padding: 20px;
-                border-radius: 8px;
-                background: rgba(0, 0, 0, 0.85);
-                border-width: 3px;
-            }
-
-            .page-title {
-                font-size: 2rem;
-            }
-
-            .content-text {
-                font-size: 1.1rem;
-            }
-
-            .adblock-title {
-                font-size: 1.8rem;
-            }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            
+            .text-box { padding: 30px 20px; }
+            .page-title { font-size: 2.5rem; }
+            .content-text { font-size: 1.1rem; text-align: left; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="ads ads-test" id="ads-test"></div>
-
-    <div class="adblock-modal" id="adblock-modal">
-        <div class="adblock-content">
-            <button class="adblock-close" id="adblock-close" aria-label="Close">&times;</button>
-            <h2 class="adblock-title">
-                <span class="word-faun">Faun</span> 
-                <span class="word-by">by</span> 
-                <span class="word-moonlight">Moonlight</span>
-            </h2>
-            <div class="adblock-text">
-                <p>We're dedicated to showcasing exceptional literature and supporting emerging voices in the literary community. To sustain our mission, we've partnered with Google AdSense to display ads on our website.</p>
-                
-                <p>By allowing ads on our site, you help us:</p>
-                <ul style="margin: 15px 0; padding-left: 20px;">
-                    <li>Pay our featured writers fairly for their work</li>
-                    <li>Cover hosting and technical infrastructure costs</li>
-                    <li>Reach new readers and expand our literary community</li>
-                    <li>Continue publishing quality literature without subscription fees</li>
-                </ul>
-                
-                <p>We understand your browsing experience matters and appreciate your consideration in supporting independent literary publishing.</p>
-            </div>
-            <div class="adblock-buttons">
-                <button class="adblock-btn adblock-btn-primary" id="understand-btn">I Understand</button>
-                <button class="adblock-btn adblock-btn-secondary" id="remind-later">Remind Me Later</button>
-            </div>
-        </div>
-    </div>
+    <div id="global-announcement"></div>
 
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
@@ -630,7 +283,7 @@
                 <p>If you're interested in submitting your work, visit our <a href="submissions.html">submissions page</a> for details.</p>
                 
                 <p style="margin-bottom: 0;">Curious about our thoughts on AI? <a href="ai-statement.html">Read our AI statement</a>.</p>
-                </div>
+            </div>
         </article>
     </main>
 
@@ -668,8 +321,18 @@
 
     <footer class="footer">
         <div class="footer-links">
-            <a href="httpsm://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
         </div>
         <div class="copyright">
             © 2025 Faun by Moonlight. All rights reserved.
@@ -677,92 +340,31 @@
     </footer>
 
     <script>
-        function detectAdBlock() {
-            return new Promise((resolve) => {
-                const testAd = document.getElementById('ads-test');
-                if (testAd) {
-                    const rect = testAd.getBoundingClientRect();
-                    const isHidden = rect.height === 0 || 
-                                     window.getComputedStyle(testAd).display === 'none' ||
-                                     window.getComputedStyle(testAd).visibility === 'hidden';
-                    resolve(isHidden);
-                } else {
-                    resolve(true);
-                }
+        // Fetch Announcement Bar
+        fetch('announcement.html')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('global-announcement').style.display = 'none';
             });
-        }
 
-        function showAdBlockModal() {
-            const modal = document.getElementById('adblock-modal');
-            const hasSeenModal = localStorage.getItem('fbm-adblock-seen');
-            const remindLater = localStorage.getItem('fbm-adblock-remind');
-            const now = Date.now();
-            
-            if (hasSeenModal === 'understood') return;
-            if (remindLater && now < parseInt(remindLater)) return;
-            
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-            }, 10);
-        }
-
-        function hideAdBlockModal() {
-            const modal = document.getElementById('adblock-modal');
-            modal.style.display = 'none';
-        }
-
+        // Logo Color Logic
         function colorLogo() {
             const logo = document.getElementById('logo');
-            const colors = ['word-faun', 'word-by', 'word-moonlight'];
-            const words = logo.textContent.split(' ');
-            logo.innerHTML = words.map((word, i) => 
-                `<span class="${colors[i]}">${word}</span>`
-            ).join(' ');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
         }
 
-        window.addEventListener('load', async () => {
-            colorLogo();
-            
-            setTimeout(async () => {
-                const isAdBlockActive = await detectAdBlock();
-                if (isAdBlockActive) {
-                    setTimeout(showAdBlockModal, 2000);
-                }
-            }, 1000);
-        });
-
         document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('adblock-modal');
-            const closeBtn = document.getElementById('adblock-close');
-            const understandBtn = document.getElementById('understand-btn');
-            const remindBtn = document.getElementById('remind-later');
-
-            closeBtn.addEventListener('click', hideAdBlockModal);
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    hideAdBlockModal();
-                }
-            });
-
-            understandBtn.addEventListener('click', () => {
-                localStorage.setItem('fbm-adblock-seen', 'understood');
-                hideAdBlockModal();
-            });
-
-            remindBtn.addEventListener('click', () => {
-                const remindTime = Date.now() + (24 * 60 * 60 * 1000);
-                localStorage.setItem('fbm-adblock-remind', remindTime.toString());
-                hideAdBlockModal();
-            });
-
-t
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    hideAdBlockModal();
-                }
-            });
+            colorLogo();
         });
     </script>
 </body>
