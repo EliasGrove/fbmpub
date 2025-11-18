@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ - Faun by Moonlight Literary Magazine</title>
     <meta name="description" content="Find answers to frequently asked questions about submitting to Faun by Moonlight, a literary magazine focused on literary fiction.">
-    <meta name="keywords" content="literary magazine, literary fiction, submission guidelines, publishing FAQ, Faun by Moonlight">
-    <meta name="author" content="Faun by Moonlight Editorial Team">
-    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.faunbymoonlight.com/faq">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
@@ -38,35 +35,48 @@
             background-size: cover;
         }
 
-        /* Darker overlay for better contrast */
+        /* Darker overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
             z-index: 0;
         }
 
-        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
-
-        /* --- ANNOUNCEMENT BAR --- */
-        .announcement-bar {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Highest Priority */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
 
-        /* --- NAVIGATION --- */
-        .nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
         }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION (Sticky + Layered) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -99,8 +109,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
+            position: relative;
+            z-index: 1; /* Ensures it stays behind the menu */
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -108,7 +120,7 @@
             align-items: flex-start;
         }
 
-        /* --- THE "GLASS" BOX (UX Optimized) --- */
+        /* --- THE "GLASS" BOX --- */
         .text-box {
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px);
@@ -132,7 +144,7 @@
             color: #f8f8f8;
         }
 
-        /* --- FAQ SPECIFIC STYLES (Accordion) --- */
+        /* --- FAQ ACCORDION STYLES --- */
         .faq-section {
             margin-bottom: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -141,16 +153,13 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-
         .faq-section:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.2);
         }
-
-        /* Active State - slight highlight */
         .faq-section.active {
             background: rgba(255, 255, 255, 0.08);
-            border-color: #E60026; /* Brand color accent */
+            border-color: #E60026;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
@@ -179,7 +188,6 @@
             color: #a0a0a0;
             transition: transform 0.3s ease, color 0.3s ease;
         }
-
         .faq-section.active .toggle-icon {
             transform: rotate(180deg);
             color: #E60026;
@@ -190,10 +198,7 @@
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .faq-section.active .faq-answer-container {
-            max-height: 1000px; /* Arbitrary large number for animation */
-        }
+        .faq-section.active .faq-answer-container { max-height: 1000px; }
 
         .faq-answer {
             font-family: "neue-kabel", sans-serif;
@@ -204,19 +209,14 @@
             padding: 0 25px 25px 25px;
             margin: 0;
         }
-
-        .faq-answer a {
-            color: #FFD100;
-            text-decoration: underline;
-        }
+        .faq-answer a { color: #FFD100; text-decoration: underline; }
         .faq-answer a:hover { color: #ffffff; }
-
         .faq-answer p { margin-bottom: 1rem; }
         .faq-answer p:last-child { margin-bottom: 0; }
 
-
         /* --- FOOTER --- */
         .footer {
+            position: relative; z-index: 2;
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 40px;
             background: rgba(0, 0, 0, 0.8);
@@ -227,16 +227,28 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- RESPONSIVE --- */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
+            
+            /* MOBILE MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
-                display: none; flex-direction: column; gap: 15px;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: #111; padding: 30px; text-align: center;
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* Solid Black */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
             .text-box { padding: 30px 20px; }
@@ -462,8 +474,8 @@
             © 2025 Faun by Moonlight. All rights reserved.
         </div>
     </footer>
+
     <script>
-        // Script to fetch the announcement banner
         fetch('announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
@@ -473,7 +485,6 @@
                 document.getElementById('global-announcement').innerHTML = data;
             })
             .catch(error => {
-                console.log('Announcement system:', error.message);
                 document.getElementById('global-announcement').style.display = 'none';
             });
 
@@ -495,7 +506,7 @@
                     const faqSection = this.parentElement;
                     const isActive = faqSection.classList.contains('active');
                     
-                    // Close other open FAQs (optional, but keeps UX clean)
+                    // Close other open FAQs
                     document.querySelectorAll('.faq-section.active').forEach(section => {
                         if (section !== faqSection) {
                             section.classList.remove('active');
