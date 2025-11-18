@@ -9,6 +9,7 @@
     <meta name="author" content="Faun by Moonlight Editorial Team">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.faunbymoonlight.com/support-us">
+    
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.faunbymoonlight.com/support-us">
     <meta property="og:title" content="Support Us - Faun by Moonlight Literary Magazine">
@@ -21,11 +22,12 @@
     <meta name="twitter:description" content="Help Faun by Moonlight publish literary fiction by volunteering, buying our Volumes, or donating via Buy Me a Coffee.">
     <meta name="twitter:image" content="https://www.faunbymoonlight.com/images/support-us-og-image.jpg">
     <meta name="twitter:site" content="@faunbymoonlight">
+
     <link rel="preconnect" href="https://use.typekit.net">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://buymeacoffee.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -33,91 +35,245 @@
         gtag('js', new Date());
         gtag('config', 'G-3ETBBLP43M');
     </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative;
-            background-image: url('images/6.png'); background-repeat: no-repeat;
-            background-position: center center; background-attachment: fixed; background-size: cover;
-            isolation: isolate;
-        }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
-        .nav-header { position: relative; z-index: 10; }
-        .main-wrapper, .footer { position: relative; z-index: 2; }
-        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
 
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
-        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
-        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 900px; text-align: left; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); text-align: center; }
+    <style>
+        /* --- CORE RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/6.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        /* Darker overlay for better contrast */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
+        }
+
+        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+
+        /* --- ANNOUNCEMENT BAR --- */
+        .announcement-bar {
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+        .logo {
+            font-family: "alfarn", serif;
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .section { margin-bottom: 1.8rem; }
-        .section:last-child { margin-bottom: 0; }
-        .section-title { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.4rem; margin-bottom: 0.8rem; letter-spacing: 1px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 255, 255, 0.3); }
-        .section-content { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; color: #e8e8e8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: justify; }
+
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: none; border: none;
+            color: #a0a0a0;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .main-wrapper {
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* --- THE "GLASS" BOX (UX Optimized) --- */
+        .text-box {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+            text-align: center;
+            color: #f8f8f8;
+        }
+
+        /* --- INTRO SECTION --- */
+        .intro-section {
+            border-left: 4px solid rgba(255, 215, 0, 0.5);
+            padding-left: 1.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.05), transparent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .section-content {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #d0d0d0;
+        }
         .section-content p { margin-bottom: 1.5rem; }
-        .section-content p:last-child { margin-bottom: 0; }
-        .intro-section { border-left: 4px solid rgba(255, 215, 0, 0.6); padding-left: 1.5rem; margin-bottom: 2.5rem; }
-        .support-option { border: 3px solid #ffffff; border-radius: 8px; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); overflow: hidden; }
-        .support-option:hover { border-color: #ffffff; background: rgba(0, 0, 0, 0.3); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15); }
-        .support-option-header { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
-        .support-option-header:hover { background: rgba(255, 255, 255, 0.05); }
-        .support-option .section-title { margin-bottom: 0; font-size: 1.3rem; flex: 1; }
-        .toggle-icon { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.2rem; color: #ffffff; margin-left: 1rem; transition: transform 0.3s ease; user-select: none; }
-        .support-option.expanded .toggle-icon { transform: rotate(180deg); }
-        .support-option-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .support-option.expanded .support-option-content { max-height: 500px; }
-        .support-option-inner { padding: 0 1.5rem 1.5rem 1.5rem; }
-        .coffee-link { color: #e8e8e8; text-decoration: underline; transition: color 0.3s ease; }
+
+        /* --- SUPPORT OPTIONS (Accordion Style) --- */
+        .section-title-main {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .support-option {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .support-option:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .support-option.expanded {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #FFD100; /* Gold accent for support */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .support-option-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .support-option .section-title {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .toggle-icon {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .support-option.expanded .toggle-icon {
+            transform: rotate(180deg);
+            color: #FFD100;
+        }
+
+        .support-option-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .support-option.expanded .support-option-content {
+            max-height: 500px;
+        }
+
+        .support-option-inner { padding: 0 25px 25px 25px; }
+
+        .coffee-link {
+            color: #FFD100;
+            text-decoration: underline;
+            font-weight: 600;
+        }
         .coffee-link:hover { color: #ffffff; }
-        .section-divider { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.8rem; margin-bottom: 1.8rem; }
-        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
-        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+
         .hidden-content { display: none; }
+
+        /* --- FOOTER --- */
+        .footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            body::before { background: rgba(0, 0, 0, 0.75); }
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
+            .nav-tabs {
+                display: none; flex-direction: column; gap: 15px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: #111; padding: 30px; text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .main-wrapper { padding: 40px 15px; }
-            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
-            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
-            .section-title { font-size: 1.3rem; }
-            .section-content { font-size: 1.2rem; text-align: left; }
-            .section { margin-bottom: 1.5rem; }
-            .section-divider { padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
-            .support-option { margin-bottom: 1.2rem; background: rgba(0, 0, 0, 0.3); border-width: 3px; }
-            .support-option-header { padding: 1.2rem; }
-            .support-option-inner { padding: 0 1.2rem 1.2rem 1.2rem; }
-            .support-option .section-title { font-size: 1.2rem; }
-            .intro-section { margin-bottom: 2rem; }
-            .footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .logo { font-size: 1.4rem; }
-            .text-box { padding: 20px; border-radius: 8px; background: rgba(0, 0, 0, 0.85); border-width: 3px; }
-            .page-title { font-size: 2rem; }
-            .section-title { font-size: 1.2rem; }
-            .section-content { font-size: 1.1rem; }
-            .section { margin-bottom: 1.2rem; }
-            .section-divider { padding-bottom: 1.2rem; margin-bottom: 1.2rem; }
-            .support-option { margin-bottom: 1rem; background: rgba(0, 0, 0, 0.4); border-width: 3px; }
-            .support-option-header { padding: 1rem; }
-            .support-option-inner { padding: 0 1rem 1rem 1rem; }
+            
+            .text-box { padding: 30px 20px; }
+            .page-title { font-size: 2.5rem; }
             .support-option .section-title { font-size: 1.1rem; }
-            .intro-section { margin-bottom: 1.5rem; padding-left: 1rem; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
     <script type="application/ld+json">
@@ -131,6 +287,8 @@
     </script>
 </head>
 <body>
+    <div id="global-announcement"></div>
+
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
         <label for="nav-toggle" class="hamburger">
@@ -149,106 +307,131 @@
             <a href="contact.html" class="nav-tab">Contact</a>
         </div>
     </nav>
+
     <main class="main-wrapper">
         <div class="text-box">
             <h1 class="page-title">Support Us</h1>
-            <section class="section intro-section">
+            
+            <div class="intro-section">
                 <div class="section-content">
                     <p>Our publication is managed by volunteers committed to publishing great literature. Your support helps us pay writers, purchase the tools we need to produce high quality content, and expand our reach.</p>
                 </div>
-            </section>
-            <section class="section section-divider">
-                <h2 class="section-title">Ways to Support Our Work</h2>
-                <div class="support-option">
-                    <div class="support-option-header" onclick="toggleSupport(this)">
-                        <h3 class="section-title">Read Our Volumes</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="support-option-content">
-                        <div class="support-option-inner">
-                            <div class="section-content">
-                                <p>Our monthly Volumes are available to read in our store <a href="https://faunbymoonlight.store" target="_blank" rel="noopener noreferrer">faunbymoonlight.store</a> for $4.99 each.</p>
-                            </div>
+            </div>
+
+            <h2 class="section-title-main">Ways to Support Our Work</h2>
+            
+            <div class="support-option">
+                <div class="support-option-header" onclick="toggleSupport(this)">
+                    <h3 class="section-title">Read Our Volumes</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="support-option-content">
+                    <div class="support-option-inner">
+                        <div class="section-content">
+                            <p>Our monthly Volumes are available to read in our store <a href="https://faunbymoonlight.store" target="_blank" rel="noopener noreferrer" class="coffee-link">faunbymoonlight.store</a> for $4.99 each.</p>
                         </div>
                     </div>
                 </div>
-                <div class="support-option">
-                    <div class="support-option-header" onclick="toggleSupport(this)">
-                        <h3 class="section-title">Volunteer</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="support-option-content">
-                        <div class="support-option-inner">
-                            <div class="section-content">
-                                <p>Whether it's editorial work, website development, marketing, beta reading, or other publication tasks, we can always use another helping hand. If you have relevant skills, we welcome your help. Feel free to reach out to us through our contact page.</p>
-                            </div>
+            </div>
+
+            <div class="support-option">
+                <div class="support-option-header" onclick="toggleSupport(this)">
+                    <h3 class="section-title">Volunteer</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="support-option-content">
+                    <div class="support-option-inner">
+                        <div class="section-content">
+                            <p>Whether it's editorial work, website development, marketing, beta reading, or other publication tasks, we can always use another helping hand. If you have relevant skills, we welcome your help. Feel free to reach out to us through our <a href="contact.html" class="coffee-link">contact page</a>.</p>
                         </div>
                     </div>
                 </div>
-                <div class="support-option">
-                    <div class="support-option-header" onclick="toggleSupport(this)">
-                        <h3 class="section-title">Purchase our Annual Collections</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="support-option-content">
-                        <div class="support-option-inner">
-                            <div class="section-content">
-                                <p>Every year we compile our best works into a yearly issue. This volume will include exclusive content, artwork, opinion pieces and more.</p>
-                            </div>
+            </div>
+
+            <div class="support-option">
+                <div class="support-option-header" onclick="toggleSupport(this)">
+                    <h3 class="section-title">Purchase our Annual Collections</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="support-option-content">
+                    <div class="support-option-inner">
+                        <div class="section-content">
+                            <p>Every year we compile our best works into a yearly issue. This volume will include exclusive content, artwork, opinion pieces and more.</p>
                         </div>
                     </div>
                 </div>
-                <div class="support-option">
-                    <div class="support-option-header" onclick="toggleSupport(this)">
-                        <h3 class="section-title">Buy Us a Coffee</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="support-option-content">
-                        <div class="support-option-inner">
-                            <div class="section-content">
-                                <p>If you'd like to fuel our late-night editing sessions and help cover operational costs, our <a href="https://buymeacoffee.com/faunbymoonlight" class="coffee-link" target="_blank" rel="noopener">Buy Me a Coffee page</a> helps keep us caffeinated.</p>
-                            </div>
+            </div>
+
+            <div class="support-option">
+                <div class="support-option-header" onclick="toggleSupport(this)">
+                    <h3 class="section-title">Buy Us a Coffee</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="support-option-content">
+                    <div class="support-option-inner">
+                        <div class="section-content">
+                            <p>If you'd like to fuel our late-night editing sessions and help cover operational costs, our <a href="https://buymeacoffee.com/faunbymoonlight" class="coffee-link" target="_blank" rel="noopener">Buy Me a Coffee page</a> helps keep us caffeinated.</p>
                         </div>
                     </div>
                 </div>
-                <div class="support-option">
-                    <div class="support-option-header" onclick="toggleSupport(this)">
-                        <h3 class="section-title">Share Our Content</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="support-option-content">
-                        <div class="support-option-inner">
-                            <div class="section-content">
-                                <p>Recommend stories to other readers, interact with our social media posts, recommend us to writers.</p>
-                            </div>
+            </div>
+
+            <div class="support-option">
+                <div class="support-option-header" onclick="toggleSupport(this)">
+                    <h3 class="section-title">Share Our Content</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="support-option-content">
+                    <div class="support-option-inner">
+                        <div class="section-content">
+                            <p>Recommend stories to other readers, interact with our social media posts, and recommend us to fellow writers.</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
             <section class="hidden-content">
                 <article>
                     <h2>Support Faun by Moonlight Literary Magazine</h2>
-                    <p>This page outlines various ways to support Faun by Moonlight, a volunteer-run literary magazine dedicated to publishing high-quality literary fiction. Your contributions help us sustain our mission to pay writers, maintain our platform, and expand our reach within the literary community. Support options include reading our Volumes, volunteering, purchasing annual collections, donating via Buy Me a Coffee, and sharing our content.</p>
-                    <h3>Ways to Contribute</h3>
-                    <p>Our monthly Volumes, available on our store, feature 2-3 literary fiction stories. Volunteering opportunities include editorial work, website development, marketing, and beta reading—contact us to get involved. Annual collections offer exclusive content, and donations via our <a href="https://buymeacoffee.com/faunbymoonlight" target="_blank" rel="noopener">Buy Me a Coffee page</a> help cover expenses. Sharing our stories and social media posts also amplifies our reach.</p>
-                    <h3>Contact and Social Media</h3>
-                    <p>For volunteering inquiries or other support-related questions, visit our <a href="contact.html">contact page</a> or email us. Follow us on X at <a href="https://x.com/faunbymoonlight" target="_blank" rel="noopener">@faunbymoonlight</a> to stay updated and share our content with the literary community.</p>
-                    <h3>Keywords</h3>
-                    <p>support literary magazine, Faun by Moonlight, volunteer literary publishing, Buy Me a Coffee donations, literary fiction support, share literary content</p>
+                    <p>This page outlines various ways to support Faun by Moonlight, a volunteer-run literary magazine dedicated to publishing high-quality literary fiction.</p>
                 </article>
             </section>
         </div>
     </main>
+
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">𝕏</a>
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <a href="contact.html" class="footer-link" aria-label="Contact us">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
         </div>
         <div class="copyright">
             © 2025 Faun by Moonlight. All rights reserved.
         </div>
     </footer>
+
     <script>
+        fetch('announcement.html')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('global-announcement').style.display = 'none';
+            });
+
         function colorLogo() {
             const logo = document.getElementById('logo');
             if (logo) {
@@ -257,12 +440,27 @@
                 logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
         }
+
         function toggleSupport(header) {
             const supportOption = header.parentElement;
             if (supportOption) {
-                supportOption.classList.toggle('expanded');
+                const isActive = supportOption.classList.contains('expanded');
+                
+                // Close others for cleaner UX
+                document.querySelectorAll('.support-option.expanded').forEach(option => {
+                    if (option !== supportOption) {
+                        option.classList.remove('expanded');
+                    }
+                });
+
+                if (isActive) {
+                    supportOption.classList.remove('expanded');
+                } else {
+                    supportOption.classList.add('expanded');
+                }
             }
         }
+
         document.addEventListener('DOMContentLoaded', colorLogo);
     </script>
 </body>
