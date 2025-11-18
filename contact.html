@@ -6,6 +6,7 @@
     <title>Contact - Faun by Moonlight</title>
     <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions.">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <link rel="preconnect" href="https://use.typekit.net">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
@@ -22,7 +23,7 @@
         body {
             font-family: "neue-kabel", sans-serif;
             background-color: #1a1a1a;
-            color: #f0f0f0; /* Slightly softer white for less eye strain */
+            color: #f0f0f0; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -33,42 +34,54 @@
             background-size: cover;
         }
 
-        /* Improved Overlay: Darker (0.75) for better text contrast without shadows */
+        /* Overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75); 
             z-index: 0;
         }
 
-        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
-
-        /* --- ANNOUNCEMENT BAR --- */
-        .announcement-bar {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Topmost priority */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
 
-        /* --- NAVIGATION --- */
-        .nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
         }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION (Sticky + Layered) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
             color: #f8f8f8;
             text-decoration: none;
             letter-spacing: 1px;
-            /* Only title keeps shadow for depth */
             text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
@@ -80,7 +93,7 @@
             font-size: 1.1rem;
             letter-spacing: 1px;
             background: none; border: none;
-            color: #a0a0a0; /* Muted default state */
+            color: #a0a0a0; 
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -95,8 +108,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
+            position: relative;
+            z-index: 1; 
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -104,12 +119,11 @@
             align-items: flex-start;
         }
 
-        /* --- THE "GLASS" BOX (UX Optimized) --- */
+        /* --- THE "GLASS" BOX --- */
         .text-box {
-            background: rgba(30, 30, 30, 0.6); /* Darker glass */
+            background: rgba(30, 30, 30, 0.6); 
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            /* Thinner, subtler border */
             border: 1px solid rgba(255, 255, 255, 0.15); 
             border-radius: 16px;
             padding: 50px;
@@ -132,7 +146,7 @@
         .intro-text {
             font-size: 1.2rem;
             line-height: 1.6;
-            color: #d0d0d0; /* High contrast grey */
+            color: #d0d0d0; 
             text-align: center;
             margin-bottom: 2.5rem;
             max-width: 600px;
@@ -140,14 +154,13 @@
             margin-right: auto;
         }
 
-        /* --- SOCIAL SECTION (Simplified) --- */
+        /* --- SOCIAL SECTION --- */
         .social-section {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 3rem;
             flex-wrap: wrap;
-            /* Removed the box-inside-a-box border */
         }
 
         .x-link {
@@ -162,7 +175,7 @@
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px; /* Pill shape is friendlier */
+            border-radius: 50px; 
             transition: all 0.3s ease;
         }
 
@@ -175,9 +188,8 @@
         
         .x-icon { width: 18px; height: 18px; fill: currentColor; }
 
-        /* --- FORM STYLING (Clean) --- */
+        /* --- FORM STYLING --- */
         .contact-form {
-            /* Removed the inner border/box. The form sits directly on the glass card now. */
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -199,7 +211,7 @@
         .form-input, .form-textarea {
             width: 100%;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.3); /* Darker input background */
+            background: rgba(0, 0, 0, 0.3); 
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 6px;
             color: #ffffff;
@@ -211,7 +223,7 @@
         .form-input:focus, .form-textarea:focus {
             outline: none;
             background: rgba(0, 0, 0, 0.5);
-            border-color: #E60026; /* Brand color highlight on focus */
+            border-color: #E60026; 
         }
 
         .form-textarea { min-height: 150px; resize: vertical; }
@@ -221,7 +233,7 @@
             font-weight: 700;
             font-size: 1.2rem;
             letter-spacing: 2px;
-            background: #f8f8f8; /* Solid background for primary action */
+            background: #f8f8f8; 
             color: #1a1a1a;
             border: none;
             border-radius: 6px;
@@ -232,7 +244,7 @@
         }
 
         .submit-button:hover {
-            background: #E60026; /* Hover turns red */
+            background: #E60026; 
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(230, 0, 38, 0.4);
@@ -253,29 +265,39 @@
 
         /* --- FOOTER --- */
         .footer {
+            position: relative; z-index: 2;
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 40px;
             background: rgba(0, 0, 0, 0.8);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link {
-            color: #888;
-            transition: color 0.3s ease;
-        }
+        .footer-link { color: #888; transition: color 0.3s ease; }
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- RESPONSIVE --- */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
+            
+            /* MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
-                display: none; flex-direction: column; gap: 15px;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: #111; padding: 30px; text-align: center;
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
             .text-box { padding: 30px 20px; }
