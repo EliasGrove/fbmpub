@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volumes - Faun by Moonlight Literary Magazine</title>
-    <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
-    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes">
-    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://use.typekit.net">
+    <title>Who We Are - Faun by Moonlight Literary Magazine</title>
+    <meta name="title" content="Who We Are - Faun by Moonlight Literary Magazine">
+    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to literary fiction that resists genre classification. We publish exceptionally unmarketable works.">
+    <meta name="keywords" content="literary magazine about, independent literary press, online fiction magazine, literary journal mission, contemporary literature magazine, experimental fiction journal, who we are, editorial philosophy, literary magazine vision">
+    <meta name="author" content="Faun by Moonlight">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://faunbymoonlight.com/who-we-are">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
@@ -16,7 +18,13 @@
         gtag('js', new Date());
         gtag('config', 'G-3ETBBLP43M');
     </script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6209354407417435" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6209354407417435">
 
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <link rel="preconnect" href="https://use.typekit.net">
+    
     <style>
         /* --- CORE RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +36,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: url('images/4.png');
+            background-image: url('images/2.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
@@ -95,6 +103,8 @@
         .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
+        #nav-toggle:checked ~ .nav-tabs { display: flex; } /* Mobile menu toggle logic */
+
 
         /* --- MAIN CONTENT LAYOUT --- */
         .main-wrapper {
@@ -105,7 +115,7 @@
             align-items: flex-start;
         }
 
-        /* --- THE "GLASS" BOX --- */
+        /* --- THE "GLASS" BOX (UX Optimized) --- */
         .text-box {
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px);
@@ -113,9 +123,9 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             padding: 50px;
-            max-width: 1200px;
-            width: 95%;
-            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
@@ -123,137 +133,31 @@
             font-family: "alfarn", serif;
             font-weight: 400;
             font-size: 3.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             letter-spacing: 1px;
             text-align: center;
             color: #f8f8f8;
         }
 
-        /* --- VOLUMES GRID --- */
-        .volumes-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .volume-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .volume-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .volume-cover {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 2 / 3;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-            cursor: zoom-in;
-            transition: transform 0.3s ease;
-        }
-
-        .volume-cover:hover {
-            transform: scale(1.02);
-        }
-        
-        .volume-title {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-            color: #ffd700;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .volume-subtitle {
+        /* --- CONTENT STYLES --- */
+        .content-text {
             font-family: "neue-kabel", sans-serif;
-            font-size: 1.15rem;
-            line-height: 1.6;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: #d0d0d0;
-            margin-bottom: 2rem;
-            min-height: 50px;
-        }
-        
-        .volume-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: auto; 
+            text-align: justify;
         }
 
-        /* --- BUTTONS --- */
-        .button {
-            display: inline-block;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #f0f0f0;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            border: 1px solid transparent;
-        }
-        
-        .button.primary {
-            background-color: #0047BB;
-            border-color: #0047BB;
-            box-shadow: 0 4px 15px rgba(0, 71, 187, 0.3);
-        }
+        .content-text p { margin-bottom: 1.5rem; }
+        .content-text p:last-child { margin-bottom: 0; }
 
-        .button.red {
-            background-color: #E60026; 
-            border-color: #E60026;
-            box-shadow: 0 4px 15px rgba(230, 0, 38, 0.3);
+        .content-text a {
+            color: #4A9EFF;
+            text-decoration: underline;
+            transition: color 0.3s ease;
         }
-
-        .button.yellow {
-            background-color: #FFD100;
-            border-color: #FFD100;
-            color: #1a1a1a;
-            box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3);
-        }
-
-        .button.secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255,255,255,0.2);
-            color: #d0d0d0;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-
-        /* --- LIGHTBOX --- */
-        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
-        .lightbox.active { display: flex; }
-        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
-        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 0; border-radius: 50%; line-height: 50px; width: 50px; height: 50px; text-align: center; transition: all 0.3s ease; }
-        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
+        .content-text a:hover { color: #ffffff; }
 
         /* --- FOOTER --- */
         .footer {
@@ -281,7 +185,7 @@
             
             .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
-            .volume-title { font-size: 1.8rem; }
+            .content-text { font-size: 1.1rem; text-align: left; }
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -291,17 +195,15 @@
 
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        
-        <input type="checkbox" id="nav-toggle">
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
-        
+        <input type="checkbox" id="nav-toggle">
         <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="volumes.html" class="nav-tab active">Volumes</a>
+            <a href="who-we-are.html" class="nav-tab active">Who We Are</a>
+            <a href="volumes.html" class="nav-tab">Volumes</a>
             <a href="submissions.html" class="nav-tab">Submit Your Work</a>
             <a href="faq.html" class="nav-tab">FAQ</a>
             <a href="support-us.html" class="nav-tab">Support Us</a>
@@ -310,49 +212,33 @@
         </div>
     </nav>
 
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-        <img src="" alt="" class="lightbox-content" id="lightbox-img">
-    </div>
-
     <main class="main-wrapper">
-        <div class="text-box">
-            <h1 class="page-title">Our Volumes</h1>
-            
-            <div class="volumes-grid">
-
-                <article class="volume-card">
-                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">November 2025</h2>
-                    <p class="volume-subtitle">Our inaugural issue is now available! We are incredibly proud to share the exceptional works we've selected.</p>
-                    <div class="volume-actions">
-                         <a href="/volumes/volume-1.html" class="button primary">Find Out More</a>
-                         <a href="/volumes/who-we-are.html" class="button red">Read our Opinion Piece</a>
-                         <a href="volumes/authors-vol-1.html" class="button yellow">Meet Our Authors</a>
-                    </div>
-                </article> 
-
-                <article class="volume-card">
-                    <img src="images/COVER 2.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">December 2025</h2>
-                    <p class="volume-subtitle">We are currently making the final edits and preparing for release. This volume is shaping up to be something truly special.</p>
-                    <div class="volume-actions">
-                        <span class="button secondary" style="cursor: default; opacity: 0.8;">Releasing Soon</span>
-                    </div>
-                </article>
-
-                <article class="volume-card">
-                    <img src="https://placehold.co/400x600/111/333?text=Volume+3" alt="Volume 3 Coming Soon" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">Volume 3</h2>
-                    <p class="volume-subtitle">Submissions are now open for our third volume. Send us your best work—no specific theme required.</p>
-                    <div class="volume-actions">
-                        <a href="submissions.html" class="button primary">Submit Your Work</a>
-                    </div>
-                </article>
-
-            </div> 
-        </div> 
+        <article class="text-box">
+            <h1 class="page-title">Who We Are</h1>
+            <div class="content-text">
+                <p>Faun by Moonlight is an online literary magazine dedicated to literary fiction.</p>
+                <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+                <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+                <p>We are currently reading for our December 2025 issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+                <p>If you're interested in submitting your work, visit our <a href="submissions.html">submissions page</a> for details.</p>
+                
+                <p style="margin-bottom: 0;">Curious about our thoughts on AI? <a href="ai-statement.html">Read our AI statement</a>.</p>
+            </div>
+        </article>
     </main>
+
+    <div class="hidden-content">
+        <section>
+            <h2>About Faun by Moonlight Literary Magazine</h2>
+            <p>Faun by Moonlight is an independent online literary magazine founded in 2025, dedicated to publishing exceptional literary fiction that defies conventional genre boundaries. We are a platform for emerging and established writers whose work resists easy categorization.</p>
+            
+            <h3>Our Editorial Philosophy</h3>
+            <p>We believe in the power of unconventional storytelling. Our specialty is the exceptionally unmarketable - fiction that mainstream publications might overlook because it pushes boundaries, bends rules, or challenges reader expectations. We seek works that prioritize artistic integrity over commercial appeal.</p>
+            
+            <h3>Our Mission</h3>
+            <p>To present readers with literature that both challenges and exceeds expectations. To support emerging writers who take creative risks. To build a community of readers who appreciate sophisticated, boundary-pushing fiction. To pay writers fairly for their work and help them build credentials in the paying literary market.</p>
+        </section>
+    </div>
 
     <footer class="footer">
         <div class="footer-links">
@@ -375,7 +261,7 @@
     </footer>
 
     <script>
-        // Announcement Bar Fetch
+        // Script to fetch the announcement banner
         fetch('announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
@@ -385,56 +271,21 @@
                 document.getElementById('global-announcement').innerHTML = data;
             })
             .catch(error => {
+                console.log('Announcement system:', error.message);
                 document.getElementById('global-announcement').style.display = 'none';
             });
 
-        // Color Logo Logic
-        document.addEventListener('DOMContentLoaded', () => {
+        function colorLogo() {
             const logo = document.getElementById('logo');
             if (logo) {
                 const colors = ['word-faun', 'word-by', 'word-moonlight'];
                 const words = logo.textContent.split(' ');
                 logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
+        }
 
-            // Lightbox Logic
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const coverImages = document.querySelectorAll('.volume-cover');
-
-            if (lightbox && coverImages.length > 0) {
-                const lightboxClose = document.getElementById('lightbox-close');
-                
-                const openLightbox = (e) => {
-                    lightboxImg.src = e.target.src;
-                    lightbox.classList.add('active');
-                };
-                
-                const closeLightbox = () => {
-                    lightbox.classList.remove('active');
-                };
-                
-                coverImages.forEach(img => img.addEventListener('click', openLightbox));
-                
-                lightboxClose.addEventListener('click', closeLightbox);
-                lightbox.addEventListener('click', closeLightbox);
-                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                        closeLightbox();
-                    }
-                });
-            }
-
-            // Mobile Menu Logic
-            document.querySelectorAll('.nav-tab').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navToggle = document.getElementById('nav-toggle');
-                    if (navToggle) {
-                        navToggle.checked = false;
-                    }
-                });
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            colorLogo();
         });
     </script>
 </body>
