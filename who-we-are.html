@@ -15,6 +15,9 @@
         gtag('js', new Date());
         gtag('config', 'G-3ETBBLP43M');
     </script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6209354407417435" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6209354407417435">
 
     <style>
         /* --- CORE RESET --- */
@@ -34,17 +37,42 @@
             background-size: cover;
         }
 
-        /* Background Overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
             z-index: 0;
         }
 
-        /* --- LAYERING FIX (CRITICAL) --- */
-        /* 1. Header gets highest priority */
-        .nav-header {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        /* Applied to both the ID (container) and the class to ensure it shows */
+        #global-announcement, .announcement-bar {
             position: relative;
+            z-index: 10000; /* Topmost */
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Padding handling to prevent double padding if class exists inside ID */
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        /* If the fetched HTML doesn't have the class, these styles apply to the ID content */
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
+        }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- HEADER (Sticky + Nuclear Layering) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
             z-index: 9999; 
             display: flex; 
             justify-content: space-between; 
@@ -53,20 +81,6 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
         }
 
-        /* 2. Main content gets low priority so it stays BEHIND header */
-        .main-wrapper {
-            position: relative;
-            z-index: 1; 
-            padding: 60px 20px;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .footer, #global-announcement { position: relative; z-index: 2; }
-
-        /* --- NAVIGATION STYLING --- */
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -95,12 +109,21 @@
             transform: translateY(-1px);
         }
 
-        /* Hamburger */
         .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- CONTENT BOX (GLASS) --- */
+        /* --- MAIN CONTENT --- */
+        .main-wrapper {
+            position: relative;
+            z-index: 1; /* Low priority */
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
         .text-box {
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px);
@@ -135,8 +158,8 @@
         .content-text p { margin-bottom: 1.5rem; }
         .content-text a { color: #4A9EFF; text-decoration: underline; }
 
-        /* --- FOOTER --- */
         .footer {
+            position: relative; z-index: 2;
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 40px;
             background: rgba(0, 0, 0, 0.8);
@@ -147,16 +170,12 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE FIXES --- */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
             
-            /* THIS IS THE MENU FIX 
-               1. Absolute positioning pulls it out of the flow
-               2. Solid black background (#000) prevents the glass box from showing through
-               3. z-index 9999 puts it on top of everything
-            */
+            /* Menu Fix: Solid Black Background */
             .nav-tabs {
                 display: none; 
                 flex-direction: column; 
@@ -165,14 +184,14 @@
                 top: 100%; 
                 left: 0; 
                 right: 0;
-                background-color: #000000; /* SOLID BLACK BACKGROUND */
+                background-color: #000000; /* Solid Black */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
                 padding: 30px; 
                 text-align: center;
                 z-index: 9999;
                 box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
-
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
             .text-box { padding: 30px 20px; }
@@ -187,14 +206,12 @@
 
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
         <input type="checkbox" id="nav-toggle">
-        
         <div class="nav-tabs">
             <a href="who-we-are.html" class="nav-tab active">Who We Are</a>
             <a href="volumes.html" class="nav-tab">Volumes</a>
@@ -221,7 +238,10 @@
     </main>
 
     <div style="display: none !important;">
-        
+        <section>
+            <h2>About Faun by Moonlight Literary Magazine</h2>
+            <p>Faun by Moonlight is an independent online literary magazine founded in 2025...</p>
+        </section>
     </div>
 
     <footer class="footer">
