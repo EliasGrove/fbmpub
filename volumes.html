@@ -35,35 +35,48 @@
             background-size: cover;
         }
 
-        /* Darker overlay for better contrast */
+        /* Overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
             z-index: 0;
         }
 
-        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
-
-        /* --- ANNOUNCEMENT BAR --- */
-        .announcement-bar {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Top priority */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
-
-        /* --- NAVIGATION --- */
-        .nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
         }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- HEADER (Sticky + Layered) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -96,8 +109,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
+            position: relative;
+            z-index: 1; 
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -170,10 +185,7 @@
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
-
-        .volume-cover:hover {
-            transform: scale(1.02);
-        }
+        .volume-cover:hover { transform: scale(1.02); }
         
         .volume-title {
             font-family: "dunbar-tall", sans-serif;
@@ -195,10 +207,7 @@
         }
         
         .volume-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: auto; 
+            display: flex; flex-direction: column; gap: 15px; margin-top: auto; 
         }
 
         /* --- BUTTONS --- */
@@ -216,39 +225,15 @@
             border: 1px solid transparent;
         }
         
-        .button.primary {
-            background-color: #0047BB;
-            border-color: #0047BB;
-            box-shadow: 0 4px 15px rgba(0, 71, 187, 0.3);
-        }
+        .button.primary { background-color: #0047BB; border-color: #0047BB; box-shadow: 0 4px 15px rgba(0, 71, 187, 0.3); }
+        .button.red { background-color: #E60026; border-color: #E60026; box-shadow: 0 4px 15px rgba(230, 0, 38, 0.3); }
+        .button.yellow { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3); }
+        .button.secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.2); color: #d0d0d0; }
 
-        .button.red {
-            background-color: #E60026; 
-            border-color: #E60026;
-            box-shadow: 0 4px 15px rgba(230, 0, 38, 0.3);
-        }
-
-        .button.yellow {
-            background-color: #FFD100;
-            border-color: #FFD100;
-            color: #1a1a1a;
-            box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3);
-        }
-
-        .button.secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255,255,255,0.2);
-            color: #d0d0d0;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
+        .button:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
 
         /* --- LIGHTBOX --- */
-        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 20000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
         .lightbox.active { display: flex; }
         .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
         @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -257,6 +242,7 @@
 
         /* --- FOOTER --- */
         .footer {
+            position: relative; z-index: 2;
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 40px;
             background: rgba(0, 0, 0, 0.8);
@@ -267,15 +253,26 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- RESPONSIVE --- */
+        /* --- MOBILE MENU FIX --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
+            
+            /* Solid Black Menu Fix */
             .nav-tabs {
-                display: none; flex-direction: column; gap: 15px;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: #111; padding: 30px; text-align: center;
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
@@ -292,12 +289,12 @@
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
         
-        <input type="checkbox" id="nav-toggle">
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
+        <input type="checkbox" id="nav-toggle">
         
         <div class="nav-tabs">
             <a href="who-we-are.html" class="nav-tab">Who We Are</a>
@@ -375,7 +372,6 @@
     </footer>
 
     <script>
-        // Announcement Bar Fetch
         fetch('announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
@@ -388,7 +384,6 @@
                 document.getElementById('global-announcement').style.display = 'none';
             });
 
-        // Color Logo Logic
         document.addEventListener('DOMContentLoaded', () => {
             const logo = document.getElementById('logo');
             if (logo) {
