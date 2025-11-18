@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Faun by Moonlight</title>
-    <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions. For submissions, please visit our submissions page.">
+    <meta name="description" content="Contact Faun by Moonlight literary magazine for general inquiries, business matters, or questions.">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
@@ -16,111 +16,271 @@
     </script>
 
     <style>
+        /* --- CORE RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f8f8f8;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative;
-            background-image: url('images/7.png'); background-repeat: no-repeat;
-            background-position: center center; background-attachment: fixed; background-size: cover;
-            isolation: isolate;
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0; /* Slightly softer white for less eye strain */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/7.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
         }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: -1; }
-        .nav-header { position: relative; z-index: 10; }
-        .main-wrapper, .footer { position: relative; z-index: 2; }
-        @media screen and (max-width: 767px) { body { background-attachment: scroll; } }
 
-        /* Announcement Bar Styles */
+        /* Improved Overlay: Darker (0.75) for better text contrast without shadows */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75); 
+            z-index: 0;
+        }
+
+        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+
+        /* --- ANNOUNCEMENT BAR --- */
         .announcement-bar {
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 10px 20px;
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1001;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a {
-            color: #FFD100;
-            text-decoration: underline;
-            font-weight: bold;
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
-        .announcement-bar a:hover {
-            color: #ffffff;
+        .logo {
+            font-family: "alfarn", serif;
+            font-size: 1.8rem;
+            color: #f8f8f8;
             text-decoration: none;
+            letter-spacing: 1px;
+            /* Only title keeps shadow for depth */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+        }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: none; border: none;
+            color: #a0a0a0; /* Muted default state */
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
         }
 
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-        .logo { font-family: "alfarn", serif; font-weight: 400; font-size: 1.8rem; color: #f8f8f8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); text-decoration: none; letter-spacing: 1px; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: none; border: none; color: #d0d0d0; padding: 12px 20px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .nav-tab:hover, .nav-tab.active { color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.6); transform: translateY(-1px); }
         .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 3px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
-        .main-wrapper { padding: 60px 20px; text-align: center; flex: 1; }
-        .text-box { display: inline-block; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border: 4px solid #ffffff; border-radius: 12px; padding: 50px; max-width: 700px; text-align: left; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
-        .page-title { font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); text-align: center; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .intro-text { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1.3rem; line-height: 1.8; color: #e8e8e8; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); text-align: justify; margin-bottom: 2rem; }
-        
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .main-wrapper {
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* --- THE "GLASS" BOX (UX Optimized) --- */
+        .text-box {
+            background: rgba(30, 30, 30, 0.6); /* Darker glass */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            /* Thinner, subtler border */
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 700px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-align: center;
+            color: #f8f8f8;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #d0d0d0; /* High contrast grey */
+            text-align: center;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SOCIAL SECTION (Simplified) --- */
         .social-section {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 3px solid #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            /* Removed the box-inside-a-box border */
         }
-        .x-link { display: inline-flex; align-items: center; gap: 8px; font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #ffffff; text-decoration: none; padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); letter-spacing: 1px; }
-        .x-link:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); transform: translateY(-1px); }
+
+        .x-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px; /* Pill shape is friendlier */
+            transition: all 0.3s ease;
+        }
+
+        .x-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        
         .x-icon { width: 18px; height: 18px; fill: currentColor; }
-        
-        .contact-form { background: rgba(255, 255, 255, 0.1); border: 3px solid #ffffff; border-radius: 8px; padding: 2rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-label { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1rem; color: #ffffff; display: block; margin-bottom: 0.5rem; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .form-input, .form-textarea { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 4px; color: #ffffff; transition: all 0.3s ease; }
-        .form-input:focus, .form-textarea:focus { outline: none; background: rgba(255, 255, 255, 0.15); border-color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
-        .form-input::placeholder, .form-textarea::placeholder { color: rgba(255, 255, 255, 0.5); font-style: italic; }
-        .form-textarea { min-height: 120px; resize: vertical; }
-        .submit-button { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; background: rgba(255, 255, 255, 0.1); border: 2px solid #ffffff; border-radius: 4px; color: #ffffff; padding: 12px 30px; cursor: pointer; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); width: 100%; }
-        .submit-button:hover { background: rgba(255, 255, 255, 0.2); border-color: #ffffff; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
-        .disclaimer { background: rgba(139, 69, 19, 0.3); border-left: 4px solid rgba(210, 180, 140, 0.6); padding: 1rem; margin-top: 2rem; border-radius: 0 4px 4px 0; font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 1rem; color: #e8e8e8; }
-        .disclaimer .emphasis { color: #ffd700; font-style: italic; }
-        .disclaimer a { color: #e8e8e8; text-decoration: underline; transition: color 0.3s ease; }
+
+        /* --- FORM STYLING (Clean) --- */
+        .contact-form {
+            /* Removed the inner border/box. The form sits directly on the glass card now. */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group { margin-bottom: 0; }
+
+        .form-label {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3); /* Darker input background */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #ffffff;
+            font-family: "neue-kabel", sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #E60026; /* Brand color highlight on focus */
+        }
+
+        .form-textarea { min-height: 150px; resize: vertical; }
+
+        .submit-button {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            background: #f8f8f8; /* Solid background for primary action */
+            color: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            background: #E60026; /* Hover turns red */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 0, 38, 0.4);
+        }
+
+        /* --- DISCLAIMER --- */
+        .disclaimer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #888;
+            text-align: center;
+        }
+        .disclaimer .emphasis { color: #FFD100; font-style: normal; font-weight: bold; }
+        .disclaimer a { color: #d0d0d0; text-decoration: underline; }
         .disclaimer a:hover { color: #ffffff; }
-        
-        .footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+        /* --- FOOTER --- */
+        .footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
         .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #d0d0d0; text-decoration: none; font-size: 1.2rem; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
-        .footer-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
-        .copyright { font-family: "neue-kabel", sans-serif; font-weight: 400; font-size: 0.9rem; color: #b0b0b0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
-        
+        .footer-link {
+            color: #888;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            body::before { background: rgba(0, 0, 0, 0.75); }
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; }
+            .nav-tabs {
+                display: none; flex-direction: column; gap: 15px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: #111; padding: 30px; text-align: center;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .main-wrapper { padding: 40px 15px; }
-            .text-box { padding: 30px; max-width: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-width: 3px; }
-            .page-title { font-size: 2.5rem; margin-bottom: 2rem; }
-            .intro-text { font-size: 1.2rem; text-align: left; }
-            .contact-form, .social-section { padding: 1.5rem; border-width: 3px; }
-            .footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .logo { font-size: 1.4rem; }
-            .text-box { padding: 20px; border-radius: 8px; background: rgba(0, 0, 0, 0.85); border-width: 3px; }
-            .page-title { font-size: 2rem; }
-            .intro-text { font-size: 1.1rem; }
-            .contact-form, .social-section { padding: 1rem; border-width: 3px; }
-            .x-link { font-size: 1rem; padding: 8px 16px; }
+            
+            .text-box { padding: 30px 20px; }
+            .page-title { font-size: 2.5rem; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
@@ -145,34 +305,48 @@
             <a href="contact.html" class="nav-tab active">Contact</a>
         </div>
     </nav>
+
     <main class="main-wrapper">
         <div class="text-box">
             <h1 class="page-title">Contact</h1>
+            
             <p class="intro-text">
                 For general inquiries, business matters, or questions about Faun by Moonlight, please reach out to us using the form below.
             </p>
+
             <section class="social-section">
-                <a href="https://x.com/faunbymoonlight" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="Follow Faun by Moonlight on X">
+                <a href="https://x.com/faunbymoonlight" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="X (Twitter)">
                     <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     @faunbymoonlight
                 </a>
                 
-                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="Follow Faun by Moonlight on Bluesky">
-                    <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/></svg>
-                    @faunbymoonlight.bsky.social
+                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="Bluesky">
+                    <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+                    Bluesky
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" rel="noopener noreferrer" class="x-link" aria-label="YouTube">
+                    <svg class="x-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                    YouTube
                 </a>
             </section>
+
             <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="40095b04-f218-4f3a-8532-5fbec80bee19">
                 <input type="hidden" name="subject" value="Contact Form - Faun by Moonlight">
+                
                 <div class="form-group">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Oscar Wilde" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="e.g. oscar@example.com" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="inquiry-type" class="form-label">Inquiry Type</label>
                     <select id="inquiry-type" name="inquiry_type" class="form-input" required>
@@ -184,45 +358,42 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="message" class="form-label">Message</label>
-                    <textarea id="message" name="message" class="form-textarea" placeholder="Please share your inquiry or message..." required></textarea>
+                    <textarea id="message" name="message" class="form-textarea" placeholder="How can we help you?" required></textarea>
                 </div>
+                
                 <button type="submit" class="submit-button">Send Message</button>
             </form>
+
             <div class="disclaimer">
-                <p><span class="emphasis">Please note:</span> This form is for general inquiries and business matters only. For manuscript submissions, please visit our <a href="submissions.html">Submissions</a> page for proper submission guidelines and email address.</p>
+                <p><span class="emphasis">Note:</span> This form is for general inquiries only. For manuscripts, please visit our <a href="submissions.html">Submissions</a> page.</p>
             </div>
         </div>
     </main>
+
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="X">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            
-            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M21.928 4.793c-1.636-.532-3.328.199-4.1 1.73l-5.618 11.236c-.32.64-.066.96.44 1.16.4.16.84.132 1.2-.2L19.468 12c1.436-1.066 1.866-2.8 1.266-4.3l1.2-2.88.012-.028zm-9.36 13.012c-.4.16-.84.132-1.2-.2L5.75 11.427c-1.436-1.066-1.866-2.8-1.266-4.3l-1.2-2.88C1.648 2.715-.044 3.446-.82 4.976L.024 6.79c-1.2 2.36-.72 5.2 1 7l9.7 10c1.2 1.24 3.134 1.24 4.334 0l9.7-10c1.72-1.8 2.2-4.64 1-7l-.844-1.812c-1.636-.532-3.328.199-4.1 1.73l-3.792 8.532-.014.028z"/>
-                </svg>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
             </a>
-
-            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                </svg>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
             </a>
-
-            <a href="contact.html" class="footer-link" aria-label="Contact us">✉</a>
+            <a href="contact.html" class="footer-link" aria-label="Contact">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
         </div>
         <div class="copyright">
             © 2025 Faun by Moonlight. All rights reserved.
         </div>
     </footer>
+    
     <script>
-        // Script to fetch the announcement banner
         fetch('announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
@@ -232,7 +403,6 @@
                 document.getElementById('global-announcement').innerHTML = data;
             })
             .catch(error => {
-                console.log('Announcement system:', error.message);
                 document.getElementById('global-announcement').style.display = 'none';
             });
 
