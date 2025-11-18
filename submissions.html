@@ -41,8 +41,32 @@
             z-index: 0;
         }
 
-        .nav-header { position: relative; z-index: 100; }
-        .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
+        /* --- NUCLEAR Z-INDEX FIX --- */
+        /* 1. Header gets highest priority and sticky positioning */
+        .nav-header {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
+        /* 2. Main content gets low priority so it stays BEHIND header */
+        .main-wrapper {
+            position: relative;
+            z-index: 1; 
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .footer, #global-announcement { position: relative; z-index: 2; }
 
         /* --- ANNOUNCEMENT BAR --- */
         .announcement-bar {
@@ -58,12 +82,7 @@
         .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
         .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
 
-        /* --- NAVIGATION --- */
-        .nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-        }
+        /* --- NAVIGATION CONTENT --- */
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -71,8 +90,6 @@
             text-decoration: none;
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            position: relative;
-            z-index: 101;
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
@@ -94,27 +111,9 @@
             transform: translateY(-1px);
         }
 
-        .hamburger { 
-            display: none; 
-            flex-direction: column; 
-            justify-content: space-around; 
-            width: 30px; 
-            height: 25px; 
-            cursor: pointer;
-            position: relative;
-            z-index: 101;
-        }
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
-
-        /* --- MAIN CONTENT LAYOUT --- */
-        .main-wrapper {
-            padding: 60px 20px;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
 
         /* --- THE "GLASS" BOX --- */
         .text-box {
@@ -305,16 +304,32 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
+            
+            /* THIS IS THE MENU FIX 
+               1. Absolute positioning pulls it out of the flow
+               2. Solid black background (#000) prevents the glass box from showing through
+               3. z-index 9999 puts it on top of everything
+            */
             .nav-tabs {
-                display: none; flex-direction: column; gap: 15px;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: #111; padding: 30px; text-align: center;
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK BACKGROUND */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
-                z-index: 100;
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
             .text-box { padding: 30px 20px; }
