@@ -7,6 +7,11 @@
     <meta name="description" content="An editor's welcome from Faun by Moonlight, discussing the state of modern literature and the magazine's mission.">
     <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/editorwelcomes.html">
     
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
     
@@ -89,21 +94,28 @@
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
+        /* --- VISIBILITY IMPROVED TABS --- */
         .nav-tabs { display: flex; gap: 30px; }
+        
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; 
             background: none; border: none;
-            color: #a0a0a0;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transform: translateY(-1px);
         }
 
@@ -213,6 +225,15 @@
             
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
+            /* Revert nav style for mobile dropdown */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                text-transform: none; 
+                font-size: 1.2rem; 
+            }
+            .nav-tab:hover { color: #ffffff; }
+            
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -293,7 +314,9 @@
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
             </a>
         </div>
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+        <div class="copyright">
+            © 2025 Faun by Moonlight. All rights reserved.
+        </div>
     </footer>
 
     <script>
