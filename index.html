@@ -34,18 +34,18 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* Assuming image 1 is the home background based on your pattern */
-            background-image: url('images/1.png');
+            /* RESTORED BACKGROUND IMAGE 3.PNG FROM YOUR CODE */
+            background-image: url('images/3.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;
         }
 
-        /* Darker overlay for contrast */
+        /* Darker overlay for better contrast */
         body::before {
             content: ''; position: fixed; inset: 0;
-            background: rgba(15, 15, 15, 0.65); /* Slightly lighter on home for impact */
+            background: rgba(15, 15, 15, 0.75);
             z-index: 0;
         }
 
@@ -127,66 +127,69 @@
             padding: 60px 20px;
             flex: 1;
             display: flex;
-            flex-direction: column;
+            /* Vertically centering for Home Page Impact */
             justify-content: center;
             align-items: center;
-            text-align: center;
-            min-height: 80vh; /* Make hero section fill most of screen */
+            min-height: 80vh;
         }
 
-        /* --- HERO SECTION STYLES --- */
-        .hero-title {
+        /* --- THE "GLASS" BOX --- */
+        .text-box {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 60px;
+            max-width: 1000px;
+            width: 100%;
+            text-align: center; /* Centered text for main landing page */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title {
             font-family: "alfarn", serif;
-            font-size: 5rem;
+            font-weight: 400;
+            font-size: 4.5rem; /* Larger title for home page */
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
             color: #f8f8f8;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            margin-bottom: 1rem;
             line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        .hero-subtitle {
+        .page-subtitle {
             font-family: "neue-kabel", sans-serif;
             font-size: 1.5rem;
+            line-height: 1.6;
             color: #e0e0e0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            margin-bottom: 3rem;
             max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
+        /* --- BUTTONS --- */
         .cta-button {
+            display: inline-block;
+            background: #0047BB;
+            color: #ffffff;
+            padding: 15px 40px;
+            border-radius: 50px;
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.2rem;
-            padding: 15px 40px;
-            border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(0, 71, 187, 0.4);
             letter-spacing: 1px;
         }
-
-        .cta-primary {
-            background-color: #0047BB;
-            color: #ffffff;
-            box-shadow: 0 5px 20px rgba(0, 71, 187, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+        .cta-button:hover {
+            transform: translateY(-2px);
+            background: #005ce6;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 71, 187, 0.6);
         }
-        .cta-primary:hover { background-color: #005ce6; transform: translateY(-2px); }
-
-        .cta-secondary {
-            background-color: rgba(255,255,255,0.1);
-            color: #ffffff;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .cta-secondary:hover { background-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-
 
         /* --- FOOTER --- */
         .footer {
@@ -206,7 +209,7 @@
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
             
-            /* NUCLEAR MENU FIX */
+            /* MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
                 display: none; 
                 flex-direction: column; 
@@ -225,7 +228,7 @@
             
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
 
-            /* Revert nav text style for mobile menu */
+            /* Revert nav style for mobile dropdown */
             .nav-tab { 
                 color: #a0a0a0; 
                 text-shadow: none; 
@@ -234,11 +237,9 @@
             }
             .nav-tab:hover { color: #ffffff; }
             
-            .hero-title { font-size: 3rem; }
-            .hero-subtitle { font-size: 1.1rem; padding: 0 20px; }
-            .hero-buttons { flex-direction: column; width: 100%; padding: 0 40px; }
-            .cta-button { width: 100%; }
-            
+            .text-box { padding: 40px 20px; }
+            .page-title { font-size: 3rem; }
+            .page-subtitle { font-size: 1.2rem; }
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -266,12 +267,10 @@
     </nav>
 
     <main class="main-wrapper">
-        <h1 class="hero-title">Faun by Moonlight</h1>
-        <p class="hero-subtitle">An independent literary magazine dedicated to the exceptionally unmarketable.</p>
-        
-        <div class="hero-buttons">
-            <a href="volumes/volume-1.html" class="cta-button cta-primary">Read Volume 1</a>
-            <a href="submissions.html" class="cta-button cta-secondary">Submit Work</a>
+        <div class="text-box">
+            <h1 class="page-title">Faun by Moonlight</h1>
+            <p class="page-subtitle">An independent online literary magazine dedicated to literary fiction that resists genre classification.</p>
+            <a href="volumes/volume-1.html" class="cta-button">Read Volume 1</a>
         </div>
     </main>
 
