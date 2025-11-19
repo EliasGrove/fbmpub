@@ -10,12 +10,18 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.faunbymoonlight.com/support-us">
     
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.faunbymoonlight.com/support-us">
     <meta property="og:title" content="Support Us - Faun by Moonlight Literary Magazine">
     <meta property="og:description" content="Help Faun by Moonlight publish literary fiction by volunteering, buying our Volumes, or donating via Buy Me a Coffee.">
     <meta property="og:image" content="https://www.faunbymoonlight.com/images/support-us-og-image.jpg">
     <meta property="og:site_name" content="Faun by Moonlight">
+    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.faunbymoonlight.com/support-us">
     <meta name="twitter:title" content="Support Us - Faun by Moonlight Literary Magazine">
@@ -106,21 +112,28 @@
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
+        /* --- VISIBILITY IMPROVED TABS --- */
         .nav-tabs { display: flex; gap: 30px; }
+        
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; 
             background: none; border: none;
-            color: #a0a0a0;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transform: translateY(-1px);
         }
 
@@ -274,7 +287,7 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE MENU FIX --- */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
@@ -288,7 +301,7 @@
                 top: 100%; 
                 left: 0; 
                 right: 0;
-                background-color: #000000; /* Solid Black */
+                background-color: #000000; /* SOLID BLACK */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
                 padding: 30px; 
                 text-align: center;
@@ -297,6 +310,15 @@
             }
             
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
+
+            /* Revert nav style for mobile dropdown */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                text-transform: none; 
+                font-size: 1.2rem; 
+            }
+            .nav-tab:hover { color: #ffffff; }
             
             .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
