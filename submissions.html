@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Work - Faun by Moonlight Literary Magazine</title>
     <meta name="description" content="Submission guidelines for Faun by Moonlight. Read our requirements and submit your literary fiction.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/submissions">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
     
@@ -42,9 +49,8 @@
         }
 
         /* --- NUCLEAR Z-INDEX FIX --- */
-        /* 1. Header gets highest priority and sticky positioning */
         .nav-header {
-            position: -webkit-sticky; /* Safari */
+            position: -webkit-sticky;
             position: sticky;
             top: 0;
             z-index: 9999; 
@@ -55,7 +61,6 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
         }
 
-        /* 2. Main content gets low priority so it stays BEHIND header */
         .main-wrapper {
             position: relative;
             z-index: 1; 
@@ -68,21 +73,29 @@
 
         .footer, #global-announcement { position: relative; z-index: 2; }
 
-        /* --- ANNOUNCEMENT BAR --- */
-        .announcement-bar {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; 
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+        
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
 
-        /* --- NAVIGATION CONTENT --- */
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
+        }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION STYLES --- */
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -94,20 +107,26 @@
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
         .nav-tabs { display: flex; gap: 30px; }
+        
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; 
             background: none; border: none;
-            color: #a0a0a0;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transform: translateY(-1px);
         }
 
@@ -214,7 +233,6 @@
             width: 100%;
         }
 
-        /* Step 1: Payment Specifics */
         .payment-step {
             border: 1px solid rgba(0, 71, 187, 0.4);
             background: rgba(0, 71, 187, 0.1);
@@ -309,11 +327,7 @@
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
             
-            /* THIS IS THE MENU FIX 
-               1. Absolute positioning pulls it out of the flow
-               2. Solid black background (#000) prevents the glass box from showing through
-               3. z-index 9999 puts it on top of everything
-            */
+            /* MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
                 display: none; 
                 flex-direction: column; 
@@ -322,7 +336,7 @@
                 top: 100%; 
                 left: 0; 
                 right: 0;
-                background-color: #000000; /* SOLID BLACK BACKGROUND */
+                background-color: #000000; /* SOLID BLACK */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
                 padding: 30px; 
                 text-align: center;
@@ -332,6 +346,15 @@
             
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
+            /* Revert text style for mobile menu list */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                text-transform: none; 
+                font-size: 1.2rem; 
+            }
+            .nav-tab:hover { color: #ffffff; }
+
             .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
             .footer { flex-direction: column; gap: 15px; text-align: center; }
