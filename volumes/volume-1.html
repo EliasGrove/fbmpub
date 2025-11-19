@@ -7,6 +7,11 @@
     <meta name="description" content="Details, reviews, and purchase information for the inaugural November 2025 issue of Faun by Moonlight literary magazine.">
     <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/volume-1">
     
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
     
@@ -37,7 +42,7 @@
             background-size: cover;
         }
 
-        /* Darker overlay */
+        /* Darker overlay for better contrast */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
@@ -89,21 +94,28 @@
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
+        /* --- VISIBILITY IMPROVED TABS --- */
         .nav-tabs { display: flex; gap: 30px; }
+        
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; 
             background: none; border: none;
-            color: #a0a0a0;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transform: translateY(-1px);
         }
 
@@ -278,6 +290,15 @@
             
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
+            /* Revert nav style for mobile dropdown to simple text */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                text-transform: none; 
+                font-size: 1.2rem; 
+            }
+            .nav-tab:hover { color: #ffffff; }
+            
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -352,7 +373,7 @@
     </footer>
 
     <script>
-        // Script to fetch the announcement banner (moving up one directory)
+        // Adjusted path for the announcement file assuming this is in /volumes/
         fetch('../announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
@@ -375,6 +396,5 @@
             }
         });
     </script>
-    
 </body>
 </html>
