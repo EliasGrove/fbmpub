@@ -6,6 +6,12 @@
     <title>Volumes - Faun by Moonlight Literary Magazine</title>
     <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
     <link rel="canonical" href="https://www.faunbymoonlight.com/volumes">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://use.typekit.net">
     
@@ -35,7 +41,7 @@
             background-size: cover;
         }
 
-        /* Overlay */
+        /* Darker overlay for better contrast */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
@@ -45,7 +51,7 @@
         /* --- ANNOUNCEMENT BAR FIX --- */
         #global-announcement, .announcement-bar {
             position: relative;
-            z-index: 10000; /* Top priority */
+            z-index: 10000; /* Topmost */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
@@ -64,7 +70,7 @@
             color: #ffffff; text-decoration: none; 
         }
 
-        /* --- HEADER (Sticky + Layered) --- */
+        /* --- NAVIGATION (Sticky + Visibility Fix) --- */
         .nav-header {
             position: -webkit-sticky;
             position: sticky;
@@ -88,20 +94,26 @@
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
         .nav-tabs { display: flex; gap: 30px; }
+        
         .nav-tab {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; 
             background: none; border: none;
-            color: #a0a0a0;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transform: translateY(-1px);
         }
 
@@ -109,10 +121,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT (Low Z-Index) --- */
+        /* --- MAIN CONTENT LAYOUT --- */
         .main-wrapper {
             position: relative;
-            z-index: 1; 
+            z-index: 1; /* Low Priority */
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -185,6 +197,7 @@
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
+
         .volume-cover:hover { transform: scale(1.02); }
         
         .volume-title {
@@ -207,7 +220,10 @@
         }
         
         .volume-actions {
-            display: flex; flex-direction: column; gap: 15px; margin-top: auto; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto; 
         }
 
         /* --- BUTTONS --- */
@@ -230,7 +246,11 @@
         .button.yellow { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3); }
         .button.secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.2); color: #d0d0d0; }
 
-        .button:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
 
         /* --- LIGHTBOX --- */
         .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 20000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
@@ -253,12 +273,12 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE MENU FIX --- */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
             
-            /* Solid Black Menu Fix */
+            /* NUCLEAR MENU FIX */
             .nav-tabs {
                 display: none; 
                 flex-direction: column; 
@@ -276,6 +296,15 @@
             }
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
+            /* Revert menu text style for mobile dropdown */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                font-size: 1.2rem; 
+                text-transform: none;
+            }
+            .nav-tab:hover { color: #ffffff; }
+            
             .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
             .volume-title { font-size: 1.8rem; }
@@ -289,12 +318,12 @@
     <nav class="nav-header">
         <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
         
+        <input type="checkbox" id="nav-toggle">
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
-        <input type="checkbox" id="nav-toggle">
         
         <div class="nav-tabs">
             <a href="who-we-are.html" class="nav-tab">Who We Are</a>
@@ -332,7 +361,7 @@
                 <article class="volume-card">
                     <img src="images/COVER 2.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
                     <h2 class="volume-title">December 2025</h2>
-                    <p class="volume-subtitle">We are currently making the final edits and preparing for release. This volume is shaping up to be something truly special.</p>
+                    <p class="volume-subtitle">We are currently making the final edits and preparing for release. Pre-order Now and get your name on FBM Thanks!</p>
                     <div class="volume-actions">
                         <a href="https://faunbymoonlight.store/products/faun-by-moonlight-volume-2-pre-order" class="button primary">Pre-order Now</a>
                     </div>
