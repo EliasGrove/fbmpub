@@ -29,7 +29,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* Assuming image path is relative to the folder this file is in */
             background-image: url('images/4.png');
             background-repeat: no-repeat;
             background-position: center center;
@@ -37,35 +36,48 @@
             background-size: cover;
         }
 
-        /* Darker overlay for reading comfort */
+        /* Darker overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.85);
             z-index: 0;
         }
 
-        .nav-header, .main-wrapper, .footer, #global-announcement { position: relative; z-index: 2; }
-
-        /* --- ANNOUNCEMENT BAR --- */
-        .announcement-bar {
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Highest Priority */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
-            padding: 12px 20px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
 
-        /* --- NAVIGATION --- */
-        .nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
         }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION (Sticky + Layered) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
         .logo {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -98,8 +110,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
+            position: relative;
+            z-index: 1; 
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -107,7 +121,7 @@
             align-items: flex-start;
         }
 
-        /* --- THE "GLASS" BOX (Optimized for Reading) --- */
+        /* --- THE "GLASS" BOX --- */
         .text-box {
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px);
@@ -126,7 +140,7 @@
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
             font-size: 2.2rem;
-            color: #FFD100; /* Gold accent */
+            color: #FFD100;
             margin-top: 3rem;
             margin-bottom: 1.5rem;
             text-align: center;
@@ -139,7 +153,7 @@
         .welcome-content p {
             font-family: "neue-kabel", sans-serif;
             font-size: 1.2rem;
-            line-height: 1.8; /* Improved line height for reading */
+            line-height: 1.8;
             color: #e0e0e0;
             margin-bottom: 1.5rem;
             text-align: justify;
@@ -148,7 +162,7 @@
         .welcome-content blockquote {
             margin: 1.5rem 0 1.5rem 2rem;
             padding-left: 1.5rem;
-            border-left: 4px solid #0047BB; /* Blue accent */
+            border-left: 4px solid #0047BB;
             font-style: italic;
             color: #ccc;
             line-height: 1.7;
@@ -162,6 +176,7 @@
 
         /* --- FOOTER --- */
         .footer {
+            position: relative; z-index: 2;
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 40px;
             background: rgba(0, 0, 0, 0.8);
@@ -179,15 +194,28 @@
             .welcome-content p { font-size: 1.1rem; text-align: left; }
         }
 
+        /* --- MOBILE MENU FIX --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
+            
+            /* MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
-                display: none; flex-direction: column; gap: 15px;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: #111; padding: 30px; text-align: center;
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK */
                 border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
             .footer { flex-direction: column; gap: 15px; text-align: center; }
@@ -321,7 +349,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
             <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.c621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
             </a>
             <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
@@ -336,7 +364,7 @@
     </footer>
 
     <script>
-        // Script to fetch the announcement banner (assuming this is in the root directory)
+        // Script to fetch the announcement banner
         fetch('announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
