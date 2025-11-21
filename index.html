@@ -96,7 +96,7 @@
         .container::before {
             content: '';
             position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
             z-index: 1;
         }
 
@@ -117,46 +117,14 @@
             font-family: "alfarn", serif;
             font-weight: 400;
             font-size: 6.5rem;
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 2rem 0;
             letter-spacing: 2px;
             text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             line-height: 1.1;
         }
 
-        /* --- UPDATED SLOGAN STYLING (Moonlight Glow) --- */
-        .slogan {
-            font-family: "alfarn", serif;
-            font-weight: 400; /* Lighter weight for elegance */
-            font-size: 1.5rem;
-            margin: 0 0 2.5rem 0;
-            letter-spacing: 0.3em; /* Cinematic spacing */
-            text-transform: uppercase;
-            color: rgba(248, 248, 248, 0.85); 
-            
-            /* The Glow */
-            text-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.2),
-                0 0 5px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Emphasize "Unpublishable" */
-        .slogan em {
-            font-style: normal;
-            color: #ffffff;
-            font-weight: 700;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* Subtle underline */
-            padding-bottom: 5px;
-            display: inline-block;
-            letter-spacing: 0.35em;
-            text-shadow: 
-                0 0 25px rgba(255, 255, 255, 0.5),
-                0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* --- COLOR CLASSES (For Title Only) --- */
         .word-faun { color: #E60026; }
-        /* Updated Blue to be lighter/more visible on black */
-        .word-by { color: #3D7EFF; } 
+        .word-by { color: #0047BB; }
         .word-moonlight { color: #FFD100; }
 
         /* --- ENTER BUTTON (Text) --- */
@@ -218,14 +186,12 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .title { font-size: 3.8rem; margin-bottom: 0.5rem; }
-            .slogan { font-size: 1.2rem; margin-bottom: 1.5rem; letter-spacing: 0.2em; }
+            .title { font-size: 3.8rem; margin-bottom: 1.5rem; }
             .enter-button { font-size: 1.5rem; }
             .spotlight-cta { font-size: 0.9rem; padding: 10px 20px; }
         }
         @media (max-width: 480px) {
             .title { font-size: 2.8rem; letter-spacing: 1px; }
-            .slogan { font-size: 0.9rem; letter-spacing: 0.15em; }
         }
 
         /* SEO Hidden Content */
@@ -242,10 +208,6 @@
         <main class="content">
             <h1 class="title" id="title">Faun by Moonlight</h1>
             
-            <p class="slogan">
-                Be <em>Unpublishable</em>
-            </p>
-
             <a href="who-we-are" class="enter-button" id="enter-btn" aria-label="Enter Site">Enter</a>
 
             <div class="spotlight-wrap">
