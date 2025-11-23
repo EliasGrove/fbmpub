@@ -1,3 +1,45 @@
+<style>
+    /* Add transition for smooth fading */
+    #announcement-text {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+        display: inline-block;
+    }
+    
+    /* Class used by JS to hide text during swap */
+    .fade-out {
+        opacity: 0 !important;
+    }
+</style>
+
 <div class="announcement-bar">
-    <p>📢 <strong>Submissions are Open!</strong> We are currently reading for our December issue. <a href="submissions.html">Submit your work here.</a></p>
+    <p>📢 <span id="announcement-text"><strong>Submissions are Open!</strong> We are currently reading for our January issue. <a href="submissions">Submit your work here.</a></span></p>
 </div>
+
+<script>
+    // Updated list of messages
+    const messages = [
+        '<strong>Submissions are Open!</strong> We are currently reading for our January issue. <a href="submissions">Submit your work here.</a>',
+        '<strong>Now Accepting Non-Fiction:</strong> We want your essays and history pieces! Check our <a href="submissions">Submissions</a> and <a href="faq">FAQ</a> pages.',
+        '<strong>New Issue Available:</strong> Volume 4 is out now! <a href="https://faunbymoonlight.store">Order your copy.</a>'
+    ];
+
+    let currentIndex = 0;
+    const textElement = document.getElementById('announcement-text');
+    const displayDuration = 5000; // 5 seconds per message
+
+    function cycleAnnouncement() {
+        // Fade out
+        textElement.classList.add('fade-out');
+
+        // Wait for fade (0.5s), swap text, fade in
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % messages.length;
+            textElement.innerHTML = messages[currentIndex];
+            textElement.classList.remove('fade-out');
+        }, 500); 
+    }
+
+    // Start the cycle
+    setInterval(cycleAnnouncement, displayDuration);
+</script>
