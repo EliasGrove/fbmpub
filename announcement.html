@@ -1,45 +1,27 @@
 <style>
-    /* Add transition for smooth fading */
-    #announcement-text {
-        transition: opacity 0.5s ease-in-out;
-        opacity: 1;
-        display: inline-block;
+    .announcement-bar {
+        background-color: #2c2c2c;
+        color: #ffffff;
+        padding: 12px 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
     }
     
-    /* Class used by JS to hide text during swap */
-    .fade-out {
-        opacity: 0 !important;
+    .announcement-bar p {
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    .announcement-bar a {
+        color: #4a9eff;
+        text-decoration: underline;
+    }
+    
+    .announcement-bar a:hover {
+        color: #6bb3ff;
     }
 </style>
 
 <div class="announcement-bar">
-    <p>📢 <span id="announcement-text"><strong>Submissions are Open!</strong> We are currently reading for our January issue. <a href="submissions">Submit your work here.</a></span></p>
+    <p>🚨 <strong>FBM Needs Your Help!</strong> Vote for us in Chill Subs' Best Lit Mags 2025 and get <strong>FREE submissions</strong> — just send us a screenshot! <a href="https://www.chillsubs.com/best-lit-mag-awards" target="_blank">Vote here (takes &lt;1 min)</a></p>
 </div>
-
-<script>
-    // Updated list of messages
-    const messages = [
-        '<strong>Submissions are Open!</strong> We are currently reading for our January issue. <a href="submissions">Submit your work here.</a>',
-        '<strong>Now Accepting Non-Fiction:</strong> We want your essays and history pieces! Check our <a href="submissions">Submissions</a> and <a href="faq">FAQ</a> pages.',
-        '<strong>New Issue Available:</strong> Volume 4 is out now! <a href="https://faunbymoonlight.store">Order your copy.</a>'
-    ];
-
-    let currentIndex = 0;
-    const textElement = document.getElementById('announcement-text');
-    const displayDuration = 5000; // 5 seconds per message
-
-    function cycleAnnouncement() {
-        // Fade out
-        textElement.classList.add('fade-out');
-
-        // Wait for fade (0.5s), swap text, fade in
-        setTimeout(() => {
-            currentIndex = (currentIndex + 1) % messages.length;
-            textElement.innerHTML = messages[currentIndex];
-            textElement.classList.remove('fade-out');
-        }, 500); 
-    }
-
-    // Start the cycle
-    setInterval(cycleAnnouncement, displayDuration);
-</script>
