@@ -7,68 +7,19 @@
     <title>Welcome - Faun by Moonlight</title>
     <meta name="title" content="Faun by Moonlight - Literary Magazine for Exceptional Fiction">
     <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist genre classification. Launching November 2025.">
-    <meta name="keywords" content="literary magazine, literary fiction, short stories, creative writing, literary journal, fiction magazine, independent press, emerging writers, literary publishing, contemporary literature">
-    <meta name="author" content="Faun by Moonlight">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://faunbymoonlight.com/">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://faunbymoonlight.com/">
-    <meta property="og:title" content="Faun by Moonlight - Literary Magazine for Exceptional Fiction">
-    <meta property="og:description" content="Online literary magazine publishing exceptional fiction that defies genre conventions. Launching November 2025.">
+    <meta property="og:title" content="Faun by Moonlight">
     <meta property="og:image" content="https://faunbymoonlight.com/images/Cover.png">
-    <meta property="og:site_name" content="Faun by Moonlight">
-
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://faunbymoonlight.com/">
-    <meta property="twitter:title" content="Faun by Moonlight - Literary Magazine">
-    <meta property="twitter:description" content="Online literary magazine publishing exceptional fiction that defies genre conventions.">
-    <meta property="twitter:image" content="https://faunbymoonlight.com/images/Cover.png">
-    <meta property="twitter:site" content="@faunbymoonlight">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Faun by Moonlight",
-      "url": "https://faunbymoonlight.com",
-      "logo": "https://faunbymoonlight.com/images/Cover.png",
-      "description": "Online literary magazine dedicated to exceptional literary fiction that resists genre classification",
-      "foundingDate": "2025",
-      "sameAs": ["https://x.com/faunbymoonlight"],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Editorial",
-        "email": "submissions@faunbymoonlight.com"
-      }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Faun by Moonlight",
-      "url": "https://faunbymoonlight.com"
-    }
-    </script>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
 
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://use.typekit.net">
 
     <style>
         /* --- CORE RESET --- */
@@ -79,12 +30,12 @@
         .container {
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Changed to column to handle footer alignment */
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
             background-color: #050505;
-            /* Ensure this image path is correct */
             background-image: url('images/index.png'); 
             background-size: cover;
             background-position: center center;
@@ -92,11 +43,11 @@
             min-width: 320px;
         }
 
-        /* Gradient Overlay for better text focus */
+        /* Gradient Overlay */
         .container::before {
             content: '';
             position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
             z-index: 1;
         }
 
@@ -106,7 +57,7 @@
             width: 100%;
             max-width: 1200px;
             padding: 0 20px;
-            margin: 0 auto;
+            margin: auto; /* Centers content vertically */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -127,7 +78,7 @@
         .word-by { color: #0047BB; }
         .word-moonlight { color: #FFD100; }
 
-        /* --- ENTER BUTTON (Text) --- */
+        /* --- ENTER BUTTON --- */
         .enter-button {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 900;
@@ -153,7 +104,7 @@
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
         }
 
-        /* --- SPOTLIGHT CTA (Glass Pill) --- */
+        /* --- SPOTLIGHT CTA --- */
         .spotlight-wrap { margin-top: 40px; }
         
         .spotlight-cta {
@@ -165,14 +116,11 @@
             color: #ffffff;
             text-decoration: none;
             padding: 12px 24px;
-            
-            /* Glassmorphism */
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
         }
@@ -184,22 +132,72 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        /* --- LISTINGS FOOTER (New Additions) --- */
+        .listings-footer {
+            position: relative; 
+            z-index: 2;
+            width: 100%;
+            padding-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .listing-link {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .listing-link:hover {
+            color: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+        }
+
+        /* This class forces any image inside it to look white. 
+           This is useful if you download the colored logos from Duotrope/Chill Subs.
+        */
+        .listing-logo-img {
+            height: 18px; /* Keep them small and subtle */
+            width: auto;
+            opacity: 0.8;
+            /* This filter turns colored logos into white silhouettes */
+            filter: grayscale(100%) brightness(1000%); 
+        }
+
+        /* Separator dot */
+        .separator {
+            width: 3px; height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .title { font-size: 3.8rem; margin-bottom: 1.5rem; }
             .enter-button { font-size: 1.5rem; }
             .spotlight-cta { font-size: 0.9rem; padding: 10px 20px; }
+            
+            .listings-footer {
+                flex-wrap: wrap;
+                gap: 15px;
+                padding-bottom: 20px;
+            }
+            .separator { display: none; } /* Hide dots on mobile if wrapping */
         }
         @media (max-width: 480px) {
             .title { font-size: 2.8rem; letter-spacing: 1px; }
         }
 
-        /* SEO Hidden Content */
-        .hidden-content {
-            position: absolute !important; width: 1px !important; height: 1px !important;
-            padding: 0 !important; margin: -1px !important; overflow: hidden !important;
-            clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important;
-        }
+        .hidden-content { display: none; }
     </style>
 </head>
 <body>
@@ -216,28 +214,31 @@
                 </a>
             </div>
         </main>
+
+        <footer class="listings-footer">
+            <a href="https://duotrope.com" target="_blank" rel="noopener" class="listing-link">
+                Duotrope
+            </a>
+            
+            <div class="separator"></div>
+
+            <a href="https://www.chillsubs.com" target="_blank" rel="noopener" class="listing-link">
+                Chill Subs
+            </a>
+
+            <div class="separator"></div>
+
+            <a href="https://thegrinder.diabolicalplots.com" target="_blank" rel="noopener" class="listing-link">
+               Submission Grinder
+            </a>
+        </footer>
     </div>
 
     <div class="hidden-content">
-        <nav aria-label="Main navigation">
-            <a href="who-we-are">Who We Are</a>
-            <a href="volumes">Volumes</a>
-            <a href="submissions">Submit Your Work</a>
-            <a href="faq">FAQ</a>
-            <a href="support-us">Support Us</a>
-            <a href="contact">Contact</a>
-        </nav>
-        <article>
-            <h2>About Faun by Moonlight Literary Magazine</h2>
-            <p>Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction.</p>
-            <section>
-                <h3>Our Mission</h3>
-                <p>We present readers with literature that both challenges and exceeds expectations. Our specialty is the exceptionally unmarketable - fiction that pushes boundaries and defies easy categorization.</p>
-            </section>
-        </article>
-    </div>
+        </div>
 
     <script>
+        // Keep your existing Scripts
         function colorTitle() {
             const title = document.getElementById('title');
             if (title) {
@@ -255,14 +256,12 @@
             let index = 0;
             
             setInterval(() => {
-                button.style.opacity = '0.2'; // Fade out
-                
+                button.style.opacity = '0.2';
                 setTimeout(() => {
                     index = (index + 1) % languages.length;
                     button.textContent = languages[index];
-                    button.style.opacity = '1'; // Fade in
-                }, 400); // Wait for fade out to mostly complete
-                
+                    button.style.opacity = '1';
+                }, 400);
             }, 3500); 
         }
 
