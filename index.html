@@ -30,9 +30,11 @@
         .container {
             height: 100vh;
             display: flex;
-            flex-direction: column; /* Changed to column to handle footer alignment */
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            /* This justifies content: space-between pushes the footer to bottom, 
+               but keeps the main content centered relative to available space */
+            justify-content: space-between; 
             text-align: center;
             position: relative;
             background-color: #050505;
@@ -51,16 +53,20 @@
             z-index: 1;
         }
 
+        /* Spacer to balance the top area (helps center the main content) */
+        .top-spacer { height: 80px; width: 100%; }
+
         .content {
             position: relative; z-index: 2;
             color: #f8f8f8;
             width: 100%;
             max-width: 1200px;
             padding: 0 20px;
-            margin: auto; /* Centers content vertically */
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Allows this to take up center space */
         }
 
         /* --- TITLE STYLING --- */
@@ -132,53 +138,58 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- LISTINGS FOOTER (New Additions) --- */
-        .listings-footer {
+        /* --- FEATURED SECTION (FOOTER) --- */
+        .featured-footer {
             position: relative; 
             z-index: 2;
             width: 100%;
-            padding-bottom: 30px;
+            padding-bottom: 50px; /* More padding to lift it up */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .featured-label {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 8px;
+            padding-left: 3px; /* visual balance for letter spacing */
+        }
+
+        .listings-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 35px; /* Wider gap for elegance */
         }
 
         .listing-link {
             font-family: "neue-kabel", sans-serif;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem; /* Increased size */
+            color: rgba(255, 255, 255, 0.7); /* Increased brightness */
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            position: relative;
         }
 
         .listing-link:hover {
-            color: rgba(255, 255, 255, 1);
-            transform: translateY(-1px);
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
-        /* This class forces any image inside it to look white. 
-           This is useful if you download the colored logos from Duotrope/Chill Subs.
-        */
-        .listing-logo-img {
-            height: 18px; /* Keep them small and subtle */
-            width: auto;
-            opacity: 0.8;
-            /* This filter turns colored logos into white silhouettes */
-            filter: grayscale(100%) brightness(1000%); 
-        }
-
-        /* Separator dot */
-        .separator {
-            width: 3px; height: 3px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-        }
+        /* Optional: Add a subtle dot between items if you prefer over simple spacing */
+        /* .listing-link:not(:last-child)::after {
+             content: '•'; position: absolute; right: -20px; color: rgba(255,255,255,0.2);
+        } */
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
@@ -186,15 +197,16 @@
             .enter-button { font-size: 1.5rem; }
             .spotlight-cta { font-size: 0.9rem; padding: 10px 20px; }
             
-            .listings-footer {
+            .listings-row {
                 flex-wrap: wrap;
-                gap: 15px;
-                padding-bottom: 20px;
+                gap: 15px 25px;
+                padding: 0 20px;
+                justify-content: center;
             }
-            .separator { display: none; } /* Hide dots on mobile if wrapping */
         }
         @media (max-width: 480px) {
             .title { font-size: 2.8rem; letter-spacing: 1px; }
+            .featured-footer { padding-bottom: 30px; }
         }
 
         .hidden-content { display: none; }
@@ -203,34 +215,29 @@
 <body>
 
     <div class="container">
+        <div class="top-spacer"></div>
+
         <main class="content">
             <h1 class="title" id="title">Faun by Moonlight</h1>
             
             <a href="who-we-are" class="enter-button" id="enter-btn" aria-label="Enter Site">Enter</a>
 
             <div class="spotlight-wrap">
-                <a href="volumes" class="spotlight-cta" aria-label="Read our Inaugural Issue">
+                <a href="volumes" class="spotlight-cta" aria-label="Read our Second Volume">
                     Read our Inaugural Issue
                 </a>
             </div>
         </main>
 
-        <footer class="listings-footer">
-            <a href="https://duotrope.com" target="_blank" rel="noopener" class="listing-link">
-                Duotrope
-            </a>
+        <footer class="featured-footer">
+            <span class="featured-label">Featured On</span>
             
-            <div class="separator"></div>
-
-            <a href="https://www.chillsubs.com" target="_blank" rel="noopener" class="listing-link">
-                Chill Subs
-            </a>
-
-            <div class="separator"></div>
-
-            <a href="https://thegrinder.diabolicalplots.com" target="_blank" rel="noopener" class="listing-link">
-               Submission Grinder
-            </a>
+            <div class="listings-row">
+                <a href="https://www.clmp.org" target="_blank" rel="noopener" class="listing-link">CLMP</a>
+                <a href="https://duotrope.com" target="_blank" rel="noopener" class="listing-link">Duotrope</a>
+                <a href="https://www.chillsubs.com" target="_blank" rel="noopener" class="listing-link">Chill Subs</a>
+                <a href="https://thegrinder.diabolicalplots.com" target="_blank" rel="noopener" class="listing-link">The Grinder</a>
+            </div>
         </footer>
     </div>
 
@@ -238,7 +245,6 @@
         </div>
 
     <script>
-        // Keep your existing Scripts
         function colorTitle() {
             const title = document.getElementById('title');
             if (title) {
