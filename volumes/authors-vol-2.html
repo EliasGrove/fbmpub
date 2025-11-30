@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volumes - Faun by Moonlight Literary Magazine</title>
-    <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
-    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes">
+    <title>Our Authors - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Meet the talented authors featured in Faun by Moonlight Volume 2: Sergey Orlov and Lexi Glass.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/authors-vol-2">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -34,14 +34,15 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: url('images/4.png');
+            /* Path adjusted for subdirectory */
+            background-image: url('../images/3.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;
         }
 
-        /* Darker overlay for better contrast */
+        /* Darker overlay */
         body::before {
             content: ''; position: fixed; inset: 0;
             background: rgba(15, 15, 15, 0.75);
@@ -51,7 +52,7 @@
         /* --- ANNOUNCEMENT BAR FIX --- */
         #global-announcement, .announcement-bar {
             position: relative;
-            z-index: 10000; /* Topmost */
+            z-index: 10000; /* Highest Priority */
             background-color: #E60026;
             color: #ffffff;
             text-align: center;
@@ -59,7 +60,7 @@
             font-weight: 500;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        
+
         #global-announcement { padding: 0; }
         .announcement-bar { padding: 12px 20px; }
         
@@ -70,7 +71,7 @@
             color: #ffffff; text-decoration: none; 
         }
 
-        /* --- NAVIGATION (Sticky + Visibility Fix) --- */
+        /* --- NAVIGATION (Sticky + Layered) --- */
         .nav-header {
             position: -webkit-sticky;
             position: sticky;
@@ -93,6 +94,7 @@
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
+        /* --- VISIBILITY IMPROVED TABS --- */
         .nav-tabs { display: flex; gap: 30px; }
         
         .nav-tab {
@@ -121,10 +123,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
             position: relative;
-            z-index: 1; /* Low Priority */
+            z-index: 1; 
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -140,9 +142,9 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             padding: 50px;
-            max-width: 1200px;
-            width: 95%;
-            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
@@ -156,109 +158,69 @@
             color: #f8f8f8;
         }
 
-        /* --- VOLUMES GRID --- */
-        .volumes-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .volume-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .volume-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .volume-cover {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 2 / 3;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-            cursor: zoom-in;
-            transition: transform 0.3s ease;
-        }
-
-        .volume-cover:hover { transform: scale(1.02); }
+        /* --- AUTHOR SECTIONS --- */
+        .section { margin-bottom: 4rem; }
         
-        .volume-title {
+        .section-divider {
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
             font-family: "dunbar-tall", sans-serif;
             font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: 1px;
-            color: #ffd700;
+            color: #FFD100; /* Gold accent */
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        .volume-subtitle {
+        .section-content {
             font-family: "neue-kabel", sans-serif;
-            font-size: 1.15rem;
-            line-height: 1.6;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: #d0d0d0;
+        }
+
+        .author-bio {
+            font-style: italic;
+            color: #e0e0e0;
             margin-bottom: 2rem;
-            min-height: 50px;
-        }
-        
-        .volume-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: auto; 
+            padding-left: 1rem;
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* --- BUTTONS --- */
-        .button {
-            display: inline-block;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #f0f0f0;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            border: 1px solid transparent;
-        }
-        
-        .button.primary { background-color: #0047BB; border-color: #0047BB; box-shadow: 0 4px 15px rgba(0, 71, 187, 0.3); }
-        .button.red { background-color: #E60026; border-color: #E60026; box-shadow: 0 4px 15px rgba(230, 0, 38, 0.3); }
-        .button.yellow { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3); }
-        .button.secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.2); color: #d0d0d0; }
-
-        .button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        .author-cover {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* --- LIGHTBOX --- */
-        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 20000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
-        .lightbox.active { display: flex; }
-        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
-        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 0; border-radius: 50%; line-height: 50px; width: 50px; height: 50px; text-align: center; transition: all 0.3s ease; }
-        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
+        /* --- EDITOR NOTE --- */
+        .editor-note {
+            background: rgba(0, 71, 187, 0.15); /* Blue tint */
+            border-left: 4px solid #0047BB;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .editor-note p { margin-bottom: 1rem; color: #f0f0f0; }
+        .editor-note p:last-child { margin-bottom: 0; }
+
+        .author-contact {
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: #888;
+            text-align: center;
+            font-style: italic;
+        }
 
         /* --- FOOTER --- */
         .footer {
@@ -278,7 +240,7 @@
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
             
-            /* NUCLEAR MENU FIX */
+            /* MENU FIX: Solid Black + High Z-Index */
             .nav-tabs {
                 display: none; 
                 flex-direction: column; 
@@ -294,20 +256,21 @@
                 z-index: 9999;
                 box-shadow: 0 10px 30px rgba(0,0,0,1);
             }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
-            /* Revert menu text style for mobile dropdown */
+            /* Revert nav style for mobile dropdown */
             .nav-tab { 
                 color: #a0a0a0; 
                 text-shadow: none; 
+                text-transform: none; 
                 font-size: 1.2rem; 
-                text-transform: none;
             }
             .nav-tab:hover { color: #ffffff; }
             
             .text-box { padding: 30px 20px; }
             .page-title { font-size: 2.5rem; }
-            .volume-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -316,71 +279,80 @@
     <div id="global-announcement"></div>
 
     <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
+        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
         
-        <input type="checkbox" id="nav-toggle">
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
+        <input type="checkbox" id="nav-toggle">
         
         <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab">Who We Are</a>
-            <a href="volumes" class="nav-tab active">Volumes</a>
-            <a href="submissions" class="nav-tab">Submit Your Work</a>
-            <a href="faq" class="nav-tab">FAQ</a>
-            <a href="support-us" class="nav-tab">Support Us</a>
-            <a href="urgent" class="nav-tab">Urgent Appeal</a>
-            <a href="contact" class="nav-tab">Contact</a>
+            <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
+            <a href="../volumes.html" class="nav-tab">Volumes</a>
+            <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
+            <a href="../faq.html" class="nav-tab">FAQ</a>
+            <a href="../support-us.html" class="nav-tab">Support Us</a>
+            <a href="../urgent.html" class="nav-tab">Urgent Appeal</a>
+            <a href="../contact.html" class="nav-tab">Contact</a>
         </div>
     </nav>
 
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-        <img src="" alt="" class="lightbox-content" id="lightbox-img">
-    </div>
-
     <main class="main-wrapper">
         <div class="text-box">
-            <h1 class="page-title">Our Volumes</h1>
             
-            <div class="volumes-grid">
+            <h1 class="page-title">Our Authors</h1>
+            
+            <section class="section section-divider">
+                <h2 class="section-title">Sergey Orlov</h2>
+                <div class="section-content">
+                    <p class="author-bio">
+                        Sergey Orlov is a Russian born writer. He currently lives in Toronto. He was inspired to write this story after researching the lost cosmonaut theory[cite: 108, 109].
+                    </p>
 
-                <article class="volume-card">
-                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">November 2025</h2>
-                    <p class="volume-subtitle">Our inaugural issue is now available! We are incredibly proud to share the exceptional works we've selected.</p>
-                    <div class="volume-actions">
-                         <a href="/volumes/volume-1" class="button primary">Find Out More</a>
-                         <a href="/volumes/who-we-are" class="button red">Read our Opinion Piece</a>
-                         <a href="volumes/authors-vol-1" class="button yellow">Meet Our Authors</a>
+                    <img src="../images/starman_cover.png" alt="Artwork for Starman by Sergey Orlov" class="author-cover" loading="lazy">
+                    
+                    <div class="editor-note">
+                        <p>
+                            The authenticity of its dialogue, the mundane details, the unseen hand of the state—it all comes together to tell you a uniquely visceral story[cite: 111].
+                        </p>
+                        <p>
+                             I was particularly attracted to it for how it presents a view of Soviet life which is much different than what we're accustomed to in Western Media[cite: 110].
+                        </p>
                     </div>
-                </article> 
+                    
+                    <p class="author-contact">
+                        If you wish to speak to Sergey, feel free to let us know[cite: 112].
+                    </p>
+                </div>
+            </section>
 
-                <article class="volume-card">
-                    <img src="images/COVER 2.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
-                    <h2 class="volume-title">December 2025</h2>
-                    <p class="volume-subtitle">We are currently making the final edits and preparing for release. Pre-order Now and get your name on FBM Thanks!</p>
-                    <div class="volume-actions">
-                        <a href="https://faunbymoonlight.store/products/faun-by-moonlight-volume-2-pre-order" class="button primary">Pre-order Now</a>
-                        <a href="/volumes/who-we-are" class="button red">Read our Opinion Piece</a>
-                        <a href="volumes/authors-vol-2" class="button yellow">Meet Our Authors</a>
+            <section class="section"> 
+                <h2 class="section-title">Lexi Glass</h2>
+                <div class="section-content">
+                    <p class="author-bio">
+                        Lexi is originally from the Northeast United States, but is currently an international nomad. When not writing, she enjoys long walks in very cold weather [cite: 1126-1127].
+                    </p>
+
+                    <img src="../images/vanishing_game_cover.png" alt="Artwork for The Vanishing Game by Lexi Glass" class="author-cover" loading="lazy">
+                    
+                    <div class="editor-note">
+                        <p>
+                            "The Vanishing Game," is a devastatingly beautiful story. Loss of one's self is often felt by others first, and only much later (if ever) by ourselves; few have been able to articulate that as clearly as it is here [cite: 1128-1129].
+                        </p>
+                        <p>
+                            Lexi has been published before, but would rather this work speak for itself[cite: 1130].
+                        </p>
                     </div>
-                </article>
+                    
+                    <p class="author-contact">
+                        If you wish to speak to Lexi, feel free to reach out and we will pass it on[cite: 1132].
+                    </p>
+                </div>
+            </section>
 
-            <article class="volume-card">
-    <img src="images/coming-soon.png" alt="Volume 3 Coming Soon" class="volume-cover" loading="lazy">
-    
-    <h2 class="volume-title">Volume 3</h2>
-    <p class="volume-subtitle">Submissions are now open for our third volume.</p>
-    <div class="volume-actions">
-        <a href="submissions" class="button primary">Submit Your Work</a>
-    </div>
-</article>
-
-            </div> 
-        </div> 
+        </div>
     </main>
 
     <footer class="footer">
@@ -394,7 +366,7 @@
             <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
             </a>
-            <a href="contact" class="footer-link" aria-label="Contact us">
+            <a href="../contact.html" class="footer-link" aria-label="Contact us">
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
             </a>
         </div>
@@ -404,7 +376,8 @@
     </footer>
 
     <script>
-        fetch('announcement')
+        // Adjusted path for the announcement file assuming this is in /volumes/
+        fetch('../announcement.html')
             .then(response => {
                 if (response.ok) return response.text();
                 throw new Error('No announcement found');
@@ -413,55 +386,21 @@
                 document.getElementById('global-announcement').innerHTML = data;
             })
             .catch(error => {
+                console.log('Announcement system:', error.message);
                 document.getElementById('global-announcement').style.display = 'none';
             });
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function colorLogo() {
             const logo = document.getElementById('logo');
             if (logo) {
                 const colors = ['word-faun', 'word-by', 'word-moonlight'];
                 const words = logo.textContent.split(' ');
                 logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
+        }
 
-            // Lightbox Logic
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const coverImages = document.querySelectorAll('.volume-cover');
-
-            if (lightbox && coverImages.length > 0) {
-                const lightboxClose = document.getElementById('lightbox-close');
-                
-                const openLightbox = (e) => {
-                    lightboxImg.src = e.target.src;
-                    lightbox.classList.add('active');
-                };
-                
-                const closeLightbox = () => {
-                    lightbox.classList.remove('active');
-                };
-                
-                coverImages.forEach(img => img.addEventListener('click', openLightbox));
-                
-                lightboxClose.addEventListener('click', closeLightbox);
-                lightbox.addEventListener('click', closeLightbox);
-                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                        closeLightbox();
-                    }
-                });
-            }
-
-            // Mobile Menu Logic
-            document.querySelectorAll('.nav-tab').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navToggle = document.getElementById('nav-toggle');
-                    if (navToggle) {
-                        navToggle.checked = false;
-                    }
-                });
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            colorLogo();
         });
     </script>
 </body>
