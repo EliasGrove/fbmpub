@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who Should Die - Faun by Moonlight</title>
-    <meta name="description" content="An opinion piece by The Editor exploring the nature of the State, justice, and the morality of power.">
-    <link rel="canonical" href="https://www.faunbymoonlight.com/who-should-die">
+    <title>Opinion: The Tyranny of Narrative - Faun by Moonlight</title>
+    <meta name="description" content="An opinion piece on the legacy of the Bauhaus, the power of symbolism, and the tyranny of narrative in historical context.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/who-we-are.html">
     
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -34,20 +34,44 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: url('images/4.png'); /* Using same bg as Volumes */
+            /* Path adjusted for subfolder */
+            background-image: url('../images/4.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
             background-size: cover;
         }
 
+        /* Darker overlay for reading comfort */
         body::before {
             content: ''; position: fixed; inset: 0;
-            background: rgba(15, 15, 15, 0.85); /* Slightly darker overlay for reading */
+            background: rgba(15, 15, 15, 0.85);
             z-index: 0;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Highest Priority */
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
+        }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION (Sticky + Layered) --- */
         .nav-header {
             position: -webkit-sticky;
             position: sticky;
@@ -57,7 +81,7 @@
             justify-content: space-between; 
             align-items: center;
             padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
         }
 
         .logo {
@@ -70,6 +94,7 @@
         }
         .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
 
+        /* --- VISIBILITY IMPROVED TABS --- */
         .nav-tabs { display: flex; gap: 30px; }
         
         .nav-tab {
@@ -78,8 +103,12 @@
             font-size: 1.1rem;
             letter-spacing: 1.5px; 
             background: none; border: none;
+            
+            /* VISIBILITY FIX */
             color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
             text-transform: uppercase;
+            
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -94,10 +123,10 @@
         .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
         #nav-toggle { display: none; }
 
-        /* --- ARTICLE LAYOUT --- */
+        /* --- MAIN CONTENT (Low Z-Index) --- */
         .main-wrapper {
             position: relative;
-            z-index: 1;
+            z-index: 1; 
             padding: 60px 20px;
             flex: 1;
             display: flex;
@@ -105,116 +134,58 @@
             align-items: flex-start;
         }
 
-        .article-box {
+        /* --- THE "GLASS" BOX --- */
+        .text-box {
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 60px 80px;
-            max-width: 900px; /* Optimal reading width */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 60px; 
+            max-width: 900px;
             width: 100%;
+            text-align: left;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 30px;
+        /* --- ARTICLE STYLES --- */
+        .welcome-content h2 {
             font-family: "dunbar-tall", sans-serif;
-            color: #888;
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-        .back-link:hover { color: #FFD100; }
-
-        .article-title {
-            font-family: "alfarn", serif;
-            font-size: 3.5rem;
-            color: #f8f8f8;
-            margin-bottom: 10px;
-            line-height: 1.1;
-            text-align: center;
-        }
-
-        .article-meta {
-            text-align: center;
-            font-family: "dunbar-tall", sans-serif;
-            color: #E60026;
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            letter-spacing: 1px;
             font-weight: 700;
-        }
-
-        .epigraph {
-            font-style: italic;
-            color: #d0d0d0;
-            border-left: 2px solid #FFD100;
-            padding-left: 20px;
-            margin: 0 auto 50px auto;
-            max-width: 80%;
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .epigraph cite {
-            display: block;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #888;
-            font-style: normal;
-        }
-
-        .article-content {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #e0e0e0;
-        }
-
-        .article-content h2 {
-            font-family: "dunbar-tall", sans-serif;
+            font-size: 2.2rem;
             color: #FFD100;
-            font-size: 1.8rem;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .article-content p {
-            margin-bottom: 25px;
-        }
-
-        .article-content strong {
-            color: #fff;
-        }
-
-        .sources-section {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            color: #888;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
-        .sources-section h3 {
-            font-family: "dunbar-tall", sans-serif;
-            color: #ccc;
-            margin-bottom: 15px;
+        .welcome-content h2:first-of-type { margin-top: 0; }
+
+        .welcome-content p {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
-        .sources-section a {
-            color: #555;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            word-break: break-all;
-            transition: color 0.2s;
+        .welcome-content blockquote {
+            margin: 1.5rem 0 1.5rem 2rem;
+            padding-left: 1.5rem;
+            border-left: 4px solid #0047BB;
+            font-style: italic;
+            color: #ccc;
+            line-height: 1.7;
         }
-        .sources-section a:hover { color: #0047BB; }
+
+        .welcome-content a {
+            color: #4A9EFF;
+            text-decoration: underline;
+        }
+        .welcome-content a:hover { color: #ffffff; }
 
         /* --- FOOTER --- */
         .footer {
@@ -229,136 +200,169 @@
         .footer-link:hover { color: #ffffff; }
         .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE --- */
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {  
+            .text-box { padding: 30px 20px; }
+            .welcome-content h2 { font-size: 1.8rem; }
+            .welcome-content p { font-size: 1.1rem; text-align: left; }
+        }
+
+        /* --- MOBILE MENU FIX --- */
         @media (max-width: 768px) {
             .nav-header { padding: 20px; }
             .hamburger { display: flex; }
-            .nav-tabs { display: none; flex-direction: column; gap: 20px; position: absolute; top: 100%; left: 0; right: 0; background-color: #000000; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,1); }
+            
+            /* MENU FIX: Solid Black + High Z-Index */
+            .nav-tabs {
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK */
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
+            }
+            
             #nav-toggle:checked ~ .nav-tabs { display: flex; }
             
-            .article-box { padding: 40px 20px; }
-            .article-title { font-size: 2.5rem; }
-            .article-content { font-size: 1.05rem; }
-            .epigraph { max-width: 100%; }
+            /* Revert nav style for mobile dropdown */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                text-transform: none; 
+                font-size: 1.2rem; 
+            }
+            .nav-tab:hover { color: #ffffff; }
+            
             .footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
+    <div id="global-announcement"></div>
 
     <nav class="nav-header">
-        <a href="index.html" class="logo" id="logo">Faun by Moonlight</a>
-        <input type="checkbox" id="nav-toggle">
+        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
         <label for="nav-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </label>
+        <input type="checkbox" id="nav-toggle">
         <div class="nav-tabs">
-            <a href="who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="volumes.html" class="nav-tab active">Volumes</a>
-            <a href="submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="faq.html" class="nav-tab">FAQ</a>
-            <a href="support-us.html" class="nav-tab">Support Us</a>
-            <a href="urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="contact.html" class="nav-tab">Contact</a>
+            <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
+            <a href="../volumes.html" class="nav-tab active">Volumes</a>
+            <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
+            <a href="../faq.html" class="nav-tab">FAQ</a>
+            <a href="../support-us.html" class="nav-tab">Support Us</a>
+            <a href="../urgent.html" class="nav-tab">Urgent Appeal</a>
+            <a href="../contact.html" class="nav-tab">Contact</a>
         </div>
     </nav>
-
+    
     <main class="main-wrapper">
-        <article class="article-box">
-            <a href="volumes.html" class="back-link">&larr; Back to Volumes</a>
+        <div class="text-box">
             
-            <h1 class="article-title">WHO SHOULD DIE</h1>
-            <div class="article-meta">By The Editor</div>
-
-            <blockquote class="epigraph">
-                "But where does it stop? Who can we shoot? I don't aim to starve to death before I kill the man that's starving me."<br><br>
-                "I don't know. Maybe there's nobody to shoot. Maybe the thing isn't men at all."
-                <cite>— John Steinbeck, Grapes of Wrath</cite>
-            </blockquote>
-
-            <div class="article-content">
+            <div class="welcome-content">
                 
-                <h2>Three Thousand Years</h2>
-                <p>Philosophy, since its inception, has aspired to be a science. Or at least to describe and explain with the same rigor. In fact, it was philosophers like Sir Francis Bacon, and to some extent Descartes, who created what we call the scientific method.</p>
-                <p>Before rigorous tests and advanced instruments, logic and reasoning were the only tools for understanding the world. While the accuracy of the conclusions drawn over the past four millennia was hit-or-miss, this pursuit of truth built the world we inhabit today—a world understood, and ruled, through science.</p>
-                <p>However, as philosophical disciplines like medicine, geology, and sociology branched into their own specialties, philosophy's sphere of authority shrank. From understanding existence and its natural expressions, it turned inwards, towards society and the role of the individual in it. This is the realm of Nietzsche, Marx, Engels, and Hegel.</p>
-                <p>Yet even here history, psychology, anthropology and genetics, came to recontextualize many of the arguments of these thinkers. It didn't invalidate their body of work, by any measure, but evidenced that pure logic was very limited in the conclusions it could draw of the external world; and so, it underwent a final contraction, to the individual.</p>
-                <p>Here, schools of thought such as Epistemology, Existentialism, and Absurdism attempted to answer: "What does it mean to be anything at all?" These works offered a lens for understanding, not testable hypotheses. They served to make you consider, not so much conclude.</p>
-                <p>These "contractions" aren't a failure of philosophy, but instead a sign of its fecundity. The final form of the intellectual pursuit Philosophers aspire to is, then, science.</p>
+                <h2>National Socialists V Chairs</h2>
 
-                <h2>By Whose Grace?</h2>
-                <p>I believe there was a missed opportunity in that final contraction to the self. Having their focus on the abstract dilemma "For what do I live?," many philosophers failed to consider, "How am I alive?"</p>
-                <p>In a world without a God to ordain my existence, who does? By whose grace do I live, if not God's? Here, for simplicity, "life" and "live" refer to both literal existence (being alive) and its quality (being free, prosperous, etc.).</p>
+                <p>In a 2017 BBC article titled “The Endless Influence of Bauhaus,” Mr. William Cook asks: “Why did the Nazis feel so threatened by the Bauhaus? Why were they so scared of an art school that made modernist furniture and kitchenware?” Mr. Cook answers his own question: “Because it represented a worldview which was the complete opposite of National Socialism.”</p>
+                <p>This is a misconception both in essence and in effect.</p>
+                <p>In essence because National Socialists didn’t see Bauhaus as the “complete opposite” of their ideology. Bauhaus products like Marianne Brandt’s lamps remained in production, Bauhaus designs appeared in Nazi-era home décor books, and former Bauhaus students like Fritz Ertl held reputable positions in the regime, even as they publicly condemned the Bauhaus as “degenerate.” As Professor Elizabeth Otto puts it, “The Bauhaus was everywhere under Nazism.”</p>
+                <p>In effect, because it wasn’t out of fear, though one can understand why Mr. Cook saw it this way. For seventy-odd years, historians have portrayed extremist political movements as nervous, prickly little things that ban, shoot, and imprison “otherness” out of fear—a fundamental misunderstanding of both the resilience of these movements and the conditions absolute power needs to operate.</p>
+                <p>The erasure of the “other” in totalitarian regimes is foundational, not reactionary. It establishes the framework through which the state defines, justifies, and sustains itself. Absolute power needs an enemy to fight, a threat to neutralize, an incompatible element to purge. This ongoing battle explains and justifies both the regime’s existence and its heavy hand.</p>
+                <p>Yet, while essential, this otherness cannot exist within its sphere of control. The “other” can only exist as an external force to be defeated, never tolerated, for tolerance risks contaminating the coherence a totalitarian regime demands.</p>
+                <p>These are total systems, and total systems cannot accommodate internal contradictions or incompatible elements.</p>
+                <p>And so, you aren’t sent to a gulag because the regime fears you, but because what you represent (racially, politically, intellectually) is incompatible with the system’s framework. You embody “the other,” and therefore must be imprisoned, shot, erased. For extremist regimes, heterogeneity of identity and homogeneity of thought are central to its existence.</p>
+                <p>To Mr. Cook’s question “Why did the Nazis feel so threatened by the Bauhaus?” then we can answer: they weren’t. They were doing housekeeping.</p>
 
-                <h2>Crimes and Punishment</h2>
-                <p>Instinctively, you might answer the question "who allows me to live" with "myself and others." I don't kill myself, and others don't kill me, you may say. But this can only be true if both parties hold exclusive power over the course of your life.</p>
-                <p>This is, evidently, not true, for there is a third party that can, and often does, override both wills to impose its own: the state. Through this power, the state is then the de-facto arbiter of whether you, or I, shall live.</p>
-                <p>Having determined this, the next question is: by what measure? What makes one deserving, or undeserving, of life in the state's eyes? The state often answers this question with idealistic platitudes, embedded in their various foundational texts: "the inherent worth of man," the "sanctity of human life," and so forth.</p>
-                <p>But if life were truly held in such an idealistic regard, the justice system could not exist. A system cannot be both idealistic and formally determined. Life cannot be both priceless and have a specific price for taking it.</p>
-                <p>Then, there must be a concrete, materialistic measure by which the state judges life and, by contrast, when that life is forfeit. This is true for any justice system. Very few states, if any, possess an explicit, material mandate for permitting life. However, states do possess explicit mandates for removing it—through the justice system and its punishments. And so, a state won't tell you by what measures it permits life, only by what measures it removes it.</p>
-                <p>We must then investigate the latter, to infer the former.</p>
+                <h2>THE Bauhaus</h2>
+                
+                <p>The Bauhaus was founded in 1919 by architect Walter Gropius. In 1925, the school moved to Dessau, where it settled in the now iconic glass and steel building, then briefly to Berlin in 1932 before the Nazi government forced its closure in 1933. In its fourteen years of existence, it trained less than 1,400 students and still fundamentally reshaped how we think about design, architecture, and the objects of everyday life.</p>
+                <p>Perhaps the most peculiar aspect of Bauhaus’s artistic philosophy was just how seemingly innocuous it was. There were none of the over-the-top political manifestos of the Futurists, Dadaists, or the countless other “isms” the twentieth century produced. No grand proclamations of its transformative power, no apocalyptic warnings about society’s future without their intervention. Its core principle was truly as simple as: Form must follow function.</p>
+                <p>Bauhaus students also weren’t screaming manifestos in restaurants or beer halls. They were doing pottery, glassblowing, metalwork. Their mission was to optimize the design of everyday items so they could be stylish, functional, and adapted for mass production.</p>
 
-                <h2>Harm</h2>
-                <p>Usually it's believed the state punishes those who cause harm. This harm may be physical (murder, assault), material (theft), or psychological (abuse, coercion).</p>
-                <p>To test this, we must investigate: Is this standard applied to all? Excluding the natural limitations of a system both designed and reliant on humans, is there at least an attempt to apply this standard to all instances where there is verifiable harm? Let us see.</p>
-                <p>A 2025 KFF analysis found that in 2023 marketplace insurers denied an average of 19% of in-network claims. A 2024 AMA survey found that 29% of physicians reported Prior Authorization led to a serious adverse event for a patient in their care such as hospitalization, life-threatening events and even death. 39% of all surveyed physicians report that rarely, if ever, are PA criteria evidence-based. The punishment for these systemic practices is civil penalties and lawsuits (for those who can afford them).</p>
-                <p>The 2017 Grenfell Tower fire was the direct result of corporate malpractice. Contractors saved around £300,000 by using Arconic's Reynobond PE cladding which they knew was highly flammable. This cost-saving measure led to 72 people burning alive. No criminal charges have been brought against any executives, only civil lawsuits.</p>
-                <p>Starting in the 1990's, Purdue Pharma led an aggressive PR campaign, claiming that pain was being under-treated in the United States. Their answer to this "crisis" was OxyContin, which they falsely claimed wasn't highly addictive, and that it was safer than over-the-counter painkillers. Purdue pushed Doctors to prescribe opioids for longer periods and at higher doses and even promoted the idea that the answer to opioid addiction was... more opioids.</p>
-                <p>Between 1999 and 2023, approximately 806,000 people died from an opioid overdose. Families were devastated, poorer communities destroyed. The punishment was the company's bankruptcy and civil lawsuits. No member of the Sackler family has faced criminal charges.</p>
-                <p>To compete with Airbus, Boeing rushed development of the 737 MAX and concealed a flawed flight control system from pilots and regulators specifically to avoid expensive simulator training requirements. This caused two crashes in Indonesia and Ethiopia, killing 346 people. Civil lawsuits ensued, but no executive was jailed.</p>
-                <p>Leading to the 2008 financial crisis major banks knowingly sold toxic, high-risk subprime mortgages as safe investments. In the financial crisis this created, eight million Americans would lose their jobs, millions more their homes, and some countries would be irreparably scarred. Many economies are still reeling from this. The punishment was trillions of dollars in government bailouts and fines. Only one minor banker was criminally jailed in the U.S.</p>
-                <p>So, is "harm" the standard for state justice? From these, and the many other examples, we can determine that it is not. Common sense dictates that if an individual knowingly poisoned, defrauded or killed people, punishment would be handed swiftly. Yet here we see no such thing. Harm, therefore, cannot be the true standard if the consequences depend entirely on the framework (individual versus corporate) in which it occurs.</p>
-                <p>The arguments against this conclusion rest in the legal concept of mens rea (guilty mind). In simple terms this means that, for the state, one must prove an individual was aware of these risks and still decided to act. This is easily proven in a single individual, but it is much harder to do for a corporation; or so the state says.</p>
-                <p>And yet, organized crime operates in much the same way that a corporation does. It has a clear structure, has a hand across multiple enterprises, and it too has a complicated and abstruse hierarchy. Yet highly complex and expensive investigations are nevertheless undertaken to bring these individuals to justice. Their structure is dismantled, its leaders imprisoned, and both motive and culpability established through informants, deals, and RICO statutes.</p>
-                <p>Mens rea cannot be the reason, because this complexity isn't a deterrent when it concerns organizations that function beyond the state's law. Intent may be obscure, but the state is able to prove it if it so wishes. Then, what is?</p>
+                <h2>A Peculiar Kind of Power</h2>
+                
+                <p>The Nazi Party banned Bauhaus for its perceived association with “cosmopolitan” and “Marxist” ideals. That much is documented. But why did the Nazis perceive such an apolitical design school in this way?</p>
+                <p>The answer cannot lie in the school’s philosophy, for it was design oriented rather than political or societal and as we’ve seen some designs were incorporated into production.</p>
+                <p>It also couldn’t be its students, because there was no unified student political affiliation and some were even National Socialists themselves.</p>
+                <p>What made Hitler see Bauhaus as “the other”?</p>
+                <p>I believe the answer lies not in what it represented, Ding an sich, but in what its design philosophy, and the items it produced, symbolized.</p>
+                <p>Symbols are emotion given form. Their power comes from what they can make you feel, not think. In fact, the strongest symbols can override or directly contradict even the most compelling logical arguments, requiring no persuasion, no arguments. It takes time, and work, to forge a symbol into something that powerful. But once you do, the results are astounding.</p>
+                <p>When you look at the piece Faun by Moonlight by Léon Spilliaert, do you not feel a certain sense of dread? A sense that you’ve stumbled upon something you shouldn’t. That whatever circumstances led you to it are equally unsettling? The devil, guiding a flock of goats free and in the open, while you appear to be the one hiding, the trees covering you, equal parts frozen by fear and captivated.</p>
+                <p>And yet, that isn’t the devil. It’s a faun—it’s right in the title: Faun by Moonlight. Half man, half goat, these Roman mythical creatures were peaceful, if at times mischievous, woodland guides. If you showed this to an ancient Roman, he would likely ask why it was depicted in such sinister lighting, but to him it would be no more intimidating than a garden gnome.</p>
+                <p>But can you see it that way? Can you see a garden gnome in inappropriately creepy lighting? Two thousand years of Judeo-Christian tradition transformed a benign Roman mythical creature into the embodiment of evil itself.</p>
+                <p>Had Roman theology prevailed, we would likely see the crucified Christ as a strange and incomprehensible symbol of a tortured God, a barbaric symbol of reverence. We would be horrified at the willingness of early Christians to be crucified themselves, a slow, agonizing death.</p>
+                <p>Crucified victims could survive for three or more days, and the Romans had become so good at avoiding major arteries that the most common cause of death was asphyxiation, exposure, and dehydration.</p>
+                <p>The cross was, for centuries, a shameful instrument of torture, and execution, not salvation.</p>
+                <p>Yet Christianity did prevail, and so now we see Roman and Greek Gods as little more than naturalistic deities that, granted, make excellent material for video games and movies, but few would take you very seriously if you said you were praying to Zeus.</p>
+                <p>To the victors come the spoils. And in the war for cultural dominion, no more precious spoil exists than truth itself. Truth is what your symbols represent. Truth is what your symbols make you feel.</p>
 
-                <h2>The State</h2>
-                <p>Before we continue, it is important to define "the state." By "state" I refer to the structure that wields, controls, and maintains legal, judicial and executive power in a given society. The state is the body that can enforce its will upon a people and the individuals that comprise it. A state can only exist if the individuals within it recognize, respect, and fear its power.</p>
-                <p>The state encompasses all of the various bodies and individuals that are responsible to ensure it remains able to exert this power. A society is predicated on its laws. Without collective rules, a group observing only individual whims lacks the cohesion to scale from community to nation. As society grows in size and complexity, it becomes impossible for its members to individually know and fairly administer these rules. A specialized body must therefore be created to do this. This is the state's origin.</p>
-                <p>In a functioning society, the state's power is, then, naturally observed without the constant need to impose its will. If this were not the case, it would not be a functioning society. Because the state's existence thus presupposes its power is already respected by the majority, its primary function becomes reactive: a reaction against those who fail to respect it.</p>
-                <p>We have already observed that the state does not react on the basis of harm done to the people. Yet, as we have also seen, it does react based upon the infringement on the set of rules (laws) with which it enforces its own will. We can conclude, then, that the state reacts only to challenges against its own power, through the rules (laws) it has imposed.</p>
-                <p>Corporations operate within this legal power structure. Their actions, despite causing verifiable harm, do not challenge the state. However harmful their actions, they respect the laws, and by extension the state's power. It is only when the state itself feels threatened by this harm (public inquiries, moral outrage, etc.) that the harm is addressed and, potentially, prosecuted (almost always in civil court).</p>
-                <p>Organized crime is prosecuted fiercely because, unlike corporations, they often co-opt the state's power in a way that it cannot tolerate. They police their communities, determine and administer laws, collect taxes, and both protect and punish. Therefore, the state determines a life is forfeit only when the individual tries to seize the power the state reserves for itself.</p>
-                <p>To the question "Why do I live?" we can answer: "Because the state does not deem you a threat to its power."</p>
+                <h2>The Power of the Vernacular</h2>
+                
+                <p>Culture has always resided more in a people’s objects than in their monuments. Cultures can, and do, borrow artistic and architectural styles without compromising their own national identity. Americans can build Greekstyle capitols and remain perfectly American. Italian sculptors can pay homage to classical styles and stay Italian.</p>
+                <p>These are symbols you look at, not objects you live with.</p>
+                <p>Yet, could the same be said for their cutlery? Their chairs, cups, beds? Can the unique cultural and environmental characteristics that shaped these everyday objects through the centuries be transplanted without consequence, even within similar cultural components? Not easily.</p>
+                <p>The Chinese developed chopsticks around 5,000 years ago, originally as cooking utensils and later refined for eating, their design was adapted for small pieces of food and communal eating, partly influenced by Confucian values of community and harmony rather than individual consumption.</p>
+                <p>Japanese chopsticks evolved differently. These were shorter, tapered, and specifically designed to pick up rice grains, symbolizing Japanese emphasis on precision, ritual, and personal composure. Korean chopsticks took yet another form, as they were flatter, made of metal, and designed for Korea’s specific culinary traditions.</p>
+                <p>In Europe it was no different. In the North, for instance, chairs developed high backs and enclosed sides, a sort of winged design that blocked drafts and retained heat in the colder northern climate. English and Dutch chairs from the 17th–18th centuries had thinner backs but still featured heavy upholstery and were constructed of thick wood for insulation. In Italy, where the climate is warmer, Renaissance chairs had low backs, no upholstery, with caned or rush seats that allowed more air circulation. And finally, Spanish chairs featured leather slung between posts rather than padded seats, cooling the seater.</p>
+                <p>A Roman household filled with Chinese furniture, a Chinese household with Italian tableware, a Scandinavian bed in a Mexican home would (in the past) have fundamentally altered what it meant to live as a Roman, Chinese, or Mexican. These objects are the texture of a people’s daily life, and daily life is culture.</p>
+                <p>Hitler’s obsession with symbols, old and new, very likely allowed him to recognize Bauhaus’s symbolic power, and that of its products, beyond the “Marxist” or “Cosmopolitan” labels. These categories were usually onesize-fits-all classifications for bans, not explanations. And what Bauhaus’s design philosophy symbolized, rather than what it was, was antithetical to his regime.</p>
+                <p>A German household filled with Bauhaus furniture would look identical to a French one, to an American one. The mass-produced, minimalist chair, lamp, bed, cup, carried no national character and none of the specificities that we explored.</p>
+                <p>When products are designed for universal consumption rather than regional specifics or tradition, the national characteristics that once distinguished cultures erode. What remains is the universal consumer, defined by a hierarchy of products, not their identity.</p>
+                <p>Whereas once status and identity were separate and distinguishable categories of existence in a society—a nobleman may afford a richer, more expensive chair yet with the same fundamental characteristics that an apothecary could—now became the one and the same. Identity and Status have now become indistinguishable from each other. When the objects of daily life become identical across borders, national heterogeneity dissolves, and with it, its identity.</p>
+                <p>Bauhaus symbolized the iPhone, symbolized the Ikea, symbolized the Zara.</p>
+                <p>This homogeneity represents then a fundamental shift in power. In traditional societies states control identity through symbols, monuments, and rituals. Mass production, and in turn mass consumption, has transferred that power to whoever controls both manufacturing and design. The state might control the public square, but corporations control your most private possessions. They now dictate style, status, and trends. Whoever controls what is produced shapes what is owned and, consequently, how people understand themselves.</p>
+                <p>This was what made Bauhaus the “other.” This was the incompatibility. It was a vision of a world where German homes looked like French homes looked like American homes, where the intimate sphere of daily life, the space where cultural identity had always been most intimately expressed, became internationally uniform. Whether they understood the consequences of this philosophy, we can’t say for certain, but for a regime built on racial and national distinction, on blood and soil, on the unique character of the Volk, this represented an impossible contradiction.</p>
+                <p>And so, it had to be closed.</p>
+                
+                <h2>The Good War</h2>
+                
+                <p>Hitler was not unique in understanding symbols. If anything, fascism’s grasp of symbolic power derived from its overreliance on them. But fascists were not alone in wielding symbolic power, nor were they the most effective at it.</p>
+                <p>As the dust settled, the victors of World War II began cementing the narrative they had been building even before the war started.</p>
+                <p>America, Britain, and Russia projected their sins onto the swastika in a purification ritual and, just like that, were exculpated of their past sins.</p>
+                <p>Which were many.</p>
+                <p>In 1939, Britain ruled over the largest colonial empire in history, at one point controlling nearly 23% of the world’s population. It built this empire as all empires are built, and as Hitler aimed to build his—through conquest, bloodshed, and misery. It held it through no softer means.</p>
+                <p>The Soviet Union was bloodier still. Robert Conquest estimates no fewer than 20 million lost their lives as a consequence of Stalin’s policies. It was so bad that as the Wehrmacht advanced through Soviet-controlled territory, they were often received as liberators, not invaders.</p>
+                <p>The United States’ own catalogue of atrocities, before and after the war, would require an essay of its own.</p>
+                <p>It worked. It worked so well that even questioning these empires’ moral legitimacy, even drawing equivalence between Nazi atrocities and those committed by the Allies invites accusations of revisionism, or worse.</p>
+                <p>A collection of genocidal empires fought a genocidal empire for control of the world, won, and called it “the good war.”</p>
+                <p>The symbolic work given to WWII was thorough enough that I must then conclude these paragraphs with a statement on the obvious—Nazism is, and sadly continues to be, a scourge on earth. The suffering it produced, for suffering’s sake, means that erradicating it was the right thin to do. But suffering has been the price others have paid for the ventures of the empires fighting in this war. A price paid for their greed, for bloodlust, for nothing at all save the desire to conquer.</p>
+                <p>When symbols control your feelings, one must ask: How does this make me feel, and why?</p>
 
-                <h2>Two Men</h2>
-                <p>Luigi Nicholas Mangione was born on May 6, 1998, in Towson, Maryland. He came from a prominent Maryland family and had a strong academic background. Mangione suffered from spondylolisthesis, a spinal condition that causes severe back pain and nerve issues. The pain interfered with his physical activities and dating life. He had spinal fusion surgery in 2023 and initially felt better, but afterward gradually cut off contact with friends and family. Friends described him as highly intelligent, kind, and well-adjusted with everything going for him. They expressed shock at his arrest, saying the person they knew was completely different from who he allegedly became.</p>
-                <p>Brian Thompson was a 50-year-old married father of two sons who lived in Maple Grove, Minnesota. He began his career as a Certified Public Accountant at PwC before joining UnitedHealth Group in 2004. Over two decades he climbed the corporate ranks, holding several key leadership positions. In April 2021, Thompson was appointed CEO of UnitedHealthcare, heading the largest health insurer in the United States, providing coverage to over 49 million Americans. Despite his high-profile position (which came with an annual compensation package of over $10 million) colleagues described him as a humble and respected leader who was dedicated to his family.</p>
-                <p>Under Brian Thompson's tenure as CEO from April 2021 until his death in December 2024, UnitedHealthcare faced intense public scrutiny for its aggressive practices in denying insurance claims and requests for prior authorization. Several class-action lawsuits against the company highlighted a systematic use of algorithms to automate and increase denials, particularly for elderly patients in Medicare Advantage plans, with one lawsuit alleging a 90% error rate in the initial AI denials that were often overturned on appeal. You can read in the sources provided the impact these policies have had on millions of Americans.</p>
+                <h2>A Hierarchy of Suffering</h2>
 
-                <h2>Grapes of Wrath</h2>
-                <p>At 5:34 a.m., about one hour before the shooting, Luigi Mangione left the hostel and rode an e-bike to Midtown. At about 6:15 a.m., he bought a water bottle and granola bars at a Starbucks. At 6:19 a.m., surveillance video shows him walking and briefly stopping by a pile of trash. Around 6:30 a.m., surveillance video captures what appears to be the gunman (he has not been found guilty yet) on the phone.</p>
-                <p>Standing 20 feet away from Thompson when he arrived at the entrance, the gunman fired three times at him from a suppressed 9mm pistol, hitting him in the back and right calf. The shooter then walks toward the victim and continues to shoot. At 6:48 a.m., officers arrived and found Thompson on the sidewalk with gunshot wounds. He was transported by EMS to Roosevelt Hospital, where he was pronounced dead at 7:12 a.m.</p>
-                <p>Following this terrible loss of life, the resulting manhunt, and the aggressive campaign against Mangione led by Attorney General Pam Bondi, a question naturally arises: If both Mr. Mangione (allegedly) and Mr. Thompson (allegedly) have caused verifiable harm, why is Mr. Mangione in jail now, but Mr. Thompson wasn't? What makes Mr. Mangione's actions, within the framework of the state, more reprehensible than Mr. Thompson's?</p>
-                <p>I believe the previous paragraphs have equipped you, dear reader, with the tools to answer this question—Mr. Thompson's actions, although harmful, were committed while obeying the law. They were reprehensible, and harmful, but there is no evidence so far that he has broken the law in his pursuit of profit maximization. In fact, he was rewarded handsomely for his efforts.</p>
-                <p>Mr. Mangione, on the other hand, (allegedly) appropriated the right over life and death the state assumes for itself, and so the state reacted accordingly. Furthermore, in seeing the overwhelming public support that Mr. Mangione received, and fearing more harm would come to those that, despite being immoral, operate within the state's framework, Attorney General Pam (Pamela) Bondi's first instinct was to seek the death penalty as a clear warning. I believe her words were "If there was ever a death case, this is one."</p>
+                <p>There was one other symbol that emerged from the ashes of Europe. The Holocaust has become perhaps the most powerful symbol of the twentieth century. Its industrial systematization, bureaucratic totality, and explicit goal of complete extermination were, indeed, distinctive in its brutality.</p>
+                <p>But distinctive features do not create a hierarchy of suffering. A murdered Congolese child under Leopold’s terror is not less dead than a murdered Jewish child in Auschwitz. A starved Bengali child during Churchill’s policies is not less worthy of remembrance. The annihilated indigenous peoples of the Americas are not footnotes.</p>
+                <p>Since October 7th, 2023, over 40,000 Palestinians have been killed in Gaza. This is a conservative estimate and doesn’t account for the thousands buried under rubble or indirect deaths from starvation, disease, and destroyed healthcare infrastructure. Before October 7th, 2023 had already seen the deadliest year for Palestinians in the West Bank in nearly two decades, with over 200 killed from military operations, airstrikes on Gaza, raids in the West Bank, checkpoint shootings, settler violence often committed with state backing or impunity, and the killing of children throwing stones.</p>
+                <p>Since 1967, over 700,000 Israeli settlers have moved into the West Bank and East Jerusalem. These settlements are internationally recognized as illegal, and yet continue expanding every year.</p>
+                <p>Millions of Palestinians live under a permit system that controls their movement between fragmented zones and requires military approval to travel between cities in their own land.</p>
+                <p>Gaza, home to over 2 million people in 140 square miles, has been under blockade since 2007. Its borders are controlled, its imports restricted, its population unable to leave. The West Bank is carved into Areas A, B, and C, separated by checkpoints, walls, and roads Palestinians cannot use.</p>
+                <p>Since 1967, we have seen the same pattern of illegal occupation, murder, engineered starvation, ghettoization, and segregation, and yet to even mention this continues to be incredibly controversial. News organizations, which have shown moral grit in accusing Putin of war crimes, strangely shy away from pointing the same finger at Israel when it does, by all available metrics, far worse.</p>
 
-                <h2>The Writing on the Wall</h2>
-                <p>It's important to understand that the state's drive for self-preservation doesn't require unified purpose or coordinated action. The state doesn't need a master plan or internal harmony, because its very existence is the imposition of power, and that power is what sustains it. A state that cannot impose itself ceases to be a state.</p>
-                <p>Any reform must then begin from this reality: within the state's framework, there is no morality, only power. Did Mr. Thompson deserve to die? For the state, no. He was never tried for any crimes, let alone sentenced to death. Yet morally, he is responsible for harm, but suffered no consequence.</p>
-                <p>This imbalance between Thompson's moral and legal responsibilities breeds the kind of discontent that led to his murder. Many executives and state actors share this imbalance. When information is carefully selected and its sources controlled, this is easy to keep hidden. Corporate governance, civil versus criminal liability, regulatory oversight, the struggles of the disadvantaged: these are made to sound complex by those who benefit from confusion.</p>
-                <p>But in the golden-age of independent micro-journalism we live in today, these injustices are becoming ever more apparent. Their simplicity is perhaps all the more aggravating. When it comes to civil discontentment, the writing on the wall is usually painted with blood.</p>
-                <p>Thompson's murder, the attempt on Trump's life, Kirk's killing prove what happens when those responsible for systemic harm face no consequences, while their victims are criminalized for retaliation. In this discontent, revolutions fester. And the state, as it exists, begins to collapse.</p>
+                <h2>A Moral Inequivalent</h2>
 
-                <div class="sources-section">
-                    <h3>Sources</h3>
-                    <a href="https://www.kff.org/private-insurance/claims-denials-and-appeals-in-aca-marketplace-plans-in-2023/" target="_blank">KFF: Claims Denials and Appeals in ACA Marketplace Plans in 2023</a>
-                    <a href="https://www.ama-assn.org/system/files/prior-authorization-survey.pdf" target="_blank">AMA Prior Authorization Survey</a>
-                    <a href="https://oag.dc.gov/release/ag-racine-sues-purdue-pharma-and-richard-sackler" target="_blank">AG Racine Sues Purdue Pharma</a>
-                    <a href="https://oag.dc.gov/sites/default/files/2019-06/DC-v-Purdue-Redacted-Complaint.pdf" target="_blank">DC v Purdue Redacted Complaint</a>
-                    <a href="https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html" target="_blank">CDC: Understanding the Opioid Overdose Epidemic</a>
-                    <a href="https://www.bbc.com/news/business-54174223" target="_blank">BBC News</a>
-                    <a href="https://www.marketplace.org/story/2018/12/17/what-we-learned-housing" target="_blank">Marketplace: What we learned housing</a>
-                    <a href="https://www.bls.gov/charts/employment-situation/civilian-unemployment-rate.html" target="_blank">BLS Civilian Unemployment Rate</a>
-                    <a href="https://www.courthousenews.com/wp-content/uploads/2025/02/class-action-complaint-against-UHG.pdf" target="_blank">Class Action Complaint Against UHG</a>
-                    <a href="https://edition.cnn.com/2024/12/06/business-insurance-claim-denials-unitedhealthcare-ceo" target="_blank">CNN: Insurance claim denials UnitedHealthcare CEO</a>
-                    <a href="https://www.balladhealth.org/news/federal-lawsuit-unitedhealth" target="_blank">Ballad Health Federal Lawsuit UnitedHealth</a>
-                </div>
+                <p>The mythologization of the Holocaust has created a framework where governments, news organizations, and populations fear associating Israeli Jews with the same instincts that produced it.</p>
+                <p>This symbolic power positions the Holocaust as an atrocity that cannot be compared or repeated, because nothing matches its specific method, even if the spirit, and the outcome, is identical.</p>
+                <p>But how? How can Israel levy this atrocity with such efficiency?</p>
+                <p>I believe the answer lies in the very foundation of Israel as a modern state. Its direct association with the Holocaust—their victims were the very first to settle—has allowed the Israeli government to levy its symbolic power as a shield on which it deflects all of its (many) sins, much like the previously mentioned allies.</p>
+                <p>And so, an unpayable moral debt is created to which all nations must, and do, answer. And they answer it with military aid that is used to dismember children, they answer it with complicity and they answer it with voluntary complacency to its crimes.</p>
+                <p>The comparison becomes “unthinkable” not because the hatred differs, but because the symbol prevents us from feeling the parallel.</p>
+                <p>This is what symbols do. They control not just what we see, or what we think, but what we can feel. The Holocaust demands “never again” while somehow permitting “again and again,” so long as the methods differ from the template.</p>
+                <p>This is what symbols do. They control you. They control me. Those who wield symbolic power struggle for dominion over human consciousness itself.</p>
+                <p>The question “what am I incapable of considering in its presence?” is, for symbols, far more important than “what does it mean?” for that is how their control is exerted over you.</p>
 
             </div>
-        </article>
+
+        </div>
     </main>
 
     <footer class="footer">
@@ -372,7 +376,7 @@
             <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
             </a>
-            <a href="contact.html" class="footer-link" aria-label="Contact us">
+            <a href="../contact.html" class="footer-link" aria-label="Contact us">
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
             </a>
         </div>
@@ -382,6 +386,19 @@
     </footer>
 
     <script>
+        // Adjusted path for the announcement file assuming this is in /volumes/
+        fetch('../announcement.html')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('global-announcement').style.display = 'none';
+            });
+
         document.addEventListener('DOMContentLoaded', () => {
             const logo = document.getElementById('logo');
             if (logo) {
@@ -389,16 +406,6 @@
                 const words = logo.textContent.split(' ');
                 logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
             }
-
-            // Mobile Menu Logic
-            document.querySelectorAll('.nav-tab').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navToggle = document.getElementById('nav-toggle');
-                    if (navToggle) {
-                        navToggle.checked = false;
-                    }
-                });
-            });
         });
     </script>
 </body>
