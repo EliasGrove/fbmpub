@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volumes - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Explore all volumes of Faun by Moonlight. Read our inaugural November 2025 issue and submit your work for future editions.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <link rel="preconnect" href="https://use.typekit.net">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3ETBBLP43M');
+    </script>
+
+    <style>
+        /* --- CORE RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/4.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        /* Darker overlay for better contrast */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
+        }
+
+        /* --- ANNOUNCEMENT BAR FIX --- */
+        #global-announcement, .announcement-bar {
+            position: relative;
+            z-index: 10000; /* Topmost */
+            background-color: #E60026;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        
+        #global-announcement a, .announcement-bar a { 
+            color: #FFD100; text-decoration: underline; font-weight: 700; 
+        }
+        #global-announcement a:hover, .announcement-bar a:hover { 
+            color: #ffffff; text-decoration: none; 
+        }
+
+        /* --- NAVIGATION (Sticky + Visibility Fix) --- */
+        .nav-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 9999; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
+        .logo {
+            font-family: "alfarn", serif;
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+
+        .nav-tabs { display: flex; gap: 30px; }
+        
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px; 
+            background: none; border: none;
+            
+            /* VISIBILITY FIX */
+            color: #e6e6e6; 
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase;
+            
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+
+        /* --- MAIN CONTENT LAYOUT --- */
+        .main-wrapper {
+            position: relative;
+            z-index: 1; /* Low Priority */
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* --- THE "GLASS" BOX --- */
+        .text-box {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 1200px;
+            width: 95%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+            text-align: center;
+            color: #f8f8f8;
+        }
+
+        /* --- VOLUMES GRID --- */
+        .volumes-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .volume-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .volume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .volume-cover {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .volume-cover:hover { transform: scale(1.02); }
+        
+        .volume-title {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            color: #ffd700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .volume-subtitle {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+            margin-bottom: 2rem;
+            min-height: 50px;
+        }
+        
+        .volume-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto; 
+        }
+
+        /* --- BUTTONS --- */
+        .button {
+            display: inline-block;
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
+        }
+        
+        .button.primary { background-color: #0047BB; border-color: #0047BB; box-shadow: 0 4px 15px rgba(0, 71, 187, 0.3); }
+        .button.red { background-color: #E60026; border-color: #E60026; box-shadow: 0 4px 15px rgba(230, 0, 38, 0.3); }
+        .button.yellow { background-color: #FFD100; border-color: #FFD100; color: #1a1a1a; box-shadow: 0 4px 15px rgba(255, 209, 0, 0.3); }
+        .button.secondary { background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.2); color: #d0d0d0; }
+
+        .button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* --- LIGHTBOX --- */
+        .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 20000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); cursor: zoom-out; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.5); animation: lightboxZoom 0.3s ease; }
+        @keyframes lightboxZoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; font-size: 2rem; cursor: pointer; padding: 0; border-radius: 50%; line-height: 50px; width: 50px; height: 50px; text-align: center; transition: all 0.3s ease; }
+        .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: rotate(90deg); }
+
+        /* --- FOOTER --- */
+        .footer {
+            position: relative; z-index: 2;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
+
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 768px) {
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
+            
+            /* NUCLEAR MENU FIX */
+            .nav-tabs {
+                display: none; 
+                flex-direction: column; 
+                gap: 20px;
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0;
+                background-color: #000000; /* SOLID BLACK */
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; 
+                text-align: center;
+                z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
+            }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            
+            /* Revert menu text style for mobile dropdown */
+            .nav-tab { 
+                color: #a0a0a0; 
+                text-shadow: none; 
+                font-size: 1.2rem; 
+                text-transform: none;
+            }
+            .nav-tab:hover { color: #ffffff; }
+            
+            .text-box { padding: 30px 20px; }
+            .page-title { font-size: 2.5rem; }
+            .volume-title { font-size: 1.8rem; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div id="global-announcement"></div>
+
+    <nav class="nav-header">
+        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
+        
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        
+        <div class="nav-tabs">
+            <a href="who-we-are" class="nav-tab">Who We Are</a>
+            <a href="volumes" class="nav-tab active">Volumes</a>
+            <a href="submissions" class="nav-tab">Submit Your Work</a>
+            <a href="faq" class="nav-tab">FAQ</a>
+            <a href="support-us" class="nav-tab">Support Us</a>
+            <a href="urgent" class="nav-tab">Urgent Appeal</a>
+            <a href="contact" class="nav-tab">Contact</a>
+        </div>
+    </nav>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+        <img src="" alt="" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <main class="main-wrapper">
+        <div class="text-box">
+            <h1 class="page-title">Our Volumes</h1>
+            
+            <div class="volumes-grid">
+
+                <article class="volume-card">
+                    <img src="images/first_issue_cove.png" alt="Cover of Faun by Moonlight, November 2025 issue" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">November 2025</h2>
+                    <p class="volume-subtitle">Our inaugural issue is now available! We are incredibly proud to share the exceptional works we've selected.</p>
+                    <div class="volume-actions">
+                         <a href="/volumes/volume-1" class="button primary">Find Out More</a>
+                         <a href="/volumes/who-we-are" class="button red">Read our Opinion Piece</a>
+                         <a href="volumes/authors-vol-1" class="button yellow">Meet Our Authors</a>
+                    </div>
+                </article> 
+
+                <article class="volume-card">
+                    <img src="images/COVER 2.png" alt="Cover of Faun by Moonlight, December 2025 issue" class="volume-cover" loading="lazy">
+                    <h2 class="volume-title">December 2025</h2>
+                    <p class="volume-subtitle">We are currently making the final edits and preparing for release. Pre-order Now and get your name on FBM Thanks!</p>
+                    <div class="volume-actions">
+                        <a href="https://faunbymoonlight.store/products/faun-by-moonlight-volume-2-pre-order" class="button primary">Pre-order Now</a>
+                        <a href="/volumes/who-we-are" class="button red">Read our Opinion Piece</a>
+                        <a href="volumes/authors-vol-2" class="button yellow">Meet Our Authors</a>
+                    </div>
+                </article>
+
+            <article class="volume-card">
+    <img src="images/coming-soon.png" alt="Volume 3 Coming Soon" class="volume-cover" loading="lazy">
+    
+    <h2 class="volume-title">Volume 3</h2>
+    <p class="volume-subtitle">Submissions are now open for our third volume.</p>
+    <div class="volume-actions">
+        <a href="submissions" class="button primary">Submit Your Work</a>
+    </div>
+</article>
+
+            </div> 
+        </div> 
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </a>
+            <a href="contact" class="footer-link" aria-label="Contact us">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
+            </a>
+        </div>
+        <div class="copyright">
+            © 2025 Faun by Moonlight. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        fetch('announcement')
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('No announcement found');
+            })
+            .then(data => {
+                document.getElementById('global-announcement').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('global-announcement').style.display = 'none';
+            });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logo');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
+
+            // Lightbox Logic
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const coverImages = document.querySelectorAll('.volume-cover');
+
+            if (lightbox && coverImages.length > 0) {
+                const lightboxClose = document.getElementById('lightbox-close');
+                
+                const openLightbox = (e) => {
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.add('active');
+                };
+                
+                const closeLightbox = () => {
+                    lightbox.classList.remove('active');
+                };
+                
+                coverImages.forEach(img => img.addEventListener('click', openLightbox));
+                
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', closeLightbox);
+                lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // Mobile Menu Logic
+            document.querySelectorAll('.nav-tab').forEach(link => {
+                link.addEventListener('click', () => {
+                    const navToggle = document.getElementById('nav-toggle');
+                    if (navToggle) {
+                        navToggle.checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
