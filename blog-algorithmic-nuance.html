@@ -1,31 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Algorithmic Death of Nuance - Faun by Moonlight</title>
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
+    <style>
+        /* --- COPY OF CORE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f0f0f0;
+            min-height: 100vh; display: flex; flex-direction: column;
+            background-image: url('images/5.png'); background-attachment: fixed; background-size: cover;
+        }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(15, 15, 15, 0.75); z-index: 0; }
+        
+        .announcement-bar { position: relative; z-index: 10000; background-color: #E60026; color: #fff; text-align: center; padding: 12px; }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .nav-header { position: sticky; top: 0; z-index: 9999; display: flex; justify-content: space-between; padding: 25px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); }
+        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #e6e6e6; text-decoration: none; text-transform: uppercase; }
+        
+        .main-wrapper { position: relative; z-index: 1; padding: 60px 40px; flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .back-link { 
+            align-self: flex-start; margin-bottom: 20px; margin-left: max(0px, calc(50% - 400px));
+            color: #a0a0a0; text-decoration: none; font-family: "dunbar-tall", sans-serif; text-transform: uppercase; 
+        }
+        .back-link:hover { color: #E60026; }
+
+        .article-container {
+            max-width: 800px; width: 100%;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px; padding: 60px;
+        }
+        .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
+        .article-date { font-family: "neue-kabel", sans-serif; color: #FFD100; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .article-title { font-family: "alfarn", serif; font-size: 3rem; color: #f8f8f8; line-height: 1.1; margin-bottom: 15px; font-weight: 400; }
+        .article-subtitle { font-family: "neue-kabel", sans-serif; font-size: 1.2rem; color: #a0a0a0; font-style: italic; }
+        .article-content { font-family: "neue-kabel", sans-serif; font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; font-weight: 400; }
+        .article-content p { margin-bottom: 1.5rem; }
+        .footer { position: relative; z-index: 2; padding: 20px 40px; background: rgba(0,0,0,0.8); color: #666; display: flex; justify-content: space-between; }
+        @media (max-width: 768px) { .article-container { padding: 30px 20px; } .article-title { font-size: 2rem; } .nav-tabs { display: none; } }
+    </style>
+</head>
 <body>
+    <div class="announcement-bar">
+        <p>🚨 Submissions Open! We are currently reading for Q1 2026 <a href="submissions">Submit your work here</a></p>
+    </div>
+
+    <nav class="nav-header">
+        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
+        <div class="nav-tabs">
+            <a href="who-we-are" class="nav-tab">Who We Are</a>
+            <a href="volumes" class="nav-tab">Volumes</a>
+            <a href="blog.html" class="nav-tab active">Blog</a>
+            <a href="submissions" class="nav-tab">Submit Your Work</a>
+        </div>
+    </nav>
+
     <main class="main-wrapper">
-        <a href="blog" class="back-link">&larr; Back to Blog</a>
+        <a href="blog.html" class="back-link">&larr; Back to Journal</a>
+        
         <article class="article-container">
             <header class="article-header">
                 <span class="article-date">Nov 22, 2025</span>
                 <h1 class="article-title">The Algorithmic Death of Nuance</h1>
-                <p class="article-subtitle">Why we left X, context collapse, and why engagement-farming is destroying the ability to have a conversation about art.</p>
+                <p class="article-subtitle">Why we left X</p>
             </header>
+            
             <div class="article-content">
                 <p>The second reason we moved away from X (you know, besides all the fascism) is the environment that space has created, and the damage it is doing to Art as a medium of expression.</p>
-                <p>Short-form content on social media inherently promotes the compression of complex topics into soundbites. Nuance, naturally, dies at the door when you're trying to explain any opinion in 250 characters. Yet, since Elon's takeover of X, the algorithm itself actively promotes outrage as the currency with which one buys an audience.</p>
-                <p>Whereas before you risked being misunderstood, now <strong>misunderstanding has become the goal.</strong></p>
-                <hr>
-                <h3>The Engagement Trap</h3>
-                <p>The more outrageous, the less nuanced, the more polemic your tweet, the more engagement you will have. But now engagement pays. Creators know that if they strip away nuance, they increase the chance of "context collapse." Strangers will misunderstand the tweet, get mad, and reply. This triggers the algorithm to show the tweet to more strangers.</p>
+                <p>Short-form content on social media inherently promotes the compression of complex topics into soundbites.</p>
+                <p>Nuance, naturally, dies at the door when you're trying to explain any opinion in 250 characters.</p>
+                <p>On Twitter this was always an issue, as it is on Bluesky, Mastodon, etc.</p>
+                <p>Yet, since Elon's takeover of X, the short-form format has become less of a problem than the algorithm itself, which actively promotes outrage as the currency with which one buys an audience.</p>
+                <p>Whereas before you risked being misunderstood, now misunderstanding has become the goal.</p>
+                <p>The more outrageous, the less nuanced, the more polemic your tweet, the more engagement you will have.</p>
+                <p>But now engagement pays--and it pays quite well.</p>
+                <p>Creators know that if they strip away nuance, they increase the chance of "context collapse."</p>
+                <p>Strangers will misunderstand the tweet, get mad, and reply. This triggers the algorithm to show the tweet to more strangers.</p>
+                <p>Being clear reduces your reach and, by extension, how much you make.</p>
                 <p>The popularity of these absolutist takes means users will naturally be forced to choose one position or another, without the benefit of a "middle ground" where opposing ideas may thrive.</p>
-                <h3>Impact on Literature</h3>
-                <p>For the common user, this prevents them from engaging with different opinions. However, the environment it has festered in the creative community is particularly damaging. Here, writers actively insult, block, and doxx each other for the crime of disagreeing with an opinion.</p>
+                <p>This, inversely, leads the users to lose their own sense of nuance, and their tolerance for it.</p>
+                <p>This is how echo chambers are created, and curated.</p>
+                
+                
+
+                <p>For the common user, this is damaging because it prevents them from engaging with different opinions, especially in politics, where extremist content has become more popular than ever.</p>
+                <p>However, the environment it has festered in the creative community is particularly damaging to the medium.</p>
+                <p>Here, writers actively insult, block, and doxx each other for the crime of disagreeing with an opinion, or providing criticism.</p>
                 <p>For contemporary literature, which has been consistently outperformed by older titles, this aversion to criticism only serves to prolong the stagnation it is currently experiencing.</p>
-                <blockquote>In fact, continuing to participate and engage in that environment will serve only to legitimize it.</blockquote>
-                <p>So, here we are. If you are one of these voices, we ask that you please head over to our website and send us your work. We would love to hear from you.</p>
+                <p>If our stated mission is to find and promote the best voices of our generation--voices that have probably struggled to be heard for quite a while--then we won't find it there.</p>
+                <p>Not because they're not there, but unless we engage in the same behavior, they won't find us.</p>
+                <p>In fact, continuing to participate and engage in that environment will serve only to legitimize it.</p>
+                <p>So, here we are.</p>
+                <p>If you are one of these voices, we ask that you please head over to our website faunbymoonlight.com and send us your work. We would leave to hear from you.</p>
+                <p>Despite good pre-order sales, and very healthy website visits, we are still quite new in this space.</p>
+                <p>If you wish to support great literature, even just a follow and interaction goes a long way.</p>
+                <p>Thank you, and remember: Be Unpublishable</p>
             </div>
         </article>
     </main>
-    </body>
+    
+    <footer class="footer">
+        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
+    <script>
+        const logo = document.getElementById('logo');
+        if (logo) {
+            const colors = ['word-faun', 'word-by', 'word-moonlight'];
+            const words = logo.textContent.split(' ');
+            logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+        }
+    </script>
+</body>
 </html>
