@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Faun by Moonlight Literary Magazine</title>
+    <meta name="description" content="Essays, commentary, and updates from the editors of Faun by Moonlight.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/blog">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
+    <style>
+        /* --- CORE RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: "neue-kabel", sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/5.png'); /* Verify image path */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: rgba(15, 15, 15, 0.75);
+            z-index: 0;
+        }
+
+        /* --- ANNOUNCEMENT BAR --- */
+        #global-announcement, .announcement-bar {
+            position: relative; z-index: 10000;
+            background-color: #E60026; color: #ffffff;
+            text-align: center; font-size: 1rem; font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        #global-announcement { padding: 0; }
+        .announcement-bar { padding: 12px 20px; }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .announcement-bar a:hover { color: #ffffff; text-decoration: none; }
+
+        /* --- NAVIGATION --- */
+        .nav-header {
+            position: -webkit-sticky; position: sticky; top: 0; z-index: 9999; 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        .logo {
+            font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8;
+            text-decoration: none; letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab {
+            font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem;
+            letter-spacing: 1.5px; background: none; border: none;
+            color: #e6e6e6; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            text-transform: uppercase; cursor: pointer; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            color: #ffffff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
+        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
+        #nav-toggle { display: none; }
+
+        /* --- BLOG GRID STYLES --- */
+        .main-wrapper {
+            position: relative; z-index: 1;
+            padding: 60px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-header { text-align: center; margin-bottom: 60px; }
+        
+        .page-title {
+            font-family: "alfarn", serif; font-weight: 400; font-size: 3.5rem;
+            letter-spacing: 1px; color: #f8f8f8;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .blog-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 40px;
+            display: flex; flex-direction: column;
+            text-decoration: none;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: #E60026;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .blog-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .blog-date {
+            font-family: "neue-kabel", sans-serif; color: #FFD100;
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .blog-title {
+            font-family: "alfarn", serif; font-size: 2rem; color: #f8f8f8;
+            margin-bottom: 20px; line-height: 1.1;
+        }
+
+        .blog-excerpt {
+            font-family: "neue-kabel", sans-serif; font-size: 1.05rem; color: #d0d0d0;
+            line-height: 1.6; margin-bottom: 30px; flex-grow: 1;
+        }
+
+        .read-more-btn {
+            font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1rem;
+            color: #E60026; text-transform: uppercase; letter-spacing: 1.5px;
+            display: flex; align-items: center; gap: 10px; transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .read-more-btn { color: #ffffff; }
+
+        /* --- FOOTER --- */
+        .footer {
+            position: relative; z-index: 2;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-links { display: flex; gap: 20px; align-items: center; }
+        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .footer-link:hover { color: #ffffff; }
+        .copyright { color: #666; font-size: 0.85rem; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-header { padding: 20px; }
+            .hamburger { display: flex; }
+            .nav-tabs {
+                display: none; flex-direction: column; gap: 20px;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background-color: #000000; border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px; text-align: center; z-index: 9999;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
+            }
+            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            .nav-tab { color: #a0a0a0; text-shadow: none; text-transform: none; font-size: 1.2rem; }
+            .nav-tab:hover { color: #ffffff; }
+
+            .main-wrapper { padding: 40px 20px; }
+            .page-title { font-size: 2.5rem; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="global-announcement">
+        <div class="announcement-bar">
+            <p>🚨 <strong>Submissions Open!</strong> We are currently reading for Q1 2026 <a href="submissions">Submit your work here</a></p>
+        </div>
+    </div>
+
+    <nav class="nav-header">
+        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
+        <label for="nav-toggle" class="hamburger">
+            <span></span><span></span><span></span>
+        </label>
+        <input type="checkbox" id="nav-toggle">
+        <div class="nav-tabs">
+            <a href="who-we-are" class="nav-tab">Who We Are</a>
+            <a href="volumes" class="nav-tab">Volumes</a>
+            <a href="blog" class="nav-tab active">Blog</a>
+            <a href="submissions" class="nav-tab">Submit Your Work</a>
+            <a href="faq" class="nav-tab">FAQ</a>
+            <a href="support-us" class="nav-tab">Support Us</a>
+            <a href="urgent" class="nav-tab">Urgent Appeal</a>
+            <a href="contact" class="nav-tab">Contact</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+        <div class="page-header">
+            <h1 class="page-title">The Journal</h1>
+        </div>
+
+        <div class="blog-grid">
+            
+            <a href="blog-algorithmic-nuance" class="blog-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Nov 22, 2025</span>
+                </div>
+                <h2 class="blog-title">The Algorithmic Death of Nuance</h2>
+                <p class="blog-excerpt">
+                    Why we left X, context collapse, and why engagement-farming is destroying the ability to have a conversation about art.
+                </p>
+                <div class="read-more-btn">Read Commentary &rarr;</div>
+            </a>
+
+            <a href="blog-death-of-literature" class="blog-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Nov 20, 2025</span>
+                </div>
+                <h2 class="blog-title">The Death of Literature</h2>
+                <p class="blog-excerpt">
+                    Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever. So why does it feel like something is dying?
+                </p>
+                <div class="read-more-btn">Read Essay &rarr;</div>
+            </a>
+
+            <a href="blog-ai-statement" class="blog-card">
+                <div class="blog-meta">
+                    <span class="blog-date">Nov 18, 2025</span>
+                </div>
+                <h2 class="blog-title">Our AI Statement</h2>
+                <p class="blog-excerpt">
+                    We not only don’t have an issue with the existence or usage of AI, but we welcome it. However, generating art and brainstorming with tools are two very different things.
+                </p>
+                <div class="read-more-btn">Read Statement &rarr;</div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg></a>
+            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+            <a href="contact" class="footer-link"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg></a>
+        </div>
+        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
+
+    <script>
+        function colorLogo() {
+            const logo = document.getElementById('logo');
+            if (logo) {
+                const colors = ['word-faun', 'word-by', 'word-moonlight'];
+                const words = logo.textContent.split(' ');
+                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() { colorLogo(); });
+    </script>
+</body>
+</html>
