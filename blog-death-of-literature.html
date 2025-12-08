@@ -4,59 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Death of Literature - Faun by Moonlight</title>
+    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    
     <style>
-        /* PASTE CSS FROM BLOG.HTML HERE (omitted for brevity) */
-        /* ... */
+        /* --- COPY OF CORE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f0f0f0;
+            min-height: 100vh; display: flex; flex-direction: column;
+            background-image: url('images/5.png'); background-attachment: fixed; background-size: cover;
+        }
+        body::before { content: ''; position: fixed; inset: 0; background: rgba(15, 15, 15, 0.75); z-index: 0; }
+        
+        /* HEADER */
+        .announcement-bar { position: relative; z-index: 10000; background-color: #E60026; color: #fff; text-align: center; padding: 12px; }
+        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
+        .nav-header { position: sticky; top: 0; z-index: 9999; display: flex; justify-content: space-between; padding: 25px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); }
+        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
+        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .nav-tabs { display: flex; gap: 30px; }
+        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #e6e6e6; text-decoration: none; text-transform: uppercase; }
+        
+        /* ARTICLE STYLES */
+        .main-wrapper { position: relative; z-index: 1; padding: 60px 40px; flex: 1; display: flex; flex-direction: column; align-items: center; }
+        
+        .back-link { 
+            align-self: flex-start; margin-bottom: 20px; margin-left: max(0px, calc(50% - 400px));
+            color: #a0a0a0; text-decoration: none; font-family: "dunbar-tall", sans-serif; text-transform: uppercase; 
+        }
+        .back-link:hover { color: #E60026; }
 
-        /* ARTICLE SPECIFIC CSS */
         .article-container {
             max-width: 800px; width: 100%;
             background: rgba(30, 30, 30, 0.6);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: 60px; margin-top: 20px;
+            border-radius: 12px; padding: 60px;
         }
+
         .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
-        .article-date { font-family: "neue-kabel", sans-serif; color: #FFD100; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; display: block; margin-bottom: 15px; }
-        .article-title { font-family: "alfarn", serif; font-size: 3rem; color: #f8f8f8; line-height: 1.1; margin-bottom: 15px; }
+        .article-date { font-family: "neue-kabel", sans-serif; color: #FFD100; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .article-title { font-family: "alfarn", serif; font-size: 3rem; color: #f8f8f8; line-height: 1.1; margin-bottom: 15px; font-weight: 400; }
         .article-subtitle { font-family: "neue-kabel", sans-serif; font-size: 1.2rem; color: #a0a0a0; font-style: italic; }
-        .article-content { font-family: "neue-kabel", sans-serif; font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; }
+
+        .article-content { font-family: "neue-kabel", sans-serif; font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; font-weight: 400; }
         .article-content p { margin-bottom: 1.5rem; }
-        .article-content strong { color: #ffffff; font-weight: 700; }
-        .article-content blockquote { border-left: 3px solid #E60026; padding-left: 20px; margin: 30px 0; font-style: italic; color: #f8f8f8; font-size: 1.2rem; }
-        .article-content hr { border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #a0a0a0; text-decoration: none; font-family: "dunbar-tall", sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .back-link:hover { color: #E60026; }
-        @media (max-width: 768px) { .article-container { padding: 30px 20px; } .article-title { font-size: 2rem; } }
+        
+        .footer { position: relative; z-index: 2; padding: 20px 40px; background: rgba(0,0,0,0.8); color: #666; display: flex; justify-content: space-between; }
+        @media (max-width: 768px) { .article-container { padding: 30px 20px; } .article-title { font-size: 2rem; } .nav-tabs { display: none; } }
     </style>
 </head>
 <body>
+    <div class="announcement-bar">
+        <p>🚨 Submissions Open! We are currently reading for Q1 2026 <a href="submissions">Submit your work here</a></p>
+    </div>
+
+    <nav class="nav-header">
+        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
+        <div class="nav-tabs">
+            <a href="who-we-are" class="nav-tab">Who We Are</a>
+            <a href="volumes" class="nav-tab">Volumes</a>
+            <a href="blog.html" class="nav-tab active">Blog</a>
+            <a href="submissions" class="nav-tab">Submit Your Work</a>
+        </div>
+    </nav>
+
     <main class="main-wrapper">
-        <a href="blog" class="back-link">&larr; Back to Blog</a>
+        <a href="blog.html" class="back-link">&larr; Back to Journal</a>
+        
         <article class="article-container">
             <header class="article-header">
                 <span class="article-date">Nov 20, 2025</span>
                 <h1 class="article-title">The Death of Literature</h1>
-                <p class="article-subtitle">And why it isn't happening—From the Editor of a Literary Magazine</p>
+                <p class="article-subtitle">And why it isn't happening--From the Editor of a Literary Magazine</p>
             </header>
+            
             <div class="article-content">
                 <p>Throughout the 20th century, critics repeatedly declared literature dead or dying—ironically the same century that produced Vonnegut, Hemingway, Pynchon, and Wallace. In 2025, literature faces similar obituaries.</p>
-                <p>While opinions vary on whether the medium is still breathing or experiencing cadaveric spasms, the conclusion remains the same: young people, with their <em>(INSERT CONDESCENDING REASON HERE)</em>, just aren’t interested in reading anymore.</p>
-                <p>Alex Schuh’s article “The Death of Reading is on the Horizon. Should We Care?” makes you want to pull out your Boomer Bingo Card. Mr. Schuh cites declining reading scores, blames digital education models and COVID-19, and warns that shrinking attention spans threaten our ability to reason through complex problems.</p>
-                <p>Scratch the (very thin) surface of this, and the many other, apparently measured arguments and you’ll find they reach the same conclusion: young people, with their phone-fried brains and dopamine addiction, are just too stupid to read. Every one of these articles carries that off-putting aftertaste of elitism and jadedness.</p>
-                <hr>
-                <p><strong>And yet… Gen Z readers have become major consumers of written fiction.</strong> According to the American Library Association’s 2022 survey, US Gen Z readers buy an average of 2 print books per month. Notably, the younger they are, the more print books they purchase.</p>
+
+                <p>While opinions vary on whether the medium is still breathing or experiencing cadaveric spasms, the conclusion remains the same: young people, with their (INSERT CONDESCENDING REASON HERE), just aren’t interested in reading anymore.</p>
+
+                <p>Alex Schuh’s article “The Death of Reading is on the Horizon. Should We Care?” makes you want to pull out your Boomer Bingo Card. Mr. Schuh cites declining reading scores, blames digital education models and COVID-19, and warns that shrinking attention spans threaten our ability to reason through complex problems. This, he argues, means that “The Death of Reading isn’t inevitable in America, but it is looming.”</p>
+                
+                [Image of line graph showing declining reading scores vs book sales]
+
+                <p>Scratch the (very thin) surface of this, and the many other, apparently measured arguments and you’ll find they reach the same conclusion: young people, with their phone-fried brains and dopamine addiction, are just too stupid to read.</p>
+
+                <p>Every one of these articles carries that off-putting aftertaste of elitism and jadedness.</p>
+
+                <p>Self-published authors make similar complaints, blaming declining sales on the youth which, ironically, are the same audience most write for. A recent meme (not a study or article, but a meme) claiming teenagers can’t read in the third person sent the Twitter writing community into a frenzy—the “AHA! That’s why I’m not selling books” many so desperately looked for.</p>
+
+                <p>And yet… Gen Z readers have become major consumers of written fiction. According to the American Library Association’s 2022 survey of 2,075 Gen Z and Millennials, US Gen Z readers buy an average of 2 print books per month, plus 1 ebook and 1 audiobook per month. Notably, the younger they are, the more print books they purchase.</p>
+
                 <p>Overall, the global book market is projected to grow to $156.04 billion by 2030. The US publishing industry achieved record revenue of $32.5 billion in 2024, while independent publishers now account for 40% of all commercially available books.</p>
-                <p>So what gives? Maybe we can find a clue in what the 20th-century doomsayers used as evidence for their claims that literature was about to kick it: Nihilism, new technologies, and shorter attention spans. But there was one claim that particularly interested me: <strong>thematic exhaustion.</strong></p>
-                <p>It got me thinking. Gen Z is buying more books, reading more, writing more, and yet we still get establishment authors declaring the death of literature? How could that be?</p>
-                <p>Well…it just so happens that older titles are absolutely <em>crushing</em> new releases. Backlist titles comprised about 50% of market volume in 2019. By 2022, that number was 70%, where it’s held steady through 2025. Major publishers now report backlist consistently making up 60–65% of consumer revenues.</p>
-                <p>So maybe it’s not that younger readers aren’t interested in reading, but that they just aren’t interested in reading what’s put out nowadays. Maybe they’re just tired of reading yet another Game of Thrones clone, or God forbid saga, churned out by the millions annually.</p>
+
+                <p>Anecdotal evidence also shows younger readers are keener than ever to read and write. Substack and Medium are more popular than ever (even Blogger making a comeback), while BookTok became a cultural phenomenon and is now how many younger readers find their books.</p>
+
+                <p>So what gives?</p>
+
+                <p>Maybe we can find a clue in what the 20th-century doomsayers used as evidence for their claims that literature was about to kick it.</p>
+
+                <p>Oh… oh… would you have guessed? Nihilism, new technologies, and shorter attention spans (no TikTok, so they blamed newspapers).</p>
+
+                <p>But there was one claim that particularly interested me: thematic exhaustion. That all the great themes were being depleted, and so it lacked originality.</p>
+
+                <p>It got me thinking.</p>
+
+                <p>Gen Z is buying more books, reading more, writing more, and yet we still get establishment and self-publishing authors declaring the death of literature? How could that be?</p>
+
+                <p>Well…it just so happens that older titles are absolutely crushing new releases. In the spring of 2019, backlist (older) titles comprised about 50% of market volume according to Nielsen BookScan. The pandemic hit, and by spring 2021 that number jumped to 57%. By 2022, that number was 70%, where it’s held steady through 2025. Major publishers now report backlist consistently making up 60–65% of consumer revenues. New releases, however, shriveled to 30–35% of market share, with brutal numbers to match: only 6.7% of frontlist titles from major publishers sell more than 10,000 copies in their first year, while 66% sell fewer than 1,000.</p>
+
+                <p>Publishers initially blamed pandemic lockdowns, but the trend stuck even as life went back to normal. This is the market now.</p>
+
+                <p>So maybe it’s not that younger readers aren’t interested in reading, but that they just aren’t interested in reading what’s put out nowadays. Maybe they’re just tired of reading yet another Game of Thrones clone, or God forbid saga, churned out by the millions annually. Maybe they’re tired of the painfully boring self-reflective exercises the MFA world keeps putting out in short and long form—the languid examinations of self, the excruciating self-inserts of the “misunderstood writer who’s too much of a cynic to think he’s good enough,” or the “sexually promiscuous woman who finds love, yet loses it because she’s just so promiscuous, you see.”</p>
+
                 <p>The current mood is one of exhaustion, not disinterest.</p>
-                <blockquote>We as writers, as publishers, as creators are not entitled to people’s attention. We must earn it, and we must earn it by creating what’s worthy of it.</blockquote>
+
+                <p>And yes, of course, there will be some people who just don’t like to read novels. Believe it or not, many of those are the ones writing them. And so what? We as writers, as publishers, as creators are not entitled to people’s attention. We must earn it, and we must earn it by creating what’s worthy of it.</p>
+
                 <p>I believe we’re culturally on the precipice of the same feelings and conditions that gave rise to last century’s greats. A highly educated, cynical, and passionate generation that is desperate for something new, and when they can’t find it, they do it themselves.</p>
             </div>
         </article>
     </main>
-    </body>
+    
+    <footer class="footer">
+        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+    </footer>
+    <script>
+        const logo = document.getElementById('logo');
+        if (logo) {
+            const colors = ['word-faun', 'word-by', 'word-moonlight'];
+            const words = logo.textContent.split(' ');
+            logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+        }
+    </script>
+</body>
 </html>
