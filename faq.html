@@ -133,9 +133,9 @@
             flex-direction: column;
         }
 
-        /* Sector Dividers (UPDATED FOR BALANCE) */
+        /* Sector Dividers */
         .sector-header {
-            padding: 30px 40px; /* Tighter padding to save space, but content is bigger */
+            padding: 40px 40px; 
             border-bottom: 1px solid var(--c-border);
             background: #0f0f0f;
             position: sticky;
@@ -143,23 +143,23 @@
             z-index: 10;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
         }
         
         .sector-title {
-            font-family: var(--f-head); /* Switched to Head font */
-            font-size: 3.5rem;         /* Significantly Larger */
+            font-family: var(--f-head);
+            font-size: 4rem; /* Matched size */
             text-transform: uppercase;
             line-height: 0.9;
-            color: #fff;
+            transition: color 0.3s;
         }
 
         .sector-id {
-            font-family: var(--f-body);
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            opacity: 0.8;
+            font-family: var(--f-head);
+            font-size: 4rem; /* Matched size */
+            line-height: 0.9;
+            opacity: 1;
+            transition: color 0.3s;
         }
 
         /* The Q&A Row */
@@ -198,17 +198,20 @@
         .faq-a p { margin-bottom: 1rem; }
         .faq-a p:last-child { margin-bottom: 0; }
 
-        /* Theme Colors per Sector */
+        /* Theme Colors per Sector (Title + ID + Hover) */
         
         /* Sector 01 (Blue) */
+        .sector-01 .sector-title, 
         .sector-01 .sector-id { color: var(--c-blue); }
         .sector-01 .faq-row:hover .faq-q { color: var(--c-blue); }
 
         /* Sector 02 (Red) */
+        .sector-02 .sector-title,
         .sector-02 .sector-id { color: var(--c-red); }
         .sector-02 .faq-row:hover .faq-q { color: var(--c-red); }
 
         /* Sector 03 (Yellow) */
+        .sector-03 .sector-title,
         .sector-03 .sector-id { color: var(--c-yellow); }
         .sector-03 .faq-row:hover .faq-q { color: var(--c-yellow); }
 
@@ -291,6 +294,7 @@
             
             .sector-header { padding: 20px 20px; top: 0; position: relative; }
             .sector-title { font-size: 2.5rem; }
+            .sector-id { font-size: 2.5rem; }
 
             .socials-section { gap: 20px; padding: 40px 20px; }
         }
@@ -333,7 +337,7 @@
     </div>
 
     <header class="header-section">
-        <h1 class="huge-title">Q&A</h1>
+        <h1 class="huge-title">FAQ</h1>
         <div class="header-meta">
         </div>
     </header>
