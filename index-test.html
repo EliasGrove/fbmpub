@@ -9,60 +9,89 @@
 
     <style>
         /* --- RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body { 
             background-color: #050505; 
             font-family: "neue-kabel", sans-serif;
             color: #e0e0e0;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; /* No horizontal scroll */
         }
 
         /* --- COLORS --- */
         :root {
-            --color-accent: #E60026; /* Red */
+            --color-f: #E60026;   /* Red */
+            --color-b: #0047BB;   /* Blue */
+            --color-m: #FFD100;   /* Yellow */
             --color-border: #333;
             --bg-text: #0a0a0a;
         }
 
-        /* --- LAYOUT GRID --- */
-        .page-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr; /* Text gets more space than video */
-            min-height: 100vh;
-        }
-
-        /* --- LEFT SIDE: CONTENT (SCROLLS) --- */
-        .content-pane {
-            background-color: var(--bg-text);
-            padding: 120px 80px 100px 80px;
-            border-right: 1px solid var(--color-border);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* --- RIGHT SIDE: VISUAL (STICKY) --- */
-        .visual-pane {
-            position: relative;
-            background-color: #000;
-            height: 100vh;
-            position: sticky;
+        /* --- THE VIDEO (FIXED POSITION - THE "CHEAT") --- */
+        /* This mimics the working Index page logic exactly, but constrained to the right half */
+        #video-container {
+            position: fixed;
             top: 0;
+            right: 0;
+            width: 50%; /* Strictly the right half */
+            height: 100vh;
+            z-index: 0; /* Behind everything */
+            background-color: #000;
             overflow: hidden;
+        }
+
+        #character-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Forces fill */
+            object-position: center;
+            opacity: 1;
+        }
+
+        /* --- LEFT SIDE: CONTENT SCROLL --- */
+        .content-scroll {
+            position: relative;
+            width: 50%; /* Strictly the left half */
+            min-height: 100vh;
+            background-color: var(--bg-text); /* Covers any video underlap */
+            border-right: 1px solid var(--color-border);
+            z-index: 10; /* Sits above the video layer */
+            padding: 160px 60px 100px 60px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
         }
 
-        /* The Video Styling */
-        #character-video {
-            width: 80%;
-            height: auto;
-            max-height: 80vh;
-            object-fit: contain;
-            filter: grayscale(100%) contrast(1.1);
-            /* Optional: Add a blend mode if you want it to blend with black */
-            /* mix-blend-mode: screen; */ 
+        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
+        .socials-fixed {
+            position: fixed;
+            bottom: 40px;
+            right: 0;
+            width: 50%; /* Matches video width */
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            z-index: 20; /* On top of video */
+            /* Gradient for readability */
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px 0;
+        }
+
+        .social-link {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .social-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
         /* --- NAVIGATION --- */
@@ -72,177 +101,183 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.9);
+            padding: 25px 40px;
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-border);
             z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-brand {
             font-family: "alfarn", serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #fff;
             text-decoration: none;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .nav-menu {
             display: flex;
-            gap: 25px;
+            gap: 20px; 
+            flex-wrap: wrap; 
+            justify-content: flex-end;
         }
 
         .nav-link {
             font-family: "neue-kabel", sans-serif;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #888;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+            white-space: nowrap;
         }
-        .nav-link:hover, .nav-link.active { color: #fff; }
-        .nav-link.highlight { color: var(--color-accent); }
+
+        /* --- NAV COLOR CYCLE --- */
+        .nav-menu .nav-link:nth-child(3n+1):hover {
+            color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
+        }
+        .nav-menu .nav-link:nth-child(3n+2):hover {
+            color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
+        }
+        .nav-menu .nav-link:nth-child(3n+3):hover {
+            color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
+        }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+        .nav-link.urgent { color: var(--color-f); }
 
         /* --- TYPOGRAPHY --- */
         .page-header {
-            margin-bottom: 60px;
-            border-bottom: 4px solid #fff; /* Brutalist thick line */
+            margin-bottom: 50px;
+            border-bottom: 4px solid #fff; 
             padding-bottom: 20px;
             display: inline-block;
             width: 100%;
         }
 
+        .sub-title {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-f);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 700;
+        }
+
         .super-title {
             font-family: "alfarn", serif;
-            font-size: 5rem;
-            line-height: 0.9;
+            font-size: 5.5rem;
+            line-height: 0.85;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
         }
 
-        .sub-title {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--color-accent);
-            margin-bottom: 10px;
-            display: block;
-            font-weight: 700;
-        }
-
         .prose {
-            font-size: 1.25rem; /* Larger for readability */
+            font-size: 1.15rem;
             line-height: 1.6;
             color: #ccc;
-            max-width: 700px;
+            max-width: 650px;
         }
-
         .prose p { margin-bottom: 2rem; }
-        
         .prose strong { color: #fff; font-weight: 700; }
+        .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
+        .prose a:hover { color: var(--color-f); }
 
-        .prose a {
-            color: #fff;
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 4px;
-            transition: color 0.3s;
-        }
-        .prose a:hover { color: var(--color-accent); }
-
-        /* --- FOOTER (Inside content pane) --- */
-        .simple-footer {
-            margin-top: 100px;
-            padding-top: 30px;
-            border-top: 1px solid var(--color-border);
-            font-size: 0.8rem;
-            color: #666;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        .footer-socials a { color: #666; margin-right: 15px; transition: color 0.3s; }
-        .footer-socials a:hover { color: #fff; }
-
-        /* --- GRAIN OVERLAY (Subtle Texture) --- */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 10px; height: 10px; 
+            border: 1px solid #fff;
+            border-radius: 50%;
+            position: fixed;
             pointer-events: none;
-            z-index: 50;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            mix-blend-mode: difference;
         }
+        .cursor.hovered { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            .page-grid { grid-template-columns: 1fr; }
-            .visual-pane { height: 50vh; order: -1; position: relative; border-bottom: 1px solid var(--color-border); } /* Video on top on mobile */
-            .content-pane { padding: 60px 30px; }
+            /* Mobile Stack: Content Top, Video Bottom */
+            .content-scroll { width: 100%; padding: 120px 30px 60px 30px; border-right: none; }
+            #video-container { position: relative; width: 100%; height: 60vh; top: auto; right: auto; }
+            .socials-fixed { position: absolute; width: 100%; bottom: 20px; }
+            .navbar { flex-direction: column; gap: 15px; align-items: flex-start; padding: 15px 20px; }
+            .nav-menu { justify-content: flex-start; width: 100%; overflow-x: auto; }
             .super-title { font-size: 3.5rem; }
-            .navbar { padding: 15px 20px; }
-            .nav-menu { display: none; } /* Add hamburger if needed, simplified for now */
         }
     </style>
 </head>
 <body>
 
-    <div class="noise"></div>
+    <div class="cursor" id="cursor"></div>
 
     <nav class="navbar">
-        <a href="index" class="nav-brand">Faun by Moonlight</a>
+        <a href="index" class="nav-brand">FAUN BY MOONLIGHT</a>
         <div class="nav-menu">
             <a href="who-we-are" class="nav-link active">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
-            <a href="submit" class="nav-link highlight">Submit</a>
+            <a href="blog" class="nav-link">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link urgent">Urgent Appeal</a>
             <a href="contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <div class="page-grid">
-        
-        <main class="content-pane">
-            
-            <header class="page-header">
-                <span class="sub-title">Mission Statement // Est. 2025</span>
-                <h1 class="super-title">Who<br>We Are</h1>
-            </header>
-
-            <div class="prose">
-                <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
-
-                <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
-
-                <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
-
-                <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
-
-                <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
-                
-                <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 40px;">
-                    Curious about our thoughts on AI? <a href="ai-statement">Read our AI statement</a>.
-                </p>
-            </div>
-
-            <footer class="simple-footer">
-                <div class="copyright">© 2025 Faun by Moonlight</div>
-                <div class="footer-socials">
-                    <a href="https://x.com/faunbymoonlight" target="_blank">X (Twitter)</a>
-                    <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank">Bluesky</a>
-                    <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank">YouTube</a>
-                </div>
-            </footer>
-        </main>
-
-        <aside class="visual-pane">
-            <video autoplay muted loop playsinline id="character-video">
-                <source src="images/who-we-are.mp4" type="video/mp4">
-            </video>
-        </aside>
-
+    <div id="video-container">
+        <video autoplay muted loop playsinline id="character-video">
+            <source src="images/who-we-are.mp4" type="video/mp4">
+        </video>
     </div>
 
+    <div class="socials-fixed">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
+        <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
+        <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+        <a href="contact" class="social-link">Mail</a>
+    </div>
+
+    <main class="content-scroll">
+        <header class="page-header">
+            <span class="sub-title">Mission Statement // Est. 2025</span>
+            <h1 class="super-title">Who<br>We Are</h1>
+        </header>
+
+        <div class="prose">
+            <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+
+            <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+
+            <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+
+            <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+
+            <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
+        </div>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const allInteractive = document.querySelectorAll('a, button');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        allInteractive.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+    </script>
 </body>
 </html>
