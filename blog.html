@@ -31,7 +31,7 @@
             display: flex; flex-direction: column;
         }
 
-        /* --- CUSTOM CURSOR (Standard, No Text) --- */
+        /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -136,45 +136,27 @@
         .blog-row {
             position: relative;
             display: grid;
-            /* Changed Grid: Content takes mostly everything, Meta takes right side */
             grid-template-columns: 1fr 200px; 
             gap: 40px;
             padding: 60px 40px;
             border-bottom: 1px solid var(--c-border);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease;
             align-items: flex-start;
         }
 
-        /* --- BLOCK COLOR LOGIC --- */
-        /* Instead of background change, we change TEXT colors to the theme */
-        
-        /* Row 1 (Red) */
-        .blog-row:nth-child(3n+1):hover .entry-title,
-        .blog-row:nth-child(3n+1):hover .entry-date,
-        .blog-row:nth-child(3n+1):hover .entry-excerpt { color: var(--c-red); }
-        .blog-row:nth-child(3n+1):hover .meta-pill { border-color: var(--c-red); color: var(--c-red); }
-        
-        /* Row 2 (Blue) */
-        .blog-row:nth-child(3n+2):hover .entry-title,
-        .blog-row:nth-child(3n+2):hover .entry-date,
-        .blog-row:nth-child(3n+2):hover .entry-excerpt { color: var(--c-blue); }
-        .blog-row:nth-child(3n+2):hover .meta-pill { border-color: var(--c-blue); color: var(--c-blue); }
+        .blog-row:hover {
+            background: #151515; /* Subtle background shift on hover */
+        }
 
-        /* Row 3 (Yellow) */
-        .blog-row:nth-child(3n+3):hover .entry-title,
-        .blog-row:nth-child(3n+3):hover .entry-date,
-        .blog-row:nth-child(3n+3):hover .entry-excerpt { color: var(--c-yellow); }
-        .blog-row:nth-child(3n+3):hover .meta-pill { border-color: var(--c-yellow); color: var(--c-yellow); }
-
-        /* Center Column */
+        /* --- CONTENT STYLING --- */
         .entry-content {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            align-items: flex-start; /* Ensures inline-blocks align left */
         }
 
-        /* Date moved inside content area */
         .entry-date {
             font-family: var(--f-body);
             font-weight: 700;
@@ -185,32 +167,58 @@
             transition: color 0.3s ease;
         }
 
+        /* --- TITLE BLOCK (RED) --- */
         .entry-title {
             font-family: var(--f-head);
-            font-size: 5.5rem; /* Made bigger */
-            line-height: 0.9;
+            font-size: 5.5rem;
+            line-height: 1.1;
             color: #fff;
-            transition: color 0.3s ease;
             margin: 0;
-            max-width: 90%;
+            
+            /* Logic for creating the "Block" effect */
+            display: inline; 
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            padding: 5px 15px;
+            margin-left: -15px; /* Pull back to align due to padding */
+            background-color: transparent;
+            transition: all 0.3s ease;
         }
 
+        .blog-row:hover .entry-title {
+            background-color: var(--c-red);
+            color: #fff;
+            /* No text shadow, pure flat block */
+        }
+
+        /* --- DESCRIPTION BLOCK (YELLOW) --- */
         .entry-excerpt {
             font-family: var(--f-body);
-            font-size: 1.3rem; /* Made slightly bigger for readability */
+            font-size: 1.3rem;
             color: #aaa;
-            max-width: 800px; /* Allowed to stretch wider */
-            line-height: 1.4;
-            opacity: 0.8;
+            line-height: 1.5;
+            max-width: 800px;
+            
+            /* Logic for creating the "Block" effect */
+            display: inline;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            padding: 5px 15px;
+            margin-left: -15px;
+            background-color: transparent;
             transition: all 0.3s ease;
-            margin-top: 10px;
+        }
+
+        .blog-row:hover .entry-excerpt {
+            background-color: var(--c-yellow);
+            color: #000; /* Black text for contrast on yellow */
         }
         
-        /* Right Column */
+        /* --- RIGHT COLUMN / TAG BLOCK (BLUE) --- */
         .entry-meta {
             display: flex;
             justify-content: flex-end;
-            padding-top: 5px;
+            padding-top: 10px;
         }
 
         .meta-pill {
@@ -221,8 +229,15 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #888;
+            background-color: transparent;
             transition: all 0.3s;
             white-space: nowrap;
+        }
+
+        .blog-row:hover .meta-pill {
+            background-color: var(--c-blue);
+            border-color: var(--c-blue);
+            color: #fff;
         }
 
         /* --- FOOTER --- */
@@ -239,7 +254,6 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            /* Fix cursor */
             * { cursor: auto !important; }
             .cursor { display: none !important; }
 
