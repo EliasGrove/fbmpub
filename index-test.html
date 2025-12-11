@@ -19,6 +19,13 @@
             color: #fff;
         }
 
+        /* --- COLORS (Original Palette for Interactive Elements) --- */
+        :root {
+            --color-faun: #E60026;
+            --color-by: #0047BB;
+            --color-moonlight: #FFD100;
+        }
+
         /* --- BACKGROUND VIDEO --- */
         #bg-video {
             position: fixed;
@@ -51,14 +58,13 @@
         /* --- THE WATCHER IMAGE --- */
         .watcher-img {
             position: absolute;
-            /* ADJUSTMENT: Pushed slightly left and up for better compositional balance */
             top: 5%; 
-            left: 20%; 
-            height: 90vh; /* Made it taller to dominate the space more */
+            left: 25%; /* Pushed right a bit to balance the 'FAUN' text */
+            height: 90vh; 
             width: auto;
             z-index: 1;
             filter: grayscale(100%) contrast(1.2);
-            mix-blend-mode: screen; /* Keep the screen blend mode from your screenshot */
+            mix-blend-mode: screen; 
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
         }
@@ -72,17 +78,19 @@
         /* --- DECONSTRUCTED TYPOGRAPHY --- */
         .big-title {
             position: absolute;
-            /* ADJUSTMENT: Anchored closer to the very bottom-left */
-            bottom: -30px; 
-            left: 10px;
+            /* FIX: Ensure it is not clipped and acts as a strong anchor */
+            bottom: -5vh; 
+            left: 5vw;
             font-family: "alfarn", serif;
             font-size: 18vw; 
             line-height: 0.8;
-            color: #fff;
             z-index: 3;
             mix-blend-mode: exclusion; 
             pointer-events: none;
         }
+
+        .word-faun { color: var(--color-faun); }
+        .word-moonlight { color: var(--color-moonlight); }
 
         .vertical-text {
             position: absolute;
@@ -103,25 +111,24 @@
         /* --- THE ENTER 'BUTTON' (Raw Text) --- */
         .enter-trigger {
             position: absolute;
-            /* ADJUSTMENT: Positioned over the figure's torso/head area */
             top: 45%; 
             left: 50%;
-            transform: translate(-50%, -50%); /* Keeps it truly centered over the visual midpoint */
+            transform: translate(-50%, -50%); 
             font-family: "dunbar-tall", sans-serif;
             font-size: 3rem;
             font-weight: 900;
-            color: #fff;
+            color: #fff; /* Default white */
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
             z-index: 10;
             mix-blend-mode: normal; 
+            transition: color 0.1s; /* Smooth flicker */
         }
 
-        /* Glitch Effect on Hover */
+        /* Glitch Effect on Hover is now controlled by JavaScript for dynamic color cycling */
         .enter-trigger:hover {
             animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: #ff003c;
         }
 
         @keyframes glitch {
@@ -133,32 +140,40 @@
             100% { transform: translate(-50%, -50%) }
         }
 
-        /* --- MINIMAL FOOTER --- */
-        .meta-data {
+        /* --- FOOTER GROUP --- */
+        .footer-group {
             position: absolute;
             bottom: 40px;
             right: 40px;
             text-align: right;
-            font-size: 0.7rem;
-            opacity: 0.6;
             z-index: 4;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            font-size: 0.75rem; /* Slightly larger */
+            line-height: 1.5;
         }
 
-        .meta-data a {
+        .cta-small {
+            opacity: 0.8;
             color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 1px solid transparent;
+            margin-bottom: 5px;
+            display: block;
         }
-        .meta-data a:hover { border-bottom: 1px solid #fff; }
+        .cta-small:hover { opacity: 1; }
+
+        .featured-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+            margin-left: 10px;
+        }
+        .featured-links a:hover { color: #fff; }
 
         /* --- CUSTOM CURSOR --- */
         .cursor {
-            /* ADJUSTMENT: Smaller default size */
             width: 10px; height: 10px; 
             border: 1px solid #fff;
             border-radius: 50%;
@@ -171,7 +186,7 @@
         }
         
         .cursor.hovered {
-            width: 30px; height: 30px; /* Reduced hover size */
+            width: 30px; height: 30px; 
             background: rgba(255, 255, 255, 0.4);
         }
 
@@ -181,7 +196,7 @@
             .big-title { font-size: 25vw; bottom: 0; left: 0; }
             .enter-trigger { left: 50%; top: 40%; transform: translate(-50%, -50%); font-size: 2rem;}
             .vertical-text { display: none; }
-            .meta-data { right: 20px; bottom: 20px; }
+            .footer-group { right: 20px; bottom: 20px; }
         }
     </style>
 </head>
@@ -202,14 +217,20 @@
             LITERARY MAGAZINE<br>EST. 2025
         </div>
 
-        <h1 class="big-title">FAUN</h1>
+        <h1 class="big-title">
+            <span class="word-faun">FAUN</span> BY <span class="word-moonlight">MOONLIGHT</span>
+        </h1>
 
         <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER</a>
 
-        <div class="meta-data">
-            <span>Vol. II Available Now</span>
-            <div style="margin-top:10px;">
-                <a href="#">CLMP</a> / <a href="#">Duotrope</a>
+        <div class="footer-group">
+            <a href="volumes" class="cta-small">Vol. II Available Now</a>
+            <div class="featured-links">
+                <span style="opacity:0.6;">FEATURED ON:</span>
+                <a href="https://www.clmp.org" target="_blank" rel="noopener">CLMP</a>
+                <a href="https://duotrope.com" target="_blank" rel="noopener">DUOTROPE</a>
+                <a href="https://www.chillsubs.com" target="_blank" rel="noopener">CHILL SUBS</a>
+                <a href="https://thegrinder.diabolicalplots.com" target="_blank" rel="noopener">GRINDER</a>
             </div>
         </div>
     </div>
@@ -219,30 +240,44 @@
         const cursor = document.getElementById('cursor');
         const link = document.getElementById('enter-link');
         const allLinks = document.querySelectorAll('a, .enter-trigger');
+        const colors = ['var(--color-faun)', 'var(--color-by)', 'var(--color-moonlight)', '#FFFFFF']; // Include white
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Loop through all interactive elements to trigger cursor hover state
         allLinks.forEach(item => {
             item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
+        // Dynamic Color Glitch on Hover
+        let colorIndex = 0;
 
-        // Language Flicker (Faster/Harsher)
+        link.addEventListener('mouseenter', () => {
+            // Start the glitch interval only on mouse enter
+            link.glitchInterval = setInterval(() => {
+                colorIndex = (colorIndex + 1) % colors.length;
+                link.style.color = colors[colorIndex];
+            }, 100); // Fast color cycling
+        });
+
+        link.addEventListener('mouseleave', () => {
+            // Stop the interval and reset color to white on mouse leave
+            clearInterval(link.glitchInterval);
+            link.style.color = '#FFFFFF';
+        });
+
+        // Language Flicker Logic
         const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', 'VOYTI'];
-        let idx = 0;
+        let langIdx = 0;
         
-        // Random glitch interval
         setInterval(() => {
             if(Math.random() > 0.7) {
-                idx = (idx + 1) % languages.length;
-                link.innerText = languages[idx];
+                langIdx = (langIdx + 1) % languages.length;
+                link.innerText = languages[langIdx];
             } else {
-                // To keep it from flickering too much, default back to ENTER often
                 link.innerText = 'ENTER';
             }
         }, 800);
