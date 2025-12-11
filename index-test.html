@@ -102,6 +102,8 @@
             padding: 150px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
             position: relative;
+            /* Added overflow hidden to clip the video if it goes out of bounds */
+            overflow: hidden; 
         }
         .page-title {
             font-family: var(--f-head);
@@ -120,6 +122,24 @@
             letter-spacing: 4px;
             color: #666;
             margin-top: 20px;
+            position: relative; /* Ensure it stays above video if needed */
+            z-index: 2;
+        }
+
+        /* --- NEW VIDEO ELEMENT STYLE --- */
+        .header-bg-video {
+            position: absolute;
+            top: 50%;
+            right: 0; 
+            /* Adjust transform to center vertically and align right, 
+               tweak translateX to pull it slightly off-screen if 'coming from right' implies overlap */
+            transform: translateY(-50%) translateX(20%); 
+            height: 120%; /* Make it large enough */
+            width: auto;
+            z-index: 1; /* Behind text (z-index 2) but above background */
+            pointer-events: none;
+            mix-blend-mode: screen; /* Optional: helps blend black bg of video with dark site bg */
+            opacity: 0.9;
         }
 
         /* --- VOLUME ROWS (The Bold Layout) --- */
@@ -205,14 +225,29 @@
             color: #fff;
         }
 
-        .vol-desc {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #ccc;
+        /* --- UPDATED DESC STYLING --- */
+        .vol-desc-container {
             max-width: 500px;
             margin-bottom: 50px;
             border-left: 2px solid #333;
-            padding-left: 20px;
+            padding-left: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Spacing between lines */
+        }
+        
+        .vol-line {
+            font-size: 1.15rem;
+            line-height: 1.4;
+            color: #ccc;
+            margin: 0;
+        }
+
+        .vol-line.highlight {
+            font-size: 1.35rem; /* Slightly larger */
+            color: #fff;        /* Brighter white */
+            font-weight: 700;   /* Bolder */
+            margin-top: 10px;   /* Extra space before this line */
         }
 
         /* --- ACTION BUTTONS --- */
@@ -247,17 +282,17 @@
         /* Volume 1: Blue */
         .theme-blue .vol-title { color: var(--c-blue); }
         .theme-blue:hover .vol-cover { box-shadow: 0 20px 50px rgba(0, 71, 187, 0.4); }
-        .theme-blue .vol-desc { border-color: var(--c-blue); }
+        .theme-blue .vol-desc-container { border-color: var(--c-blue); }
         
         /* Volume 2: Red */
         .theme-red .vol-title { color: var(--c-red); }
         .theme-red:hover .vol-cover { box-shadow: 0 20px 50px rgba(230, 0, 38, 0.4); }
-        .theme-red .vol-desc { border-color: var(--c-red); }
+        .theme-red .vol-desc-container { border-color: var(--c-red); }
 
         /* Volume 3: Yellow */
         .theme-yellow .vol-title { color: var(--c-yellow); }
         .theme-yellow:hover .vol-cover { box-shadow: 0 20px 50px rgba(255, 209, 0, 0.4); }
-        .theme-yellow .vol-desc { border-color: var(--c-yellow); }
+        .theme-yellow .vol-desc-container { border-color: var(--c-yellow); }
 
 
         /* --- LIGHTBOX --- */
@@ -265,6 +300,42 @@
         .lightbox.active { display: flex; }
         .lightbox-content { max-width: 90vw; max-height: 90vh; border: 1px solid #333; animation: zoomIn 0.3s; }
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -279,6 +350,10 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
+            /* Fix cursor on mobile */
+            * { cursor: auto !important; }
+            .cursor { display: none !important; }
+
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -297,7 +372,16 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .page-title { font-size: 4rem; }
+            /* Adjusted header padding on mobile to account for potential video interference */
             .archive-header { padding: 120px 20px 40px 20px; }
+            
+            /* Hide or adjust video on mobile if it clutters */
+            .header-bg-video {
+                height: 80%;
+                top: 60%;
+                opacity: 0.5;
+                transform: translateY(-50%) translateX(40%);
+            }
             
             .volume-row { grid-template-columns: 1fr; min-height: auto; padding-bottom: 60px; }
             .vol-visual { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); }
@@ -307,6 +391,9 @@
             .vol-title { font-size: 3rem; }
             .actions-group { flex-direction: column; width: 100%; }
             .btn-bold { width: 100%; text-align: center; }
+            
+            /* Stack socials on mobile slightly closer */
+            .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
 </head>
@@ -349,6 +436,10 @@
     <header class="archive-header">
         <h1 class="page-title">The<br>Archive</h1>
         <div class="page-subtitle">A Catalogue of the Exceptionally Unmarketable</div>
+        
+        <video class="header-bg-video" autoplay muted loop playsinline>
+            <source src="images/volumes-vid.mp4" type="video/mp4">
+        </video>
     </header>
 
     <main>
@@ -363,9 +454,14 @@
             <div class="vol-data">
                 <span class="vol-date">November 2025</span>
                 <h2 class="vol-title">The Inaugural<br>Issue</h2>
-                <p class="vol-desc">
-                     A man more concerned about his torturers than their torture. A vampire's letter complaining about stolen identity. An exploration of how Nazis didn't like lamps. Get it all here in the very first volume of Faun by Moonlight! .
-                </p>
+                
+                <div class="vol-desc-container">
+                    <p class="vol-line">A man more concerned about his torturers than their torture.</p>
+                    <p class="vol-line">A vampire complaining about stolen identity.</p>
+                    <p class="vol-line">An exploration on why Nazis didn't like chairs.</p>
+                    <p class="vol-line highlight">Get it all here in the very first volume of Faun by Moonlight!</p>
+                </div>
+
                 <div class="actions-group">
                     <a href="/volumes/volume-1" class="btn-bold">Read It</a>
                     <a href="/volumes/who-we-are" class="btn-bold">Opinion Piece</a>
@@ -384,8 +480,14 @@
             <div class="vol-data">
                 <span class="vol-date">December 2025</span>
                 <h2 class="vol-title">The Second<br>Volume</h2>
-                <p class="vol-desc">
-Here, a lost cosmonaut is haunted by something (or is he?) that won’t let him go. A man watches his body vanish piece by piece. We’re forced to think: “who allows us to live?”                </p>
+                
+                <div class="vol-desc-container">
+                    <p class="vol-line">A lost cosmonaut is haunted by something (or is he?) that won’t let him go.</p> 
+                    <p class="vol-line">A man loses his body piece by piece.</p>
+                    <p class="vol-line">A man loses his body piece by piece.</p> 
+                    <p class="vol-line highlight">Read our second volume today</p>
+                </div>
+
                 <div class="actions-group">
                     <a href="https://faunbymoonlight.store/products/faun-by-moonlight-volume-2-pre-order" class="btn-bold">Read It</a>
                     <a href="volumes/who-should-die.html" class="btn-bold">Opinion Piece</a>
@@ -404,9 +506,12 @@ Here, a lost cosmonaut is haunted by something (or is he?) that won’t let him 
             <div class="vol-data">
                 <span class="vol-date">Q1 2026</span>
                 <h2 class="vol-title">Future<br>Edition</h2>
-                <p class="vol-desc">
-                    Submissions are now open for our third volume. We are looking for the strange, the beautiful, and the defiant.
-                </p>
+                
+                <div class="vol-desc-container">
+                    <p class="vol-line">Submissions are now open for our third volume.</p>
+                    <p class="vol-line highlight">We are looking for the strange, the beautiful, and the defiant.</p>
+                </div>
+                
                 <div class="actions-group">
                     <a href="submissions" class="btn-bold" style="background: var(--c-yellow); border-color: var(--c-yellow); color: #000;">Submit Your Work</a>
                 </div>
@@ -414,6 +519,28 @@ Here, a lost cosmonaut is haunted by something (or is he?) that won’t let him 
         </article>
 
     </main>
+
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
 
     <div class="lightbox" id="lightbox">
         <img src="" alt="" class="lightbox-content" id="lightbox-img">
