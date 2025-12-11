@@ -55,7 +55,7 @@
             background-color: var(--bg-text); 
             border-left: 1px solid var(--color-border);
             z-index: 10; 
-            /* Padding bottom makes room for fixed socials so text doesn't get cut off */
+            /* Padding top accounts for navbar height */
             padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
@@ -70,7 +70,6 @@
             width: 50vw; /* Span the right half */
             padding: 30px 60px 50px 60px; /* Match content padding */
             z-index: 20; /* Sit on top of scrolling text */
-            /* Subtle gradient so text is readable over scrolling content */
             background: linear-gradient(to top, var(--bg-text) 80%, transparent);
             display: flex;
             gap: 30px;
@@ -107,7 +106,6 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* UPDATED NAV BRAND STYLING */
         .nav-brand {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -115,34 +113,27 @@
             text-decoration: none;
             letter-spacing: 1px;
             white-space: nowrap;
-            display: flex; /* Keeps words together */
-            gap: 0.4rem;   /* Spacing between words */
+            display: flex; 
+            gap: 0.4rem;  
+            z-index: 1001; /* Ensure brand stays on top */
         }
 
-        /* The words inside the brand */
         .brand-word {
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
-        /* HOVER EFFECTS FOR LOGO WORDS (Red, Blue, Yellow) */
-        .brand-word.word-f:hover { 
-            color: var(--color-f); 
-            text-shadow: 0 0 15px rgba(230, 0, 38, 0.5);
-        }
-        .brand-word.word-b:hover { 
-            color: var(--color-b); 
-            text-shadow: 0 0 15px rgba(0, 71, 187, 0.5);
-        }
-        .brand-word.word-m:hover { 
-            color: var(--color-m); 
-            text-shadow: 0 0 15px rgba(255, 209, 0, 0.5);
-        }
+        /* HOVER EFFECTS FOR LOGO WORDS */
+        .brand-word.word-f:hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.5); }
+        .brand-word.word-b:hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.5); }
+        .brand-word.word-m:hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.5); }
 
+        /* --- DESKTOP NAV MENU --- */
         .nav-menu {
             display: flex;
             gap: 20px; 
             flex-wrap: wrap; 
             justify-content: flex-end;
+            transition: all 0.3s ease;
         }
 
         .nav-link {
@@ -157,18 +148,29 @@
             white-space: nowrap;
         }
 
-        /* --- NAV COLOR CYCLE --- */
-        .nav-menu .nav-link:nth-child(3n+1):hover {
-            color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
-        }
-        .nav-menu .nav-link:nth-child(3n+2):hover {
-            color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
-        }
-        .nav-menu .nav-link:nth-child(3n+3):hover {
-            color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
-        }
+        .nav-menu .nav-link:nth-child(3n+1):hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4); }
+        .nav-menu .nav-link:nth-child(3n+2):hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4); }
+        .nav-menu .nav-link:nth-child(3n+3):hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4); }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
         .nav-link.urgent { color: var(--color-f); }
+
+        /* --- HAMBURGER MENU (HIDDEN ON DESKTOP) --- */
+        .hamburger {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            z-index: 1001; /* Above the menu overlay */
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: #fff;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
 
         /* --- TYPOGRAPHY --- */
         .page-header {
@@ -224,20 +226,70 @@
         }
         .cursor.hovered { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); }
 
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- RESPONSIVE MOBILE (BURGER MENU LOGIC) --- */
         @media (max-width: 900px) {
             #bg-video { clip-path: none; opacity: 0.3; object-position: center; } 
+            
             .content-scroll { 
                 width: 100%; 
                 margin-left: 0; 
-                padding: 40px 30px 100px 30px; /* Extra padding for fixed socials */
+                padding: 120px 30px 100px 30px; /* Reduced top padding */
                 border-left: none; 
                 background: rgba(10,10,10,0.85); 
             }
             .socials-fixed-bottom { left: 0; width: 100%; padding: 30px; justify-content: center; background: linear-gradient(to top, #0a0a0a 80%, transparent);}
-            .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
-            .nav-menu { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; }
+            
             .super-title { font-size: 3.5rem; }
+
+            /* NAV CHANGES */
+            .navbar {
+                padding: 15px 20px;
+                /* No changes to flex direction here, keeps logo left, burger right */
+            }
+
+            /* Show Hamburger */
+            .hamburger { display: flex; }
+
+            /* Hide default menu and position it absolute */
+            .nav-menu {
+                position: absolute;
+                top: 100%; /* Push it exactly below the header */
+                left: 0;
+                width: 100%;
+                background-color: #000;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 25px;
+                border-bottom: 1px solid #333;
+                
+                /* HIDING LOGIC */
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+            }
+
+            /* Active State for Menu */
+            .nav-menu.active {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-link {
+                font-size: 1.2rem; /* Bigger text on mobile */
+            }
+
+            /* Burger Animation to X */
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+            
+            /* Hide cursor on touch */
+            .cursor { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
@@ -251,6 +303,12 @@
             <span class="brand-word word-b">BY</span>
             <span class="brand-word word-m">MOONLIGHT</span>
         </a>
+
+        <button class="hamburger" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
         <div class="nav-menu">
             <a href="who-we-are" class="nav-link active">Who We Are</a>
@@ -295,18 +353,36 @@
     </div>
 
     <script>
-        const cursor = document.getElementById('cursor');
-        const allInteractive = document.querySelectorAll('a, button, .brand-word');
+        // --- CUSTOM CURSOR ---
+        if (window.matchMedia("(hover: hover)").matches) {
+            const cursor = document.getElementById('cursor');
+            const allInteractive = document.querySelectorAll('a, button, .brand-word');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+
+            allInteractive.forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+
+        // --- BURGER MENU LOGIC ---
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
 
-        allInteractive.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
     </script>
 </body>
 </html>
