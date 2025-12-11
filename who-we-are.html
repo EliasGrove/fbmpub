@@ -39,7 +39,10 @@
             object-fit: cover;
             opacity: 1; 
             
+            /* UPDATED: Centered normally */
             object-position: center;
+            
+            /* CROP: Hides the Right 50% */
             clip-path: inset(0 50% 0 0);
         }
 
@@ -47,11 +50,12 @@
         .content-scroll {
             position: relative;
             width: 50vw; 
-            margin-left: 50vw; 
+            margin-left: 50vw; /* Pushes box to Right */
             min-height: 100vh;
             background-color: var(--bg-text); 
             border-left: 1px solid var(--color-border);
             z-index: 10; 
+            /* Padding bottom makes room for fixed socials so text doesn't get cut off */
             padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
@@ -62,10 +66,11 @@
         .socials-fixed-bottom {
             position: fixed;
             bottom: 0;
-            left: 50vw; 
-            width: 50vw; 
-            padding: 30px 60px 50px 60px; 
-            z-index: 20; 
+            left: 50vw; /* Start at the middle of the screen */
+            width: 50vw; /* Span the right half */
+            padding: 30px 60px 50px 60px; /* Match content padding */
+            z-index: 20; /* Sit on top of scrolling text */
+            /* Subtle gradient so text is readable over scrolling content */
             background: linear-gradient(to top, var(--bg-text) 80%, transparent);
             display: flex;
             gap: 30px;
@@ -102,6 +107,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
+        /* UPDATED NAV BRAND STYLING */
         .nav-brand {
             font-family: "alfarn", serif;
             font-size: 1.8rem;
@@ -109,87 +115,82 @@
             text-decoration: none;
             letter-spacing: 1px;
             white-space: nowrap;
-            display: flex; 
-            gap: 0.4rem;  
-            z-index: 1002; /* Ensures brand stays above the menu overlay */
-            position: relative;
+            display: flex; /* Keeps words together */
+            gap: 0.4rem;   /* Spacing between words */
         }
 
-        .brand-word { transition: color 0.3s ease, text-shadow 0.3s ease; }
-        .brand-word.word-f:hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.5); }
-        .brand-word.word-b:hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.5); }
-        .brand-word.word-m:hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.5); }
+        /* The words inside the brand */
+        .brand-word {
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
 
-        /* --- HAMBURGER BUTTON --- */
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-            background: transparent;
+        /* HOVER EFFECTS FOR LOGO WORDS (Red, Blue, Yellow) */
+        .brand-word.word-f:hover { 
+            color: var(--color-f); 
+            text-shadow: 0 0 15px rgba(230, 0, 38, 0.5);
+        }
+        .brand-word.word-b:hover { 
+            color: var(--color-b); 
+            text-shadow: 0 0 15px rgba(0, 71, 187, 0.5);
+        }
+        .brand-word.word-m:hover { 
+            color: var(--color-m); 
+            text-shadow: 0 0 15px rgba(255, 209, 0, 0.5);
+        }
+
+        /* BURGER MENU (HIDDEN ON DESKTOP) */
+        .burger {
+            display: none;
+            background: none;
             border: none;
-            z-index: 1002; /* Above the overlay */
-            padding: 0;
+            flex-direction: column;
+            gap: 6px;
+            cursor: none; /* Matches custom cursor */
+            z-index: 1002;
         }
-
-        .hamburger span {
-            width: 100%;
+        .burger span {
+            display: block;
+            width: 30px;
             height: 2px;
             background-color: #fff;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        /* Hamburger Animation when Active */
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+        /* Burger Animation classes */
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-        /* --- MENU OVERLAY (HIDDEN BY DEFAULT) --- */
         .nav-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #050505;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            z-index: 1001;
-            
-            /* Hidden State */
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
-        }
-
-        /* Active State (Visible) */
-        .nav-menu.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
+            gap: 20px; 
+            flex-wrap: wrap; 
+            justify-content: flex-end;
         }
 
         .nav-link {
             font-family: "neue-kabel", sans-serif;
             font-weight: 700;
-            font-size: 1.5rem; /* Larger font for overlay */
+            font-size: 0.75rem;
             color: #888;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             transition: color 0.3s, text-shadow 0.3s;
+            white-space: nowrap;
         }
 
         /* --- NAV COLOR CYCLE --- */
-        .nav-menu .nav-link:nth-child(3n+1):hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4); }
-        .nav-menu .nav-link:nth-child(3n+2):hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4); }
-        .nav-menu .nav-link:nth-child(3n+3):hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4); }
-        .nav-link.active { color: #fff; border-bottom: 2px solid #fff; }
+        .nav-menu .nav-link:nth-child(3n+1):hover {
+            color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
+        }
+        .nav-menu .nav-link:nth-child(3n+2):hover {
+            color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
+        }
+        .nav-menu .nav-link:nth-child(3n+3):hover {
+            color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
+        }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
         .nav-link.urgent { color: var(--color-f); }
 
         /* --- TYPOGRAPHY --- */
@@ -249,19 +250,54 @@
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
             #bg-video { clip-path: none; opacity: 0.3; object-position: center; } 
+            
             .content-scroll { 
                 width: 100%; 
                 margin-left: 0; 
-                padding: 40px 30px 100px 30px;
+                padding: 120px 30px 100px 30px; /* Adjusted top padding */
                 border-left: none; 
                 background: rgba(10,10,10,0.85); 
             }
+            
             .socials-fixed-bottom { left: 0; width: 100%; padding: 30px; justify-content: center; background: linear-gradient(to top, #0a0a0a 80%, transparent);}
             
-            /* Navbar stays simple flex on mobile now, no stacking needed */
-            .navbar { padding: 15px 20px; }
+            /* -- BURGER MENU LOGIC -- */
+            .navbar { 
+                /* Keep row so it doesn't expand vertically */
+                flex-direction: row; 
+                justify-content: space-between; 
+                padding: 15px 20px; 
+                align-items: center;
+            }
+
+            .burger {
+                display: flex; /* Show burger on mobile */
+            }
+
+            .nav-menu { 
+                display: none; /* Hide menu items by default */
+                position: absolute;
+                top: 100%; /* Push it right below the navbar */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                padding: 40px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-menu.active {
+                display: flex; /* Show when active class is added */
+            }
+
+            .nav-link {
+                font-size: 1.2rem; /* Make links bigger on mobile */
+            }
+
             .super-title { font-size: 3.5rem; }
-            .nav-link { font-size: 1.2rem; } /* Smaller menu font on mobile */
         }
     </style>
 </head>
@@ -276,13 +312,13 @@
             <span class="brand-word word-m">MOONLIGHT</span>
         </a>
 
-        <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+        <button class="burger" aria-label="Toggle Menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <div class="nav-menu" id="nav-menu">
+        <div class="nav-menu">
             <a href="who-we-are" class="nav-link active">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
             <a href="blog" class="nav-link">Blog</a>
@@ -326,12 +362,9 @@
 
     <script>
         const cursor = document.getElementById('cursor');
-        // Added hamburger to interactive elements
-        const allInteractive = document.querySelectorAll('a, button, .brand-word, .hamburger');
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+        // Added .burger to interactive elements
+        const allInteractive = document.querySelectorAll('a, button, .brand-word, .burger'); 
 
-        // Cursor Logic
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
@@ -342,16 +375,20 @@
             item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // Toggle Hamburger Logic
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
+        // --- BURGER MENU LOGIC ---
+        const burger = document.querySelector('.burger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('open');
             navMenu.classList.toggle('active');
         });
 
         // Close menu when a link is clicked
-        document.querySelectorAll('.nav-link').forEach(link => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
+                burger.classList.remove('open');
                 navMenu.classList.remove('active');
             });
         });
