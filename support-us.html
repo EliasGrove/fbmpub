@@ -3,507 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Us - Faun by Moonlight Literary Magazine</title>
-    <meta name="description" content="Support Faun by Moonlight through volunteering, purchasing our collections, or donating via Buy Me a Coffee to help us publish literary fiction.">
-    <meta name="keywords" content="support literary magazine, Faun by Moonlight, volunteer opportunities, Buy Me a Coffee, literary fiction, donate to literature, purchase magazine Volumes">
-    <meta name="author" content="Faun by Moonlight Editorial Team">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.faunbymoonlight.com/support-us">
+    <title>Support Us - Faun by Moonlight</title>
     
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.faunbymoonlight.com/support-us">
-    <meta property="og:title" content="Support Us - Faun by Moonlight Literary Magazine">
-    <meta property="og:description" content="Help Faun by Moonlight publish literary fiction by volunteering, buying our Volumes, or donating via Buy Me a Coffee.">
-    <meta property="og:image" content="https://www.faunbymoonlight.com/images/support-us-og-image.jpg">
-    <meta property="og:site_name" content="Faun by Moonlight">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.faunbymoonlight.com/support-us">
-    <meta name="twitter:title" content="Support Us - Faun by Moonlight Literary Magazine">
-    <meta name="twitter:description" content="Help Faun by Moonlight publish literary fiction by volunteering, buying our Volumes, or donating via Buy Me a Coffee.">
-    <meta name="twitter:image" content="https://www.faunbymoonlight.com/images/support-us-og-image.jpg">
-    <meta name="twitter:site" content="@faunbymoonlight">
-
-    <link rel="preconnect" href="https://use.typekit.net">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://buymeacoffee.com">
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
 
     <style>
-        /* --- CORE RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: "neue-kabel", sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        :root {
+            --c-bg: #0a0a0a;
+            --c-text: #e0e0e0;
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #333;
+            --f-head: "alfarn", serif;
+            --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
+        }
+
+        body { 
+            background-color: var(--c-bg); 
+            font-family: var(--f-body);
+            color: var(--c-text);
+            overflow-x: hidden; 
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-image: url('images/6.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
+            display: flex; flex-direction: column;
         }
 
-        /* Darker overlay for better contrast */
-        body::before {
-            content: ''; position: fixed; inset: 0;
-            background: rgba(15, 15, 15, 0.75);
-            z-index: 0;
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-yellow);
+            mix-blend-mode: normal;
         }
 
-        /* --- ANNOUNCEMENT BAR FIX --- */
-        #global-announcement, .announcement-bar {
-            position: relative;
-            z-index: 10000; /* Top priority */
-            background-color: #E60026;
-            color: #ffffff;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        #global-announcement { padding: 0; }
-        .announcement-bar { padding: 12px 20px; }
-
-        #global-announcement a, .announcement-bar a { 
-            color: #FFD100; text-decoration: underline; font-weight: 700; 
-        }
-        #global-announcement a:hover, .announcement-bar a:hover { 
-            color: #ffffff; text-decoration: none; 
-        }
-
-        /* --- NAVIGATION (Sticky + Layered) --- */
-        .nav-header {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 9999; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-        }
-
-        .logo {
-            font-family: "alfarn", serif;
-            font-size: 1.8rem;
-            color: #f8f8f8;
-            text-decoration: none;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-
-        /* --- VISIBILITY IMPROVED TABS --- */
-        .nav-tabs { display: flex; gap: 30px; }
-        
-        .nav-tab {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1.5px; 
-            background: none; border: none;
-            
-            /* VISIBILITY FIX */
-            color: #e6e6e6; 
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
-            text-transform: uppercase;
-            
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .nav-tab:hover, .nav-tab.active {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            transform: translateY(-1px);
-        }
-
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
-
-        /* --- MAIN CONTENT (Low Z-Index) --- */
-        .main-wrapper {
-            position: relative;
-            z-index: 1; 
-            padding: 60px 20px;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        /* --- THE "GLASS" BOX --- */
-        .text-box {
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            padding: 50px;
-            max-width: 900px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .page-title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
-            letter-spacing: 1px;
-            text-align: center;
-            color: #f8f8f8;
-        }
-
-        /* --- INTRO SECTION --- */
-        .intro-section {
-            border-left: 4px solid rgba(255, 215, 0, 0.5);
-            padding-left: 1.5rem;
-            margin-bottom: 2.5rem;
-            background: linear-gradient(to right, rgba(255, 215, 0, 0.05), transparent);
-            border-radius: 0 8px 8px 0;
-        }
-
-        .section-content {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.2rem;
-            line-height: 1.7;
-            color: #d0d0d0;
-        }
-        .section-content p { margin-bottom: 1.5rem; }
-
-        /* --- SUPPORT OPTIONS (Accordion Style) --- */
-        .section-title-main {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .support-option {
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .support-option:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .support-option.expanded {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: #FFD100; /* Gold accent for support */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .support-option-header {
-            padding: 20px 25px;
-            cursor: pointer;
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 25px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .support-option .section-title {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #ffffff;
-            margin: 0;
+        .nav-brand {
+            font-family: var(--f-head);
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
             letter-spacing: 1px;
+            display: flex; gap: 0.4rem;
+        }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
+
+        .desktop-menu { display: flex; gap: 25px; }
+        .nav-link {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
+
+        /* --- HEADER --- */
+        .page-header {
+            padding: 150px 40px 60px 40px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        .super-title {
+            font-family: var(--f-head);
+            font-size: 8rem;
+            line-height: 0.85;
+            text-transform: uppercase;
+            color: #fff;
+            margin: 0;
+        }
+        .intro-text {
+            max-width: 600px;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #888;
+            border-left: 2px solid var(--c-yellow);
+            padding-left: 20px;
         }
 
-        .toggle-icon {
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            transition: transform 0.3s ease, color 0.3s ease;
+        /* --- GRID LAYOUT --- */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns on Desktop */
+            border-bottom: 1px solid var(--c-border);
         }
 
-        .support-option.expanded .toggle-icon {
-            transform: rotate(180deg);
-            color: #FFD100;
+        /* --- CARDS (MODULES) --- */
+        .module {
+            border-right: 1px solid var(--c-border);
+            border-bottom: 1px solid var(--c-border);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+        
+        .module:hover { background: #111; }
+
+        /* Number Index */
+        .module-index {
+            font-family: var(--f-head);
+            font-size: 3rem;
+            opacity: 0.1;
+            position: absolute;
+            top: 20px; right: 30px;
+            transition: opacity 0.3s, color 0.3s;
+        }
+        .module:hover .module-index { opacity: 1; }
+
+        /* Content */
+        .module-content h2 {
+            font-family: var(--f-display);
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1;
+            color: #fff;
+        }
+        .module-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #aaa;
+            margin-bottom: 30px;
         }
 
-        .support-option-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Links/Buttons */
+        .action-link {
+            font-family: var(--f-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-top: auto;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
         }
 
-        .support-option.expanded .support-option-content {
-            max-height: 500px;
+        /* --- THEMES --- */
+        /* Blue (Store) */
+        .theme-blue:hover { border-color: var(--c-blue); }
+        .theme-blue:hover .module-index { color: var(--c-blue); }
+        .theme-blue h2 { color: var(--c-blue); }
+        .theme-blue .action-link { color: #fff; border-bottom-color: var(--c-blue); }
+        
+        /* Red (Volunteer) */
+        .theme-red:hover { border-color: var(--c-red); }
+        .theme-red:hover .module-index { color: var(--c-red); }
+        .theme-red h2 { color: var(--c-red); }
+        .theme-red .action-link { color: #fff; border-bottom-color: var(--c-red); }
+
+        /* Yellow (Coffee) */
+        .theme-yellow:hover { border-color: var(--c-yellow); }
+        .theme-yellow:hover .module-index { color: var(--c-yellow); }
+        .theme-yellow h2 { color: var(--c-yellow); }
+        .theme-yellow .action-link { color: #fff; border-bottom-color: var(--c-yellow); }
+
+        /* Spanning Card (Share) */
+        .span-full {
+            grid-column: 1 / -1;
+            min-height: auto;
+            padding: 40px;
+            flex-direction: row;
+            align-items: center;
+            border-right: none;
         }
-
-        .support-option-inner { padding: 0 25px 25px 25px; }
-
-        .coffee-link {
-            color: #FFD100;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-        .coffee-link:hover { color: #ffffff; }
-
-        .hidden-content { display: none; }
+        .span-full .module-content { max-width: 600px; }
 
         /* --- FOOTER --- */
-        .footer {
-            position: relative; z-index: 2;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .footer-link:hover { color: #ffffff; }
-        .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE FIXES --- */
-        @media (max-width: 768px) {
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            
-            /* MENU FIX: Solid Black + High Z-Index */
-            .nav-tabs {
-                display: none; 
-                flex-direction: column; 
-                gap: 20px;
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0;
-                background-color: #000000; /* SOLID BLACK */
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                padding: 30px; 
-                text-align: center;
-                z-index: 9999;
-                box-shadow: 0 10px 30px rgba(0,0,0,1);
-            }
-            
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .burger.open span:nth-child(2) { opacity: 0; }
+            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Revert nav style for mobile dropdown */
-            .nav-tab { 
-                color: #a0a0a0; 
-                text-shadow: none; 
-                text-transform: none; 
-                font-size: 1.2rem; 
+            .mobile-menu-overlay {
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
             }
-            .nav-tab:hover { color: #ffffff; }
+            .mobile-menu-overlay.active { transform: translateY(0); }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+            .super-title { font-size: 4rem; }
+            .page-header { padding: 120px 20px 40px 20px; }
             
-            .text-box { padding: 30px 20px; }
-            .page-title { font-size: 2.5rem; }
-            .support-option .section-title { font-size: 1.1rem; }
-            .footer { flex-direction: column; gap: 15px; text-align: center; }
+            .support-grid { grid-template-columns: 1fr; }
+            .module { border-right: none; min-height: auto; padding: 40px 20px; }
+            .span-full { flex-direction: column; align-items: flex-start; gap: 20px; }
         }
     </style>
 </head>
 <body>
-    <div id="global-announcement"></div>
+    <div class="cursor" id="cursor"></div>
 
-   <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
-        <label for="nav-toggle" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab">Who We Are</a>
-            <a href="volumes" class="nav-tab">Volumes</a>
-            <a href="blog" class="nav-tab">Blog</a>
-            <a href="submissions" class="nav-tab">Submit Your Work</a>
-            <a href="faq" class="nav-tab">FAQ</a>
-            <a href="support-us" class="nav-tab active">Support Us</a>
-            <a href="urgent" class="nav-tab">Urgent Appeal</a>
-            <a href="contact" class="nav-tab">Contact</a>
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link active">Support Us</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <main class="main-wrapper">
-        <div class="text-box">
-            <h1 class="page-title">Support Us</h1>
-            
-            <div class="intro-section">
-                <div class="section-content">
-                    <p>Our publication is managed by volunteers committed to publishing great literature. Your support helps us pay writers, purchase the tools we need to produce high quality content, and expand our reach.</p>
-                </div>
-            </div>
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link active">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
 
-            <h2 class="section-title-main">Ways to Support Our Work</h2>
-            
-            <div class="support-option">
-                <div class="support-option-header" onclick="toggleSupport(this)">
-                    <h3 class="section-title">Read Our Volumes</h3>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="support-option-content">
-                    <div class="support-option-inner">
-                        <div class="section-content">
-                            <p>Our monthly Volumes are available to read in our store <a href="https://faunbymoonlight.store" target="_blank" rel="noopener noreferrer" class="coffee-link">faunbymoonlight.store</a> for $4.99 each.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="support-option">
-                <div class="support-option-header" onclick="toggleSupport(this)">
-                    <h3 class="section-title">Volunteer</h3>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="support-option-content">
-                    <div class="support-option-inner">
-                        <div class="section-content">
-                            <p>Whether it's editorial work, website development, marketing, beta reading, or other publication tasks, we can always use another helping hand. If you have relevant skills, we welcome your help. Feel free to reach out to us through our <a href="contact" class="coffee-link">contact page</a>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="support-option">
-                <div class="support-option-header" onclick="toggleSupport(this)">
-                    <h3 class="section-title">Purchase our Annual Collections</h3>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="support-option-content">
-                    <div class="support-option-inner">
-                        <div class="section-content">
-                            <p>Every year we compile our best works into a yearly issue. This volume will include exclusive content, artwork, opinion pieces and more.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="support-option">
-                <div class="support-option-header" onclick="toggleSupport(this)">
-                    <h3 class="section-title">Buy Us a Coffee</h3>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="support-option-content">
-                    <div class="support-option-inner">
-                        <div class="section-content">
-                            <p>If you'd like to fuel our late-night editing sessions and help cover operational costs, our <a href="https://buymeacoffee.com/faunbymoonlight" class="coffee-link" target="_blank" rel="noopener">Buy Me a Coffee page</a> helps keep us caffeinated.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="support-option">
-                <div class="support-option-header" onclick="toggleSupport(this)">
-                    <h3 class="section-title">Share Our Content</h3>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="support-option-content">
-                    <div class="support-option-inner">
-                        <div class="section-content">
-                            <p>Recommend stories to other readers, interact with our social media posts, and recommend us to fellow writers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <section class="hidden-content">
-                <article>
-                    <h2>Support Faun by Moonlight Literary Magazine</h2>
-                    <p>This page outlines various ways to support Faun by Moonlight, a volunteer-run literary magazine dedicated to publishing high-quality literary fiction.</p>
-                </article>
-            </section>
+    <header class="page-header">
+        <h1 class="super-title">Support<br>Mission</h1>
+        <div class="intro-text">
+            Our publication is managed by volunteers committed to publishing great literature. Your support helps us pay writers, purchase the tools we need to produce high quality content, and expand our reach.
         </div>
+    </header>
+
+    <main class="support-grid">
+
+        <div class="module theme-blue">
+            <span class="module-index">01</span>
+            <div class="module-content">
+                <h2>Read Our<br>Volumes</h2>
+                <p>Our monthly Volumes are available to read in our store. Your purchase directly funds author payments.</p>
+            </div>
+            <a href="https://faunbymoonlight.store" target="_blank" class="action-link">Visit Store ($4.99) &rarr;</a>
+        </div>
+
+        <div class="module theme-blue">
+            <span class="module-index">02</span>
+            <div class="module-content">
+                <h2>Annual<br>Collections</h2>
+                <p>Every year we compile our best works into a yearly issue. This volume will include exclusive content, artwork, opinion pieces and more.</p>
+            </div>
+            <a href="volumes" class="action-link">View Collections &rarr;</a>
+        </div>
+
+        <div class="module theme-red">
+            <span class="module-index">03</span>
+            <div class="module-content">
+                <h2>Join The<br>Team</h2>
+                <p>Whether it's editorial work, website development, marketing, or beta reading, we can always use another helping hand.</p>
+            </div>
+            <a href="contact" class="action-link">Volunteer Now &rarr;</a>
+        </div>
+
+        <div class="module theme-yellow" style="grid-column: span 2;">
+            <span class="module-index">04</span>
+            <div class="module-content" style="max-width: 600px;">
+                <h2>Buy Us<br>A Coffee</h2>
+                <p>If you'd like to fuel our late-night editing sessions and help cover operational costs, our Buy Me a Coffee page helps keep us caffeinated and online.</p>
+                
+                
+                
+            </div>
+            <a href="https://buymeacoffee.com/faunbymoonlight" target="_blank" class="action-link">Donate via BMC &rarr;</a>
+        </div>
+
+        <div class="module theme-blue">
+            <span class="module-index">05</span>
+            <div class="module-content">
+                <h2>Spread<br>The Word</h2>
+                <p>Recommend stories to other readers, interact with our social media posts, and recommend us to fellow writers.</p>
+            </div>
+            <a href="https://x.com/faunbymoonlight" target="_blank" class="action-link">Share on X &rarr;</a>
+        </div>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-            </a>
-            <a href="contact" class="footer-link" aria-label="Contact us">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
-            </a>
-        </div>
-        <div class="copyright">
-            © 2025 Faun by Moonlight. All rights reserved.
-        </div>
+    <footer>
+        © 2025 Faun by Moonlight. All rights reserved.
     </footer>
 
     <script>
-        fetch('announcement')
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('No announcement found');
-            })
-            .then(data => {
-                document.getElementById('global-announcement').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('global-announcement').style.display = 'none';
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const interactive = document.querySelectorAll('a, button, .module');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('open');
+                navMenu.classList.remove('active');
             });
-
-        function colorLogo() {
-            const logo = document.getElementById('logo');
-            if (logo) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
-        }
-
-        function toggleSupport(header) {
-            const supportOption = header.parentElement;
-            if (supportOption) {
-                const isActive = supportOption.classList.contains('expanded');
-                
-                // Close others for cleaner UX
-                document.querySelectorAll('.support-option.expanded').forEach(option => {
-                    if (option !== supportOption) {
-                        option.classList.remove('expanded');
-                    }
-                });
-
-                if (isActive) {
-                    supportOption.classList.remove('expanded');
-                } else {
-                    supportOption.classList.add('expanded');
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', colorLogo);
+        });
     </script>
 </body>
 </html>
