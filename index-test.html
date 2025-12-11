@@ -405,7 +405,7 @@
 
     <header class="hero">
         <h1 class="page-title">Submit<br>Your Work</h1>
-        <p class="page-subtitle">We are not interested in the polite, the sterile, or the safe. Read the guidelines below carefully before proceeding.</p>
+        <p class="page-subtitle">We welcome the bold, the new, the daring. If that is you, send us your work.</p>
     </header>
 
     <main class="submission-container">
@@ -421,10 +421,10 @@
                 <p>We are looking for works that resist simple genre classification. Works that aren't scared of pushing boundaries. Our specialty is the exceptionally unmarketable.</p>
                 
                 <div class="warning-box">
-                    <strong>HARD NO:</strong> We will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors will be immediately discarded.
+                    <strong>PLEASE NOTE:</strong> We will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors will be immediately discarded.
                 </div>
 
-                <h3>Manuscript Specs</h3>
+                <h3>Manuscript Requirements</h3>
                 <ul>
                     <li>Standard format (12pt, Double Spaced)</li>
                     <li>Up to 10,000 words</li>
@@ -445,7 +445,7 @@
             </div>
             <div class="scroll-content">
                 <h3>Rates</h3>
-                <p>We believe in paying writers. Payment is issued via PayPal upon acceptance of the manuscript.</p>
+                <p>Payment is issued via PayPal upon acceptance of the manuscript.</p>
                 <ul>
                     <li><strong>$20.00</strong> — Stories under 5,000 words</li>
                     <li><strong>$50.00</strong> — Stories 5,000+ words</li>
@@ -456,7 +456,7 @@
         <div class="grid-row">
             <div class="sticky-header">
                 <span class="section-number" style="color: var(--c-blue);">03</span>
-                <span class="section-name" style="color: var(--c-blue);">Submission Protocol</span>
+                <span class="section-name" style="color: var(--c-blue);">How to Submit</span>
             </div>
             <div class="scroll-content">
                 <p>We operate on a community-first model. We ask that our writers are also our readers.</p>
@@ -464,18 +464,18 @@
                 <div class="submission-module">
                     
                     <div class="step-block">
-                        <h4 style="color: var(--c-blue); text-transform: uppercase; margin-bottom: 15px;">Phase A: Acquire Volume</h4>
-                        <p>Your readership keeps the lights on. It also ensures you receive detailed, personalized feedback on every submission.</p>
+                        <h4 style="color: var(--c-blue); text-transform: uppercase; margin-bottom: 15px;">Step 1: Buy Our Volumes</h4>
+                        <p> We believe our writers should also be our readers. Your readership keeps the lights on and pays our talented writers. It also ensures you receive detailed, personalized feedback on every submission. </p>
                         <a href="https://faunbymoonlight.store" target="_blank" class="btn-buy">Buy Current Volume</a>
                     </div>
 
                     <div class="step-block">
-                        <h4 style="color: var(--c-red); text-transform: uppercase; margin-bottom: 15px;">Phase B: Transmit Data</h4>
-                        <p>Verify your purchase to reveal the secure submission channel.</p>
+                        <h4 style="color: var(--c-red); text-transform: uppercase; margin-bottom: 15px;">Step 2: Send Your Manuscript</h4>
+                        <p>Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or volume purchase information in the email body.</p>
                         
                         <label class="checkbox-wrapper">
                             <input type="checkbox" id="verifyCheck">
-                            <span>I certify that I have purchased a volume.</span>
+                            <span>I have purchased a volume.</span>
                         </label>
 
                         <div class="reveal-box">
@@ -483,7 +483,6 @@
                             <div class="email-secret" id="emailSecret">
                                 Send .docx to:<br>
                                 <a href="mailto:submissions@faunbymoonlight.com">submissions@faunbymoonlight.com</a>
-                                <br><span style="font-size:0.8rem; opacity:0.7; font-family:var(--f-body); margin-top:5px; display:block;">Include receipt # in body</span>
                             </div>
                         </div>
                     </div>
@@ -540,7 +539,7 @@
         verifyCheck.addEventListener('change', () => {
             if (verifyCheck.checked) {
                 revealBtn.classList.add('active');
-                revealBtn.innerText = "Click to Decrypt Address";
+                revealBtn.innerText = "Click to Reveal Submission Address";
             } else {
                 revealBtn.classList.remove('active');
                 revealBtn.innerText = "Locked // Awaiting Verification";
