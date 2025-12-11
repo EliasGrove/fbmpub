@@ -102,6 +102,7 @@
             padding: 150px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
             position: relative;
+            overflow: hidden; 
         }
         .page-title {
             font-family: var(--f-head);
@@ -120,6 +121,23 @@
             letter-spacing: 4px;
             color: #666;
             margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- ADJUSTED VIDEO STYLE --- */
+        .header-bg-video {
+            position: absolute;
+            top: 50%;
+            right: 0; 
+            /* Changed from 25% to 10% to bring it back to the left slightly */
+            transform: translateY(-50%) translateX(10%); 
+            height: 85%; 
+            width: auto;
+            z-index: 1; 
+            pointer-events: none;
+            mix-blend-mode: screen; 
+            opacity: 0.9;
         }
 
         /* --- VOLUME ROWS (The Bold Layout) --- */
@@ -352,7 +370,16 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .page-title { font-size: 4rem; }
+            /* Adjusted header padding on mobile to account for potential video interference */
             .archive-header { padding: 120px 20px 40px 20px; }
+            
+            /* Hide or adjust video on mobile if it clutters */
+            .header-bg-video {
+                height: 80%;
+                top: 60%;
+                opacity: 0.5;
+                transform: translateY(-50%) translateX(40%);
+            }
             
             .volume-row { grid-template-columns: 1fr; min-height: auto; padding-bottom: 60px; }
             .vol-visual { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); }
@@ -407,6 +434,10 @@
     <header class="archive-header">
         <h1 class="page-title">The<br>Archive</h1>
         <div class="page-subtitle">A Catalogue of the Exceptionally Unmarketable</div>
+        
+        <video class="header-bg-video" autoplay muted loop playsinline>
+            <source src="images/volumes-vid.mp4" type="video/mp4">
+        </video>
     </header>
 
     <main>
