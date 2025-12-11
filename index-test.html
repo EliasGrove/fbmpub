@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome - Faun by Moonlight</title>
+    <meta name="title" content="Faun by Moonlight - Literary Magazine for Exceptional Fiction">
+    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist genre classification.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://faunbymoonlight.com/">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+
+    <meta property="og:title" content="Faun by Moonlight">
+    <meta property="og:image" content="https://faunbymoonlight.com/images/Cover.png">
+    <meta property="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <style>
+        /* --- CORE RESET & GRIT --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #050505; 
+            font-family: "neue-kabel", sans-serif;
+        }
+
+        /* --- VIDEO BACKGROUND --- */
+        #bg-video {
+            position: fixed;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: -3;
+            object-fit: cover;
+            opacity: 0.6; /* Slight dim so text pops */
+            filter: grayscale(100%) contrast(1.2); /* Makes the video gritty/black and white */
+        }
+
+        /* --- NOISE OVERLAY (The Grit) --- */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.15"/%3E%3C/svg%3E');
+        }
+
+        /* --- MAIN LAYOUT --- */
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center everything vertically */
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- THE SURPRISE IMAGE (The Watcher) --- */
+        .watcher-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 75vh; /* Large and imposing */
+            width: auto;
+            z-index: -1; /* Sits behind the text but over the video */
+            opacity: 0; /* Starts hidden */
+            /* This blend mode makes black backgrounds transparent and white elements glow */
+            mix-blend-mode: screen; 
+            animation: ghostFade 4s ease-out forwards;
+            animation-delay: 0.5s;
+            pointer-events: none;
+        }
+
+        @keyframes ghostFade {
+            0% { opacity: 0; transform: translate(-50%, -45%) scale(0.95); filter: blur(10px); }
+            100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            mix-blend-mode: difference; /* Makes text readable on any background */
+        }
+
+        .title {
+            font-family: "alfarn", serif;
+            font-weight: 400;
+            font-size: 7rem;
+            letter-spacing: -2px; /* Tighter for a modern look */
+            line-height: 0.9;
+            color: #f0f0f0;
+            margin: 0;
+            text-transform: lowercase; /* Optional: stylistic choice for minimalism */
+        }
+
+        /* --- INTERACTIVE ELEMENTS --- */
+        .enter-button {
+            font-family: "dunbar-tall", sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            color: #f0f0f0;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            padding-bottom: 5px;
+            margin-top: 1rem;
+        }
+        
+        .enter-button:hover {
+            border-bottom: 1px solid #f0f0f0;
+            letter-spacing: 6px; /* Spreads out on hover */
+        }
+
+        .spotlight-wrap {
+            margin-top: 20px;
+        }
+        
+        .spotlight-cta {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .spotlight-cta:hover {
+            opacity: 1;
+            text-decoration: line-through; /* A punk/grunge detail */
+        }
+
+        /* --- FOOTER (Minimal) --- */
+        .featured-footer {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .listing-link {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .listing-link:hover {
+            color: #fff;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .title { font-size: 4rem; }
+            .watcher-img { height: 50vh; opacity: 0.6; }
+            .featured-footer { flex-wrap: wrap; gap: 20px; padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/index-vid.mp4" type="video/mp4">
+    </video>
+
+    <div class="noise-overlay"></div>
+
+    <div class="container">
+        
+        <img src="images/watcher.png" alt="The Watcher" class="watcher-img">
+
+        <main class="content">
+            <h1 class="title">Faun by<br>Moonlight</h1>
+            
+            <a href="who-we-are" class="enter-button" id="enter-btn">Enter</a>
+
+            <div class="spotlight-wrap">
+                <a href="volumes" class="spotlight-cta">
+                    Vol. II Out Now
+                </a>
+            </div>
+        </main>
+
+        <footer class="featured-footer">
+            <a href="https://www.clmp.org" target="_blank" class="listing-link">CLMP</a>
+            <a href="https://duotrope.com" target="_blank" class="listing-link">Duotrope</a>
+            <a href="https://www.chillsubs.com" target="_blank" class="listing-link">Chill Subs</a>
+            <a href="https://thegrinder.diabolicalplots.com" target="_blank" class="listing-link">The Grinder</a>
+        </footer>
+    </div>
+
+    <script>
+        // Keeping the language cycle script as it fits the surreal vibe perfectly
+        function cycleLanguages() {
+            const button = document.getElementById('enter-btn');
+            if (!button) return;
+            
+            const languages = ['Enter', 'Entrar', 'Entrer', '入る', '进入', 'Войти'];
+            let index = 0;
+            
+            setInterval(() => {
+                button.style.opacity = '0'; // Fade out completely
+                setTimeout(() => {
+                    index = (index + 1) % languages.length;
+                    button.textContent = languages[index];
+                    button.style.opacity = '1';
+                }, 400);
+            }, 3500); 
+        }
+
+        window.addEventListener('load', () => {
+            cycleLanguages();
+        });
+    </script>
+</body>
+</html>
