@@ -9,7 +9,7 @@
 
     <style>
         /* --- BRUTALIST RESET --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* We will make a custom cursor */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body { 
             height: 100vh; 
@@ -27,7 +27,7 @@
             min-width: 100%; min-height: 100%;
             width: auto; height: auto;
             z-index: 0;
-            opacity: 0.4; /* Dark and moody */
+            opacity: 0.4;
             filter: grayscale(100%) contrast(1.5);
             object-fit: cover;
         }
@@ -46,21 +46,21 @@
             position: relative;
             width: 100%; height: 100%;
             z-index: 2;
-            padding: 40px;
         }
 
         /* --- THE WATCHER IMAGE --- */
-        /* This sits in the middle-right, text flows over it */
         .watcher-img {
             position: absolute;
-            top: 15%;
-            right: 15%;
-            height: 80vh;
+            /* ADJUSTMENT: Pushed slightly left and up for better compositional balance */
+            top: 5%; 
+            left: 20%; 
+            height: 90vh; /* Made it taller to dominate the space more */
             width: auto;
             z-index: 1;
             filter: grayscale(100%) contrast(1.2);
-            /* Interaction: slightly float */
+            mix-blend-mode: screen; /* Keep the screen blend mode from your screenshot */
             animation: float 6s ease-in-out infinite;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -72,14 +72,14 @@
         /* --- DECONSTRUCTED TYPOGRAPHY --- */
         .big-title {
             position: absolute;
-            bottom: -20px;
-            left: -10px;
+            /* ADJUSTMENT: Anchored closer to the very bottom-left */
+            bottom: -30px; 
+            left: 10px;
             font-family: "alfarn", serif;
-            font-size: 18vw; /* Massive */
+            font-size: 18vw; 
             line-height: 0.8;
             color: #fff;
             z-index: 3;
-            /* The key to the grit: Exclusion makes it invert colors over the image */
             mix-blend-mode: exclusion; 
             pointer-events: none;
         }
@@ -103,9 +103,10 @@
         /* --- THE ENTER 'BUTTON' (Raw Text) --- */
         .enter-trigger {
             position: absolute;
-            top: 50%;
-            left: 20%;
-            transform: translateY(-50%);
+            /* ADJUSTMENT: Positioned over the figure's torso/head area */
+            top: 45%; 
+            left: 50%;
+            transform: translate(-50%, -50%); /* Keeps it truly centered over the visual midpoint */
             font-family: "dunbar-tall", sans-serif;
             font-size: 3rem;
             font-weight: 900;
@@ -114,22 +115,22 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             z-index: 10;
-            mix-blend-mode: normal; /* Stands out */
+            mix-blend-mode: normal; 
         }
 
         /* Glitch Effect on Hover */
         .enter-trigger:hover {
             animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: #ff003c; /* Sudden flash of red */
+            color: #ff003c;
         }
 
         @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+            0% { transform: translate(-50%, -50%) }
+            20% { transform: translate(-52%, -48%) }
+            40% { transform: translate(-52%, -52%) }
+            60% { transform: translate(-48%, -48%) }
+            80% { transform: translate(-48%, -52%) }
+            100% { transform: translate(-50%, -50%) }
         }
 
         /* --- MINIMAL FOOTER --- */
@@ -157,28 +158,30 @@
 
         /* --- CUSTOM CURSOR --- */
         .cursor {
-            width: 20px; height: 20px;
+            /* ADJUSTMENT: Smaller default size */
+            width: 10px; height: 10px; 
             border: 1px solid #fff;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s;
+            transition: width 0.2s, height 0.2s, background 0.2s;
             mix-blend-mode: difference;
         }
         
         .cursor.hovered {
-            width: 50px; height: 50px;
-            background: #fff;
+            width: 30px; height: 30px; /* Reduced hover size */
+            background: rgba(255, 255, 255, 0.4);
         }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .watcher-img { right: -50px; height: 60vh; top: 20%; opacity: 0.5; }
-            .big-title { font-size: 25vw; bottom: 10%; }
-            .enter-trigger { left: 50%; top: 60%; transform: translate(-50%, -50%); }
+            .watcher-img { left: 0; height: 70vh; top: 10%; opacity: 0.5; }
+            .big-title { font-size: 25vw; bottom: 0; left: 0; }
+            .enter-trigger { left: 50%; top: 40%; transform: translate(-50%, -50%); font-size: 2rem;}
             .vertical-text { display: none; }
+            .meta-data { right: 20px; bottom: 20px; }
         }
     </style>
 </head>
@@ -196,12 +199,12 @@
         <img src="images/watcher.png" alt="" class="watcher-img">
 
         <div class="vertical-text">
-            Literary Magazine<br>Est. 2025
+            LITERARY MAGAZINE<br>EST. 2025
         </div>
 
         <h1 class="big-title">FAUN</h1>
 
-        <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER SITE</a>
+        <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER</a>
 
         <div class="meta-data">
             <span>Vol. II Available Now</span>
@@ -215,14 +218,19 @@
         // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         const link = document.getElementById('enter-link');
+        const allLinks = document.querySelectorAll('a, .enter-trigger');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        link.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        link.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        // Loop through all interactive elements to trigger cursor hover state
+        allLinks.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
 
         // Language Flicker (Faster/Harsher)
         const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', 'VOYTI'];
@@ -233,6 +241,9 @@
             if(Math.random() > 0.7) {
                 idx = (idx + 1) % languages.length;
                 link.innerText = languages[idx];
+            } else {
+                // To keep it from flickering too much, default back to ENTER often
+                link.innerText = 'ENTER';
             }
         }, 800);
     </script>
