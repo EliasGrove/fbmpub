@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
     <style>
-        /* --- BRUTALIST RESET --- */
+        /* --- CORE RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body { 
@@ -19,15 +19,15 @@
             color: #fff;
         }
 
-        /* --- COLORS (Original Palette) --- */
+        /* --- COLORS --- */
         :root {
-            --color-f: #E60026;   /* Faun (Red) */
-            --color-b: #0047BB;   /* By (Blue) */
-            --color-m: #FFD100;   /* Moonlight (Yellow) */
+            --color-f: #E60026;   /* Red */
+            --color-b: #0047BB;   /* Blue */
+            --color-m: #FFD100;   /* Yellow */
             --color-white: #FFFFFF;
         }
 
-        /* --- BACKGROUND VIDEO / TEXTURE --- */
+        /* --- BACKGROUND --- */
         #bg-video {
             position: fixed;
             top: 50%; left: 50%;
@@ -39,6 +39,7 @@
             filter: grayscale(100%) contrast(1.5);
             object-fit: cover;
         }
+
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
@@ -46,13 +47,14 @@
             z-index: 1;
             pointer-events: none;
         }
+
         .wrapper {
             position: relative;
             width: 100%; height: 100%;
             z-index: 2;
         }
 
-        /* --- THE WATCHER IMAGE --- */
+        /* --- THE WATCHER --- */
         .watcher-img {
             position: absolute;
             top: 5%; 
@@ -71,35 +73,66 @@
             100% { transform: translateY(0px); }
         }
 
-        /* --- "FBM" LOGO (BOTTOM-LEFT) --- */
+        /* --- FBM LOGO (Bottom Left) --- */
         .fbm-logo {
             position: absolute;
-            /* Anchored to the far bottom-left corner */
             bottom: 5vh; 
             left: 5vw;
-            display: flex; /* Use flex to align the letters horizontally */
-            align-items: flex-end;
-            font-family: "dunbar-tall", sans-serif; /* Use the bold font for FBM */
+            display: flex;
+            gap: 10px; /* Slight gap between letters */
+            font-family: "dunbar-tall", sans-serif; 
             font-weight: 900;
-            font-size: 15vw; /* Massive size, responsive */
+            font-size: 14vw; /* All letters same massive size */
             line-height: 0.8;
             z-index: 3;
             mix-blend-mode: exclusion; 
-            pointer-events: none;
+            user-select: none;
+            pointer-events: auto; /* Ensures we can hover them */
         }
 
-        /* Individual Letter Styling for Color Blocks */
-        .fbm-logo span {
-            margin-right: 0.05em; /* Subtle spacing */
+        .fbm-letter {
+            color: #fff; /* Default to white */
+            transition: color 0.4s ease; /* smooth transition, no shake */
         }
-        .letter-f { color: var(--color-f); }
-        .letter-b { 
-            color: var(--color-b); 
-            font-size: 10vw; /* 'B' is smaller for balance */
-        }
-        .letter-m { color: var(--color-m); }
 
-        /* --- VERTICAL TEXT (TOP-RIGHT) --- */
+        /* THE HOVER LOGIC: Only Color on Hover */
+        .letter-f:hover { color: var(--color-f); }
+        .letter-b:hover { color: var(--color-b); }
+        .letter-m:hover { color: var(--color-m); }
+
+        /* --- ENTER BUTTON (Center) --- */
+        .enter-trigger {
+            position: absolute;
+            top: 45%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            font-family: "dunbar-tall", sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 10;
+            mix-blend-mode: normal; 
+            /* ELEGANT TRANSITION settings */
+            transition: letter-spacing 0.6s ease, color 0.6s ease;
+        }
+
+        /* ELEGANT HOVER: Smooth expansion + Color Cycle */
+        .enter-trigger:hover {
+            letter-spacing: 8px; /* Slow breathing effect */
+            animation: slowColorCycle 4s infinite alternate; /* Very slow color shift */
+        }
+
+        /* Smoothly fades between the brand colors */
+        @keyframes slowColorCycle {
+            0% { color: var(--color-f); }   /* Red */
+            50% { color: var(--color-b); }  /* Blue */
+            100% { color: var(--color-m); } /* Yellow */
+        }
+
+        /* --- VERTICAL TEXT --- */
         .vertical-text {
             position: absolute;
             top: 40px;
@@ -116,37 +149,7 @@
             mix-blend-mode: exclusion;
         }
 
-        /* --- THE ENTER 'BUTTON' (CENTER) --- */
-        .enter-trigger {
-            position: absolute;
-            top: 45%; 
-            left: 50%;
-            transform: translate(-50%, -50%); 
-            font-family: "dunbar-tall", sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--color-white); 
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            z-index: 10;
-            mix-blend-mode: normal; 
-        }
-
-        /* Glitch animation on hover */
-        .enter-trigger:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-        }
-        @keyframes glitch {
-            0% { transform: translate(-50%, -50%) }
-            20% { transform: translate(-52%, -48%) }
-            40% { transform: translate(-52%, -52%) }
-            60% { transform: translate(-48%, -48%) }
-            80% { transform: translate(-48%, -52%) }
-            100% { transform: translate(-50%, -50%) }
-        }
-
-        /* --- FOOTER GROUP (BOTTOM-RIGHT) --- */
+        /* --- FOOTER GROUP --- */
         .footer-group {
             position: absolute;
             bottom: 40px;
@@ -158,47 +161,47 @@
         }
         .cta-small {
             opacity: 0.8;
-            color: var(--color-white);
+            color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
             display: block;
         }
-        .cta-small:hover { opacity: 1; }
+        .cta-small:hover { opacity: 1; border-bottom: 1px solid #fff; width: fit-content; margin-left: auto;}
+
         .featured-links a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: color 0.2s;
+            transition: color 0.3s;
             margin-left: 10px;
         }
-        .featured-links a:hover { color: var(--color-white); }
+        .featured-links a:hover { color: #fff; }
 
         /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 10px; height: 10px; 
-            border: 1px solid var(--color-white);
+            border: 1px solid #fff;
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
             mix-blend-mode: difference;
         }
         .cursor.hovered {
-            width: 30px; height: 30px; 
-            background: rgba(255, 255, 255, 0.4);
+            width: 40px; height: 40px; 
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Mobile Adjustments */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .watcher-img { left: 0; height: 70vh; top: 10%; opacity: 0.5; }
-            .fbm-logo { font-size: 20vw; bottom: 5vh; left: 5vw; }
-            .fbm-logo .letter-b { font-size: 13vw; }
-            .enter-trigger { left: 50%; top: 40%; transform: translate(-50%, -50%); font-size: 2rem;}
+            .fbm-logo { font-size: 20vw; bottom: 5vh; left: 5vw; gap: 5px; }
+            .enter-trigger { left: 50%; top: 40%; font-size: 2rem;}
             .vertical-text { display: none; }
             .footer-group { right: 20px; bottom: 20px; }
         }
@@ -211,20 +214,19 @@
     </video>
 
     <div class="scanlines"></div>
-
     <div class="cursor" id="cursor"></div>
 
     <div class="wrapper">
         <img src="images/watcher.png" alt="" class="watcher-img">
 
         <div class="vertical-text">
-            LITERARY MAGAZINE<br>EST. 2025
+            Literary Magazine<br>Est. 2025
         </div>
 
         <div class="fbm-logo">
-            <span class="letter-f">F</span>
-            <span class="letter-b">B</span>
-            <span class="letter-m">M</span>
+            <span class="fbm-letter letter-f">F</span>
+            <span class="fbm-letter letter-b">B</span>
+            <span class="fbm-letter letter-m">M</span>
         </div>
 
         <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER</a>
@@ -235,8 +237,6 @@
                 <span style="opacity:0.6;">FEATURED ON:</span>
                 <a href="https://www.clmp.org" target="_blank" rel="noopener">CLMP</a>
                 <a href="https://duotrope.com" target="_blank" rel="noopener">DUOTROPE</a>
-                <a href="https://www.chillsubs.com" target="_blank" rel="noopener">CHILL SUBS</a>
-                <a href="https://thegrinder.diabolicalplots.com" target="_blank" rel="noopener">GRINDER</a>
             </div>
         </div>
     </div>
@@ -244,60 +244,31 @@
     <script>
         // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
-        const link = document.getElementById('enter-link');
-        const allLinks = document.querySelectorAll('a, .enter-trigger');
-        
-        // Use CSS variables for the color cycle
-        const colors = [
-            getComputedStyle(document.documentElement).getPropertyValue('--color-f'), 
-            getComputedStyle(document.documentElement).getPropertyValue('--color-b'), 
-            getComputedStyle(document.documentElement).getPropertyValue('--color-m'), 
-            getComputedStyle(document.documentElement).getPropertyValue('--color-white')
-        ];
-        
-        // Initialize glitch interval variable
-        let colorGlitchInterval;
-        let langCycleInterval;
+        const allInteractive = document.querySelectorAll('a, .fbm-letter');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        allLinks.forEach(item => {
+        allInteractive.forEach(item => {
             item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // Dynamic Color Glitch on Hover (SLOWED DOWN)
-        let colorIndex = 0;
-
-        link.addEventListener('mouseenter', () => {
-            // Start the glitch interval on mouse enter
-            colorGlitchInterval = setInterval(() => {
-                colorIndex = (colorIndex + 1) % colors.length;
-                link.style.color = colors[colorIndex];
-            }, 700); // *** SLOWER: 700ms interval for subtle shift ***
-        });
-
-        link.addEventListener('mouseleave', () => {
-            // Stop the interval and reset color to white on mouse leave
-            clearInterval(colorGlitchInterval);
-            link.style.color = 'var(--color-white)';
-        });
-
-        // Language Flicker Logic
+        // Language Flicker Logic - Kept separate from style to ensure cleanness
+        const link = document.getElementById('enter-link');
         const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', 'VOYTI'];
         let langIdx = 0;
         
-        langCycleInterval = setInterval(() => {
-            if(Math.random() > 0.7) {
+        setInterval(() => {
+            if(Math.random() > 0.8) { // Occurs less frequently for elegance
                 langIdx = (langIdx + 1) % languages.length;
                 link.innerText = languages[langIdx];
             } else {
                 link.innerText = 'ENTER';
             }
-        }, 800); // Keeping language cycle fast enough to feel unstable
+        }, 1200); // Slower interval
     </script>
 </body>
 </html>
