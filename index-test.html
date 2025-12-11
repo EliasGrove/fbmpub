@@ -147,29 +147,19 @@
         }
         
         /* --- HOVER COLOR CYCLE (RED / BLUE / YELLOW) --- */
-        
-        /* 1st, 4th, 7th link -> RED */
         .nav-menu .nav-link:nth-child(3n+1):hover {
             color: var(--color-f);
             text-shadow: 0 0 15px rgba(230, 0, 38, 0.6);
         }
-
-        /* 2nd, 5th, 8th link -> BLUE */
         .nav-menu .nav-link:nth-child(3n+2):hover {
             color: var(--color-b);
             text-shadow: 0 0 15px rgba(0, 71, 187, 0.6);
         }
-
-        /* 3rd, 6th, 9th link -> YELLOW */
         .nav-menu .nav-link:nth-child(3n+3):hover {
             color: var(--color-m);
             text-shadow: 0 0 15px rgba(255, 209, 0, 0.6);
         }
-
-        /* Active State defaults to White for clarity, or you can match the color */
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
-
-        /* "Urgent Appeal" defaults to Red, but follows cycle on hover */
         .nav-link.urgent { color: var(--color-f); }
 
 
@@ -262,7 +252,15 @@
         <a href="index" class="nav-brand">FAUN BY MOONLIGHT</a>
         
         <div class="nav-menu">
-            <a href="who-we-are" class="nav-link active">Who We Are</a> <a href="volumes" class="nav-link">Volumes</a> <a href="blog" class="nav-link">Blog</a> <a href="submissions" class="nav-link">Submit</a> <a href="faq" class="nav-link">FAQ</a> <a href="support-us" class="nav-link">Support Us</a> <a href="urgent" class="nav-link urgent">Urgent Appeal</a> <a href="contact" class="nav-link">Contact</a> </div>
+            <a href="who-we-are" class="nav-link active">Who We Are</a> 
+            <a href="volumes" class="nav-link">Volumes</a> 
+            <a href="blog" class="nav-link">Blog</a> 
+            <a href="submissions" class="nav-link">Submit</a> 
+            <a href="faq" class="nav-link">FAQ</a> 
+            <a href="support-us" class="nav-link">Support Us</a> 
+            <a href="urgent" class="nav-link urgent">Urgent Appeal</a> 
+            <a href="contact" class="nav-link">Contact</a> 
+        </div>
     </nav>
 
     <div class="page-grid">
@@ -287,8 +285,9 @@
         </main>
 
         <aside class="visual-pane">
+            
             <video autoplay muted loop playsinline id="character-video" poster="images/watcher.png">
-                <source src="images/who-we-are.mp4" type="video/mp4">
+                <source src="images/index-vid.mp4" type="video/mp4">
             </video>
 
             <footer class="video-footer">
