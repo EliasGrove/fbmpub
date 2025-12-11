@@ -76,12 +76,7 @@
         .word-b:hover { color: var(--c-blue); }
         .word-m:hover { color: var(--c-yellow); }
 
-        /* --- DESKTOP MENU --- */
-        .desktop-menu {
-            display: flex;
-            gap: 25px;
-        }
-
+        .desktop-menu { display: flex; gap: 25px; }
         .nav-link {
             font-family: var(--f-body);
             font-weight: 700;
@@ -93,16 +88,13 @@
             transition: color 0.3s, text-shadow 0.3s;
         }
         
-        /* RGB Hover Effects */
         .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
         .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
-        
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        /* --- MOBILE MENU ELEMENTS (Hidden on Desktop) --- */
-        .burger { display: none; } /* Default hidden */
-        .mobile-menu-overlay { display: none; } /* Default hidden */
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
 
         /* --- MARQUEE ALERT --- */
         .alert-ticker {
@@ -120,7 +112,8 @@
             font-weight: 700;
             text-transform: uppercase;
             font-size: 0.9rem;
-            color: var(--c-yellow);
+            color: var(--c-text); /* Neutral color for ticker */
+            opacity: 0.5;
             letter-spacing: 2px;
         }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
@@ -138,17 +131,11 @@
             color: #fff;
             margin-bottom: 20px;
         }
-        .page-subtitle {
-            max-width: 600px;
-            font-size: 1.2rem;
-            color: #888;
-            line-height: 1.5;
-        }
 
         /* --- MAIN GRID LAYOUT --- */
         .submission-container {
             display: grid;
-            grid-template-columns: 1fr 2fr; /* Split screen 1/3 - 2/3 */
+            grid-template-columns: 300px 1fr; /* Fixed width sidebar, fluid content */
             width: 100%;
         }
 
@@ -160,7 +147,7 @@
             border-right: 1px solid var(--c-border);
             border-bottom: 1px solid var(--c-border);
             position: sticky;
-            top: 85px; /* Height of navbar */
+            top: 85px; 
             height: fit-content;
             background: var(--c-bg);
             z-index: 10;
@@ -171,47 +158,78 @@
             color: #222;
             display: block;
             margin-bottom: 10px;
+            transition: color 0.3s;
         }
         .section-name {
             font-family: var(--f-body);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--c-red);
+            color: #888;
             font-size: 0.9rem;
+            transition: color 0.3s;
         }
+
+        /* Color Themes for Sections (Affects Sticky Header & Content Accents) */
+        
+        /* Section 1: Red */
+        .section-red .section-number { color: rgba(230, 0, 38, 0.2); }
+        .section-red .section-name { color: var(--c-red); }
+        .section-red li { border-left-color: var(--c-red) !important; }
+        .section-red .warning-box { border-color: var(--c-red); background: rgba(230, 0, 38, 0.05); }
+
+        /* Section 2: Blue */
+        .section-blue .section-number { color: rgba(0, 71, 187, 0.2); }
+        .section-blue .section-name { color: var(--c-blue); }
+        .section-blue li { border-left-color: var(--c-blue) !important; }
+        
+        /* Section 3: Yellow */
+        .section-yellow .section-number { color: rgba(255, 209, 0, 0.2); }
+        .section-yellow .section-name { color: var(--c-yellow); }
 
         /* RIGHT COL: CONTENT */
         .scroll-content {
             padding: 60px 80px;
             border-bottom: 1px solid var(--c-border);
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-size: 1.15rem; /* Standardized size */
+            line-height: 1.8;   /* Improved line height */
             color: #ccc;
         }
-        .scroll-content h3 { color: #fff; margin-bottom: 1rem; font-family: var(--f-head); font-size: 2rem; }
-        .scroll-content p { margin-bottom: 1.5rem; }
-        .scroll-content ul { list-style: none; margin-bottom: 2rem; }
-        .scroll-content li { 
-            margin-bottom: 10px; 
-            padding-left: 20px; 
-            border-left: 2px solid var(--c-blue); 
+        .scroll-content h3 { 
+            color: #fff; 
+            margin-bottom: 1.5rem; 
+            font-family: var(--f-head); 
+            font-size: 2.2rem; 
+            margin-top: 0;
         }
-        .highlight { color: #fff; font-weight: 700; }
-        .warning-box {
-            border: 1px solid var(--c-red);
-            background: rgba(230, 0, 38, 0.05);
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1rem;
+        .scroll-content p { margin-bottom: 2rem; max-width: 800px; }
+        
+        .scroll-content ul { list-style: none; margin-bottom: 2rem; padding: 0; }
+        .scroll-content li { 
+            margin-bottom: 15px; 
+            padding-left: 20px; 
+            border-left: 3px solid #333; /* Default border color, overridden by theme */
+            color: #e0e0e0;
         }
 
-        /* --- SUBMISSION MODULE --- */
+        .highlight { color: #fff; font-weight: 700; }
+        
+        .warning-box {
+            border: 1px solid #333;
+            padding: 25px;
+            margin: 30px 0;
+            font-size: 1rem;
+            color: #ddd;
+        }
+        .warning-box strong { color: #fff; display: block; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase;}
+
+        /* --- SUBMISSION MODULE (Yellow Theme) --- */
         .submission-module {
-            background: #0a0a0a;
-            padding: 40px;
+            background: #0e0e0e;
+            padding: 50px;
             border: 1px solid var(--c-border);
             margin-top: 20px;
+            max-width: 800px;
         }
         
         .step-block {
@@ -219,47 +237,74 @@
             padding-bottom: 40px;
             border-bottom: 1px solid #222;
         }
-        .step-block:last-child { border-bottom: none; }
+        .step-block:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0;}
+
+        .step-title {
+            color: var(--c-yellow);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-family: var(--f-body);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
         .btn-buy {
             display: inline-block;
-            background: var(--c-blue);
-            color: #fff;
+            background: var(--c-yellow);
+            color: #000;
             padding: 15px 40px;
             text-decoration: none;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: all 0.3s ease;
         }
-        .btn-buy:hover { background: #fff; color: var(--c-blue); }
+        .btn-buy:hover { background: #fff; color: #000; }
 
         .checkbox-wrapper {
             display: flex; align-items: center; gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #222;
             cursor: none;
+            transition: border-color 0.3s;
         }
+        .checkbox-wrapper:hover { border-color: #444; }
+
         .checkbox-wrapper input {
             appearance: none;
             width: 20px; height: 20px;
             border: 2px solid #555;
             background: transparent;
             cursor: none;
+            display: grid;
+            place-content: center;
+        }
+        .checkbox-wrapper input::before {
+            content: "";
+            width: 10px; height: 10px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--c-bg); /* Checkmark color */
+            background-color: var(--c-yellow);
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
         }
         .checkbox-wrapper input:checked {
             background: var(--c-yellow);
             border-color: var(--c-yellow);
         }
+        /* Fix for custom checkmark visibility */
+        .checkbox-wrapper input:checked::before { transform: scale(1); background-color: #000; } 
         
         .reveal-box { position: relative; overflow: hidden; }
         
         .btn-reveal {
             width: 100%;
             padding: 20px;
-            background: #222;
+            background: #1a1a1a;
             color: #666;
             text-align: center;
             text-transform: uppercase;
@@ -270,13 +315,13 @@
         }
         
         .btn-reveal.active {
-            background: var(--c-red);
-            color: #fff;
-            border: 1px solid var(--c-red);
+            background: var(--c-yellow);
+            color: #000;
+            border: 1px solid var(--c-yellow);
             cursor: none;
             pointer-events: auto;
         }
-        .btn-reveal.active:hover { background: #fff; color: var(--c-red); }
+        .btn-reveal.active:hover { background: #fff; border-color: #fff; }
 
         .email-secret {
             display: none;
@@ -290,7 +335,7 @@
             margin-top: 10px;
             animation: fadeIn 0.5s ease;
         }
-        .email-secret a { color: inherit; }
+        .email-secret a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--c-yellow);}
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -306,58 +351,33 @@
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 900px) {
-            /* Toggle Nav Modes */
             .desktop-menu { display: none; }
-            .burger { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 6px; 
-                background: none; border: none; z-index: 1002; 
-            }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
             
-            /* Burger Animation */
             .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .burger.open span:nth-child(2) { opacity: 0; }
             .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-            /* Mobile Menu Overlay */
             .mobile-menu-overlay {
-                display: flex; /* Active for mobile logic, but hidden by opacity/transform initially */
-                position: fixed;
-                top: 0; left: 0; width: 100vw; height: 100vh;
-                background: var(--c-bg);
-                flex-direction: column;
-                justify-content: center; align-items: center;
-                gap: 30px;
-                transform: translateY(-100%);
-                transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: var(--c-bg); flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
-            
-            .mobile-menu-overlay .nav-link {
-                font-family: var(--f-head);
-                font-size: 2.5rem;
-                color: #444;
-            }
-            .mobile-menu-overlay .nav-link:hover, .mobile-menu-overlay .nav-link.active {
-                color: #fff;
-            }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* Layout Adjustments */
             .page-title { font-size: 4rem; }
             .submission-container { display: flex; flex-direction: column; }
             .sticky-header { 
-                position: relative; 
-                top: 0; 
-                padding: 30px;
-                border-right: none;
-                background: #080808;
+                position: relative; top: 0; padding: 30px; border-right: none; background: #080808; 
+                display: flex; align-items: center; gap: 15px;
             }
-            .section-number { font-size: 2.5rem; display: inline-block; margin-right: 15px; }
-            .section-name { display: inline-block; }
+            .section-number { font-size: 2rem; margin-bottom: 0; }
             .scroll-content { padding: 30px; }
+            .submission-module { padding: 30px; }
         }
     </style>
 </head>
@@ -409,7 +429,7 @@
 
     <main class="submission-container">
 
-        <div class="grid-row">
+        <div class="grid-row section-red">
             <div class="sticky-header">
                 <span class="section-number">01</span>
                 <span class="section-name">The Criteria</span>
@@ -420,7 +440,8 @@
                 <p>We are looking for works that resist simple genre classification. Works that aren't scared of pushing boundaries. Our specialty is the exceptionally unmarketable.</p>
                 
                 <div class="warning-box">
-                    <strong>PLEASE NOTE:</strong> We will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors will be immediately discarded.
+                    <strong>Please Note</strong>
+                    We will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors will be immediately discarded.
                 </div>
 
                 <h3>Manuscript Requirements</h3>
@@ -437,7 +458,7 @@
             </div>
         </div>
 
-        <div class="grid-row">
+        <div class="grid-row section-blue">
             <div class="sticky-header">
                 <span class="section-number">02</span>
                 <span class="section-name">Compensation</span>
@@ -447,27 +468,30 @@
                 <p>Payment is issued via PayPal upon acceptance of the manuscript.</p>
                 <ul>
                     <li><strong>$20.00</strong> — Fiction & Non-Fiction under 5,000 words</li>
-                    <li><strong>$50.00</strong> — iction & Non-Fiction 5,000+ words</li>
+                    <li><strong>$50.00</strong> — Fiction & Non-Fiction 5,000+ words</li>
                 </ul>
+                <p>We purchase First North American Serial Rights (FNASR). All rights revert to the author upon publication.</p>
             </div>
         </div>
 
-        <div class="grid-row">
+        <div class="grid-row section-yellow">
             <div class="sticky-header">
-                <span class="section-number" style="color: var(--c-blue);">03</span>
-                <span class="section-name" style="color: var(--c-blue);">How to Submit</span>
+                <span class="section-number">03</span>
+                <span class="section-name">How to Submit</span>
             </div>
             <div class="scroll-content">                
+                <p>We believe our writers should also be our readers. This ensures our community remains strong and our writers are compensated fairly.</p>
+
                 <div class="submission-module">
                     
                     <div class="step-block">
-                        <h4 style="color: var(--c-blue); text-transform: uppercase; margin-bottom: 15px;">Step 1: Buy Our Volumes</h4>
-                        <p> We believe our writers should also be our readers. Your readership keeps the lights on and pays our talented writers. It also ensures you receive detailed, personalized feedback on every submission. </p>
+                        <h4 class="step-title">Step 1: Buy Our Volumes</h4>
+                        <p>Your readership keeps the lights on. It also ensures you receive detailed, personalized feedback on every submission.</p>
                         <a href="https://faunbymoonlight.store" target="_blank" class="btn-buy">Buy Current Volume</a>
                     </div>
 
                     <div class="step-block">
-                        <h4 style="color: var(--c-red); text-transform: uppercase; margin-bottom: 15px;">Step 2: Send Your Manuscript</h4>
+                        <h4 class="step-title">Step 2: Send Your Manuscript</h4>
                         <p>Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or volume purchase information in the email body.</p>
                         
                         <label class="checkbox-wrapper">
@@ -497,7 +521,6 @@
     <script>
         // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        // Add .nav-link to interactive elements list so cursor expands on links
         const interactive = document.querySelectorAll('a, button, input, .checkbox-wrapper, .nav-link');
 
         document.addEventListener('mousemove', (e) => {
@@ -519,7 +542,6 @@
             navMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when a link is clicked
         const mobileLinks = navMenu.querySelectorAll('.nav-link');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -541,7 +563,7 @@
                 revealBtn.classList.remove('active');
                 revealBtn.innerText = "Locked // Awaiting Verification";
                 emailSecret.style.display = 'none';
-                revealBtn.style.display = 'block'; // Ensure button comes back if unchecked
+                revealBtn.style.display = 'block';
             }
         });
 
