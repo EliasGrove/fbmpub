@@ -137,11 +137,13 @@
         /* --- HEADER VIDEO --- */
         .header-bg-video {
             position: absolute;
-            top: 50%;
+            /* Moved center point down */
+            top: 60%;
             right: 0; 
-            /* Same positioning logic as Volumes page */
-            transform: translateY(-50%) translateX(10%); 
-            height: 85%; 
+            /* Pushed further right and kept centered vertically relative to new top */
+            transform: translateY(-50%) translateX(15%); 
+            /* Slightly increased height */
+            height: 90%; 
             width: auto;
             z-index: 1; 
             pointer-events: none;
