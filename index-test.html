@@ -8,89 +8,69 @@
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
     <style>
-        /* --- RESET --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-bg: #0a0a0a;
+            --c-text: #e0e0e0;
+            --c-white: #ffffff;
+            --font-head: "alfarn", serif;
+            --font-body: "neue-kabel", sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
 
         body { 
-            background-color: #050505; 
-            font-family: "neue-kabel", sans-serif;
-            color: #e0e0e0;
-            overflow-x: hidden; 
+            background-color: #000; /* Behind video */
+            font-family: var(--font-body);
+            color: var(--c-text);
+            overflow-x: hidden;
         }
 
-        /* --- COLORS --- */
-        :root {
-            --color-f: #E60026;   /* Red */
-            --color-b: #0047BB;   /* Blue */
-            --color-m: #FFD100;   /* Yellow */
-            --color-border: #333;
-            --bg-text: #0a0a0a;
-        }
-
-        /* --- THE VIDEO (EXACT SETTINGS FROM INDEX) --- */
-        #bg-video {
+        /* --- 2. CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
             position: fixed;
-            top: 50%; left: 50%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
             transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            z-index: 0; /* Behind everything */
-            
-            /* Visual Settings */
-            object-fit: cover;
-            opacity: 1; /* Fully visible */
-            
-            /* THE TRICK: We act like it's full screen, but physically cut off the left 50% */
-            clip-path: inset(0 0 0 50%);
+            transition: width 0.2s, height 0.2s;
+        }
+        /* Hover state for cursor */
+        body:has(a:hover) .cursor-dot {
+            width: 50px;
+            height: 50px;
         }
 
-        /* --- LEFT CONTENT (SCROLLABLE) --- */
-        .content-scroll {
-            position: relative;
-            width: 50vw; /* Occupies the Left Half */
-            min-height: 100vh;
-            background-color: var(--bg-text); /* Solid color covers any video bleed */
-            border-right: 1px solid var(--color-border);
-            z-index: 10; 
-            padding: 160px 60px 100px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
-        .socials-fixed {
+        /* --- 3. VIDEO IMPLEMENTATION (The Mask Method) --- */
+        #video-backdrop {
             position: fixed;
-            bottom: 40px;
-            right: 0;
-            width: 50vw;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            z-index: 20;
-            /* Gradient to ensure text pops off the video */
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 20px 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            /* CRITICAL: Hides the left 50% of the video */
+            clip-path: inset(0 0 0 50%);
+            background-color: #000;
         }
 
-        .social-link {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 700;
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
+        #bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+            opacity: 0.8; 
         }
 
-        .social-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        /* --- NAVIGATION BAR --- */
+        /* --- 4. NAVIGATION --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -98,76 +78,77 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-brand {
-            font-family: "alfarn", serif;
+            font-family: var(--font-head);
             font-size: 1.8rem;
             color: #fff;
             text-decoration: none;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            white-space: nowrap;
         }
 
         .nav-menu {
             display: flex;
-            gap: 20px; 
-            flex-wrap: wrap; 
-            justify-content: flex-end;
+            gap: 30px;
         }
 
         .nav-link {
-            font-family: "neue-kabel", sans-serif;
+            font-family: var(--font-body);
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: #888;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.3s, text-shadow 0.3s;
-            white-space: nowrap;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
         }
 
-        /* --- NAV COLOR CYCLE (RED/BLUE/YELLOW) --- */
-        .nav-menu .nav-link:nth-child(3n+1):hover {
-            color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
-        }
-        .nav-menu .nav-link:nth-child(3n+2):hover {
-            color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
-        }
-        .nav-menu .nav-link:nth-child(3n+3):hover {
-            color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
-        }
-        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
-        .nav-link.urgent { color: var(--color-f); }
+        /* --- TRICOLOR HOVER LOGIC --- */
+        /* Cycle: Red, Blue, Yellow */
+        .nav-link:nth-child(3n+1):hover { color: var(--c-red); }
+        .nav-link:nth-child(3n+2):hover { color: var(--c-blue); }
+        .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); }
 
-        /* --- TYPOGRAPHY --- */
-        .page-header {
-            margin-bottom: 50px;
-            border-bottom: 4px solid #fff; 
-            padding-bottom: 20px;
-            display: inline-block;
-            width: 100%;
+        .nav-link.active { color: #fff; border-bottom: 2px solid #fff; }
+
+        /* --- 5. LEFT CONTENT PANE (Scrollable) --- */
+        .content-pane {
+            width: 50vw; /* Strictly 50% */
+            min-height: 100vh;
+            background-color: var(--c-bg);
+            position: relative;
+            z-index: 10; /* sits above the video layer */
+            padding: 180px 80px 100px 60px;
+            border-right: 1px solid #222;
+        }
+
+        /* TYPOGRAPHY */
+        .header-group {
+            margin-bottom: 80px;
+            border-left: 4px solid #fff;
+            padding-left: 30px;
         }
 
         .sub-title {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--color-f);
-            margin-bottom: 15px;
             display: block;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--c-red);
+            margin-bottom: 10px;
             font-weight: 700;
         }
 
         .super-title {
-            font-family: "alfarn", serif;
-            font-size: 5.5rem;
+            font-family: var(--font-head);
+            font-size: 6rem;
             line-height: 0.85;
             color: #fff;
             text-transform: uppercase;
@@ -175,73 +156,105 @@
         }
 
         .prose {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #ccc;
-            max-width: 650px;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: #cccccc;
+            max-width: 90%;
         }
-        .prose p { margin-bottom: 2rem; }
+
+        .prose p { margin-bottom: 2.5rem; }
         .prose strong { color: #fff; font-weight: 700; }
-        .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
-        .prose a:hover { color: var(--color-f); }
-
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            width: 10px; height: 10px; 
-            border: 1px solid #fff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background 0.3s;
-            mix-blend-mode: difference;
+        
+        .prose a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid var(--c-blue);
+            transition: background 0.3s;
         }
-        .cursor.hovered { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); }
+        .prose a:hover {
+            background-color: var(--c-blue);
+            color: #fff;
+        }
 
-        /* --- RESPONSIVE MOBILE --- */
-        @media (max-width: 900px) {
-            /* Remove the clip so it acts as a background again, or stack it */
-            #bg-video { clip-path: none; opacity: 0.3; } /* Dim it so text is readable over it */
-            .content-scroll { width: 100%; padding: 40px 30px; border-right: none; background: rgba(10,10,10,0.8); }
-            .socials-fixed { position: relative; width: 100%; background: transparent; bottom: auto; right: auto; padding-top: 40px;}
-            .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
-            .nav-menu { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; }
-            .super-title { font-size: 3.5rem; }
+        /* FOOTER (In flow) */
+        .content-footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            font-size: 0.75rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 6. SOCIAL OVERLAY (Bottom Right) --- */
+        .social-overlay {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 20;
+            display: flex;
+            gap: 30px;
+        }
+
+        .social-link {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5; /* Low opacity per request */
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 20px; flex-wrap: wrap; }
+            .nav-menu { display: none; } /* Hide menu for simplicity in this demo */
+            
+            /* Collapse to single column */
+            #video-backdrop { clip-path: none; position: relative; height: 50vh; order: -1; }
+            .content-pane { width: 100%; padding: 60px 30px; }
+            .super-title { font-size: 4rem; }
+            .social-overlay { position: relative; bottom: auto; right: auto; padding: 30px; background: #000; justify-content: center;}
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot"></div>
 
     <nav class="navbar">
-        <a href="index" class="nav-brand">FAUN BY MOONLIGHT</a>
+        <a href="index" class="nav-brand">Faun by Moonlight</a>
         <div class="nav-menu">
             <a href="who-we-are" class="nav-link active">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
             <a href="blog" class="nav-link">Blog</a>
-            <a href="submissions" class="nav-link">Submit</a>
+            <a href="submit" class="nav-link">Submit</a>
             <a href="faq" class="nav-link">FAQ</a>
-            <a href="support-us" class="nav-link">Support Us</a>
-            <a href="urgent" class="nav-link urgent">Urgent Appeal</a>
+            <a href="support" class="nav-link">Support Us</a>
+            <a href="appeal" class="nav-link">Urgent Appeal</a>
             <a href="contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="images/who-we-are.mp4" type="video/mp4">
-    </video>
-
-    <div class="socials-fixed">
-        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
-        <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
-        <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
-        <a href="contact" class="social-link">Mail</a>
+    <div id="video-backdrop">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="images/who-we-are.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
-    <main class="content-scroll">
-        <header class="page-header">
+    <main class="content-pane">
+        
+        <header class="header-group">
             <span class="sub-title">Mission Statement // Est. 2025</span>
             <h1 class="super-title">Who<br>We Are</h1>
         </header>
@@ -257,21 +270,28 @@
 
             <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
         </div>
+
+        <footer class="content-footer">
+            &copy; 2025 Faun by Moonlight — Literary Fiction
+        </footer>
+
     </main>
 
-    <script>
-        const cursor = document.getElementById('cursor');
-        const allInteractive = document.querySelectorAll('a, button');
+    <div class="social-overlay">
+        <a href="#" class="social-link">X / Twitter</a>
+        <a href="#" class="social-link">Bluesky</a>
+        <a href="#" class="social-link">YouTube</a>
+        <a href="#" class="social-link">Mail</a>
+    </div>
 
+    <script>
+        const cursor = document.querySelector('.cursor-dot');
+        
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-
-        allInteractive.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
     </script>
+
 </body>
 </html>
