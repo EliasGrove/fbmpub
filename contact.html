@@ -12,8 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
-            --c-bg: #050505;
-            --c-panel: #0a0a0a;
+            --c-bg: #0a0a0a; 
             --c-text: #e0e0e0;
             --c-red: #E60026;
             --c-blue: #0047BB;
@@ -49,7 +48,7 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid var(--c-red);
+            border: 1px solid var(--c-yellow);
             mix-blend-mode: normal;
         }
 
@@ -61,7 +60,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            background: rgba(5, 5, 5, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -100,103 +99,103 @@
         .burger { display: none; } 
         .mobile-menu-overlay { display: none; }
 
-        /* --- SPLIT LAYOUT CONTAINER --- */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-            padding-top: 85px; /* Nav spacing */
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 40px 80px 40px;
+            border-bottom: 1px solid var(--c-border);
         }
-
-        /* --- LEFT SIDE: DIRECTORY --- */
-        .directory-panel {
-            padding: 80px 60px;
-            border-right: 1px solid var(--c-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: var(--c-bg);
-        }
-
-        .page-header h1 {
+        .super-title {
             font-family: var(--f-head);
-            font-size: 6rem;
-            line-height: 0.9;
+            font-size: 8rem;
+            line-height: 0.85;
             text-transform: uppercase;
             color: #fff;
-            margin-bottom: 30px;
+            margin: 0;
         }
-
-        .page-intro {
+        .intro-text {
+            max-width: 600px;
+            margin-top: 30px;
             font-size: 1.2rem;
+            line-height: 1.5;
             color: #888;
-            max-width: 450px;
-            line-height: 1.6;
-            margin-bottom: 60px;
+            border-left: 2px solid var(--c-yellow);
+            padding-left: 20px;
         }
 
-        .directory-list {
+        /* --- SPLIT LAYOUT CONTAINER --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr; /* Form gets slightly more space */
+            min-height: 60vh;
+        }
+
+        /* --- LEFT SIDE: CHANNELS --- */
+        .channels-panel {
+            padding: 60px 40px;
+            border-right: 1px solid var(--c-border);
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .panel-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #555;
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .channel-list {
             display: flex;
             flex-direction: column;
             gap: 0;
         }
 
-        .social-row {
+        .channel-row {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             padding: 25px 0;
-            border-bottom: 1px solid var(--c-border);
+            border-bottom: 1px solid #222;
             text-decoration: none;
-            color: #666;
-            font-family: var(--f-display);
-            font-weight: 700;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             transition: all 0.3s ease;
         }
+        .channel-row:first-child { border-top: 1px solid #222; }
 
-        .social-handle {
+        .channel-name {
+            font-family: var(--f-display);
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            color: #888;
+            transition: color 0.3s;
+        }
+        .channel-handle {
             font-family: var(--f-body);
             font-size: 0.9rem;
-            letter-spacing: 2px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
+            color: #444;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
 
-        .social-row:hover .social-handle { opacity: 1; transform: translateX(0); }
-        .social-row:first-child { border-top: 1px solid var(--c-border); }
+        .channel-row:hover .channel-name { color: #fff; padding-left: 10px; }
+        .channel-row:hover .channel-handle { color: var(--c-yellow); padding-right: 10px; }
 
-        /* Social Hover Colors */
-        .social-row.x:hover { color: #fff; padding-left: 20px; }
-        .social-row.bluesky:hover { color: var(--c-blue); padding-left: 20px; }
-        .social-row.youtube:hover { color: var(--c-red); padding-left: 20px; }
-        .social-row.substack:hover { color: var(--c-yellow); padding-left: 20px; }
-        .social-row.insta:hover { color: #d62976; padding-left: 20px; }
-
-        /* --- RIGHT SIDE: FORM TERMINAL --- */
+        /* --- RIGHT SIDE: FORM --- */
         .form-panel {
-            padding: 80px 60px;
-            background: var(--c-panel);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 60px 80px;
+            border-bottom: 1px solid var(--c-border);
+            background: #0e0e0e;
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
+            gap: 50px;
+            max-width: 700px;
         }
 
-        .form-group {
-            position: relative;
-        }
+        .form-group { position: relative; }
 
         .form-label {
             font-family: var(--f-body);
@@ -204,20 +203,20 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #555;
+            color: #666;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        /* Typewriter Input Style */
+        /* Input Style */
         .form-input, .form-textarea, .form-select {
             width: 100%;
             background: transparent;
             border: none;
             border-bottom: 2px solid #333;
-            padding: 15px 0;
+            padding: 10px 0;
             font-family: var(--f-head);
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Larger typing font */
             color: #fff;
             border-radius: 0;
             transition: border-color 0.3s ease;
@@ -225,67 +224,85 @@
 
         .form-input:focus, .form-textarea:focus, .form-select:focus {
             outline: none;
-            border-bottom-color: var(--c-red);
+            border-bottom-color: var(--c-yellow);
         }
 
         .form-textarea {
             resize: vertical;
-            min-height: 100px;
-            font-family: var(--f-body); /* Body font for long text readability */
+            min-height: 80px;
+            font-family: var(--f-body); 
             font-size: 1.2rem;
             line-height: 1.6;
         }
 
-        .form-select {
-            color: #aaa;
-            cursor: pointer;
-        }
+        .form-select { color: #aaa; cursor: pointer; }
         .form-select option { background: #000; color: #fff; }
 
         .submit-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 20px;
-            font-family: var(--f-display);
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 20px 40px;
+            font-family: var(--f-body);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-self: flex-start;
         }
 
         .submit-btn:hover {
-            background: var(--c-red);
-            color: #fff;
-            padding-left: 30px;
+            background: var(--c-yellow);
+            border-color: var(--c-yellow);
+            color: #000;
         }
 
-        .disclaimer {
-            margin-top: 40px;
-            font-size: 0.85rem;
-            color: #444;
-            border-top: 1px solid #222;
-            padding-top: 20px;
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
         }
-        .disclaimer a { color: #666; text-decoration: underline; }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+
+        .social-link:hover { transform: translateY(-2px); }
 
         /* --- FOOTER --- */
         footer {
-            grid-column: span 2;
             padding: 40px;
             text-align: center;
-            color: #333;
+            color: #555;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             border-top: 1px solid var(--c-border);
-            background: var(--c-bg);
         }
 
         /* --- RESPONSIVE --- */
@@ -307,17 +324,17 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* Grid Collapse */
-            .contact-container { grid-template-columns: 1fr; }
+            .page-header { padding: 120px 20px 40px 20px; }
+            .super-title { font-size: 4rem; }
             
-            .directory-panel { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); }
-            .page-header h1 { font-size: 4rem; }
-            .social-handle { opacity: 1; transform: none; display: block; font-size: 0.7rem; color: #555; }
-            
+            .contact-grid { grid-template-columns: 1fr; }
+            .channels-panel { padding: 40px 20px; border-right: none; }
             .form-panel { padding: 60px 20px; }
-            .form-input { font-size: 1.2rem; }
             
-            footer { grid-column: span 1; }
+            .channel-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .channel-handle { opacity: 1; }
+            
+            .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
 </head>
@@ -357,41 +374,48 @@
         <a href="contact" class="nav-link">Contact</a>
     </div>
 
-    <main class="contact-container">
-        
-        <section class="directory-panel">
-            <div class="page-header">
-                <h1>Contact<br>Us</h1>
-                <p class="page-intro">
-                    For general inquiries, business matters, or questions about the magazine. We read everything, even if we can't reply to everything immediately.
-                </p>
-            </div>
+    <header class="page-header">
+        <h1 class="super-title">Contact<br>Frequency</h1>
+        <div class="intro-text">
+            For general inquiries, business matters, or questions about the magazine. 
 
-            <div class="directory-list">
-                <a href="https://x.com/faunbymoonlight" target="_blank" class="social-row x">
-                    <span>X (Twitter)</span>
-                    <span class="social-handle">@faunbymoonlight</span>
+[Image of envelope]
+ We read everything, even if we can't reply to everything immediately.
+        </div>
+    </header>
+
+    <main class="contact-grid">
+        
+        <section class="channels-panel">
+            <span class="panel-label">01 // Direct Channels</span>
+            
+            <div class="channel-list">
+                <a href="https://x.com/faunbymoonlight" target="_blank" class="channel-row">
+                    <span class="channel-name">X (Twitter)</span>
+                    <span class="channel-handle">@faunbymoonlight</span>
                 </a>
-                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-row bluesky">
-                    <span>Bluesky</span>
-                    <span class="social-handle">@faunbymoonlight.bsky.social</span>
+                <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="channel-row">
+                    <span class="channel-name">Bluesky</span>
+                    <span class="channel-handle">@faunbymoonlight.bsky.social</span>
                 </a>
-                <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-row youtube">
-                    <span>YouTube</span>
-                    <span class="social-handle">Faun by Moonlight Channel</span>
+                <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="channel-row">
+                    <span class="channel-name">YouTube</span>
+                    <span class="channel-handle">Faun by Moonlight Channel</span>
                 </a>
-                <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-row substack">
-                    <span>Substack</span>
-                    <span class="social-handle">Editorial Newsletter</span>
+                <a href="https://faunbymoonlight.substack.com" target="_blank" class="channel-row">
+                    <span class="channel-name">Substack</span>
+                    <span class="channel-handle">Editorial Newsletter</span>
                 </a>
-                <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-row insta">
-                    <span>Instagram</span>
-                    <span class="social-handle">@faunbymoonlight</span>
+                <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="channel-row">
+                    <span class="channel-name">Instagram</span>
+                    <span class="channel-handle">@faunbymoonlight</span>
                 </a>
             </div>
         </section>
 
         <section class="form-panel">
+            <span class="panel-label">02 // Transmission</span>
+
             <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="40095b04-f218-4f3a-8532-5fbec80bee19">
                 <input type="hidden" name="subject" value="Contact Form - Faun by Moonlight">
@@ -418,22 +442,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="message" class="form-label">Transmission</label>
-                    <textarea id="message" name="message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" class="form-textarea" placeholder="Type here..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">
-                    <span>Send Message</span>
-                    <span>&rarr;</span>
-                </button>
-
-                <div class="disclaimer">
-                    NOTE: This form is for general inquiries only. For manuscripts, please visit our <a href="submissions">Submissions</a> page.
-                </div>
+                <button type="submit" class="submit-btn">Send Transmission</button>
             </form>
         </section>
 
     </main>
+
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
 
     <footer>
         © 2025 Faun by Moonlight. All rights reserved.
@@ -442,7 +481,7 @@
     <script>
         // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .social-row, .form-input, .form-textarea, .form-select');
+        const interactive = document.querySelectorAll('a, button, .channel-row, .form-input, .form-textarea, .form-select');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
