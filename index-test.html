@@ -130,10 +130,9 @@
             position: absolute;
             top: 50%;
             right: 0; 
-            /* Centered vertically, no horizontal offset needed if right:0 works well, 
-               or slight translateX to push it right if the video file has empty space on left */
-            transform: translateY(-50%); 
-            height: 85%; /* Reduced from 120% to fit better */
+            /* Added translateX(25%) to push it further right */
+            transform: translateY(-50%) translateX(25%); 
+            height: 85%; 
             width: auto;
             z-index: 1; 
             pointer-events: none;
@@ -433,7 +432,7 @@
     </div>
 
     <header class="archive-header">
-        <h1 class="page-title">The<br>Archive</h1>
+        <h1 class="page-title">Our<br>Volumes</h1>
         <div class="page-subtitle">A Catalogue of the Exceptionally Unmarketable</div>
         
         <video class="header-bg-video" autoplay muted loop playsinline>
