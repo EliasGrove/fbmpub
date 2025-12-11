@@ -39,14 +39,14 @@
             object-fit: cover;
             opacity: 1; 
             
-            /* SHIFT: '30%' pushes the image content to the right (away from left edge) */
-            object-position: 30% center;
+            /* SHIFT: 80% pushes the focus significantly to the right */
+            object-position: 80% center;
             
             /* CROP: Hides the Right 50% */
             clip-path: inset(0 50% 0 0);
         }
 
-        /* --- RIGHT CONTENT (SCROLLABLE) --- */
+        /* --- RIGHT CONTENT (SCROLLABLE TEXT AREA) --- */
         .content-scroll {
             position: relative;
             width: 50vw; 
@@ -55,10 +55,42 @@
             background-color: var(--bg-text); 
             border-left: 1px solid var(--color-border);
             z-index: 10; 
-            padding: 160px 60px 100px 60px;
+            /* Padding bottom makes room for fixed socials so text doesn't get cut off */
+            padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
+        .socials-fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50vw; /* Start at the middle of the screen */
+            width: 50vw; /* Span the right half */
+            padding: 30px 60px 50px 60px; /* Match content padding */
+            z-index: 20; /* Sit on top of scrolling text */
+            /* Subtle gradient so text is readable over scrolling content */
+            background: linear-gradient(to top, var(--bg-text) 80%, transparent);
+            display: flex;
+            gap: 30px;
+        }
+
+        .social-link {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .social-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
         /* --- NAVIGATION BAR --- */
@@ -156,32 +188,6 @@
         .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
         .prose a:hover { color: var(--color-f); }
 
-        /* --- SOCIALS (NOW IN CONTENT BOX) --- */
-        .socials-inline {
-            margin-top: 60px; /* Space from text */
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            gap: 30px;
-        }
-
-        .social-link {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 700;
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        .social-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
         /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 10px; height: 10px; 
@@ -202,10 +208,11 @@
             .content-scroll { 
                 width: 100%; 
                 margin-left: 0; 
-                padding: 40px 30px; 
+                padding: 40px 30px 100px 30px; /* Extra padding for fixed socials */
                 border-left: none; 
                 background: rgba(10,10,10,0.85); 
             }
+            .socials-fixed-bottom { left: 0; width: 100%; padding: 30px; justify-content: center; background: linear-gradient(to top, #0a0a0a 80%, transparent);}
             .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
             .nav-menu { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; }
             .super-title { font-size: 3.5rem; }
@@ -251,14 +258,14 @@
 
             <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
         </div>
-
-        <div class="socials-inline">
-            <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
-            <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
-            <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
-            <a href="contact" class="social-link">Mail</a>
-        </div>
     </main>
+
+    <div class="socials-fixed-bottom">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
+        <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
+        <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+        <a href="contact" class="social-link">Mail</a>
+    </div>
 
     <script>
         const cursor = document.getElementById('cursor');
