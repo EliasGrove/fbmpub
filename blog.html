@@ -31,7 +31,7 @@
             display: flex; flex-direction: column;
         }
 
-        /* --- CUSTOM CURSOR --- */
+        /* --- CUSTOM CURSOR (Standard, No Text) --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -45,21 +45,11 @@
             mix-blend-mode: exclusion;
         }
         .cursor.hovered { 
-            width: 80px; height: 80px; 
-            background: #fff;
-            mix-blend-mode: difference;
-            display: flex; justify-content: center; align-items: center;
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-red);
+            mix-blend-mode: normal;
         }
-        /* Text inside cursor */
-        .cursor::after {
-            content: '';
-            font-size: 10px;
-            color: #000;
-            font-family: var(--f-body);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .cursor.hovered::after { content: 'READ'; }
 
         /* --- NAVIGATION --- */
         .navbar {
@@ -159,15 +149,15 @@
         .blog-row:hover { background: #1a1a1a; }
         
         /* Row 1 (Red) */
-        .blog-row:nth-child(3n+1):hover .entry-title { color: var(--c-red); -webkit-text-stroke: 0px; }
+        .blog-row:nth-child(3n+1):hover .entry-title { color: var(--c-red); }
         .blog-row:nth-child(3n+1):hover .meta-pill { border-color: var(--c-red); color: var(--c-red); }
         
         /* Row 2 (Blue) */
-        .blog-row:nth-child(3n+2):hover .entry-title { color: var(--c-blue); -webkit-text-stroke: 0px; }
+        .blog-row:nth-child(3n+2):hover .entry-title { color: var(--c-blue); }
         .blog-row:nth-child(3n+2):hover .meta-pill { border-color: var(--c-blue); color: var(--c-blue); }
 
         /* Row 3 (Yellow) */
-        .blog-row:nth-child(3n+3):hover .entry-title { color: var(--c-yellow); -webkit-text-stroke: 0px; }
+        .blog-row:nth-child(3n+3):hover .entry-title { color: var(--c-yellow); }
         .blog-row:nth-child(3n+3):hover .meta-pill { border-color: var(--c-yellow); color: var(--c-yellow); }
 
         /* Date Column */
@@ -314,35 +304,12 @@
 
     <main class="blog-index">
 
-        <a href="who-should-die.html" class="blog-row">
-            <div class="entry-content">
-                <h2 class="entry-title">Who Should Die</h2>
-                <p class="entry-excerpt">
-                    An inquiry into the nature of the State, harm, and punishment.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Philosophy</span>
-            </div>
-        </a>
-
-        <a href="national-socialists-v-chairs.html" class="blog-row">
-                <div class="entry-content">
-                <h2 class="entry-title">Nazis vs. Chairs</h2>
-                <p class="entry-excerpt">
-                    An essay on symbols and totalitarianism.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Politics</span>
-            </div>
-        </a>
-
         <a href="blog-algorithmic-nuance" class="blog-row">
+            <div class="entry-date">09.30.25</div>
             <div class="entry-content">
                 <h2 class="entry-title">The Algorithmic Death of Nuance</h2>
                 <p class="entry-excerpt">
-                    Why we left X.
+                    Why we left X, context collapse, and why engagement-farming is destroying the ability to have a conversation about art.
                 </p>
             </div>
             <div class="entry-meta">
@@ -351,10 +318,11 @@
         </a>
 
         <a href="blog-death-of-literature" class="blog-row">
+            <div class="entry-date">09.12.25</div>
             <div class="entry-content">
                 <h2 class="entry-title">The Death of Literature</h2>
                 <p class="entry-excerpt">
-                    Critics have declared literature dead for a century. Are they right? (No)
+                    Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever. So why does it feel like something is dying?
                 </p>
             </div>
             <div class="entry-meta">
@@ -363,14 +331,41 @@
         </a>
 
         <a href="blog-ai-statement.html" class="blog-row">
+            <div class="entry-date">08.01.25</div>
             <div class="entry-content">
                 <h2 class="entry-title">Statement on A.I.</h2>
                 <p class="entry-excerpt">
-                    We not only don’t have an issue with the existence or usage of AI, but we welcome it.
+                    We not only don’t have an issue with the existence or usage of AI, but we welcome it. However, generating art and brainstorming with tools are two very different things.
                 </p>
             </div>
             <div class="entry-meta">
                 <span class="meta-pill">Editorial</span>
+            </div>
+        </a>
+
+        <a href="who-should-die.html" class="blog-row">
+            <div class="entry-date">10.24.25</div>
+            <div class="entry-content">
+                <h2 class="entry-title">Who Should Die</h2>
+                <p class="entry-excerpt">
+                    If both Mr. Mangione and Mr. Thompson have caused verifiable harm, why is one in jail and the other wasn't? An inquiry into the nature of the State, harm, and punishment.
+                </p>
+            </div>
+            <div class="entry-meta">
+                <span class="meta-pill">Philosophy</span>
+            </div>
+        </a>
+
+        <a href="national-socialists-v-chairs.html" class="blog-row">
+            <div class="entry-date">10.15.25</div>
+            <div class="entry-content">
+                <h2 class="entry-title">National Socialists V Chairs</h2>
+                <p class="entry-excerpt">
+                    Why did the Nazis feel so threatened by the Bauhaus? They weren’t. They were doing housekeeping. An essay on symbols and totalitarianism.
+                </p>
+            </div>
+            <div class="entry-meta">
+                <span class="meta-pill">History</span>
             </div>
         </a>
 
