@@ -18,7 +18,7 @@
             overflow-x: hidden;
         }
 
-        /* --- COLORS (FBM PALETTE) --- */
+        /* --- COLORS --- */
         :root {
             --color-f: #E60026;   /* Red */
             --color-b: #0047BB;   /* Blue */
@@ -30,7 +30,7 @@
         /* --- LAYOUT GRID --- */
         .page-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 50/50 Split */
+            grid-template-columns: 1fr 1fr; /* Strict 50/50 Split */
             min-height: 100vh;
         }
 
@@ -46,7 +46,7 @@
             justify-content: center;
         }
 
-        /* --- RIGHT SIDE: VIDEO & SOCIALS --- */
+        /* --- RIGHT SIDE: VIDEO CONTAINER --- */
         .visual-pane {
             position: sticky;
             top: 0;
@@ -56,20 +56,22 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
+            align-items: center;
         }
 
+        /* THE VIDEO (Fills the Right Side) */
         #character-video {
             position: absolute;
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; 
-            object-position: center;
+            object-fit: cover; /* Ensures it fills every pixel */
+            object-position: center center; /* Keeps the character centered */
             opacity: 1; 
             z-index: 1;
         }
 
-        /* --- SOCIALS (OVERLAY ON VIDEO) --- */
+        /* --- SOCIALS (OVERLAY AT BOTTOM RIGHT) --- */
         .video-footer {
             position: relative;
             z-index: 10;
@@ -77,31 +79,27 @@
             padding: 40px;
             display: flex;
             justify-content: center;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); 
-        }
-
-        .social-row {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+            /* Gradient ensures text is readable over video */
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); 
         }
 
         .social-link {
             font-family: "neue-kabel", sans-serif;
             font-weight: 700;
-            font-size: 0.65rem;
+            font-size: 0.65rem; /* Matches Featured On size */
             letter-spacing: 3px;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             transition: all 0.3s ease;
+            margin: 0 15px;
             border-bottom: 1px solid transparent;
             padding-bottom: 3px;
         }
 
         .social-link:hover {
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            text-shadow: 0 0 10px rgba(255,255,255,0.6);
         }
 
         /* --- NAVIGATION --- */
@@ -112,7 +110,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            background: rgba(5, 5, 5, 0.9);
+            background: rgba(5, 5, 5, 0.95); /* High opacity for readability */
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -129,7 +127,7 @@
 
         .nav-menu {
             display: flex;
-            gap: 20px; 
+            gap: 25px; 
             flex-wrap: wrap; 
             justify-content: flex-end;
         }
@@ -146,19 +144,23 @@
             white-space: nowrap;
         }
         
-        /* --- HOVER COLOR CYCLE (RED / BLUE / YELLOW) --- */
+        /* --- NAVIGATION HOVER COLORS (The FBM Cycle) --- */
+        /* Red Pattern */
         .nav-menu .nav-link:nth-child(3n+1):hover {
             color: var(--color-f);
-            text-shadow: 0 0 15px rgba(230, 0, 38, 0.6);
+            text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
         }
+        /* Blue Pattern */
         .nav-menu .nav-link:nth-child(3n+2):hover {
             color: var(--color-b);
-            text-shadow: 0 0 15px rgba(0, 71, 187, 0.6);
+            text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
         }
+        /* Yellow Pattern */
         .nav-menu .nav-link:nth-child(3n+3):hover {
             color: var(--color-m);
-            text-shadow: 0 0 15px rgba(255, 209, 0, 0.6);
+            text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
         }
+
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
         .nav-link.urgent { color: var(--color-f); }
 
@@ -177,7 +179,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--color-f);
+            color: var(--color-f); /* Uses Red Accent */
             margin-bottom: 15px;
             display: block;
             font-weight: 700;
@@ -201,6 +203,7 @@
 
         .prose p { margin-bottom: 2rem; }
         .prose strong { color: #fff; font-weight: 700; }
+        
         .prose a {
             color: #fff;
             text-decoration: underline;
@@ -285,18 +288,15 @@
         </main>
 
         <aside class="visual-pane">
-            
             <video autoplay muted loop playsinline id="character-video" poster="images/watcher.png">
-                <source src="images/index-vid.mp4" type="video/mp4">
+                <source src="images/who-we-are.mp4" type="video/mp4">
             </video>
 
             <footer class="video-footer">
-                <div class="social-row">
-                    <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
-                    <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
-                    <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
-                    <a href="contact" class="social-link">Mail</a>
-                </div>
+                <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
+                <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
+                <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+                <a href="contact" class="social-link">Mail</a>
             </footer>
         </aside>
 
