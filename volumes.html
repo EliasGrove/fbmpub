@@ -205,14 +205,29 @@
             color: #fff;
         }
 
-        .vol-desc {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #ccc;
+        /* --- UPDATED DESC STYLING --- */
+        .vol-desc-container {
             max-width: 500px;
             margin-bottom: 50px;
             border-left: 2px solid #333;
-            padding-left: 20px;
+            padding-left: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Spacing between lines */
+        }
+        
+        .vol-line {
+            font-size: 1.15rem;
+            line-height: 1.4;
+            color: #ccc;
+            margin: 0;
+        }
+
+        .vol-line.highlight {
+            font-size: 1.35rem; /* Slightly larger */
+            color: #fff;        /* Brighter white */
+            font-weight: 700;   /* Bolder */
+            margin-top: 10px;   /* Extra space before this line */
         }
 
         /* --- ACTION BUTTONS --- */
@@ -247,17 +262,17 @@
         /* Volume 1: Blue */
         .theme-blue .vol-title { color: var(--c-blue); }
         .theme-blue:hover .vol-cover { box-shadow: 0 20px 50px rgba(0, 71, 187, 0.4); }
-        .theme-blue .vol-desc { border-color: var(--c-blue); }
+        .theme-blue .vol-desc-container { border-color: var(--c-blue); }
         
         /* Volume 2: Red */
         .theme-red .vol-title { color: var(--c-red); }
         .theme-red:hover .vol-cover { box-shadow: 0 20px 50px rgba(230, 0, 38, 0.4); }
-        .theme-red .vol-desc { border-color: var(--c-red); }
+        .theme-red .vol-desc-container { border-color: var(--c-red); }
 
         /* Volume 3: Yellow */
         .theme-yellow .vol-title { color: var(--c-yellow); }
         .theme-yellow:hover .vol-cover { box-shadow: 0 20px 50px rgba(255, 209, 0, 0.4); }
-        .theme-yellow .vol-desc { border-color: var(--c-yellow); }
+        .theme-yellow .vol-desc-container { border-color: var(--c-yellow); }
 
 
         /* --- LIGHTBOX --- */
@@ -406,24 +421,14 @@
             <div class="vol-data">
                 <span class="vol-date">November 2025</span>
                 <h2 class="vol-title">The Inaugural<br>Issue</h2>
-          <p class="vol-desc">
-    A man more concerned about his torturers than their torture.
-</p>
-
-<p class="vol-desc">
-    A vampire complaining about stolen identity.
-</p>
-
-<p class="vol-desc">
-    An exploration on why Nazis didn't like chairs.
-</p>
-
-<p class="vol-desc">
-    Get it all here in the very first volume of Faun by Moonlight!
-</p>
-
                 
-                </p>
+                <div class="vol-desc-container">
+                    <p class="vol-line">A man more concerned about his torturers than their torture.</p>
+                    <p class="vol-line">A vampire complaining about stolen identity.</p>
+                    <p class="vol-line">An exploration on why Nazis didn't like chairs.</p>
+                    <p class="vol-line highlight">Get it all here in the very first volume of Faun by Moonlight!</p>
+                </div>
+
                 <div class="actions-group">
                     <a href="/volumes/volume-1" class="btn-bold">Read It</a>
                     <a href="/volumes/who-we-are" class="btn-bold">Opinion Piece</a>
@@ -442,8 +447,13 @@
             <div class="vol-data">
                 <span class="vol-date">December 2025</span>
                 <h2 class="vol-title">The Second<br>Volume</h2>
-                <p class="vol-desc">
-Here, a lost cosmonaut is haunted by something (or is he?) that won’t let him go. A man watches his body vanish piece by piece. We’re forced to think: “who allows us to live?”                </p>
+                
+                <div class="vol-desc-container">
+                    <p class="vol-line">A lost cosmonaut is haunted by something (or is he?) that won’t let him go.</p> 
+                    <p class="vol-line">A man loses his body piece by piece.</p> 
+                    <p class="vol-line highlight">We’re forced to think: “who allows us to live?”</p>
+                </div>
+
                 <div class="actions-group">
                     <a href="https://faunbymoonlight.store/products/faun-by-moonlight-volume-2-pre-order" class="btn-bold">Read It</a>
                     <a href="volumes/who-should-die.html" class="btn-bold">Opinion Piece</a>
@@ -462,9 +472,12 @@ Here, a lost cosmonaut is haunted by something (or is he?) that won’t let him 
             <div class="vol-data">
                 <span class="vol-date">Q1 2026</span>
                 <h2 class="vol-title">Future<br>Edition</h2>
-                <p class="vol-desc">
-                    Submissions are now open for our third volume. We are looking for the strange, the beautiful, and the defiant.
-                </p>
+                
+                <div class="vol-desc-container">
+                    <p class="vol-line">Submissions are now open for our third volume.</p>
+                    <p class="vol-line highlight">We are looking for the strange, the beautiful, and the defiant.</p>
+                </div>
+                
                 <div class="actions-group">
                     <a href="submissions" class="btn-bold" style="background: var(--c-yellow); border-color: var(--c-yellow); color: #000;">Submit Your Work</a>
                 </div>
