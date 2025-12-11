@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Work - Faun by Moonlight</title>
+    <title>Submit - Faun by Moonlight</title>
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
@@ -93,18 +93,20 @@
             transition: color 0.3s, text-shadow 0.3s;
         }
         
+        /* RGB Hover Effects */
         .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
         .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        /* --- MOBILE MENU ELEMENTS --- */
-        .burger { display: none; } 
-        .mobile-menu-overlay { display: none; }
+        /* --- MOBILE MENU ELEMENTS (Hidden on Desktop) --- */
+        .burger { display: none; } /* Default hidden */
+        .mobile-menu-overlay { display: none; } /* Default hidden */
 
-        /* --- TICKER --- */
+        /* --- MARQUEE ALERT --- */
         .alert-ticker {
-            padding-top: 100px;
+            padding-top: 100px; /* Space for nav */
             background: var(--c-bg);
             border-bottom: 1px solid var(--c-border);
             overflow: hidden;
@@ -136,6 +138,12 @@
             color: #fff;
             margin-bottom: 20px;
         }
+        .page-subtitle {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: #888;
+            line-height: 1.5;
+        }
 
         /* --- MAIN GRID LAYOUT --- */
         .submission-container {
@@ -152,7 +160,7 @@
             border-right: 1px solid var(--c-border);
             border-bottom: 1px solid var(--c-border);
             position: sticky;
-            top: 85px; 
+            top: 85px; /* Height of navbar */
             height: fit-content;
             background: var(--c-bg);
             z-index: 10;
@@ -189,18 +197,16 @@
             padding-left: 20px; 
             border-left: 2px solid var(--c-blue); 
         }
-        .scroll-content a { color: #fff; text-decoration: underline; }
-        .emphasis { color: #fff; font-weight: 700; }
-
-        .content-policy-disclaimer {
+        .highlight { color: #fff; font-weight: 700; }
+        .warning-box {
             border: 1px solid var(--c-red);
             background: rgba(230, 0, 38, 0.05);
             padding: 20px;
-            margin-bottom: 20px;
-            color: #e0e0e0;
+            margin: 20px 0;
+            font-size: 1rem;
         }
 
-        /* --- SUBMISSION MODULE (Dark Box) --- */
+        /* --- SUBMISSION MODULE --- */
         .submission-module {
             background: #0a0a0a;
             padding: 40px;
@@ -248,6 +254,8 @@
             border-color: var(--c-yellow);
         }
         
+        .reveal-box { position: relative; overflow: hidden; }
+        
         .btn-reveal {
             width: 100%;
             padding: 20px;
@@ -270,7 +278,7 @@
         }
         .btn-reveal.active:hover { background: #fff; color: var(--c-red); }
 
-        .email-display {
+        .email-secret {
             display: none;
             text-align: center;
             padding: 20px;
@@ -280,8 +288,11 @@
             font-family: var(--f-head);
             font-size: 1.5rem;
             margin-top: 10px;
+            animation: fadeIn 0.5s ease;
         }
-        .email-display a { color: inherit; text-decoration: none; }
+        .email-secret a { color: inherit; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- FOOTER --- */
         footer {
@@ -293,8 +304,9 @@
             letter-spacing: 2px;
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 900px) {
+            /* Toggle Nav Modes */
             .desktop-menu { display: none; }
             .burger { 
                 display: flex; 
@@ -304,12 +316,14 @@
             }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
             
+            /* Burger Animation */
             .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .burger.open span:nth-child(2) { opacity: 0; }
             .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
+            /* Mobile Menu Overlay */
             .mobile-menu-overlay {
-                display: flex; 
+                display: flex; /* Active for mobile logic, but hidden by opacity/transform initially */
                 position: fixed;
                 top: 0; left: 0; width: 100vw; height: 100vh;
                 background: var(--c-bg);
@@ -331,6 +345,7 @@
                 color: #fff;
             }
 
+            /* Layout Adjustments */
             .page-title { font-size: 4rem; }
             .submission-container { display: flex; flex-direction: column; }
             .sticky-header { 
@@ -384,12 +399,13 @@
 
     <div class="alert-ticker">
         <div class="ticker-content">
-            📖 Now Reading for Q1 2026! We are actively selecting stories for our next Quarterly Volume.
+            /// NOW READING FOR Q1 2026 /// LOOKING FOR THE EXCEPTIONALLY UNMARKETABLE /// LITERARY FICTION & NON-FICTION ///
         </div>
     </div>
 
     <header class="hero">
         <h1 class="page-title">Submit<br>Your Work</h1>
+        <p class="page-subtitle">We are not interested in the polite, the sterile, or the safe. Read the guidelines below carefully before proceeding.</p>
     </header>
 
     <main class="submission-container">
@@ -397,61 +413,25 @@
         <div class="grid-row">
             <div class="sticky-header">
                 <span class="section-number">01</span>
-                <span class="section-name">Please Note</span>
+                <span class="section-name">The Criteria</span>
             </div>
             <div class="scroll-content">
-                <div class="content-policy-disclaimer">
-                    <p style="margin:0;">We at Faun by Moonlight are willing to publish difficult and challenging themes; however, we will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors or severe psychological abuse will also be immediately discarded.</p>
+                <h3>What We Want</h3>
+                <p>We are currently open to <span class="highlight">Literary Fiction</span> and <span class="highlight">Non-Fiction</span> (Essays, Historical Pieces).</p>
+                <p>We are looking for works that resist simple genre classification. Works that aren't scared of pushing boundaries. Our specialty is the exceptionally unmarketable.</p>
+                
+                <div class="warning-box">
+                    <strong>HARD NO:</strong> We will not publish, nor consider, any works that depict graphic sexual content involving minors. Graphic depictions of extreme violence against minors will be immediately discarded.
                 </div>
-            </div>
-        </div>
 
-        <div class="grid-row">
-            <div class="sticky-header">
-                <span class="section-number">02</span>
-                <span class="section-name">Guidelines</span>
-            </div>
-            <div class="scroll-content">
-                <h3>What We're Looking For</h3>
-                <p>Please consult our <a href="faq" class="emphasis">FAQ</a> for detailed information about the works we are interested in.</p>
-
-                <h3>Non-Fiction Submissions</h3>
-                <p>We are now open to non-fiction submissions. Particularly, we are interested in receiving:</p>
+                <h3>Manuscript Specs</h3>
                 <ul>
-                    <li><span class="emphasis">Essays:</span> Personal, lyrical, or critical essays exploring unique perspectives.</li>
-                    <li><span class="emphasis">Historical Pieces:</span> Well-researched narratives, snapshots of specific eras, or deep dives into obscure events.</li>
+                    <li>Standard format (12pt, Double Spaced)</li>
+                    <li>Up to 10,000 words</li>
+                    <li>.docx files only</li>
+                    <li>Simultaneous submissions accepted</li>
+                    <li>No previously published work</li>
                 </ul>
-                <p>Payment for non-fiction is the same as our fiction rates.</p>
-
-                <h3>Manuscript Requirements</h3>
-                <ul>
-                    <li><span class="emphasis">Format:</span> Standard manuscript format (double-spaced, 12-point Times New Roman or similar serif font, 1-inch margins)</li>
-                    <li><span class="emphasis">Length:</span> Up to 10,000 words</li>
-                    <li><span class="emphasis">File Type:</span> Microsoft Word (.docx) only</li>
-                    <li><span class="emphasis">Simultaneous Submissions:</span> Accepted (please notify us immediately if your work is accepted elsewhere)</li>
-                    <li><span class="emphasis">Previously Published:</span> Not accepted</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="grid-row">
-            <div class="sticky-header">
-                <span class="section-number" style="color: var(--c-blue);">03</span>
-                <span class="section-name" style="color: var(--c-blue);">Payment</span>
-            </div>
-            <div class="scroll-content">
-                <p>We pay $20 for stories under 5,000 words, $50 for stories 5,000+ words, paid upon acceptance.</p>
-            </div>
-        </div>
-
-        <div class="grid-row">
-            <div class="sticky-header">
-                <span class="section-number">04</span>
-                <span class="section-name">Policies</span>
-            </div>
-            <div class="scroll-content">
-                <h3>Cover Letter</h3>
-                <p>Keep your cover letter brief. You may include a synopsis or brief introduction, but this is optional. We prefer to let the work speak for itself.</p>
 
                 <h3>AI Policy</h3>
                 <p>We accept submissions that have utilized AI tools for research or editing. However, works primarily generated by AI will not be considered. The creative voice must be authentically yours.</p>
@@ -460,35 +440,51 @@
 
         <div class="grid-row">
             <div class="sticky-header">
-                <span class="section-number" style="color: var(--c-red);">05</span>
-                <span class="section-name" style="color: var(--c-red);">How To Submit</span>
+                <span class="section-number">02</span>
+                <span class="section-name">Compensation</span>
             </div>
             <div class="scroll-content">
+                <h3>Rates</h3>
+                <p>We believe in paying writers. Payment is issued via PayPal upon acceptance of the manuscript.</p>
+                <ul>
+                    <li><strong>$20.00</strong> — Stories under 5,000 words</li>
+                    <li><strong>$50.00</strong> — Stories 5,000+ words</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="sticky-header">
+                <span class="section-number" style="color: var(--c-blue);">03</span>
+                <span class="section-name" style="color: var(--c-blue);">Submission Protocol</span>
+            </div>
+            <div class="scroll-content">
+                <p>We operate on a community-first model. We ask that our writers are also our readers.</p>
                 
                 <div class="submission-module">
                     
                     <div class="step-block">
-                        <h3 style="color: var(--c-blue);">Step 1: Buy Our Volumes</h3>
-                        <p>We believe our writers should also be our readers. Your readership keeps the lights on and pays our talented writers. It also ensures you receive detailed, personalized feedback on every submission.</p>
-                        <a href="https://faunbymoonlight.store" target="_blank" class="btn-buy">Buy Now →</a>
-                        <p style="margin-top: 15px; font-size: 0.9rem; color: #80b4ff;">
-                            <strong>IMPORTANT:</strong> We'll match your submission to your payment using your email address.
-                        </p>
+                        <h4 style="color: var(--c-blue); text-transform: uppercase; margin-bottom: 15px;">Phase A: Acquire Volume</h4>
+                        <p>Your readership keeps the lights on. It also ensures you receive detailed, personalized feedback on every submission.</p>
+                        <a href="https://faunbymoonlight.store" target="_blank" class="btn-buy">Buy Current Volume</a>
                     </div>
 
                     <div class="step-block">
-                        <h3 style="color: #fff;">Step 2: Send Your Manuscript</h3>
-                        <p>Email your manuscript as a .docx file. Include your story title, word count, and either your payment confirmation or volume purchase information in the email body.</p>
+                        <h4 style="color: var(--c-red); text-transform: uppercase; margin-bottom: 15px;">Phase B: Transmit Data</h4>
+                        <p>Verify your purchase to reveal the secure submission channel.</p>
                         
                         <label class="checkbox-wrapper">
                             <input type="checkbox" id="verifyCheck">
-                            <span>I have purchased a volume</span>
+                            <span>I certify that I have purchased a volume.</span>
                         </label>
 
-                        <div id="revealBtn" class="btn-reveal">Click to Reveal Submission Email</div>
-                        
-                        <div id="emailDisplay" class="email-display">
-                            <a href="mailto:submissions@faunbymoonlight.com">submissions@faunbymoonlight.com</a>
+                        <div class="reveal-box">
+                            <div class="btn-reveal" id="revealBtn">Locked // Awaiting Verification</div>
+                            <div class="email-secret" id="emailSecret">
+                                Send .docx to:<br>
+                                <a href="mailto:submissions@faunbymoonlight.com">submissions@faunbymoonlight.com</a>
+                                <br><span style="font-size:0.8rem; opacity:0.7; font-family:var(--f-body); margin-top:5px; display:block;">Include receipt # in body</span>
+                            </div>
                         </div>
                     </div>
 
@@ -496,25 +492,16 @@
             </div>
         </div>
 
-        <div class="grid-row">
-            <div class="sticky-header">
-                <span class="section-number">06</span>
-                <span class="section-name">Response Time</span>
-            </div>
-            <div class="scroll-content">
-                <p>We aim to respond to all submissions within two weeks. If you haven't heard from us after this period, feel free to query.</p>
-            </div>
-        </div>
-
     </main>
 
     <footer>
-        © 2025 Faun by Moonlight. All rights reserved.
+        © 2025 Faun by Moonlight // Literary Magazine
     </footer>
 
     <script>
         // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
+        // Add .nav-link to interactive elements list so cursor expands on links
         const interactive = document.querySelectorAll('a, button, input, .checkbox-wrapper, .nav-link');
 
         document.addEventListener('mousemove', (e) => {
@@ -527,7 +514,7 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // --- MENU LOGIC ---
+        // --- MOBILE MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
         const navMenu = document.getElementById('navMenu');
 
@@ -536,6 +523,7 @@
             navMenu.classList.toggle('active');
         });
 
+        // Close mobile menu when a link is clicked
         const mobileLinks = navMenu.querySelectorAll('.nav-link');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -547,24 +535,24 @@
         // --- SUBMISSION REVEAL LOGIC ---
         const verifyCheck = document.getElementById('verifyCheck');
         const revealBtn = document.getElementById('revealBtn');
-        const emailDisplay = document.getElementById('emailDisplay');
+        const emailSecret = document.getElementById('emailSecret');
 
         verifyCheck.addEventListener('change', () => {
             if (verifyCheck.checked) {
                 revealBtn.classList.add('active');
-                revealBtn.textContent = "Reveal Submission Email";
+                revealBtn.innerText = "Click to Decrypt Address";
             } else {
                 revealBtn.classList.remove('active');
-                revealBtn.textContent = "Click to Reveal Submission Email";
-                emailDisplay.style.display = 'none';
-                revealBtn.style.display = 'block';
+                revealBtn.innerText = "Locked // Awaiting Verification";
+                emailSecret.style.display = 'none';
+                revealBtn.style.display = 'block'; // Ensure button comes back if unchecked
             }
         });
 
         revealBtn.addEventListener('click', () => {
             if (verifyCheck.checked) {
                 revealBtn.style.display = 'none';
-                emailDisplay.style.display = 'block';
+                emailSecret.style.display = 'block';
             }
         });
     </script>
