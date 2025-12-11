@@ -5,355 +5,244 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who We Are - Faun by Moonlight</title>
     
-    <meta name="title" content="Who We Are - Faun by Moonlight Literary Magazine">
-    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to literary fiction that resists genre classification.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://faunbymoonlight.com/who-we-are">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
-
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
-
     <style>
-        /* --- CORE RESET & CURSOR --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body { 
             background-color: #050505; 
             font-family: "neue-kabel", sans-serif;
             color: #e0e0e0;
-            overflow-x: hidden;
-            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         /* --- COLORS --- */
         :root {
-            --color-f: #E60026;   /* Red */
-            --color-b: #0047BB;   /* Blue */
-            --color-m: #FFD100;   /* Yellow */
+            --color-accent: #E60026; /* Red */
+            --color-border: #333;
+            --bg-text: #0a0a0a;
         }
 
-        /* --- BACKGROUND ELEMENTS --- */
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
-            background-size: 100% 4px;
-            z-index: 90;
-            pointer-events: none;
+        /* --- LAYOUT GRID --- */
+        .page-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr; /* Text gets more space than video */
+            min-height: 100vh;
         }
 
-        /* --- THE CHARACTER VIDEO (LEFT SIDE) --- */
-        #character-video {
-            position: fixed;
-            /* Positioning based on your screenshot reference */
-            bottom: 0; 
-            left: 0;
-            height: 85vh; /* Takes up most of the left height */
-            width: auto;
-            max-width: 50vw;
-            z-index: 0;
-            object-fit: contain;
-            /* Ghostly effect */
-            filter: grayscale(100%) contrast(1.2);
-            mix-blend-mode: screen; 
-            opacity: 0.8;
-            pointer-events: none;
-        }
-
-        /* --- ANNOUNCEMENT BAR (Top) --- */
-        #global-announcement {
+        /* --- LEFT SIDE: CONTENT (SCROLLS) --- */
+        .content-pane {
+            background-color: var(--bg-text);
+            padding: 120px 80px 100px 80px;
+            border-right: 1px solid var(--color-border);
             position: relative;
-            z-index: 100;
-            background-color: var(--color-f);
-            color: #fff;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 700;
-            padding: 5px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            z-index: 2;
         }
-        #global-announcement a { color: var(--color-m); text-decoration: underline; }
+
+        /* --- RIGHT SIDE: VISUAL (STICKY) --- */
+        .visual-pane {
+            position: relative;
+            background-color: #000;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The Video Styling */
+        #character-video {
+            width: 80%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(1.1);
+            /* Optional: Add a blend mode if you want it to blend with black */
+            /* mix-blend-mode: screen; */ 
+        }
 
         /* --- NAVIGATION --- */
-        nav {
+        .navbar {
             position: fixed;
-            top: 50px; /* Below announcement */
-            left: 40px;
-            right: 40px;
+            top: 0; left: 0; width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            z-index: 100;
-            mix-blend-mode: exclusion; /* Ensures visibility over anything */
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
         }
 
-        /* FBM HOME BUTTON (Copied Logic) */
-        .nav-home {
-            display: flex;
-            gap: 10px;
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 900;
-            font-size: 3rem;
-            line-height: 0.8;
+        .nav-brand {
+            font-family: "alfarn", serif;
+            font-size: 1.5rem;
+            color: #fff;
             text-decoration: none;
-            user-select: none;
-            pointer-events: auto;
+            letter-spacing: 1px;
         }
-        .fbm-letter { color: #fff; transition: color 0.4s ease; }
-        .letter-f:hover { color: var(--color-f); }
-        .letter-b:hover { color: var(--color-b); }
-        .letter-m:hover { color: var(--color-m); }
 
-        /* MENU LINKS (Top Right) */
-        .nav-links {
+        .nav-menu {
             display: flex;
             gap: 25px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            max-width: 600px;
         }
 
-        .nav-item {
+        .nav-link {
             font-family: "neue-kabel", sans-serif;
             font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: #888;
             text-decoration: none;
-            color: #fff;
-            letter-spacing: 2px;
-            position: relative;
-            opacity: 0.7;
-            transition: opacity 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
-        
-        .nav-item:hover, .nav-item.active {
-            opacity: 1;
-        }
-        .nav-item.active { border-bottom: 1px solid var(--color-f); }
-
-        /* --- CONTENT LAYOUT --- */
-        .container {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: flex-end; /* Push content to right */
-            padding: 180px 5% 100px 5%;
-            position: relative;
-            z-index: 10;
-        }
-
-        .content-column {
-            width: 100%;
-            max-width: 600px; /* Readable column width */
-            padding-bottom: 100px;
-        }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+        .nav-link.highlight { color: var(--color-accent); }
 
         /* --- TYPOGRAPHY --- */
         .page-header {
+            margin-bottom: 60px;
+            border-bottom: 4px solid #fff; /* Brutalist thick line */
+            padding-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .super-title {
             font-family: "alfarn", serif;
             font-size: 5rem;
             line-height: 0.9;
-            text-transform: uppercase;
-            margin-bottom: 60px;
             color: #fff;
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
+            text-transform: uppercase;
+            margin: 0;
         }
 
-        .content-text {
-            font-size: 1.1rem;
+        .sub-title {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .prose {
+            font-size: 1.25rem; /* Larger for readability */
             line-height: 1.6;
-            font-weight: 400;
             color: #ccc;
-            text-align: left;
+            max-width: 700px;
         }
 
-        .content-text p { margin-bottom: 2rem; }
+        .prose p { margin-bottom: 2rem; }
         
-        .content-text a { 
-            color: #fff; 
-            text-decoration: none; 
-            border-bottom: 1px solid var(--color-b);
-            transition: all 0.3s;
-        }
-        .content-text a:hover { 
-            background: var(--color-b);
-            color: #000;
-        }
+        .prose strong { color: #fff; font-weight: 700; }
 
-        /* --- FOOTER (Integrated into column) --- */
-        .page-footer {
-            margin-top: 80px;
-            border-top: 1px solid #333;
-            padding-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .social-link {
-            color: #666;
+        .prose a {
+            color: #fff;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
             transition: color 0.3s;
         }
-        .social-link:hover { color: #fff; }
+        .prose a:hover { color: var(--color-accent); }
 
-        .copyright {
-            font-size: 0.7rem;
-            color: #444;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        /* --- FOOTER (Inside content pane) --- */
+        .simple-footer {
+            margin-top: 100px;
+            padding-top: 30px;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
+        .footer-socials a { color: #666; margin-right: 15px; transition: color 0.3s; }
+        .footer-socials a:hover { color: #fff; }
 
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            width: 10px; height: 10px; 
-            border: 1px solid #fff;
-            border-radius: 50%;
-            position: fixed;
+        /* --- GRAIN OVERLAY (Subtle Texture) --- */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
             pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
-            mix-blend-mode: difference;
-        }
-        .cursor.hovered {
-            width: 40px; height: 40px; 
-            background: rgba(255, 255, 255, 0.3);
+            z-index: 50;
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 1024px) {
-            #character-video { opacity: 0.3; left: -20%; } /* Fade video so text is readable over it on tablets */
-        }
-
-        @media (max-width: 768px) {
-            nav { top: 20px; left: 20px; right: 20px; flex-direction: column; gap: 20px; }
-            .nav-links { justify-content: flex-start; gap: 15px 20px; }
-            .container { padding-top: 180px; }
-            .page-header { font-size: 3.5rem; }
-            #character-video { 
-                height: 50vh; 
-                bottom: 0; 
-                left: 50%; 
-                transform: translateX(-50%); 
-                opacity: 0.4; 
-            }
-            .content-column { padding-bottom: 300px; } /* Space for video at bottom */
+        @media (max-width: 900px) {
+            .page-grid { grid-template-columns: 1fr; }
+            .visual-pane { height: 50vh; order: -1; position: relative; border-bottom: 1px solid var(--color-border); } /* Video on top on mobile */
+            .content-pane { padding: 60px 30px; }
+            .super-title { font-size: 3.5rem; }
+            .navbar { padding: 15px 20px; }
+            .nav-menu { display: none; } /* Add hamburger if needed, simplified for now */
         }
     </style>
 </head>
 <body>
 
-    <div id="global-announcement"></div>
+    <div class="noise"></div>
 
-    <div class="scanlines"></div>
-    <div class="cursor" id="cursor"></div>
-
-    <video autoplay muted loop playsinline id="character-video">
-        <source src="images/who-we-are.mp4" type="video/mp4">
-    </video>
-
-    <nav>
-        <a href="index" class="nav-home">
-            <span class="fbm-letter letter-f">F</span>
-            <span class="fbm-letter letter-b">B</span>
-            <span class="fbm-letter letter-m">M</span>
-        </a>
-
-        <div class="nav-links">
-            <a href="who-we-are" class="nav-item active">Who We Are</a>
-            <a href="volumes" class="nav-item">Volumes</a>
-            <a href="blog" class="nav-item">Blog</a>
-            <a href="submissions" class="nav-item">Submit</a>
-            <a href="faq" class="nav-item">FAQ</a>
-            <a href="support-us" class="nav-item">Support Us</a>
-            <a href="urgent" class="nav-item" style="color: var(--color-f);">Urgent Appeal</a>
-            <a href="contact" class="nav-item">Contact</a>
+    <nav class="navbar">
+        <a href="index" class="nav-brand">Faun by Moonlight</a>
+        <div class="nav-menu">
+            <a href="who-we-are" class="nav-link active">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="submit" class="nav-link highlight">Submit</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="content-column">
+    <div class="page-grid">
+        
+        <main class="content-pane">
+            
             <header class="page-header">
-                Who We<br>Are
+                <span class="sub-title">Mission Statement // Est. 2025</span>
+                <h1 class="super-title">Who<br>We Are</h1>
             </header>
 
-            <div class="content-text">
-                <p>Faun by Moonlight is an online literary magazine dedicated to literary fiction.</p>
+            <div class="prose">
+                <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+
                 <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+
                 <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
-                <p>We are currently reading for our December 2025 issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+
+                <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+
                 <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
-                <p>Curious about our thoughts on AI? <a href="ai-statement">Read our AI statement</a>.</p>
+                
+                <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 40px;">
+                    Curious about our thoughts on AI? <a href="ai-statement">Read our AI statement</a>.
+                </p>
             </div>
 
-            <footer class="page-footer">
-                <div class="social-icons">
-                    <a href="https://x.com/faunbymoonlight" class="social-link" target="_blank" rel="noopener">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="social-link" target="_blank" rel="noopener">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="social-link" target="_blank" rel="noopener">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                    </a>
-                    <a href="contact" class="social-link" aria-label="Contact us">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
-                    </a>
-                </div>
-                <div class="copyright">
-                    © 2025 Faun by Moonlight. All rights reserved.
+            <footer class="simple-footer">
+                <div class="copyright">© 2025 Faun by Moonlight</div>
+                <div class="footer-socials">
+                    <a href="https://x.com/faunbymoonlight" target="_blank">X (Twitter)</a>
+                    <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank">Bluesky</a>
+                    <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank">YouTube</a>
                 </div>
             </footer>
-        </div>
+        </main>
+
+        <aside class="visual-pane">
+            <video autoplay muted loop playsinline id="character-video">
+                <source src="images/who-we-are.mp4" type="video/mp4">
+            </video>
+        </aside>
+
     </div>
 
-    <script>
-        // --- CUSTOM CURSOR ---
-        const cursor = document.getElementById('cursor');
-        const allInteractive = document.querySelectorAll('a, .fbm-letter');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        allInteractive.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
-
-        // --- ANNOUNCEMENT BAR FETCH ---
-        // Keeps your original functionality but keeps it hidden if it fails
-        fetch('announcement')
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('No announcement found');
-            })
-            .then(data => {
-                document.getElementById('global-announcement').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('global-announcement').style.display = 'none';
-            });
-    </script>
 </body>
 </html>
