@@ -102,7 +102,6 @@
             padding: 150px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
             position: relative;
-            /* Added overflow hidden to clip the video if it goes out of bounds */
             overflow: hidden; 
         }
         .page-title {
@@ -122,23 +121,23 @@
             letter-spacing: 4px;
             color: #666;
             margin-top: 20px;
-            position: relative; /* Ensure it stays above video if needed */
+            position: relative;
             z-index: 2;
         }
 
-        /* --- NEW VIDEO ELEMENT STYLE --- */
+        /* --- ADJUSTED VIDEO STYLE --- */
         .header-bg-video {
             position: absolute;
             top: 50%;
             right: 0; 
-            /* Adjust transform to center vertically and align right, 
-               tweak translateX to pull it slightly off-screen if 'coming from right' implies overlap */
-            transform: translateY(-50%) translateX(20%); 
-            height: 120%; /* Make it large enough */
+            /* Centered vertically, no horizontal offset needed if right:0 works well, 
+               or slight translateX to push it right if the video file has empty space on left */
+            transform: translateY(-50%); 
+            height: 85%; /* Reduced from 120% to fit better */
             width: auto;
-            z-index: 1; /* Behind text (z-index 2) but above background */
+            z-index: 1; 
             pointer-events: none;
-            mix-blend-mode: screen; /* Optional: helps blend black bg of video with dark site bg */
+            mix-blend-mode: screen; 
             opacity: 0.9;
         }
 
