@@ -12,7 +12,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body { 
-            height: 100vh; 
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh; /* FIX: Adapts to mobile address bars */
             overflow: hidden; 
             background-color: #000; 
             font-family: "neue-kabel", sans-serif;
@@ -220,14 +221,43 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE FIXES --- */
         @media (max-width: 768px) {
-            .watcher-img { left: 0; height: 70vh; top: 10%; opacity: 0.5; }
-            .fbm-logo { font-size: 20vw; bottom: 5vh; left: 5vw; gap: 5px; }
-            .enter-trigger { left: 50%; top: 40%; font-size: 2rem;}
+            .watcher-img { 
+                left: -10%; 
+                height: 60vh; 
+                top: 15%; 
+                opacity: 0.8; 
+                /* FIX: Screen blend mode makes images invisible on mobile dark mode, use normal */
+                mix-blend-mode: normal; 
+                filter: grayscale(100%) contrast(1.1);
+            }
+            .fbm-logo { 
+                font-size: 18vw; 
+                /* FIX: Use dvh to avoid bottom bar overlap */
+                bottom: 8dvh; 
+                left: 5vw; 
+                gap: 5px; 
+            }
+            .enter-trigger { 
+                left: 50%; 
+                top: 50%; 
+                font-size: 2rem;
+                width: 100%;
+                text-align: center;
+            }
             .vertical-text { display: none; }
-            .footer-group { right: 20px; bottom: 20px; align-items: flex-end; }
+            .footer-group { 
+                right: 20px; 
+                /* FIX: Use dvh to avoid bottom bar overlap */
+                bottom: 8dvh; 
+                align-items: flex-end; 
+            }
             .featured-links { flex-direction: column; gap: 5px; }
+            
+            /* Hide custom cursor on touch devices to prevent lag */
+            .cursor { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
@@ -272,26 +302,29 @@
 
     <script>
         // --- CUSTOM CURSOR LOGIC ---
-        const cursor = document.getElementById('cursor');
-        // Select anything clickable or interactive
-        const allInteractive = document.querySelectorAll('a, .fbm-letter');
+        // Wrapped in check to only run on desktop/mouse devices
+        if (window.matchMedia("(hover: hover)").matches) {
+            const cursor = document.getElementById('cursor');
+            const allInteractive = document.querySelectorAll('a, .fbm-letter');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        allInteractive.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            allInteractive.forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
-        // --- LANGUAGE CYCLER (ELEGANT) ---
+        // --- LANGUAGE CYCLER (FIXED) ---
         const link = document.getElementById('enter-link');
-        const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', '进入', 'VOYTI'];
+        
+        // FIX: Removed Asian characters because the font 'dunbar-tall' does not support them
+        const languages = ['ENTER', 'ENTRAR', 'ENTRER', 'VOYTI'];
         let langIdx = 0;
         
-        // Slower interval for less chaos
         setInterval(() => {
             // 20% chance to switch language, keeps it mostly on "ENTER"
             if(Math.random() > 0.8) { 
