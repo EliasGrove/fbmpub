@@ -18,9 +18,11 @@
             overflow-x: hidden;
         }
 
-        /* --- COLORS --- */
+        /* --- COLORS (FBM PALETTE) --- */
         :root {
-            --color-accent: #E60026; /* Red */
+            --color-f: #E60026;   /* Red */
+            --color-b: #0047BB;   /* Blue */
+            --color-m: #FFD100;   /* Yellow */
             --color-border: #333;
             --bg-text: #0a0a0a;
         }
@@ -61,7 +63,7 @@
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Forces video to fill the black space */
+            object-fit: cover; 
             object-position: center;
             opacity: 1; 
             z-index: 1;
@@ -140,14 +142,36 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            transition: color 0.3s;
+            transition: color 0.3s, text-shadow 0.3s;
             white-space: nowrap;
         }
         
-        .nav-link:hover, .nav-link.active { color: #fff; }
+        /* --- HOVER COLOR CYCLE (RED / BLUE / YELLOW) --- */
         
-        .nav-link.urgent { color: var(--color-accent); }
-        .nav-link.urgent:hover { color: #fff; text-shadow: 0 0 10px var(--color-accent); }
+        /* 1st, 4th, 7th link -> RED */
+        .nav-menu .nav-link:nth-child(3n+1):hover {
+            color: var(--color-f);
+            text-shadow: 0 0 15px rgba(230, 0, 38, 0.6);
+        }
+
+        /* 2nd, 5th, 8th link -> BLUE */
+        .nav-menu .nav-link:nth-child(3n+2):hover {
+            color: var(--color-b);
+            text-shadow: 0 0 15px rgba(0, 71, 187, 0.6);
+        }
+
+        /* 3rd, 6th, 9th link -> YELLOW */
+        .nav-menu .nav-link:nth-child(3n+3):hover {
+            color: var(--color-m);
+            text-shadow: 0 0 15px rgba(255, 209, 0, 0.6);
+        }
+
+        /* Active State defaults to White for clarity, or you can match the color */
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        /* "Urgent Appeal" defaults to Red, but follows cycle on hover */
+        .nav-link.urgent { color: var(--color-f); }
+
 
         /* --- TYPOGRAPHY --- */
         .page-header {
@@ -163,7 +187,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--color-accent);
+            color: var(--color-f);
             margin-bottom: 15px;
             display: block;
             font-weight: 700;
@@ -194,7 +218,7 @@
             text-underline-offset: 4px;
             transition: color 0.3s;
         }
-        .prose a:hover { color: var(--color-accent); }
+        .prose a:hover { color: var(--color-f); }
 
         /* --- CUSTOM CURSOR --- */
         .cursor {
@@ -238,15 +262,7 @@
         <a href="index" class="nav-brand">FAUN BY MOONLIGHT</a>
         
         <div class="nav-menu">
-            <a href="who-we-are" class="nav-link active">Who We Are</a>
-            <a href="volumes" class="nav-link">Volumes</a>
-            <a href="blog" class="nav-link">Blog</a>
-            <a href="submissions" class="nav-link">Submit</a>
-            <a href="faq" class="nav-link">FAQ</a>
-            <a href="support-us" class="nav-link">Support Us</a>
-            <a href="urgent" class="nav-link urgent">Urgent Appeal</a>
-            <a href="contact" class="nav-link">Contact</a>
-        </div>
+            <a href="who-we-are" class="nav-link active">Who We Are</a> <a href="volumes" class="nav-link">Volumes</a> <a href="blog" class="nav-link">Blog</a> <a href="submissions" class="nav-link">Submit</a> <a href="faq" class="nav-link">FAQ</a> <a href="support-us" class="nav-link">Support Us</a> <a href="urgent" class="nav-link urgent">Urgent Appeal</a> <a href="contact" class="nav-link">Contact</a> </div>
     </nav>
 
     <div class="page-grid">
