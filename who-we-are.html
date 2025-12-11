@@ -3,318 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who We Are - Faun by Moonlight Literary Magazine</title>
-    <meta name="title" content="Who We Are - Faun by Moonlight Literary Magazine">
-    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to literary fiction that resists genre classification.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://faunbymoonlight.com/who-we-are">
+    <title>Who We Are - Faun by Moonlight</title>
     
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6209354407417435" crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-6209354407417435">
-
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://use.typekit.net">
-    
+
     <style>
-        /* --- CORE RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body { 
+            background-color: #050505; 
             font-family: "neue-kabel", sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+            color: #e0e0e0;
+            overflow-x: hidden; 
+        }
+
+        /* --- COLORS --- */
+        :root {
+            --color-f: #E60026;   /* Red */
+            --color-b: #0047BB;   /* Blue */
+            --color-m: #FFD100;   /* Yellow */
+            --color-border: #333;
+            --bg-text: #0a0a0a;
+        }
+
+        /* --- THE VIDEO (LEFT SIDE) --- */
+        #bg-video {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: 0; 
+            
+            object-fit: cover;
+            opacity: 1; 
+            
+            /* UPDATED: Centered normally */
+            object-position: center;
+            
+            /* CROP: Hides the Right 50% */
+            clip-path: inset(0 50% 0 0);
+        }
+
+        /* --- RIGHT CONTENT (SCROLLABLE TEXT AREA) --- */
+        .content-scroll {
+            position: relative;
+            width: 50vw; 
+            margin-left: 50vw; /* Pushes box to Right */
             min-height: 100vh;
+            background-color: var(--bg-text); 
+            border-left: 1px solid var(--color-border);
+            z-index: 10; 
+            /* Padding bottom makes room for fixed socials so text doesn't get cut off */
+            padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
-            background-image: url('images/2.png');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
+            justify-content: center;
         }
 
-        /* Overlay */
-        body::before {
-            content: ''; position: fixed; inset: 0;
-            background: rgba(15, 15, 15, 0.75);
-            z-index: 0;
+        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
+        .socials-fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50vw; /* Start at the middle of the screen */
+            width: 50vw; /* Span the right half */
+            padding: 30px 60px 50px 60px; /* Match content padding */
+            z-index: 20; /* Sit on top of scrolling text */
+            /* Subtle gradient so text is readable over scrolling content */
+            background: linear-gradient(to top, var(--bg-text) 80%, transparent);
+            display: flex;
+            gap: 30px;
         }
 
-        /* --- ANNOUNCEMENT BAR FIX --- */
-        #global-announcement, .announcement-bar {
-            position: relative;
-            z-index: 10000; /* Topmost */
-            background-color: #E60026;
-            color: #ffffff;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        #global-announcement { padding: 0; }
-        .announcement-bar { padding: 12px 20px; }
-        
-        #global-announcement a, .announcement-bar a { 
-            color: #FFD100; text-decoration: underline; font-weight: 700; 
-        }
-        #global-announcement a:hover, .announcement-bar a:hover { 
-            color: #ffffff; text-decoration: none; 
-        }
-
-        /* --- HEADER (Sticky + Nuclear Layering) --- */
-        .nav-header {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 9999; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-        }
-
-        .logo {
-            font-family: "alfarn", serif;
-            font-size: 1.8rem;
-            color: #f8f8f8;
-            text-decoration: none;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-
-        /* --- NAV TABS (VISIBILITY FIX APPLIED) --- */
-        .nav-tabs { display: flex; gap: 30px; }
-        
-        .nav-tab {
-            font-family: "dunbar-tall", sans-serif;
+        .social-link {
+            font-family: "neue-kabel", sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1.5px; /* Increased spacing */
-            background: none; border: none;
-            
-            /* NEW COLORS FOR VISIBILITY */
-            color: #e6e6e6; /* Lighter Gray/White */
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9); /* Heavy Shadow */
-            text-transform: uppercase; /* More "Button-like" feel */
-            
-            cursor: pointer;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
         }
-        
-        .nav-tab:hover, .nav-tab.active {
+
+        .social-link:hover {
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Glow on hover */
-            transform: translateY(-1px);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
-
-        /* --- MAIN CONTENT --- */
-        .main-wrapper {
-            position: relative;
-            z-index: 1; /* Low priority */
-            padding: 60px 20px;
-            flex: 1;
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .text-box {
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            padding: 50px;
-            max-width: 800px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .page-title {
+        /* UPDATED NAV BRAND STYLING */
+        .nav-brand {
             font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 3.5rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
             letter-spacing: 1px;
-            text-align: center;
-            color: #f8f8f8;
+            white-space: nowrap;
+            display: flex; /* Keeps words together */
+            gap: 0.4rem;   /* Spacing between words */
         }
 
-        .content-text {
+        /* The words inside the brand */
+        .brand-word {
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        /* HOVER EFFECTS FOR LOGO WORDS (Red, Blue, Yellow) */
+        .brand-word.word-f:hover { 
+            color: var(--color-f); 
+            text-shadow: 0 0 15px rgba(230, 0, 38, 0.5);
+        }
+        .brand-word.word-b:hover { 
+            color: var(--color-b); 
+            text-shadow: 0 0 15px rgba(0, 71, 187, 0.5);
+        }
+        .brand-word.word-m:hover { 
+            color: var(--color-m); 
+            text-shadow: 0 0 15px rgba(255, 209, 0, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px; 
+            flex-wrap: wrap; 
+            justify-content: flex-end;
+        }
+
+        .nav-link {
             font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #d0d0d0;
-            text-align: justify;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+            white-space: nowrap;
         }
-        .content-text p { margin-bottom: 1.5rem; }
-        .content-text p:last-child { margin-bottom: 0; }
-        .content-text a { color: #4A9EFF; text-decoration: underline; transition: color 0.3s ease; }
-        .content-text a:hover { color: #ffffff; }
 
-        .footer {
-            position: relative; z-index: 2;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        /* --- NAV COLOR CYCLE --- */
+        .nav-menu .nav-link:nth-child(3n+1):hover {
+            color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4);
         }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .footer-link:hover { color: #ffffff; }
-        .copyright { color: #666; font-size: 0.85rem; }
+        .nav-menu .nav-link:nth-child(3n+2):hover {
+            color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4);
+        }
+        .nav-menu .nav-link:nth-child(3n+3):hover {
+            color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4);
+        }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+        .nav-link.urgent { color: var(--color-f); }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            
-            /* Menu Fix: Solid Black Background */
-            .nav-tabs {
-                display: none; 
-                flex-direction: column; 
-                gap: 20px;
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0;
-                background-color: #000000; /* Solid Black */
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                padding: 30px; 
-                text-align: center;
-                z-index: 9999;
-                box-shadow: 0 10px 30px rgba(0,0,0,1);
-            }
-            
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            
-            /* Revert nav items to normal style for mobile dropdown */
-            .nav-tab { 
-                color: #a0a0a0; 
-                text-shadow: none; 
-                text-transform: none; 
-                font-size: 1.2rem;
-            }
-            .nav-tab:hover { color: #ffffff; }
+        /* --- TYPOGRAPHY --- */
+        .page-header {
+            margin-bottom: 50px;
+            border-bottom: 4px solid #fff; 
+            padding-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+        }
 
-            .text-box { padding: 30px 20px; }
-            .page-title { font-size: 2.5rem; }
-            .content-text { font-size: 1.1rem; text-align: left; }
-            .footer { flex-direction: column; gap: 15px; text-align: center; }
+        .sub-title {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-f);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .super-title {
+            font-family: "alfarn", serif;
+            font-size: 5.5rem;
+            line-height: 0.85;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .prose {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #ccc;
+            max-width: 650px;
+        }
+        .prose p { margin-bottom: 2rem; }
+        .prose strong { color: #fff; font-weight: 700; }
+        .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
+        .prose a:hover { color: var(--color-f); }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 10px; height: 10px; 
+            border: 1px solid #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor.hovered { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 900px) {
+            #bg-video { clip-path: none; opacity: 0.3; object-position: center; } 
+            .content-scroll { 
+                width: 100%; 
+                margin-left: 0; 
+                padding: 40px 30px 100px 30px; /* Extra padding for fixed socials */
+                border-left: none; 
+                background: rgba(10,10,10,0.85); 
+            }
+            .socials-fixed-bottom { left: 0; width: 100%; padding: 30px; justify-content: center; background: linear-gradient(to top, #0a0a0a 80%, transparent);}
+            .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
+            .nav-menu { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; }
+            .super-title { font-size: 3.5rem; }
         }
     </style>
 </head>
 <body>
-    <div id="global-announcement"></div>
 
-    <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
-        <label for="nav-toggle" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab active">Who We Are</a>
-            <a href="volumes" class="nav-tab">Volumes</a>
-            <a href="blog" class="nav-tab">Blog</a>
-            <a href="submissions" class="nav-tab">Submit Your Work</a>
-            <a href="faq" class="nav-tab">FAQ</a>
-            <a href="support-us" class="nav-tab">Support Us</a>
-            <a href="urgent" class="nav-tab">Urgent Appeal</a>
-            <a href="contact" class="nav-tab">Contact</a>
+    <div class="cursor" id="cursor"></div>
+
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="nav-menu">
+            <a href="who-we-are" class="nav-link active">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link urgent">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <main class="main-wrapper">
-        <article class="text-box">
-            <h1 class="page-title">Who We Are</h1>
-            <div class="content-text">
-                <p>Faun by Moonlight is an online literary magazine dedicated to literary fiction.</p>
-                <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
-                <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
-                <p>We are currently reading for our December 2025 issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
-                <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
-                <p style="margin-bottom: 0;">Curious about our thoughts on AI? <a href="ai-statement">Read our AI statement</a>.</p>
-            </div>
-        </article>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/who-we-are.mp4" type="video/mp4">
+    </video>
+
+    <main class="content-scroll">
+        <header class="page-header">
+            <span class="sub-title">Mission Statement // Est. 2025</span>
+            <h1 class="super-title">Who<br>We Are</h1>
+        </header>
+
+        <div class="prose">
+            <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+
+            <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+
+            <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+
+            <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+
+            <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
+        </div>
     </main>
 
-    <div style="display: none !important;">
-        <section>
-            <h2>About Faun by Moonlight Literary Magazine</h2>
-            <p>Faun by Moonlight is an independent online literary magazine founded in 2025...</p>
-        </section>
+    <div class="socials-fixed-bottom">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
+        <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
+        <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+        <a href="contact" class="social-link">Mail</a>
     </div>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-            </a>
-            <a href="contact" class="footer-link" aria-label="Contact us">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
-            </a>
-        </div>
-        <div class="copyright">
-            © 2025 Faun by Moonlight. All rights reserved.
-        </div>
-    </footer>
-
     <script>
-        fetch('announcement')
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('No announcement found');
-            })
-            .then(data => {
-                document.getElementById('global-announcement').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('global-announcement').style.display = 'none';
-            });
+        const cursor = document.getElementById('cursor');
+        const allInteractive = document.querySelectorAll('a, button, .brand-word');
 
-        function colorLogo() {
-            const logo = document.getElementById('logo');
-            if (logo) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
-        }
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            colorLogo();
+        allInteractive.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
     </script>
 </body>
