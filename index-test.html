@@ -27,73 +27,55 @@
             --bg-text: #0a0a0a;
         }
 
-        /* --- THE VIDEO (LEFT SIDE) --- */
-        #bg-video {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            z-index: 0; 
-            
-            object-fit: cover;
-            opacity: 1; 
-            
-            /* SHIFT: 80% pushes the focus significantly to the right */
-            object-position: 80% center;
-            
-            /* CROP: Hides the Right 50% */
-            clip-path: inset(0 50% 0 0);
+        /* --- LAYOUT CONTAINER --- */
+        .split-layout {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
         }
 
-        /* --- RIGHT CONTENT (SCROLLABLE TEXT AREA) --- */
-        .content-scroll {
-            position: relative;
-            width: 50vw; 
-            margin-left: 50vw; /* Pushes box to Right */
+        /* --- LEFT SIDE: FIXED VIDEO --- */
+        .visual-pane {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100vh;
+            background-color: #000;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fill the box */
+            
+            /* CRITICAL FIX: 
+               This sets the focal point.
+               50% 50% = Dead Center.
+               If character is still cut off, change first number (X-axis).
+            */
+            object-position: 50% 50%; 
+            opacity: 1;
+        }
+
+        /* --- RIGHT SIDE: SCROLLABLE TEXT --- */
+        .content-pane {
+            width: 50%;
+            margin-left: 50%; /* Push over to right side */
             min-height: 100vh;
-            background-color: var(--bg-text); 
+            background-color: var(--bg-text);
             border-left: 1px solid var(--color-border);
-            z-index: 10; 
-            /* Padding bottom makes room for fixed socials so text doesn't get cut off */
-            padding: 160px 60px 120px 60px; 
+            position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Center vertically */
+            padding: 160px 80px 100px 80px; /* Big padding */
         }
 
-        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
-        .socials-fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 50vw; /* Start at the middle of the screen */
-            width: 50vw; /* Span the right half */
-            padding: 30px 60px 50px 60px; /* Match content padding */
-            z-index: 20; /* Sit on top of scrolling text */
-            /* Subtle gradient so text is readable over scrolling content */
-            background: linear-gradient(to top, var(--bg-text) 80%, transparent);
-            display: flex;
-            gap: 30px;
-        }
-
-        .social-link {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 700;
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        .social-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        /* --- NAVIGATION BAR --- */
+        /* --- NAVIGATION --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -101,7 +83,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -188,6 +170,32 @@
         .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
         .prose a:hover { color: var(--color-f); }
 
+        /* --- SOCIALS (At bottom of text) --- */
+        .socials-inline {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            gap: 30px;
+        }
+
+        .social-link {
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .social-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
         /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 10px; height: 10px; 
@@ -204,15 +212,8 @@
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
-            #bg-video { clip-path: none; opacity: 0.3; object-position: center; } 
-            .content-scroll { 
-                width: 100%; 
-                margin-left: 0; 
-                padding: 40px 30px 100px 30px; /* Extra padding for fixed socials */
-                border-left: none; 
-                background: rgba(10,10,10,0.85); 
-            }
-            .socials-fixed-bottom { left: 0; width: 100%; padding: 30px; justify-content: center; background: linear-gradient(to top, #0a0a0a 80%, transparent);}
+            .visual-pane { position: relative; width: 100%; height: 50vh; }
+            .content-pane { width: 100%; margin-left: 0; border-left: none; padding: 40px 30px; }
             .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
             .nav-menu { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; }
             .super-title { font-size: 3.5rem; }
@@ -237,34 +238,38 @@
         </div>
     </nav>
 
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="images/who-we-are.mp4" type="video/mp4">
-    </video>
+    <div class="split-layout">
+        <aside class="visual-pane">
+            <video autoplay muted loop playsinline id="bg-video" poster="images/watcher.png">
+                <source src="images/who-we-are.mp4" type="video/mp4">
+            </video>
+        </aside>
 
-    <main class="content-scroll">
-        <header class="page-header">
-            <span class="sub-title">Mission Statement // Est. 2025</span>
-            <h1 class="super-title">Who<br>We Are</h1>
-        </header>
+        <main class="content-pane">
+            <header class="page-header">
+                <span class="sub-title">Mission Statement // Est. 2025</span>
+                <h1 class="super-title">Who<br>We Are</h1>
+            </header>
 
-        <div class="prose">
-            <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+            <div class="prose">
+                <p><strong>Faun by Moonlight</strong> is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
 
-            <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+                <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
 
-            <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+                <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
 
-            <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
+                <p>We are currently reading for our <strong>December 2025</strong> issue and putting the finishing touches on our November 2025 inaugural issue. We invite you to return in November to enjoy the phenomenal works we've discovered.</p>
 
-            <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
-        </div>
-    </main>
+                <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
+            </div>
 
-    <div class="socials-fixed-bottom">
-        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
-        <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
-        <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
-        <a href="contact" class="social-link">Mail</a>
+            <div class="socials-inline">
+                <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link">X (Twitter)</a>
+                <a href="https://bsky.app" target="_blank" class="social-link">Bluesky</a>
+                <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+                <a href="contact" class="social-link">Mail</a>
+            </div>
+        </main>
     </div>
 
     <script>
