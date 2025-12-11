@@ -3,278 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Welcome - Faun by Moonlight</title>
-    <meta name="title" content="Faun by Moonlight - Literary Magazine for Exceptional Fiction">
-    <meta name="description" content="Faun by Moonlight is an online literary magazine dedicated to exceptional literary fiction. We publish works that resist genre classification. Launching November 2025.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://faunbymoonlight.com/">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-
-    <meta property="og:title" content="Faun by Moonlight">
-    <meta property="og:image" content="https://faunbymoonlight.com/images/Cover.png">
-    <meta property="twitter:card" content="summary_large_image">
-
+    <title>Faun by Moonlight</title>
+    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <style>
-        /* --- CORE RESET --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- CORE RESET & CURSOR --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
-        html, body { height: 100%; overflow: hidden; }
-
-        .container {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* This justifies content: space-between pushes the footer to bottom, 
-               but keeps the main content centered relative to available space */
-            justify-content: space-between; 
-            text-align: center;
-            position: relative;
-            background-color: #050505;
-            background-image: url('images/index.png'); 
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            min-width: 320px;
-        }
-
-        /* Gradient Overlay */
-        .container::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 1;
-        }
-
-        /* Spacer to balance the top area (helps center the main content) */
-        .top-spacer { height: 80px; width: 100%; }
-
-        .content {
-            position: relative; z-index: 2;
-            color: #f8f8f8;
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1; /* Allows this to take up center space */
-        }
-
-        /* --- TITLE STYLING --- */
-        .title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 6.5rem;
-            margin: 0 0 2rem 0;
-            letter-spacing: 2px;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            line-height: 1.1;
-        }
-
-        .word-faun { color: #E60026; }
-        .word-by { color: #0047BB; }
-        .word-moonlight { color: #FFD100; }
-
-        /* --- ENTER BUTTON --- */
-        .enter-button {
-            font-family: "dunbar-tall", sans-serif;
-            font-weight: 900;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            background: none;
-            border: none;
-            color: #f8f8f8;
-            padding: 15px 30px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            opacity: 0.9;
-            transition: all 0.4s ease;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            text-transform: uppercase;
-        }
-        
-        .enter-button:hover {
-            color: #ffffff;
-            opacity: 1;
-            transform: scale(1.05);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-        }
-
-        /* --- SPOTLIGHT CTA --- */
-        .spotlight-wrap { margin-top: 40px; }
-        
-        .spotlight-cta {
-            display: inline-block;
+        body { 
+            height: 100vh; 
+            overflow: hidden; 
+            background-color: #000; 
             font-family: "neue-kabel", sans-serif;
-            font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
+            color: #fff;
         }
 
-        .spotlight-cta:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* --- COLORS --- */
+        :root {
+            --color-f: #E60026;   /* Red */
+            --color-b: #0047BB;   /* Blue */
+            --color-m: #FFD100;   /* Yellow */
         }
 
-        /* --- FEATURED SECTION (FOOTER) --- */
-        .featured-footer {
-            position: relative; 
+        /* --- BACKGROUND VIDEO --- */
+        #bg-video {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: 0;
+            opacity: 0.4;
+            filter: grayscale(100%) contrast(1.5);
+            object-fit: cover;
+        }
+
+        /* --- SCANLINES TEXTURE --- */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 100%; height: 100%;
             z-index: 2;
-            width: 100%;
-            padding-bottom: 50px; /* More padding to lift it up */
+        }
+
+        /* --- THE WATCHER (IMAGE) --- */
+        .watcher-img {
+            position: absolute;
+            top: 5%; 
+            left: 25%;
+            height: 90vh; 
+            width: auto;
+            z-index: 1;
+            filter: grayscale(100%) contrast(1.2);
+            mix-blend-mode: screen; 
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- FBM LOGO (BOTTOM LEFT) --- */
+        .fbm-logo {
+            position: absolute;
+            bottom: 5vh; 
+            left: 5vw;
+            display: flex;
+            gap: 15px; /* Consistent spacing */
+            font-family: "dunbar-tall", sans-serif; 
+            font-weight: 900;
+            font-size: 14vw; /* Uniform Size */
+            line-height: 0.8;
+            z-index: 3;
+            mix-blend-mode: exclusion; 
+            user-select: none;
+            pointer-events: auto; 
+        }
+
+        .fbm-letter {
+            color: #fff; /* Default White */
+            transition: color 0.4s ease;
+        }
+
+        /* HOVER EFFECTS: Individual Colors */
+        .letter-f:hover { color: var(--color-f); }
+        .letter-b:hover { color: var(--color-b); }
+        .letter-m:hover { color: var(--color-m); }
+
+        /* --- VERTICAL TEXT (TOP RIGHT) --- */
+        .vertical-text {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-family: "neue-kabel", sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            z-index: 3;
+            mix-blend-mode: exclusion;
+        }
+
+        /* --- ENTER BUTTON (CENTER) --- */
+        .enter-trigger {
+            position: absolute;
+            top: 45%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            font-family: "dunbar-tall", sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 10;
+            mix-blend-mode: normal; 
+            transition: letter-spacing 0.8s ease, color 0.5s ease;
+            white-space: nowrap;
+        }
+
+        /* HOVER: Smooth Expansion + Gradient Cycle */
+        .enter-trigger:hover {
+            letter-spacing: 12px; /* Elegant breathing */
+            animation: slowColorCycle 4s infinite alternate;
+        }
+
+        @keyframes slowColorCycle {
+            0% { color: var(--color-f); }
+            50% { color: var(--color-b); }
+            100% { color: var(--color-m); }
+        }
+
+        /* --- FOOTER GROUP (BOTTOM RIGHT) --- */
+        .footer-group {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            text-align: right;
+            z-index: 4;
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: 15px;
         }
 
-        .featured-label {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 700;
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 5px;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            padding-bottom: 8px;
-            padding-left: 3px; /* visual balance for letter spacing */
-        }
-
-        .listings-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 35px; /* Wider gap for elegance */
-        }
-
-        .listing-link {
-            font-family: "neue-kabel", sans-serif;
-            font-size: 0.85rem; /* Increased size */
-            color: rgba(255, 255, 255, 0.7); /* Increased brightness */
+        .cta-small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
+            border-bottom: 1px solid transparent;
+            align-self: flex-end;
+        }
+        .cta-small:hover { border-bottom: 1px solid #fff; }
+
+        .featured-label {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .listing-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+        .featured-links {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            align-items: center;
         }
 
-        /* Optional: Add a subtle dot between items if you prefer over simple spacing */
-        /* .listing-link:not(:last-child)::after {
-             content: '•'; position: absolute; right: -20px; color: rgba(255,255,255,0.2);
-        } */
+        .featured-link {
+            font-family: "neue-kabel", sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .featured-link:hover {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 10px; height: 10px; 
+            border: 1px solid #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor.hovered {
+            width: 40px; height: 40px; 
+            background: rgba(255, 255, 255, 0.2);
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .title { font-size: 3.8rem; margin-bottom: 1.5rem; }
-            .enter-button { font-size: 1.5rem; }
-            .spotlight-cta { font-size: 0.9rem; padding: 10px 20px; }
-            
-            .listings-row {
-                flex-wrap: wrap;
-                gap: 15px 25px;
-                padding: 0 20px;
-                justify-content: center;
-            }
+            .watcher-img { left: 0; height: 70vh; top: 10%; opacity: 0.5; }
+            .fbm-logo { font-size: 20vw; bottom: 5vh; left: 5vw; gap: 5px; }
+            .enter-trigger { left: 50%; top: 40%; font-size: 2rem;}
+            .vertical-text { display: none; }
+            .footer-group { right: 20px; bottom: 20px; align-items: flex-end; }
+            .featured-links { flex-direction: column; gap: 5px; }
         }
-        @media (max-width: 480px) {
-            .title { font-size: 2.8rem; letter-spacing: 1px; }
-            .featured-footer { padding-bottom: 30px; }
-        }
-
-        .hidden-content { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="top-spacer"></div>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/index-vid.mp4" type="video/mp4">
+    </video>
 
-        <main class="content">
-            <h1 class="title" id="title">Faun by Moonlight</h1>
-            
-            <a href="who-we-are" class="enter-button" id="enter-btn" aria-label="Enter Site">Enter</a>
+    <div class="scanlines"></div>
+    <div class="cursor" id="cursor"></div>
 
-            <div class="spotlight-wrap">
-                <a href="volumes" class="spotlight-cta" aria-label="Read our Second Volume">
-                    Our Second Volume is out Now!
-                </a>
-            </div>
-        </main>
+    <div class="wrapper">
+        <img src="images/watcher.png" alt="" class="watcher-img">
 
-        <footer class="featured-footer">
-            <span class="featured-label">Featured On</span>
-            
-            <div class="listings-row">
-                <a href="https://www.clmp.org/readers/publisher/faun-by-moonlight/" target="_blank" rel="noopener" class="listing-link">CLMP</a>
-                <a href="https://duotrope.com/magazine/faun-by-moonlight-literary-magazine-39483" target="_blank" rel="noopener" class="listing-link">Duotrope</a>
-                <a href="https://www.chillsubs.com/magazine/faun-by-moonlight" target="_blank" rel="noopener" class="listing-link">Chill Subs</a>
-                <a href="https://thegrinder.diabolicalplots.com/Market/Index?id=20213" target="_blank" rel="noopener" class="listing-link">The Grinder</a>
-            </div>
-        </footer>
-    </div>
-
-    <div class="hidden-content">
+        <div class="vertical-text">
+            Literary Magazine<br>Est. 2025
         </div>
 
+        <div class="fbm-logo">
+            <span class="fbm-letter letter-f">F</span>
+            <span class="fbm-letter letter-b">B</span>
+            <span class="fbm-letter letter-m">M</span>
+        </div>
+
+        <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER</a>
+
+        <div class="footer-group">
+            <a href="volumes" class="cta-small">Vol. II Available Now</a>
+            
+            <div>
+                <span class="featured-label">Featured On</span>
+                <div class="featured-links">
+                    <a href="https://www.clmp.org/readers/publisher/faun-by-moonlight/" target="_blank" rel="noopener" class="featured-link">CLMP</a>
+                    <a href="https://duotrope.com/magazine/faun-by-moonlight-literary-magazine-39483" target="_blank" rel="noopener" class="featured-link">Duotrope</a>
+                    <a href="https://www.chillsubs.com/magazine/faun-by-moonlight" target="_blank" rel="noopener" class="featured-link">Chill Subs</a>
+                    <a href="https://thegrinder.diabolicalplots.com/Market/Index?id=20213" target="_blank" rel="noopener" class="featured-link">The Grinder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function colorTitle() {
-            const title = document.getElementById('title');
-            if (title) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = title.textContent.split(' ');
-                title.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
-        }
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        // Select anything clickable or interactive
+        const allInteractive = document.querySelectorAll('a, .fbm-letter');
 
-        function cycleLanguages() {
-            const button = document.getElementById('enter-btn');
-            if (!button) return;
-            
-            const languages = ['Enter', 'Entrar', 'Entrer', '入る', '进入', 'Войти'];
-            let index = 0;
-            
-            setInterval(() => {
-                button.style.opacity = '0.2';
-                setTimeout(() => {
-                    index = (index + 1) % languages.length;
-                    button.textContent = languages[index];
-                    button.style.opacity = '1';
-                }, 400);
-            }, 3500); 
-        }
-
-        window.addEventListener('load', () => {
-            colorTitle();
-            cycleLanguages();
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
+
+        allInteractive.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- LANGUAGE CYCLER (ELEGANT) ---
+        const link = document.getElementById('enter-link');
+        const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', '进入', 'VOYTI'];
+        let langIdx = 0;
+        
+        // Slower interval for less chaos
+        setInterval(() => {
+            // 20% chance to switch language, keeps it mostly on "ENTER"
+            if(Math.random() > 0.8) { 
+                langIdx = (langIdx + 1) % languages.length;
+                link.innerText = languages[langIdx];
+            } else {
+                link.innerText = 'ENTER';
+            }
+        }, 1200); 
     </script>
 </body>
 </html>
