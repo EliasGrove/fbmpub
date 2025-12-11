@@ -19,14 +19,15 @@
             color: #fff;
         }
 
-        /* --- COLORS (Original Palette for Interactive Elements) --- */
+        /* --- COLORS (Original Palette) --- */
         :root {
-            --color-faun: #E60026;
-            --color-by: #0047BB;
-            --color-moonlight: #FFD100;
+            --color-f: #E60026;   /* Faun (Red) */
+            --color-b: #0047BB;   /* By (Blue) */
+            --color-m: #FFD100;   /* Moonlight (Yellow) */
+            --color-white: #FFFFFF;
         }
 
-        /* --- BACKGROUND VIDEO --- */
+        /* --- BACKGROUND VIDEO / TEXTURE --- */
         #bg-video {
             position: fixed;
             top: 50%; left: 50%;
@@ -38,8 +39,6 @@
             filter: grayscale(100%) contrast(1.5);
             object-fit: cover;
         }
-
-        /* --- THE GRIT (Scanlines) --- */
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
@@ -47,8 +46,6 @@
             z-index: 1;
             pointer-events: none;
         }
-
-        /* --- LAYOUT CONTAINER --- */
         .wrapper {
             position: relative;
             width: 100%; height: 100%;
@@ -59,7 +56,7 @@
         .watcher-img {
             position: absolute;
             top: 5%; 
-            left: 25%; /* Pushed right a bit to balance the 'FAUN' text */
+            left: 25%;
             height: 90vh; 
             width: auto;
             z-index: 1;
@@ -68,30 +65,41 @@
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
         }
-
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
 
-        /* --- DECONSTRUCTED TYPOGRAPHY --- */
-        .big-title {
+        /* --- "FBM" LOGO (BOTTOM-LEFT) --- */
+        .fbm-logo {
             position: absolute;
-            /* FIX: Ensure it is not clipped and acts as a strong anchor */
-            bottom: -5vh; 
+            /* Anchored to the far bottom-left corner */
+            bottom: 5vh; 
             left: 5vw;
-            font-family: "alfarn", serif;
-            font-size: 18vw; 
+            display: flex; /* Use flex to align the letters horizontally */
+            align-items: flex-end;
+            font-family: "dunbar-tall", sans-serif; /* Use the bold font for FBM */
+            font-weight: 900;
+            font-size: 15vw; /* Massive size, responsive */
             line-height: 0.8;
             z-index: 3;
             mix-blend-mode: exclusion; 
             pointer-events: none;
         }
 
-        .word-faun { color: var(--color-faun); }
-        .word-moonlight { color: var(--color-moonlight); }
+        /* Individual Letter Styling for Color Blocks */
+        .fbm-logo span {
+            margin-right: 0.05em; /* Subtle spacing */
+        }
+        .letter-f { color: var(--color-f); }
+        .letter-b { 
+            color: var(--color-b); 
+            font-size: 10vw; /* 'B' is smaller for balance */
+        }
+        .letter-m { color: var(--color-m); }
 
+        /* --- VERTICAL TEXT (TOP-RIGHT) --- */
         .vertical-text {
             position: absolute;
             top: 40px;
@@ -108,7 +116,7 @@
             mix-blend-mode: exclusion;
         }
 
-        /* --- THE ENTER 'BUTTON' (Raw Text) --- */
+        /* --- THE ENTER 'BUTTON' (CENTER) --- */
         .enter-trigger {
             position: absolute;
             top: 45%; 
@@ -117,20 +125,18 @@
             font-family: "dunbar-tall", sans-serif;
             font-size: 3rem;
             font-weight: 900;
-            color: #fff; /* Default white */
+            color: var(--color-white); 
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
             z-index: 10;
             mix-blend-mode: normal; 
-            transition: color 0.1s; /* Smooth flicker */
         }
 
-        /* Glitch Effect on Hover is now controlled by JavaScript for dynamic color cycling */
+        /* Glitch animation on hover */
         .enter-trigger:hover {
             animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
         }
-
         @keyframes glitch {
             0% { transform: translate(-50%, -50%) }
             20% { transform: translate(-52%, -48%) }
@@ -140,20 +146,19 @@
             100% { transform: translate(-50%, -50%) }
         }
 
-        /* --- FOOTER GROUP --- */
+        /* --- FOOTER GROUP (BOTTOM-RIGHT) --- */
         .footer-group {
             position: absolute;
             bottom: 40px;
             right: 40px;
             text-align: right;
             z-index: 4;
-            font-size: 0.75rem; /* Slightly larger */
+            font-size: 0.75rem; 
             line-height: 1.5;
         }
-
         .cta-small {
             opacity: 0.8;
-            color: #fff;
+            color: var(--color-white);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -161,7 +166,6 @@
             display: block;
         }
         .cta-small:hover { opacity: 1; }
-
         .featured-links a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
@@ -170,12 +174,12 @@
             transition: color 0.2s;
             margin-left: 10px;
         }
-        .featured-links a:hover { color: #fff; }
+        .featured-links a:hover { color: var(--color-white); }
 
         /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 10px; height: 10px; 
-            border: 1px solid #fff;
+            border: 1px solid var(--color-white);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -184,7 +188,6 @@
             transition: width 0.2s, height 0.2s, background 0.2s;
             mix-blend-mode: difference;
         }
-        
         .cursor.hovered {
             width: 30px; height: 30px; 
             background: rgba(255, 255, 255, 0.4);
@@ -193,7 +196,8 @@
         /* Mobile Adjustments */
         @media (max-width: 768px) {
             .watcher-img { left: 0; height: 70vh; top: 10%; opacity: 0.5; }
-            .big-title { font-size: 25vw; bottom: 0; left: 0; }
+            .fbm-logo { font-size: 20vw; bottom: 5vh; left: 5vw; }
+            .fbm-logo .letter-b { font-size: 13vw; }
             .enter-trigger { left: 50%; top: 40%; transform: translate(-50%, -50%); font-size: 2rem;}
             .vertical-text { display: none; }
             .footer-group { right: 20px; bottom: 20px; }
@@ -217,9 +221,11 @@
             LITERARY MAGAZINE<br>EST. 2025
         </div>
 
-        <h1 class="big-title">
-            <span class="word-faun">FAUN</span> BY <span class="word-moonlight">MOONLIGHT</span>
-        </h1>
+        <div class="fbm-logo">
+            <span class="letter-f">F</span>
+            <span class="letter-b">B</span>
+            <span class="letter-m">M</span>
+        </div>
 
         <a href="who-we-are" class="enter-trigger" id="enter-link">ENTER</a>
 
@@ -240,7 +246,18 @@
         const cursor = document.getElementById('cursor');
         const link = document.getElementById('enter-link');
         const allLinks = document.querySelectorAll('a, .enter-trigger');
-        const colors = ['var(--color-faun)', 'var(--color-by)', 'var(--color-moonlight)', '#FFFFFF']; // Include white
+        
+        // Use CSS variables for the color cycle
+        const colors = [
+            getComputedStyle(document.documentElement).getPropertyValue('--color-f'), 
+            getComputedStyle(document.documentElement).getPropertyValue('--color-b'), 
+            getComputedStyle(document.documentElement).getPropertyValue('--color-m'), 
+            getComputedStyle(document.documentElement).getPropertyValue('--color-white')
+        ];
+        
+        // Initialize glitch interval variable
+        let colorGlitchInterval;
+        let langCycleInterval;
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -252,35 +269,35 @@
             item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // Dynamic Color Glitch on Hover
+        // Dynamic Color Glitch on Hover (SLOWED DOWN)
         let colorIndex = 0;
 
         link.addEventListener('mouseenter', () => {
-            // Start the glitch interval only on mouse enter
-            link.glitchInterval = setInterval(() => {
+            // Start the glitch interval on mouse enter
+            colorGlitchInterval = setInterval(() => {
                 colorIndex = (colorIndex + 1) % colors.length;
                 link.style.color = colors[colorIndex];
-            }, 100); // Fast color cycling
+            }, 700); // *** SLOWER: 700ms interval for subtle shift ***
         });
 
         link.addEventListener('mouseleave', () => {
             // Stop the interval and reset color to white on mouse leave
-            clearInterval(link.glitchInterval);
-            link.style.color = '#FFFFFF';
+            clearInterval(colorGlitchInterval);
+            link.style.color = 'var(--color-white)';
         });
 
         // Language Flicker Logic
         const languages = ['ENTER', 'ENTRAR', 'ENTRER', '入る', 'VOYTI'];
         let langIdx = 0;
         
-        setInterval(() => {
+        langCycleInterval = setInterval(() => {
             if(Math.random() > 0.7) {
                 langIdx = (langIdx + 1) % languages.length;
                 link.innerText = languages[langIdx];
             } else {
                 link.innerText = 'ENTER';
             }
-        }, 800);
+        }, 800); // Keeping language cycle fast enough to feel unstable
     </script>
 </body>
 </html>
