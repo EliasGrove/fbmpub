@@ -52,7 +52,7 @@
             pointer-events: none;
         }
 
-        /* --- NAVIGATION (Shared Style) --- */
+        /* --- NAVIGATION --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
@@ -82,182 +82,199 @@
         .nav-menu .nav-link:hover { color: #fff; }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        /* --- MAIN GRID LAYOUT --- */
+        /* --- GRID LAYOUT --- */
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr 2fr; /* Left Sidebar / Right Content */
+            grid-template-columns: 1fr 2fr; 
             min-height: 100vh;
-            padding-top: 100px; /* Space for Navbar */
+            padding-top: 100px;
             max-width: 1600px;
             margin: 0 auto;
         }
 
-        /* --- LEFT COLUMN (STICKY INFO) --- */
+        /* --- LEFT COLUMN --- */
         .sticky-col {
-            position: sticky;
-            top: 120px; /* Stick below nav */
-            height: fit-content;
-            padding: 40px;
-            border-right: 1px solid var(--color-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            position: sticky; top: 120px; height: fit-content;
+            padding: 40px; border-right: 1px solid var(--color-border);
+            display: flex; flex-direction: column; justify-content: space-between;
         }
 
         .huge-title {
-            font-family: "alfarn", serif;
-            font-size: 5rem;
-            line-height: 0.85;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 30px;
+            font-family: "alfarn", serif; font-size: 5rem; line-height: 0.85;
+            text-transform: uppercase; color: #fff; margin-bottom: 30px;
         }
 
         .status-box {
-            border: 1px solid var(--color-border);
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            margin-bottom: 30px;
+            border: 1px solid var(--color-border); padding: 20px;
+            background: rgba(255, 255, 255, 0.03); margin-bottom: 30px;
         }
-
-        .status-label {
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888;
-            margin-bottom: 10px; display: block;
-        }
-        .status-live {
-            font-family: "dunbar-tall", sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .status-dot {
-            width: 10px; height: 10px; background: var(--color-m); border-radius: 50%;
-            box-shadow: 0 0 10px var(--color-m);
-            animation: pulse 2s infinite;
-        }
+        .status-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 10px; display: block; }
+        .status-live { font-family: "dunbar-tall", sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .status-dot { width: 10px; height: 10px; background: var(--color-m); border-radius: 50%; box-shadow: 0 0 10px var(--color-m); animation: pulse 2s infinite; }
         @keyframes pulse { 0% {opacity:1;} 50% {opacity:0.4;} 100% {opacity:1;} }
 
-        /* --- RIGHT COLUMN (SCROLLING CARDS) --- */
-        .scroll-col {
-            padding: 40px 60px 100px 60px;
-        }
+        /* --- RIGHT COLUMN --- */
+        .scroll-col { padding: 40px 60px 100px 60px; }
 
-        /* CARD STYLES */
         .info-card {
-            border: 1px solid var(--color-border);
-            background: var(--color-card);
-            padding: 40px;
-            margin-bottom: 30px;
-            transition: border-color 0.4s ease, transform 0.4s ease;
-            position: relative;
+            border: 1px solid var(--color-border); background: var(--color-card);
+            padding: 40px; margin-bottom: 30px;
+            transition: border-color 0.4s ease, transform 0.4s ease; position: relative;
         }
         .info-card:hover { transform: translateX(10px); }
-
-        /* Card Color Accents on Hover */
         .card-red:hover { border-color: var(--color-f); }
         .card-blue:hover { border-color: var(--color-b); }
         .card-yellow:hover { border-color: var(--color-m); }
 
         .card-header {
-            font-family: "dunbar-tall", sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #fff;
-            display: flex; justify-content: space-between; align-items: center;
+            font-family: "dunbar-tall", sans-serif; font-size: 1.8rem; font-weight: 700;
+            margin-bottom: 20px; color: #fff; display: flex; justify-content: space-between; align-items: center;
         }
         .card-icon { font-family: "neue-kabel"; font-size: 1rem; color: #555; letter-spacing: 1px; }
 
-        .card-body {
-            font-size: 1.1rem; line-height: 1.6; color: #ccc;
-        }
+        .card-body { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
         .card-body p { margin-bottom: 1.5rem; }
         .card-body ul { list-style: none; margin-left: 0; }
-        .card-body li {
-            margin-bottom: 10px; padding-left: 20px; border-left: 2px solid #333;
-            transition: border-color 0.3s;
-        }
+        .card-body li { margin-bottom: 10px; padding-left: 20px; border-left: 2px solid #333; transition: border-color 0.3s; }
         .card-body li:hover { border-left-color: #fff; }
         .highlight { color: #fff; font-weight: 700; }
 
-        /* --- INTERACTIVE SUBMISSION BOX --- */
+        /* --- REDESIGNED SUBMISSION BOX --- */
         .submission-interface {
-            background: #111;
-            border: 1px solid var(--color-border);
-            padding: 0;
-            margin-top: 50px;
-        }
-        
-        .interface-header {
-            background: #222; padding: 15px 30px;
-            font-family: "neue-kabel", sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-            border-bottom: 1px solid #333; display: flex; justify-content: space-between;
+            background: linear-gradient(180deg, #111 0%, #050505 100%);
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 50px;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
 
-        .interface-body { padding: 40px; text-align: center; }
+        /* Step 1 Area */
+        .sub-step-1 {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px dashed #333;
+        }
 
-        /* CHECKBOX STYLE */
+        .step-label {
+            display: block; font-family: "neue-kabel", sans-serif; font-size: 0.75rem; 
+            letter-spacing: 3px; text-transform: uppercase; color: #666; margin-bottom: 15px;
+        }
+
+        .sub-heading {
+            font-family: "dunbar-tall", sans-serif; font-size: 2rem; color: #fff; margin-bottom: 20px;
+        }
+
+        .sub-desc {
+            max-width: 500px; margin: 0 auto 30px auto; color: #999; font-size: 1rem; line-height: 1.5;
+        }
+
+        /* Hierarchy Button: BUY */
+        .btn-purchase {
+            background-color: var(--color-b);
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 71, 187, 0.3);
+        }
+        .btn-purchase:hover {
+            background-color: #005ce6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 71, 187, 0.5);
+            color: #fff;
+        }
+
+        /* Step 2 Area */
+        .sub-step-2 {
+            margin-top: 40px;
+        }
+
+        /* Enhanced Checkbox */
         .check-wrap {
             display: inline-flex; align-items: center; gap: 15px;
-            margin: 20px 0; padding: 15px 25px;
-            border: 1px solid #333; border-radius: 50px;
-            cursor: pointer; transition: all 0.3s;
+            padding: 10px; cursor: pointer; transition: opacity 0.3s;
         }
-        .check-wrap:hover { border-color: #666; }
+        .check-wrap:hover { opacity: 0.8; }
+        
         .custom-check {
-            width: 20px; height: 20px; border: 2px solid #555; border-radius: 4px;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .custom-check::after {
-            content: ''; width: 10px; height: 10px; background: var(--color-f);
-            display: none;
+            width: 24px; height: 24px; border: 2px solid #555; border-radius: 4px;
+            display: flex; justify-content: center; align-items: center; transition: all 0.3s;
         }
         #payment-checkbox { display: none; }
-        #payment-checkbox:checked + .custom-check::after { display: block; }
-        #payment-checkbox:checked + .custom-check { border-color: #fff; }
+        
+        /* Checkbox Active State */
+        #payment-checkbox:checked + .custom-check {
+            border-color: var(--color-f);
+            background: rgba(230, 0, 38, 0.1);
+            box-shadow: 0 0 10px rgba(230, 0, 38, 0.2);
+        }
+        #payment-checkbox:checked + .custom-check::after {
+            content: '✓'; color: var(--color-f); font-weight: bold;
+        }
 
-        /* BUTTONS */
-        .reveal-btn {
-            background: transparent; border: 1px solid #444; color: #666;
-            padding: 15px 40px; font-family: "neue-kabel"; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            margin-top: 10px; transition: all 0.3s; pointer-events: none;
+        /* Hierarchy Button: REVEAL (Disabled/Active states) */
+        .btn-reveal {
+            background: transparent;
+            border: 2px solid #333;
+            color: #444;
+            padding: 15px 40px;
+            font-family: "neue-kabel";
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            cursor: not-allowed;
+            border-radius: 4px;
+            display: inline-block;
         }
-        .reveal-btn.active {
-            background: var(--color-f); color: #fff; border-color: var(--color-f);
-            pointer-events: auto; cursor: pointer;
+
+        /* Active State for Reveal Button */
+        .btn-reveal.active {
+            background: var(--color-f);
+            border-color: var(--color-f);
+            color: #fff;
+            pointer-events: auto;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(230,0,38,0.3);
         }
-        .reveal-btn.active:hover { background: #ff1a40; box-shadow: 0 0 20px rgba(230,0,38,0.4); }
+        .btn-reveal.active:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(230,0,38,0.5);
+        }
 
         .email-result {
-            margin-top: 30px; font-size: 1.5rem; font-family: "dunbar-tall"; color: #fff;
-            opacity: 0; transform: translateY(10px); transition: all 0.5s;
+            margin-top: 30px; font-size: 1.8rem; font-family: "dunbar-tall"; color: #fff;
+            opacity: 0; transform: translateY(20px); transition: all 0.5s ease;
         }
         .email-result.visible { opacity: 1; transform: translateY(0); }
-        .email-result a { color: #fff; text-decoration: none; border-bottom: 1px solid var(--color-f); }
-
-        .store-link {
-            display: block; margin-top: 20px; font-size: 0.9rem; color: #888; text-decoration: underline;
-        }
-        .store-link:hover { color: var(--color-b); }
+        .email-result a { color: #fff; text-decoration: none; border-bottom: 2px solid var(--color-f); padding-bottom: 2px;}
 
         /* --- WARNING BANNER --- */
         .warning-banner {
-            border: 1px solid var(--color-f);
-            background: rgba(230, 0, 38, 0.05);
-            padding: 20px; margin-bottom: 40px;
-            font-size: 0.95rem; color: #ccc;
+            border: 1px solid var(--color-f); background: rgba(230, 0, 38, 0.05);
+            padding: 20px; margin-bottom: 40px; font-size: 0.95rem; color: #ccc;
         }
         .warning-title { color: var(--color-f); font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
 
         /* --- FOOTER --- */
         .footer {
-            border-top: 1px solid #222;
-            padding: 40px;
-            display: flex; justify-content: center; gap: 30px;
-            background: #000;
+            border-top: 1px solid #222; padding: 40px;
+            display: flex; justify-content: center; gap: 30px; background: #000;
         }
         .footer a { color: #444; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; transition: color 0.3s; }
         .footer a:hover { color: #fff; }
 
-        /* --- CUSTOM CURSOR --- */
+        /* --- CURSOR --- */
         .cursor {
             width: 10px; height: 10px; border: 1px solid #fff; border-radius: 50%;
             position: fixed; pointer-events: none; z-index: 9999;
@@ -274,6 +291,8 @@
             .scroll-col { padding: 30px 20px; }
             .info-card { padding: 25px; }
             .info-card:hover { transform: none; }
+            .submission-interface { padding: 30px 20px; }
+            .btn-purchase, .btn-reveal { width: 100%; }
             .navbar { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 20px; }
             .nav-menu { width: 100%; overflow-x: auto; padding-bottom: 10px; justify-content: flex-start; }
         }
@@ -373,29 +392,31 @@
             </div>
 
             <div class="submission-interface">
-                <div class="interface-header">
-                    <span>Protocol: Secure Submission</span>
-                    <span>Status: Awaiting Input</span>
+                
+                <div class="sub-step-1">
+                    <span class="step-label">Step 1: Read Us</span>
+                    <h3 class="sub-heading">Own a Volume?</h3>
+                    <p class="sub-desc">Submitting requires purchasing a back issue. This funds our writers and ensures you know our style.</p>
+                    <a href="https://faunbymoonlight.store" target="_blank" class="btn-purchase">Purchase Digital Volume</a>
                 </div>
-                <div class="interface-body">
-                    <p style="margin-bottom: 20px; color: #aaa;">To submit, you must own a copy of a previous volume. This ensures our writers get paid.</p>
-                    
-                    <a href="https://faunbymoonlight.store" target="_blank" class="store-link" style="font-size: 1.1rem; color: #fff; border: 1px solid #333; padding: 10px 20px; display: inline-block; text-decoration: none; margin-bottom: 20px;">Purchase Volume →</a>
-                    
-                    <br>
 
+                <div class="sub-step-2">
+                    <span class="step-label">Step 2: Submit</span>
+                    <p class="sub-desc" style="margin-bottom: 20px;">Once purchased, confirm below to reveal the submission address.</p>
+                    
                     <label for="payment-checkbox" class="check-wrap">
                         <input type="checkbox" id="payment-checkbox">
                         <div class="custom-check"></div>
-                        <span style="color: #fff; font-weight: 700;">I have purchased a volume</span>
+                        <span style="color: #fff; font-weight: 700; font-size: 1.1rem;">I have purchased a volume</span>
                     </label>
 
                     <br>
 
-                    <button id="reveal-btn" class="reveal-btn">Reveal Submission Email</button>
+                    <button id="reveal-btn" class="btn-reveal">Reveal Email Address</button>
                     
                     <div id="email-result" class="email-result"></div>
                 </div>
+
             </div>
 
         </main>
@@ -431,10 +452,10 @@
         checkbox.addEventListener('change', () => {
             if(checkbox.checked) {
                 btn.classList.add('active');
-                btn.innerText = "ACCESS GRANTED. CLICK TO REVEAL.";
+                btn.innerText = "Click to Unlock";
             } else {
                 btn.classList.remove('active');
-                btn.innerText = "Reveal Submission Email";
+                btn.innerText = "Reveal Email Address";
                 result.classList.remove('visible');
             }
         });
@@ -443,7 +464,7 @@
             if(checkbox.checked) {
                 result.innerHTML = '<a href="mailto:submissions@faunbymoonlight.com">submissions@faunbymoonlight.com</a>';
                 result.classList.add('visible');
-                // Optional: Make the button disappear after reveal for cleaner UI
+                // Hide button to clean up UI
                 btn.style.display = 'none';
             }
         });
