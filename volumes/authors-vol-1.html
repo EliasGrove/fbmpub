@@ -3,404 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Authors - Faun by Moonlight Literary Magazine</title>
+    <title>Our Authors - Faun by Moonlight</title>
     <meta name="description" content="Meet the talented authors featured in Faun by Moonlight Volume 1: Oly Weary and Eduardo Garcia.">
     <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/authors-vol-1">
     
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
-
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://use.typekit.net">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3ETBBLP43M');
-    </script>
 
     <style>
-        /* --- CORE RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: "neue-kabel", sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        :root {
+            --c-bg: #0a0a0a; 
+            --c-text: #e0e0e0;
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #333;
+            --f-head: "alfarn", serif;
+            --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
+        }
+
+        body { 
+            background-color: var(--c-bg); 
+            font-family: var(--f-body);
+            color: var(--c-text);
+            overflow-x: hidden; 
             min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-yellow);
+            mix-blend-mode: normal;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             display: flex;
-            flex-direction: column;
-            /* Path adjusted for subdirectory */
-            background-image: url('../images/3.png'); 
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            background-size: cover;
-        }
-
-        /* Darker overlay */
-        body::before {
-            content: ''; position: fixed; inset: 0;
-            background: rgba(15, 15, 15, 0.75);
-            z-index: 0;
-        }
-
-        /* --- ANNOUNCEMENT BAR FIX --- */
-        #global-announcement, .announcement-bar {
-            position: relative;
-            z-index: 10000; /* Highest Priority */
-            background-color: #E60026;
-            color: #ffffff;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        #global-announcement { padding: 0; }
-        .announcement-bar { padding: 12px 20px; }
-        
-        #global-announcement a, .announcement-bar a { 
-            color: #FFD100; text-decoration: underline; font-weight: 700; 
-        }
-        #global-announcement a:hover, .announcement-bar a:hover { 
-            color: #ffffff; text-decoration: none; 
-        }
-
-        /* --- NAVIGATION (Sticky + Layered) --- */
-        .nav-header {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            z-index: 9999; 
-            display: flex; 
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo {
-            font-family: "alfarn", serif;
-            font-size: 1.8rem;
-            color: #f8f8f8;
+        .nav-brand {
+            font-family: var(--f-head);
+            font-size: 1.5rem;
+            color: #fff;
             text-decoration: none;
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex; gap: 0.4rem;
         }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
 
-        /* --- VISIBILITY IMPROVED TABS --- */
-        .nav-tabs { display: flex; gap: 30px; }
-        
-        .nav-tab {
-            font-family: "dunbar-tall", sans-serif;
+        .desktop-menu { display: flex; gap: 25px; }
+        .nav-link {
+            font-family: var(--f-body);
             font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1.5px; 
-            background: none; border: none;
-            
-            /* VISIBILITY FIX */
-            color: #e6e6e6; 
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
             text-transform: uppercase;
-            
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
         }
-        .nav-tab:hover, .nav-tab.active {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            transform: translateY(-1px);
-        }
-
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 2px; background-color: #f8f8f8; transition: all 0.3s ease; }
-        #nav-toggle { display: none; }
-
-        /* --- MAIN CONTENT (Low Z-Index) --- */
-        .main-wrapper {
-            position: relative;
-            z-index: 1; 
-            padding: 60px 20px;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        /* --- THE "GLASS" BOX --- */
-        .text-box {
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            padding: 50px;
-            max-width: 900px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .page-title {
-            font-family: "alfarn", serif;
-            font-weight: 400;
-            font-size: 3.5rem;
-            margin-bottom: 3rem;
-            letter-spacing: 1px;
-            text-align: center;
-            color: #f8f8f8;
-        }
-
-        /* --- AUTHOR SECTIONS --- */
-        .section { margin-bottom: 4rem; }
         
-        .section-divider {
-            padding-bottom: 4rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        .section-title {
-            font-family: "dunbar-tall", sans-serif;
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
+
+        /* --- HERO HEADER --- */
+        .authors-hero {
+            padding: 180px 40px 80px 40px;
+            border-bottom: 1px solid var(--c-border);
+            text-align: left;
+        }
+        .hero-label {
+            font-family: var(--f-body);
             font-weight: 700;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            color: #FFD100; /* Gold accent */
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: var(--f-head);
+            font-size: 7rem;
+            line-height: 0.9;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
         }
 
-        .section-content {
-            font-family: "neue-kabel", sans-serif;
-            font-weight: 400;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #d0d0d0;
+        /* --- AUTHOR SHOWCASE (The Core Layout) --- */
+        .author-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Split Screen */
+            min-height: 90vh; /* Full screen feel */
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        /* Alternate Layout for 2nd Author */
+        .author-section.alt {
+            direction: rtl; /* Easy way to flip columns */
+        }
+        .author-section.alt > * {
+            direction: ltr; /* Reset text direction inside */
+        }
+
+        /* --- VISUAL SIDE (Cover Art) --- */
+        .visual-col {
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-right: 1px solid var(--c-border);
+            /* Subtle background tint based on theme */
+            background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+        }
+        .author-section.alt .visual-col { border-right: none; border-left: 1px solid var(--c-border); }
+
+        .book-cover {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            transition: transform 0.4s ease;
+            filter: grayscale(20%);
+        }
+        .author-section:hover .book-cover {
+            transform: scale(1.02) rotate(-1deg);
+            filter: grayscale(0%);
+        }
+
+        /* --- CONTENT SIDE --- */
+        .content-col {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .author-name {
+            font-family: var(--f-head);
+            font-size: 5rem;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
         }
 
         .author-bio {
-            font-style: italic;
-            color: #e0e0e0;
-            margin-bottom: 2rem;
-            padding-left: 1rem;
-            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            font-family: var(--f-display);
+            font-size: 1.5rem;
+            line-height: 1.3;
+            color: #fff;
+            margin-bottom: 40px;
+            border-left: 2px solid #444;
+            padding-left: 20px;
         }
 
-        .author-cover {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* --- EDITOR NOTE --- */
+        /* Editor Note Styling */
         .editor-note {
-            background: rgba(0, 71, 187, 0.15); /* Blue tint */
-            border-left: 4px solid #0047BB;
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2.5rem 0;
+            background: #111;
+            padding: 30px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .note-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .editor-note p { margin-bottom: 1rem; color: #f0f0f0; }
-        .editor-note p:last-child { margin-bottom: 0; }
-
-        .author-contact {
-            margin-top: 2rem;
+        .note-text {
+            font-family: var(--f-body);
             font-size: 1rem;
-            color: #888;
-            text-align: center;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .note-text p { margin-bottom: 15px; }
+        .note-text p:last-child { margin-bottom: 0; }
+
+        .contact-line {
+            font-family: var(--f-body);
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
             font-style: italic;
         }
+
+        /* --- COLOR THEMES --- */
+        
+        /* Oly (Red) */
+        .theme-red .author-name { color: var(--c-red); }
+        .theme-red .editor-note { border-left: 4px solid var(--c-red); }
+        .theme-red .book-cover { box-shadow: 0 30px 60px rgba(230, 0, 38, 0.15); }
+
+        /* Eduardo (Blue) */
+        .theme-blue .author-name { color: var(--c-blue); }
+        .theme-blue .editor-note { border-left: 4px solid var(--c-blue); }
+        .theme-blue .book-cover { box-shadow: 0 30px 60px rgba(0, 71, 187, 0.15); }
+
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+
+        .social-link:hover { transform: translateY(-2px); }
 
         /* --- FOOTER --- */
-        .footer {
-            position: relative; z-index: 2;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--c-border);
         }
-        .footer-links { display: flex; gap: 20px; align-items: center; }
-        .footer-link { color: #888; transition: color 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .footer-link:hover { color: #ffffff; }
-        .copyright { color: #666; font-size: 0.85rem; }
 
-        /* --- MOBILE FIXES --- */
-        @media (max-width: 768px) {
-            .nav-header { padding: 20px; }
-            .hamburger { display: flex; }
-            
-            /* MENU FIX: Solid Black + High Z-Index */
-            .nav-tabs {
-                display: none; 
-                flex-direction: column; 
-                gap: 20px;
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0;
-                background-color: #000000; /* SOLID BLACK */
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                padding: 30px; 
-                text-align: center;
-                z-index: 9999;
-                box-shadow: 0 10px 30px rgba(0,0,0,1);
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .burger.open span:nth-child(2) { opacity: 0; }
+            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .mobile-menu-overlay {
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
             }
+            .mobile-menu-overlay.active { transform: translateY(0); }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+            .authors-hero { padding: 120px 20px 40px 20px; }
+            .hero-title { font-size: 4rem; }
+
+            /* Collapse Grid */
+            .author-section { grid-template-columns: 1fr; min-height: auto; }
+            .author-section.alt { direction: ltr; } /* Reset flip for mobile */
             
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
+            .visual-col { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); order: 1; }
+            .content-col { padding: 40px 20px; order: 2; }
             
-            /* Revert nav style for mobile dropdown */
-            .nav-tab { 
-                color: #a0a0a0; 
-                text-shadow: none; 
-                text-transform: none; 
-                font-size: 1.2rem; 
-            }
-            .nav-tab:hover { color: #ffffff; }
+            .author-section.alt .visual-col { border-left: none; }
+
+            .author-name { font-size: 3.5rem; }
+            .author-bio { font-size: 1.2rem; }
             
-            .text-box { padding: 30px 20px; }
-            .page-title { font-size: 2.5rem; }
-            .section-title { font-size: 1.8rem; }
-            .footer { flex-direction: column; gap: 15px; text-align: center; }
+            .book-cover { max-width: 250px; }
+            
+            .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <div id="global-announcement"></div>
+    <div class="cursor" id="cursor"></div>
 
-    <nav class="nav-header">
-        <a href="../index.html" class="logo" id="logo">Faun by Moonlight</a>
-        
-        <label for="nav-toggle" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        
-        <div class="nav-tabs">
-            <a href="../who-we-are.html" class="nav-tab">Who We Are</a>
-            <a href="../volumes.html" class="nav-tab">Volumes</a>
-            <a href="../submissions.html" class="nav-tab">Submit Your Work</a>
-            <a href="../faq.html" class="nav-tab">FAQ</a>
-            <a href="../support-us.html" class="nav-tab">Support Us</a>
-            <a href="../urgent.html" class="nav-tab">Urgent Appeal</a>
-            <a href="../contact.html" class="nav-tab">Contact</a>
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <main class="main-wrapper">
-        <div class="text-box">
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
+
+    <header class="authors-hero">
+        <span class="hero-label">The Architects</span>
+        <h1 class="hero-title">Volume 01:<br>Authors</h1>
+    </header>
+
+    <main>
+        
+        <article class="author-section theme-red">
             
-            <h1 class="page-title">Our Authors</h1>
+            <div class="visual-col">
+                <img src="../volumes/olycover.png" alt="Interrogation by Oly Weary" class="book-cover">
+            </div>
+
+            <div class="content-col">
+                <h2 class="author-name">Oly<br>Weary</h2>
+                <div class="author-bio">
+                    Oly Weary has never been published until now. He’s a British-born, Spanish-residing writer who loves to create absurdist stories.
+                </div>
+
+                <div class="editor-note">
+                    <span class="note-label">Editor's Note</span>
+                    <div class="note-text">
+                        <p>"Interrogation" manages to subvert the Absurdist genre. In the works of Camus, Kafka, Beckett or Ionesco there has always been a distinction between the absurd and the character. These were individuals confronted with the absurd of their circumstances.</p>
+                        <p>This is absurdism where the subject and the absurd has been completely defeated. Resistance isn’t futile, it’s simply incomprehensible.</p>
+                    </div>
+                </div>
+
+                <div class="contact-line">
+                    Want to speak to Oly? <a href="../contact" style="color: #fff; text-decoration: underline;">Send us a message</a> and we’ll put him through.
+                </div>
+            </div>
+
+        </article>
+
+        <article class="author-section alt theme-blue">
             
-            <section class="section section-divider">
-                <h2 class="section-title">Oly Weary</h2>
-                <div class="section-content">
-                    <p class="author-bio">
-                        Oly Weary has never been published until now. He’s a British-born, Spanish-residing writer who loves to create absurdist stories.
-                    </p>
-v
-                    <img src="../volumes/olycover.png" alt="Artwork for Interrogation by Oly Weary" class="author-cover" loading="lazy">
-                    
-                    <div class="editor-note">
-                        <p>
-                            "Interrogation" manages to subvert the Absurdist genre. In the works of Camus, Kafka, Beckett or Ionesco there has always been a distinction between the absurd and the character. These were individuals confronted with the absurd of their circumstances, their reactions constituted the core of the story.
-                        </p>
-                        <p>
-                            This is absurdism where the subject and the absurd has been completely defeated. Resistance isn’t futile, it’s simply incomprehensible.
-                        </p>
-                    </div>
-                    
-                    <p class="author-contact">
-                        If you wish to speak to Oly, feel free to send us a message and we’ll put him through.
-                    </p>
+            <div class="visual-col">
+                <img src="../volumes/garciacover.png" alt="Concerning the Vampire by Eduardo Garcia" class="book-cover">
+            </div>
+
+            <div class="content-col">
+                <h2 class="author-name">Eduardo<br>Garcia</h2>
+                <div class="author-bio">
+                    Eduardo Garcia has been published twice in a local magazine, which is no longer in operation. He hails from Argentina and likes to write in his spare time.
                 </div>
-            </section>
 
-            <section class="section"> 
-                <h2 class="section-title">Eduardo Garcia</h2>
-                <div class="section-content">
-                    <p class="author-bio">
-                        Eduardo Garcia has been published twice in a local magazine, which is no longer in operation. He hails from Argentina and likes to write in his spare time.
-                    </p>
-
-                    <img src="../volumes/garciacover.png" alt="Artwork for Concerning the Vampire by Eduardo Garcia" class="author-cover" loading="lazy">
-                    
-                    <div class="editor-note">
-                        <p>
-                            In "Concerning the Vampire" a centenarian vampire writes a formal complaint to a county court judge claiming to be the victim of identity theft. It’s a delightful exploration of the 19th-century high-society fascination with all things occult and supernatural, when the lines between science and fantasy were still being drawn.
-                        </p>
-                        <p>
-                            It speaks of agency, identity, celebrity culture, and an immigrant’s persistent anxiety that there are invisible networks of belonging he’ll never access, no matter how qualified he becomes. An anxiety often misdirected toward other immigrants, by immigrants.
-                        </p>
+                <div class="editor-note">
+                    <span class="note-label">Editor's Note</span>
+                    <div class="note-text">
+                        <p>In "Concerning the Vampire" a centenarian vampire writes a formal complaint to a county court judge claiming to be the victim of identity theft. It’s a delightful exploration of the 19th-century high-society fascination with all things occult.</p>
+                        <p>It speaks of agency, identity, celebrity culture, and an immigrant’s persistent anxiety that there are invisible networks of belonging he’ll never access.</p>
                     </div>
-                    
-                    <p class="author-contact">
-                        If you wish to contact Eduardo, feel free to get in touch and I’ll put you through.
-                    </p>
                 </div>
-            </section>
 
-        </div>
+                <div class="contact-line">
+                    Want to speak to Eduardo? <a href="../contact" style="color: #fff; text-decoration: underline;">Send us a message</a> and we’ll put him through.
+                </div>
+            </div>
+
+        </article>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on X">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" rel="noopener" aria-label="Follow us on Bluesky">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-            </a>
-            <a href="../contact.html" class="footer-link" aria-label="Contact us">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
-            </a>
-        </div>
-        <div class="copyright">
-            © 2025 Faun by Moonlight. All rights reserved.
-        </div>
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
+
+    <footer>
+        © 2025 Faun by Moonlight. All rights reserved.
     </footer>
 
     <script>
-        // Adjusted path for the announcement file assuming this is in /volumes/
-        fetch('../announcement.html')
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('No announcement found');
-            })
-            .then(data => {
-                document.getElementById('global-announcement').innerHTML = data;
-            })
-            .catch(error => {
-                console.log('Announcement system:', error.message);
-                document.getElementById('global-announcement').style.display = 'none';
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const interactive = document.querySelectorAll('a, button, .author-section');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('open');
+                navMenu.classList.remove('active');
             });
-
-        function colorLogo() {
-            const logo = document.getElementById('logo');
-            if (logo) {
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            colorLogo();
         });
     </script>
 </body>
