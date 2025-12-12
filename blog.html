@@ -107,6 +107,8 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            position: relative; /* Necessary for absolute video */
+            overflow: hidden;   /* Clips the video */
         }
         
         .huge-title {
@@ -116,6 +118,8 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative;
+            z-index: 2; /* Ensures text is above video */
         }
 
         .header-meta {
@@ -125,8 +129,27 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             max-width: 300px;
+            position: relative;
+            z-index: 2; /* Ensures text is above video */
         }
         .header-meta strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1.2rem; }
+
+        /* --- HEADER VIDEO --- */
+        .header-bg-video {
+            position: absolute;
+            /* Moved center point down */
+            top: 60%;
+            right: 0; 
+            /* Pushed further right and kept centered vertically relative to new top */
+            transform: translateY(-50%) translateX(30%); 
+            /* Slightly increased height */
+            height: 90%; 
+            width: auto;
+            z-index: 1; 
+            pointer-events: none;
+            mix-blend-mode: screen; 
+            opacity: 0.9;
+        }
 
         /* --- THE BLOG INDEX (LIST) --- */
         .blog-index {
@@ -305,6 +328,15 @@
             .huge-title { font-size: 15vw; }
             .header-meta { text-align: left; }
             
+            /* Mobile Video Adjustments */
+            .header-bg-video {
+                height: 50%;
+                top: auto;
+                bottom: 0;
+                transform: translateX(30%);
+                opacity: 0.5;
+            }
+            
             .blog-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 20px; }
             .entry-title { font-size: 3rem; }
             .entry-excerpt { font-size: 1.1rem; }
@@ -355,6 +387,10 @@
         <h1 class="huge-title">The<br>Feed</h1>
         <div class="header-meta">
         </div>
+        
+        <video class="header-bg-video" autoplay muted loop playsinline>
+            <source src="images/blog-video.mp4" type="video/mp4">
+        </video>
     </header>
 
     <main class="blog-index">
