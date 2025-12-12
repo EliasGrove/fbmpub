@@ -4,185 +4,589 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Should Die - Faun by Moonlight</title>
+    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     
-    <style>
-        /* --- COPY OF CORE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f0f0f0;
-            min-height: 100vh; display: flex; flex-direction: column;
-            background-image: url('images/5.png'); background-attachment: fixed; background-size: cover;
-        }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(15, 15, 15, 0.75); z-index: 0; }
-        
-        .announcement-bar { position: relative; z-index: 10000; background-color: #E60026; color: #fff; text-align: center; padding: 12px; }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .nav-header { position: sticky; top: 0; z-index: 9999; display: flex; justify-content: space-between; padding: 25px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); }
-        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #e6e6e6; text-decoration: none; text-transform: uppercase; }
-        
-        .main-wrapper { position: relative; z-index: 1; padding: 60px 40px; flex: 1; display: flex; flex-direction: column; align-items: center; }
-        .back-link { 
-            align-self: flex-start; margin-bottom: 20px; margin-left: max(0px, calc(50% - 400px));
-            color: #a0a0a0; text-decoration: none; font-family: "dunbar-tall", sans-serif; text-transform: uppercase; 
-        }
-        .back-link:hover { color: #E60026; }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3ETBBLP43M');
+    </script>
 
-        .article-container {
-            max-width: 800px; width: 100%;
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: 60px;
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        :root {
+            --c-bg: #0a0a0a; 
+            --c-text: #e0e0e0;
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #333;
+            --f-head: "alfarn", serif;
+            --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
         }
-        .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
-        .article-date { font-family: "neue-kabel", sans-serif; color: #FFD100; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        .article-title { font-family: "alfarn", serif; font-size: 3rem; color: #f8f8f8; line-height: 1.1; margin-bottom: 15px; font-weight: 400; }
-        .article-subtitle { font-family: "neue-kabel", sans-serif; font-size: 1.2rem; color: #a0a0a0; font-style: italic; }
-        .article-content { font-family: "neue-kabel", sans-serif; font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; font-weight: 400; }
-        .article-content p { margin-bottom: 1.5rem; }
-        .article-content h3 { font-family: "alfarn", serif; font-size: 1.8rem; color: #E60026; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 400; }
+
+        body { 
+            background-color: var(--c-bg); 
+            font-family: var(--f-body);
+            color: var(--c-text);
+            overflow-x: hidden; 
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* Red Selection for this page */
+        ::selection {
+            background: var(--c-red);
+            color: #fff;
+        }
+
+        /* --- SCROLL PROGRESS BAR (Red) --- */
+        .progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
+        }
+        .progress-bar {
+            height: 4px; background: var(--c-red); width: 0%;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-red); /* Red Border */
+            mix-blend-mode: normal;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            font-family: var(--f-head);
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex; gap: 0.4rem;
+        }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
+
+        .desktop-menu { display: flex; gap: 25px; }
+        .nav-link {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
         
-        .quote-block {
-            border-left: 2px solid #E60026;
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
+
+        /* --- HERO SECTION --- */
+        .statement-hero {
+            padding: 180px 40px 80px 40px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        
+        .hero-meta {
+            display: flex; justify-content: space-between; margin-bottom: 20px;
+            font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+        }
+
+        .hero-title {
+            font-family: var(--f-head);
+            font-size: 8rem;
+            line-height: 0.8;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* --- CONTENT GRID --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            min-height: 100vh;
+        }
+
+        /* Left Sticky Sidebar */
+        .meta-sidebar {
+            border-right: 1px solid var(--c-border);
+            padding: 60px 40px;
+            position: relative;
+        }
+        .sticky-wrapper {
+            position: sticky;
+            top: 120px;
+        }
+        .tldr-box {
+            border-left: 2px solid var(--c-red); /* Red Accent */
             padding-left: 20px;
-            font-style: italic;
-            color: #a0a0a0;
-            margin-bottom: 2rem;
+        }
+        .tldr-label {
+            display: block; font-family: var(--f-body); font-weight: 700; 
+            text-transform: uppercase; color: var(--c-red); margin-bottom: 15px; letter-spacing: 2px;
+        }
+        .tldr-text {
+            font-size: 1.2rem; line-height: 1.4; color: #fff; font-family: var(--f-head);
+        }
+
+        /* Right Content Area */
+        .article-body {
+            padding: 80px 120px; 
+            font-family: var(--f-body);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #ccc;
+            max-width: 1100px;
+        }
+
+        .article-body p { margin-bottom: 1.5rem; }
+        
+        /* Headers in text */
+        .article-body h3 {
+            font-family: var(--f-head);
+            font-size: 2.2rem;
+            color: #fff;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* Typography Styling */
+        .lead-paragraph {
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 3rem;
+        }
+
+        .pull-quote {
+            font-family: var(--f-head);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: var(--c-red); /* Red Quote */
+            margin: 3rem 0;
+            padding: 0 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 40px;
+        }
+
+        .highlight-box {
+            background: #111;
+            padding: 40px;
+            border: 1px solid #333;
+            margin: 2rem 0;
+        }
+        .highlight-box p { margin-bottom: 10px; color: #fff; font-size: 1.1rem;}
+        
+        strong { color: #fff; font-weight: 700; }
+        em { color: #fff; font-style: italic; }
+
+        /* Placeholder for Image */
+        .visual-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #111;
+            border: 1px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-family: var(--f-body);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0;
         }
         
-        .sources-list { list-style: none; padding: 0; font-size: 0.9rem; color: #a0a0a0; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .sources-list {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            font-family: var(--f-body);
+        }
         .sources-list li { margin-bottom: 0.5rem; }
 
-        .footer { position: relative; z-index: 2; padding: 20px 40px; background: rgba(0,0,0,0.8); color: #666; display: flex; justify-content: space-between; }
-        @media (max-width: 768px) { .article-container { padding: 30px 20px; } .article-title { font-size: 2rem; } .nav-tabs { display: none; } }
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px; height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+        .social-link:hover { transform: translateY(-2px); }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--c-border);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .burger.open span:nth-child(2) { opacity: 0; }
+            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .mobile-menu-overlay {
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
+            }
+            .mobile-menu-overlay.active { transform: translateY(0); }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+            .statement-hero { padding: 120px 20px 40px 20px; }
+            .hero-title { font-size: 3.5rem; }
+            
+            .content-grid { grid-template-columns: 1fr; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
+            .sticky-wrapper { position: relative; top: 0; }
+            
+            .article-body { padding: 40px 20px; font-size: 1.1rem; }
+            .lead-paragraph { font-size: 1.3rem; }
+            .pull-quote { font-size: 1.8rem; padding: 30px 0; }
+            .visual-placeholder { height: 200px; }
+            
+            .socials-section { gap: 20px; padding: 40px 20px; }
+        }
     </style>
 </head>
 <body>
-    <div class="announcement-bar">
-        <p>🚨 Submissions Open! We are currently reading for Q1 2026 <a href="submissions">Submit your work here</a></p>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
     </div>
 
-    <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
-        <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab">Who We Are</a>
-            <a href="volumes" class="nav-tab">Volumes</a>
-            <a href="blog.html" class="nav-tab active">Blog</a>
-            <a href="submissions" class="nav-tab">Submit Your Work</a>
+    <div class="cursor" id="cursor"></div>
+
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link active">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <main class="main-wrapper">
-        <a href="blog.html" class="back-link">&larr; Back to Journal</a>
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link active">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
+
+    <header class="statement-hero">
+        <div class="hero-meta">
+            <span>Philosophy / Politics</span>
+            <span>Dec 10, 2025</span>
+        </div>
+        <h1 class="hero-title">Who Should<br>Die</h1>
+    </header>
+
+    <main class="content-grid">
         
-        <article class="article-container">
-            <header class="article-header">
-                <span class="article-date">Dec 10, 2025</span>
-                <h1 class="article-title">Who Should Die</h1>
-                <p class="article-subtitle">By The Editor</p>
-            </header>
-            
-            <div class="article-content">
-                <div class="quote-block">
-                    <p>"But where does it stop? Who can we shoot? I don't aim to starve to death before I kill the man that's starving me."</p>
-                    <p>"I don't know. Maybe there's nobody to shoot. Maybe the thing isn't men at all."</p>
-                    <p>— John Steinbeck, <em>Grapes of Wrath</em></p>
+        <aside class="meta-sidebar">
+            <div class="sticky-wrapper">
+                <div class="tldr-box">
+                    <span class="tldr-label">TL;DR</span>
+                    <p class="tldr-text">The state does not punish harm; it punishes challenges to its monopoly on violence. When justice is absent, discontent writes its verdict in blood.</p>
                 </div>
-
-                <h3>Three Thousand Years</h3>
-                <p>Philosophy, since its inception, has aspired to be a science. Or at least to describe and explain with the same rigor. In fact, it was philosophers like Sir Francis Bacon, and to some extent Descartes, who created what we call the scientific method.</p>
-                <p>Before rigorous tests and advanced instruments, logic and reasoning were the only tools for understanding the world. While the accuracy of the conclusions drawn over the past four millennia was hit-or-miss, this pursuit of truth built the world we inhabit today—a world understood, and ruled, through science.</p>
-                <p>However, as philosophical disciplines like medicine, geology, and sociology branched into their own specialties, philosophy's sphere of authority shrank. From understanding existence and its natural expressions, it turned inwards, towards society and the role of the individual in it. This is the realm of Nietzsche, Marx, Engels, and Hegel.</p>
-                <p>Yet even here history, psychology, anthropology and genetics, came to recontextualize many of the arguments of these thinkers. It didn't invalidate their body of work, by any measure, but evidenced that pure logic was very limited in the conclusions it could draw of the external world; and so, it underwent a final contraction, to the individual.</p>
-                <p>Here, schools of thought such as Epistemology, Existentialism, and Absurdism attempted to answer: "What does it mean to be anything at all?" These works offered a lens for understanding, not testable hypotheses. They served to make you consider, not so much conclude.</p>
-                <p>These "contractions" aren't a failure of philosophy, but instead a sign of its fecundity. The final form of the intellectual pursuit Philosophers aspire to is, then, science.</p>
-
-                <h3>By Whose Grace?</h3>
-                <p>I believe there was a missed opportunity in that final contraction to the self. Having their focus on the abstract dilemma "For what do I live?," many philosophers failed to consider, "How am I alive?"</p>
-                <p>In a world without a God to ordain my existence, who does? By whose grace do I live, if not God's? Here, for simplicity, "life" and "live" refer to both literal existence (being alive) and its quality (being free, prosperous, etc.).</p>
-
-                <h3>Crimes and Punishment</h3>
-                <p>Instinctively, you might answer the question "who allows me to live" with "myself and others." I don't kill myself, and others don't kill me, you may say. But this can only be true if both parties hold exclusive power over the course of your life.</p>
-                <p>This is, evidently, not true, for there is a third party that can, and often does, override both wills to impose its own: the state. Through this power, the state is then the de-facto arbiter of whether you, or I, shall live.</p>
-                <p>Having determined this, the next question is: by what measure? What makes one deserving, or undeserving, of life in the state's eyes? The state often answers this question with idealistic platitudes, embedded in their various foundational texts: "the inherent worth of man," the "sanctity of human life," and so forth.</p>
-                <p>But if life were truly held in such an idealistic regard, the justice system could not exist. A system cannot be both idealistic and formally determined. Life cannot be both priceless and have a specific price for taking it.</p>
-                <p>Then, there must be a concrete, materialistic measure by which the state judges life and, by contrast, when that life is forfeit. This is true for any justice system. Very few states, if any, possess an explicit, material mandate for permitting life. However, states do possess explicit mandates for removing it—through the justice system and its punishments. And so, a state won't tell you by what measures it permits life, only by what measures it removes it.</p>
-                <p>We must then investigate the latter, to infer the former.</p>
-
-                <h3>Harm</h3>
-                <p>Usually it's believed the state punishes those who cause harm. This harm may be physical (murder, assault), material (theft), or psychological (abuse, coercion).</p>
-                <p>To test this, we must investigate: Is this standard applied to all? Excluding the natural limitations of a system both designed and reliant on humans, is there at least an attempt to apply this standard to all instances where there is verifiable harm? Let us see.</p>
-                <p>A 2025 KFF analysis found that in 2023 marketplace insurers denied an average of 19% of in-network claims. A 2024 AMA survey found that 29% of physicians reported Prior Authorization led to a serious adverse event for a patient in their care such as hospitalization, life-threatening events and even death. 39% of all surveyed physicians report that rarely, if ever, are PA criteria evidence-based. The punishment for these systemic practices is civil penalties and lawsuits (for those who can afford them).</p>
-                <p>The 2017 Grenfell Tower fire was the direct result of corporate malpractice. Contractors saved around £300,000 by using Arconic's Reynobond PE cladding which they knew was highly flammable. This cost-saving measure led to 72 people burning alive. No criminal charges have been brought against any executives, only civil lawsuits.</p>
-                <p>Starting in the 1990's, Purdue Pharma led an aggressive PR campaign, claiming that pain was being under-treated in the United States. Their answer to this "crisis" was OxyContin, which they falsely claimed wasn't highly addictive, and that it was safer than over-the-counter painkillers. Purdue pushed Doctors to prescribe opioids for longer periods and at higher doses and even promoted the idea that the answer to opioid addiction was... more opioids.</p>
-                <p>Between 1999 and 2023, approximately 806,000 people died from an opioid overdose. Families were devastated, poorer communities destroyed. The punishment was the company's bankruptcy and civil lawsuits. No member of the Sackler family has faced criminal charges.</p>
-                <p>To compete with Airbus, Boeing rushed development of the 737 MAX and concealed a flawed flight control system from pilots and regulators specifically to avoid expensive simulator training requirements. This caused two crashes in Indonesia and Ethiopia, killing 346 people. Civil lawsuits ensued, but no executive was jailed.</p>
-                <p>Leading to the 2008 financial crisis major banks knowingly sold toxic, high-risk subprime mortgages as safe investments. In the financial crisis this created, eight million Americans would lose their jobs, millions more their homes, and some countries would be irreparably scarred. Many economies are still reeling from this. The punishment was trillions of dollars in government bailouts and fines. Only one minor banker was criminally jailed in the U.S.</p>
-                <p>So, is "harm" the standard for state justice? From these, and the many other examples, we can determine that it is not. Common sense dictates that if an individual knowingly poisoned, defrauded or killed people, punishment would be handed swiftly. Yet here we see no such thing. Harm, therefore, cannot be the true standard if the consequences depend entirely on the framework (individual versus corporate) in which it occurs.</p>
-                <p>The arguments against this conclusion rest in the legal concept of mens rea (guilty mind). In simple terms this means that, for the state, one must prove an individual was aware of these risks and still decided to act. This is easily proven in a single individual, but it is much harder to do for a corporation; or so the state says.</p>
-                <p>And yet, organized crime operates in much the same way that a corporation does. It has a clear structure, has a hand across multiple enterprises, and it too has a complicated and abstruse hierarchy. Yet highly complex and expensive investigations are nevertheless undertaken to bring these individuals to justice. Their structure is dismantled, its leaders imprisoned, and both motive and culpability established through informants, deals, and RICO statutes.</p>
-                <p>Mens rea cannot be the reason, because this complexity isn't a deterrent when it concerns organizations that function beyond the state's law. Intent may be obscure, but the state is able to prove it if it so wishes. Then, what is?</p>
-
-                <h3>The State</h3>
-                <p>Before we continue, it is important to define "the state." By "state" I refer to the structure that wields, controls, and maintains legal, judicial and executive power in a given society. The state is the body that can enforce its will upon a people and the individuals that comprise it. A state can only exist if the individuals within it recognize, respect, and fear its power.</p>
-                <p>The state encompasses all of the various bodies and individuals that are responsible to ensure it remains able to exert this power. A society is predicated on its laws. Without collective rules, a group observing only individual whims lacks the cohesion to scale from community to nation. As society grows in size and complexity, it becomes impossible for its members to individually know and fairly administer these rules. A specialized body must therefore be created to do this. This is the state's origin.</p>
-                <p>In a functioning society, the state's power is, then, naturally observed without the constant need to impose its will. If this were not the case, it would not be a functioning society. Because the state's existence thus presupposes its power is already respected by the majority, its primary function becomes reactive: a reaction against those who fail to respect it.</p>
-                <p>We have already observed that the state does not react on the basis of harm done to the people. Yet, as we have also seen, it does react based upon the infringement on the set of rules (laws) with which it enforces its own will. We can conclude, then, that the state reacts only to challenges against its own power, through the rules (laws) it has imposed.</p>
-                <p>Corporations operate within this legal power structure. Their actions, despite causing verifiable harm, do not challenge the state. However harmful their actions, they respect the laws, and by extension the state's power. It is only when the state itself feels threatened by this harm (public inquiries, moral outrage, etc.) that the harm is addressed and, potentially, prosecuted (almost always in civil court).</p>
-                <p>Organized crime is prosecuted fiercely because, unlike corporations, they often co-opt the state's power in a way that it cannot tolerate. They police their communities, determine and administer laws, collect taxes, and both protect and punish. Therefore, the state determines a life is forfeit only when the individual tries to seize the power the state reserves for itself.</p>
-                <p>To the question "Why do I live?" we can answer: "Because the state does not deem you a threat to its power."</p>
-
-                <h3>Two Men</h3>
-                <p>Luigi Nicholas Mangione was born on May 6, 1998, in Towson, Maryland. He came from a prominent Maryland family and had a strong academic background. Mangione suffered from spondylolisthesis, a spinal condition that causes severe back pain and nerve issues. The pain interfered with his physical activities and dating life. He had spinal fusion surgery in 2023 and initially felt better, but afterward gradually cut off contact with friends and family. Friends described him as highly intelligent, kind, and well-adjusted with everything going for him. They expressed shock at his arrest, saying the person they knew was completely different from who he allegedly became.</p>
-                <p>Brian Thompson was a 50-year-old married father of two sons who lived in Maple Grove, Minnesota. He began his career as a Certified Public Accountant at PwC before joining UnitedHealth Group in 2004. Over two decades he climbed the corporate ranks, holding several key leadership positions. In April 2021, Thompson was appointed CEO of UnitedHealthcare, heading the largest health insurer in the United States, providing coverage to over 49 million Americans. Despite his high-profile position (which came with an annual compensation package of over $10 million) colleagues described him as a humble and respected leader who was dedicated to his family.</p>
-                <p>Under Brian Thompson's tenure as CEO from April 2021 until his death in December 2024, UnitedHealthcare faced intense public scrutiny for its aggressive practices in denying insurance claims and requests for prior authorization. Several class-action lawsuits against the company highlighted a systematic use of algorithms to automate and increase denials, particularly for elderly patients in Medicare Advantage plans, with one lawsuit alleging a 90% error rate in the initial AI denials that were often overturned on appeal. You can read in the sources provided the impact these policies have had on millions of Americans.</p>
-
-                <h3>Grapes of Wrath</h3>
-                <p>At 5:34 a.m., about one hour before the shooting, Luigi Mangione left the hostel and rode an e-bike to Midtown. At about 6:15 a.m., he bought a water bottle and granola bars at a Starbucks. At 6:19 a.m., surveillance video shows him walking and briefly stopping by a pile of trash. Around 6:30 a.m., surveillance video captures what appears to be the gunman (he has not been found guilty yet) on the phone.</p>
-                <p>Standing 20 feet away from Thompson when he arrived at the entrance, the gunman fired three times at him from a suppressed 9mm pistol, hitting him in the back and right calf. The shooter then walks toward the victim and continues to shoot. At 6:48 a.m., officers arrived and found Thompson on the sidewalk with gunshot wounds. He was transported by EMS to Roosevelt Hospital, where he was pronounced dead at 7:12 a.m.</p>
-                <p>Following this terrible loss of life, the resulting manhunt, and the aggressive campaign against Mangione led by Attorney General Pam Bondi, a question naturally arises: If both Mr. Mangione (allegedly) and Mr. Thompson (allegedly) have caused verifiable harm, why is Mr. Mangione in jail now, but Mr. Thompson wasn't? What makes Mr. Mangione's actions, within the framework of the state, more reprehensible than Mr. Thompson's?</p>
-                <p>I believe the previous paragraphs have equipped you, dear reader, with the tools to answer this question—Mr. Thompson's actions, although harmful, were committed while obeying the law. They were reprehensible, and harmful, but there is no evidence so far that he has broken the law in his pursuit of profit maximization. In fact, he was rewarded handsomely for his efforts.</p>
-                <p>Mr. Mangione, on the other hand, (allegedly) appropriated the right over life and death the state assumes for itself, and so the state reacted accordingly. Furthermore, in seeing the overwhelming public support that Mr. Mangione received, and fearing more harm would come to those that, despite being immoral, operate within the state's framework, Attorney General Pam (Pamela) Bondi's first instinct was to seek the death penalty as a clear warning. I believe her words were "If there was ever a death case, this is one."</p>
-
-                <h3>The Writing on the Wall</h3>
-                <p>It's important to understand that the state's drive for self-preservation doesn't require unified purpose or coordinated action. The state doesn't need a master plan or internal harmony, because its very existence is the imposition of power, and that power is sustains it. A state that cannot impose itself ceases to be a state.</p>
-                <p>Any reform must then begin from this reality: within the state's framework, there is no morality, only power. Did Mr. Thompson deserve to die? For the state, no. He was never tried for any crimes, let alone sentenced to death. Yet morally, he is responsible for harm, but suffered no consequence.</p>
-                <p>This imbalance between Thompson's moral and legal responsibilities breeds the kind of discontent that led to his murder. Many executives and state actors share this imbalance. When information is carefully selected and its sources controlled, this is easy to keep hidden. Corporate governance, civil versus criminal liability, regulatory oversight, the struggles of the disadvantaged: these are made to sound complex by those who benefit from confusion.</p>
-                <p>But in the golden-age of independent micro-journalism we live in today, these injustices are becoming ever more apparent. Their simplicity is perhaps all the more aggravating. When it comes to civil discontentment, the writing on the wall is usually painted with blood.</p>
-                <p>Thompson's murder, the attempt on Trump's life, Kirk's killing prove what happens when those responsible for systemic harm face no consequences, while their victims are criminalized for retaliation. In this discontent, revolutions fester. And the state, as it exists, begins to collapse.</p>
-
-                <ul class="sources-list">
-                    <li><strong>Sources:</strong></li>
-                    <li>KFF: Claims Denials and Appeals in ACA Marketplace Plans in 2023</li>
-                    <li>AMA Prior Authorization Survey</li>
-                    <li>AG Racine Sues Purdue Pharma</li>
-                    <li>DC v Purdue Redacted Complaint</li>
-                    <li>CDC: Understanding the Opioid Overdose Epidemic</li>
-                    <li>BBC News</li>
-                    <li>Marketplace: What we learned housing</li>
-                    <li>BLS Civilian Unemployment Rate</li>
-                    <li>Class Action Complaint Against UHG</li>
-                    <li>CNN: Insurance claim denials UnitedHealthcare CEO</li>
-                    <li>Ballad Health Federal Lawsuit UnitedHealth</li>
-                </ul>
             </div>
+        </aside>
+
+        <article class="article-body">
+            
+            <div class="highlight-box">
+                <p><em>"But where does it stop? Who can we shoot? I don't aim to starve to death before I kill the man that's starving me."</em></p>
+                <p><em>"I don't know. Maybe there's nobody to shoot. Maybe the thing isn't men at all."</em></p>
+                <p>— John Steinbeck, <em>Grapes of Wrath</em></p>
+            </div>
+
+            <p class="lead-paragraph">Philosophy, since its inception, has aspired to be a science. Or at least to describe and explain with the same rigor. In fact, it was philosophers like Sir Francis Bacon, and to some extent Descartes, who created what we call the scientific method.</p>
+
+            <h3>Three Thousand Years</h3>
+
+            <p>Before rigorous tests and advanced instruments, logic and reasoning were the only tools for understanding the world. While the accuracy of the conclusions drawn over the past four millennia was hit-or-miss, this pursuit of truth built the world we inhabit today—a world understood, and ruled, through science.</p>
+
+            <p>However, as philosophical disciplines like medicine, geology, and sociology branched into their own specialties, philosophy's sphere of authority shrank. From understanding existence and its natural expressions, it turned inwards, towards society and the role of the individual in it. This is the realm of Nietzsche, Marx, Engels, and Hegel.</p>
+
+            <p>Here, schools of thought such as Epistemology, Existentialism, and Absurdism attempted to answer: "What does it mean to be anything at all?" These works offered a lens for understanding, not testable hypotheses. They served to make you consider, not so much conclude.</p>
+
+            <p>These "contractions" aren't a failure of philosophy, but instead a sign of its fecundity. The final form of the intellectual pursuit Philosophers aspire to is, then, science.</p>
+
+            <h3>By Whose Grace?</h3>
+
+            <p>I believe there was a missed opportunity in that final contraction to the self. Having their focus on the abstract dilemma "For what do I live?," many philosophers failed to consider, "How am I alive?"</p>
+
+            <p>In a world without a God to ordain my existence, who does? By whose grace do I live, if not God's? Here, for simplicity, "life" and "live" refer to both literal existence (being alive) and its quality (being free, prosperous, etc.).</p>
+
+            <h3>Crimes and Punishment</h3>
+
+            <p>Instinctively, you might answer the question "who allows me to live" with "myself and others." I don't kill myself, and others don't kill me, you may say. But this can only be true if both parties hold exclusive power over the course of your life.</p>
+
+            <p>This is, evidently, not true, for there is a third party that can, and often does, override both wills to impose its own: the state. Through this power, the state is then the de-facto arbiter of whether you, or I, shall live.</p>
+
+            <p>Having determined this, the next question is: by what measure? What makes one deserving, or undeserving, of life in the state's eyes? The state often answers this question with idealistic platitudes, embedded in their various foundational texts: "the inherent worth of man," the "sanctity of human life," and so forth.</p>
+
+            <p>But if life were truly held in such an idealistic regard, the justice system could not exist. A system cannot be both idealistic and formally determined. Life cannot be both priceless and have a specific price for taking it.</p>
+
+            <p>Then, there must be a concrete, materialistic measure by which the state judges life and, by contrast, when that life is forfeit. This is true for any justice system. Very few states, if any, possess an explicit, material mandate for permitting life. However, states do possess explicit mandates for removing it—through the justice system and its punishments. And so, a state won't tell you by what measures it permits life, only by what measures it removes it.</p>
+
+            <p>We must then investigate the latter, to infer the former.</p>
+
+            <h3>Harm</h3>
+
+            <p>Usually it's believed the state punishes those who cause harm. This harm may be physical (murder, assault), material (theft), or psychological (abuse, coercion).</p>
+
+            <p>To test this, we must investigate: Is this standard applied to all? Excluding the natural limitations of a system both designed and reliant on humans, is there at least an attempt to apply this standard to all instances where there is verifiable harm? Let us see.</p>
+
+            <div class="highlight-box">
+                <p><strong>Insurance:</strong> A 2025 KFF analysis found that in 2023 marketplace insurers denied an average of 19% of in-network claims. A 2024 AMA survey found that 29% of physicians reported Prior Authorization led to a serious adverse event, including hospitalization and death. 39% report criteria are rarely evidence-based.</p>
+                <p><strong>Grenfell Tower:</strong> Contractors saved £300,000 by using flammable cladding, leading to 72 people burning alive. No criminal charges; only civil lawsuits.</p>
+                <p><strong>Opioids:</strong> Between 1999 and 2023, approximately 806,000 people died from opioid overdoses driven by Purdue Pharma's aggressive campaigns. No member of the Sackler family has faced criminal charges.</p>
+                <p><strong>Boeing:</strong> Boeing rushed the 737 MAX and concealed flawed systems to avoid training costs. This caused two crashes killing 346 people. Civil lawsuits ensued; no executive was jailed.</p>
+                <p><strong>2008 Crisis:</strong> Major banks sold toxic mortgages, leading to global economic scarring and millions losing homes. Only one minor banker was criminally jailed in the U.S.</p>
+            </div>
+
+            <p>So, is "harm" the standard for state justice? From these, and the many other examples, we can determine that it is not. Common sense dictates that if an individual knowingly poisoned, defrauded or killed people, punishment would be handed swiftly. Yet here we see no such thing. Harm, therefore, cannot be the true standard if the consequences depend entirely on the framework (individual versus corporate) in which it occurs.</p>
+
+            <p>The arguments against this conclusion rest in the legal concept of mens rea (guilty mind). In simple terms this means that, for the state, one must prove an individual was aware of these risks and still decided to act. This is easily proven in a single individual, but it is much harder to do for a corporation; or so the state says.</p>
+
+            <p>And yet, organized crime operates in much the same way that a corporation does. It has a clear structure, has a hand across multiple enterprises, and it too has a complicated and abstruse hierarchy. Yet highly complex and expensive investigations are nevertheless undertaken to bring these individuals to justice. Their structure is dismantled, its leaders imprisoned, and both motive and culpability established through informants, deals, and RICO statutes.</p>
+
+            <p>Mens rea cannot be the reason, because this complexity isn't a deterrent when it concerns organizations that function beyond the state's law. Intent may be obscure, but the state is able to prove it if it so wishes. Then, what is?</p>
+
+            <h3>The State</h3>
+
+            <p>Before we continue, it is important to define "the state." By "state" I refer to the structure that wields, controls, and maintains legal, judicial and executive power in a given society. The state is the body that can enforce its will upon a people and the individuals that comprise it. A state can only exist if the individuals within it recognize, respect, and fear its power.</p>
+
+            <p>In a functioning society, the state's power is, then, naturally observed without the constant need to impose its will. Because the state's existence thus presupposes its power is already respected by the majority, its primary function becomes reactive: a reaction against those who fail to respect it.</p>
+
+            <p>We have already observed that the state does not react on the basis of harm done to the people. Yet, as we have also seen, it does react based upon the infringement on the set of rules (laws) with which it enforces its own will. We can conclude, then, that the state reacts only to challenges against its own power, through the rules (laws) it has imposed.</p>
+
+            <p>Corporations operate within this legal power structure. Their actions, despite causing verifiable harm, do not challenge the state. However harmful their actions, they respect the laws, and by extension the state's power. It is only when the state itself feels threatened by this harm (public inquiries, moral outrage, etc.) that the harm is addressed.</p>
+
+            <p>Organized crime is prosecuted fiercely because, unlike corporations, they often co-opt the state's power in a way that it cannot tolerate. They police their communities, determine and administer laws, collect taxes, and both protect and punish. Therefore, the state determines a life is forfeit only when the individual tries to seize the power the state reserves for itself.</p>
+
+            <div class="pull-quote">
+                "To the question 'Why do I live?' we can answer: 'Because the state does not deem you a threat to its power.'"
+            </div>
+
+            <h3>Two Men</h3>
+
+            <p>Luigi Nicholas Mangione was born on May 6, 1998, in Towson, Maryland. He came from a prominent Maryland family and had a strong academic background. Mangione suffered from spondylolisthesis, a spinal condition that causes severe back pain. Friends described him as highly intelligent, kind, and well-adjusted.</p>
+
+            <p>Brian Thompson was a 50-year-old married father of two sons. He climbed the corporate ranks to become CEO of UnitedHealthcare, holding an annual compensation package of over $10 million. Under his tenure, UnitedHealthcare faced intense public scrutiny for its aggressive practices in denying insurance claims and requests for prior authorization.</p>
+
+            <div class="visual-placeholder">
+                
+            </div>
+
+            <p>Several class-action lawsuits against the company highlighted a systematic use of algorithms to automate and increase denials, particularly for elderly patients in Medicare Advantage plans, with one lawsuit alleging a 90% error rate in the initial AI denials that were often overturned on appeal.</p>
+
+            <h3>Grapes of Wrath</h3>
+
+            <p>At 5:34 a.m., about one hour before the shooting, Luigi Mangione left the hostel and rode an e-bike to Midtown. Standing 20 feet away from Thompson when he arrived at the entrance, the gunman fired three times at him from a suppressed 9mm pistol, hitting him in the back and right calf. The shooter then walks toward the victim and continues to shoot.</p>
+
+            <p>Following this terrible loss of life, the resulting manhunt, and the aggressive campaign against Mangione led by Attorney General Pam Bondi, a question naturally arises: If both Mr. Mangione (allegedly) and Mr. Thompson (allegedly) have caused verifiable harm, why is Mr. Mangione in jail now, but Mr. Thompson wasn't? What makes Mr. Mangione's actions, within the framework of the state, more reprehensible than Mr. Thompson's?</p>
+
+            <p>I believe the previous paragraphs have equipped you, dear reader, with the tools to answer this question—Mr. Thompson's actions, although harmful, were committed while obeying the law. They were reprehensible, and harmful, but there is no evidence so far that he has broken the law in his pursuit of profit maximization. In fact, he was rewarded handsomely for his efforts.</p>
+
+            <p>Mr. Mangione, on the other hand, (allegedly) appropriated the right over life and death the state assumes for itself, and so the state reacted accordingly. Furthermore, in seeing the overwhelming public support that Mr. Mangione received, and fearing more harm would come to those that, despite being immoral, operate within the state's framework, Attorney General Pam (Pamela) Bondi's first instinct was to seek the death penalty as a clear warning. I believe her words were "If there was ever a death case, this is one."</p>
+
+            <h3>The Writing on the Wall</h3>
+
+            <p>It's important to understand that the state's drive for self-preservation doesn't require unified purpose or coordinated action. The state doesn't need a master plan or internal harmony, because its very existence is the imposition of power, and that power is sustains it.</p>
+
+            <p>Any reform must then begin from this reality: within the state's framework, there is no morality, only power. Did Mr. Thompson deserve to die? For the state, no. He was never tried for any crimes, let alone sentenced to death. Yet morally, he is responsible for harm, but suffered no consequence.</p>
+
+            <p>This imbalance between Thompson's moral and legal responsibilities breeds the kind of discontent that led to his murder. Many executives and state actors share this imbalance. When information is carefully selected and its sources controlled, this is easy to keep hidden. Corporate governance, civil versus criminal liability, regulatory oversight, the struggles of the disadvantaged: these are made to sound complex by those who benefit from confusion.</p>
+
+            <p>But in the golden-age of independent micro-journalism we live in today, these injustices are becoming ever more apparent. Their simplicity is perhaps all the more aggravating. When it comes to civil discontentment, the writing on the wall is usually painted with blood.</p>
+
+            <p>Thompson's murder, the attempt on Trump's life, Kirk's killing prove what happens when those responsible for systemic harm face no consequences, while their victims are criminalized for retaliation. In this discontent, revolutions fester. And the state, as it exists, begins to collapse.</p>
+
+            <ul class="sources-list">
+                <li><strong>Sources:</strong></li>
+                <li>KFF: Claims Denials and Appeals in ACA Marketplace Plans in 2023</li>
+                <li>AMA Prior Authorization Survey</li>
+                <li>AG Racine Sues Purdue Pharma</li>
+                <li>DC v Purdue Redacted Complaint</li>
+                <li>CDC: Understanding the Opioid Overdose Epidemic</li>
+                <li>BBC News</li>
+                <li>Marketplace: What we learned housing</li>
+                <li>BLS Civilian Unemployment Rate</li>
+                <li>Class Action Complaint Against UHG</li>
+                <li>CNN: Insurance claim denials UnitedHealthcare CEO</li>
+                <li>Ballad Health Federal Lawsuit UnitedHealth</li>
+            </ul>
+
         </article>
+
     </main>
-    
-    <footer class="footer">
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
+
+    <footer>
+        © 2025 Faun by Moonlight. All rights reserved.
     </footer>
+
     <script>
-        const logo = document.getElementById('logo');
-        if (logo) {
-            const colors = ['word-faun', 'word-by', 'word-moonlight'];
-            const words = logo.textContent.split(' ');
-            logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+        // --- SCROLL PROGRESS LOGIC ---
+        window.onscroll = function() {myFunction()};
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
         }
+
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const interactive = document.querySelectorAll('a, button, .article-body');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('open');
+                navMenu.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
