@@ -4,250 +4,530 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Socialists V Chairs - Faun by Moonlight</title>
+    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     
-    <style>
-        /* --- COPY OF CORE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "neue-kabel", sans-serif; background-color: #1a1a1a; color: #f0f0f0;
-            min-height: 100vh; display: flex; flex-direction: column;
-            background-image: url('images/5.png'); background-attachment: fixed; background-size: cover;
-        }
-        body::before { content: ''; position: fixed; inset: 0; background: rgba(15, 15, 15, 0.75); z-index: 0; }
-        
-        .announcement-bar { position: relative; z-index: 10000; background-color: #E60026; color: #fff; text-align: center; padding: 12px; }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .nav-header { position: sticky; top: 0; z-index: 9999; display: flex; justify-content: space-between; padding: 25px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); }
-        .logo { font-family: "alfarn", serif; font-size: 1.8rem; color: #f8f8f8; text-decoration: none; }
-        .word-faun { color: #E60026; } .word-by { color: #0047BB; } .word-moonlight { color: #FFD100; }
-        .nav-tabs { display: flex; gap: 30px; }
-        .nav-tab { font-family: "dunbar-tall", sans-serif; font-weight: 700; font-size: 1.1rem; color: #e6e6e6; text-decoration: none; text-transform: uppercase; }
-        
-        .main-wrapper { position: relative; z-index: 1; padding: 60px 40px; flex: 1; display: flex; flex-direction: column; align-items: center; }
-        .back-link { 
-            align-self: flex-start; margin-bottom: 20px; margin-left: max(0px, calc(50% - 400px));
-            color: #a0a0a0; text-decoration: none; font-family: "dunbar-tall", sans-serif; text-transform: uppercase; 
-        }
-        .back-link:hover { color: #E60026; }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3ETBBLP43M');
+    </script>
 
-        .article-container {
-            max-width: 800px; width: 100%;
-            background: rgba(30, 30, 30, 0.6);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px; padding: 60px;
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        :root {
+            --c-bg: #0a0a0a; 
+            --c-text: #e0e0e0;
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #333;
+            --f-head: "alfarn", serif;
+            --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
         }
-        .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
-        .article-date { font-family: "neue-kabel", sans-serif; color: #FFD100; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; display: block; }
-        .article-title { font-family: "alfarn", serif; font-size: 3rem; color: #f8f8f8; line-height: 1.1; margin-bottom: 15px; font-weight: 400; }
-        .article-subtitle { font-family: "neue-kabel", sans-serif; font-size: 1.2rem; color: #a0a0a0; font-style: italic; }
-        .article-content { font-family: "neue-kabel", sans-serif; font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; font-weight: 400; }
-        .article-content p { margin-bottom: 1.5rem; }
+
+        body { 
+            background-color: var(--c-bg); 
+            font-family: var(--f-body);
+            color: var(--c-text);
+            overflow-x: hidden; 
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        /* Red Selection for this page */
+        ::selection {
+            background: var(--c-red);
+            color: #fff;
+        }
+
+        /* --- SCROLL PROGRESS BAR (Red) --- */
+        .progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
+        }
+        .progress-bar {
+            height: 4px; background: var(--c-red); width: 0%;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-red); /* Red Border */
+            mix-blend-mode: normal;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            font-family: var(--f-head);
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex; gap: 0.4rem;
+        }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
+
+        .desktop-menu { display: flex; gap: 25px; }
+        .nav-link {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
         
-        /* Specific Heading Style within Article */
-        .article-content h3 {
-            font-family: "alfarn", serif;
-            font-size: 1.8rem;
-            color: #E60026;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
+
+        /* --- HERO SECTION --- */
+        .statement-hero {
+            padding: 180px 40px 80px 40px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        
+        .hero-meta {
+            display: flex; justify-content: space-between; margin-bottom: 20px;
+            font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+        }
+
+        .hero-title {
+            font-family: var(--f-head);
+            font-size: 8rem;
+            line-height: 0.8;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* --- CONTENT GRID --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            min-height: 100vh;
+        }
+
+        /* Left Sticky Sidebar */
+        .meta-sidebar {
+            border-right: 1px solid var(--c-border);
+            padding: 60px 40px;
+            position: relative;
+        }
+        .sticky-wrapper {
+            position: sticky;
+            top: 120px;
+        }
+        .tldr-box {
+            border-left: 2px solid var(--c-red); /* Red Accent */
+            padding-left: 20px;
+        }
+        .tldr-label {
+            display: block; font-family: var(--f-body); font-weight: 700; 
+            text-transform: uppercase; color: var(--c-red); margin-bottom: 15px; letter-spacing: 2px;
+        }
+        .tldr-text {
+            font-size: 1.2rem; line-height: 1.4; color: #fff; font-family: var(--f-head);
+        }
+
+        /* Right Content Area */
+        .article-body {
+            padding: 80px 120px; 
+            font-family: var(--f-body);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #ccc;
+            max-width: 1100px;
+        }
+
+        .article-body p { margin-bottom: 1.5rem; }
+        
+        /* Headers in text */
+        .article-body h3 {
+            font-family: var(--f-head);
+            font-size: 2.2rem;
+            color: #fff;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
             font-weight: 400;
         }
 
-        .footer { position: relative; z-index: 2; padding: 20px 40px; background: rgba(0,0,0,0.8); color: #666; display: flex; justify-content: space-between; }
-        @media (max-width: 768px) { .article-container { padding: 30px 20px; } .article-title { font-size: 2rem; } .nav-tabs { display: none; } }
+        /* Typography Styling */
+        .lead-paragraph {
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 3rem;
+        }
+
+        .pull-quote {
+            font-family: var(--f-head);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: var(--c-red); /* Red Quote */
+            margin: 3rem 0;
+            padding: 0 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 40px;
+        }
+
+        .highlight-box {
+            background: #111;
+            padding: 40px;
+            border: 1px solid #333;
+            margin: 2rem 0;
+        }
+        .highlight-box p { margin-bottom: 10px; color: #fff; font-size: 1.1rem;}
+        
+        strong { color: #fff; font-weight: 700; }
+        em { color: #fff; font-style: italic; }
+
+        /* Placeholder for Image */
+        .visual-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #111;
+            border: 1px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-family: var(--f-body);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0;
+        }
+
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px; height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+        .social-link:hover { transform: translateY(-2px); }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--c-border);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .burger.open span:nth-child(2) { opacity: 0; }
+            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .mobile-menu-overlay {
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
+            }
+            .mobile-menu-overlay.active { transform: translateY(0); }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+            .statement-hero { padding: 120px 20px 40px 20px; }
+            .hero-title { font-size: 3.5rem; }
+            
+            .content-grid { grid-template-columns: 1fr; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
+            .sticky-wrapper { position: relative; top: 0; }
+            
+            .article-body { padding: 40px 20px; font-size: 1.1rem; }
+            .lead-paragraph { font-size: 1.3rem; }
+            .pull-quote { font-size: 1.8rem; padding: 30px 0; }
+            .visual-placeholder { height: 200px; }
+            
+            .socials-section { gap: 20px; padding: 40px 20px; }
+        }
     </style>
 </head>
 <body>
-    <div class="announcement-bar">
-        <p>🚨 Submissions Open! We are currently reading for Q1 2026 <a href="submissions">Submit your work here</a></p>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
     </div>
 
-    <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
-        <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab">Who We Are</a>
-            <a href="volumes" class="nav-tab">Volumes</a>
-            <a href="blog.html" class="nav-tab active">Blog</a>
-            <a href="submissions" class="nav-tab">Submit Your Work</a>
+    <div class="cursor" id="cursor"></div>
+
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link active">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <main class="main-wrapper">
-        <a href="blog.html" class="back-link">&larr; Back to Journal</a>
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link active">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
+
+    <header class="statement-hero">
+        <div class="hero-meta">
+            <span>History</span>
+            <span>Dec 05, 2025</span>
+        </div>
+        <h1 class="hero-title">National Socialists<br>V Chairs</h1>
+    </header>
+
+    <main class="content-grid">
         
-        <article class="article-container">
-            <header class="article-header">
-                <span class="article-date">Dec 05, 2025</span>
-                <h1 class="article-title">National Socialists V Chairs</h1>
-                <p class="article-subtitle">The Erasure of the Other</p>
-            </header>
-            
-            <div class="article-content">
-                <p>In a 2017 BBC article titled “The Endless Influence of Bauhaus,” Mr. William Cook asks: “Why did the Nazis feel so threatened by the Bauhaus? Why were they so scared of an art school that made modernist furniture and kitchenware?” Mr. Cook answers his own question: “Because it represented a worldview which was the complete opposite of National Socialism.”</p>
-
-                <p>This is a misconception both in essence and in effect.</p>
-
-                <p>In essence because National Socialists didn’t see Bauhaus as the “complete opposite” of their ideology. Bauhaus products like Marianne Brandt’s lamps remained in production, Bauhaus designs appeared in Nazi-era home décor books, and former Bauhaus students like Fritz Ertl held reputable positions in the regime, even as they publicly condemned the Bauhaus as “degenerate.” As Professor Elizabeth Otto puts it, “The Bauhaus was everywhere under Nazism.”</p>
-
-                <p>In effect, because it wasn’t out of fear, though one can understand why Mr. Cook saw it this way. For seventy-odd years, historians have portrayed extremist political movements as nervous, prickly little things that ban, shoot, and imprison “otherness” out of fear—a fundamental misunderstanding of both the resilience of these movements and the conditions absolute power needs to operate.</p>
-
-                <p>The erasure of the “other” in totalitarian regimes is foundational, not reactionary. It establishes the framework through which the state defines, justifies, and sustains itself. Absolute power needs an enemy to fight, a threat to neutralize, an incompatible element to purge. This ongoing battle explains and justifies both the regime’s existence and its heavy hand.</p>
-
-                <p>Yet, while essential, this otherness cannot exist within its sphere of control. The “other” can only exist as an external force to be defeated, never tolerated, for tolerance risks contaminating the coherence a totalitarian regime demands.</p>
-
-                <p>These are total systems, and total systems cannot accommodate internal contradictions or incompatible elements.</p>
-
-                <p>And so, you aren’t sent to a gulag because the regime fears you, but because what you represent (racially, politically, intellectually) is incompatible with the system’s framework. You embody “the other,” and therefore must be imprisoned, shot, erased. For extremist regimes, heterogeneity of identity and homogeneity of thought are central to its existence.</p>
-
-                <p>To Mr. Cook’s question “Why did the Nazis feel so threatened by the Bauhaus?” then we can answer: they weren’t. They were doing housekeeping.</p>
-
-                <h3>THE Bauhaus</h3>
-
-                <p>The Bauhaus was founded in 1919 by architect Walter Gropius. In 1925, the school moved to Dessau, where it settled in the now iconic glass and steel building, then briefly to Berlin in 1932 before the Nazi government forced its closure in 1933. In its fourteen years of existence, it trained less than 1,400 students and still fundamentally reshaped how we think about design, architecture, and the objects of everyday life.</p>
-
-                <p>Perhaps the most peculiar aspect of Bauhaus’s artistic philosophy was just how seemingly innocuous it was. There were none of the over-the-top political manifestos of the Futurists, Dadaists, or the countless other “isms” the twentieth century produced. No grand proclamations of its transformative power, no apocalyptic warnings about society’s future without their intervention. Its core principle was truly as simple as: Form must follow function.</p>
-
-                <p>Bauhaus students also weren’t screaming manifestos in restaurants or beer halls. They were doing pottery, glassblowing, metalwork. Their mission was to optimize the design of everyday items so they could be stylish, functional, and adapted for mass production.</p>
-
-                <h3>A Peculiar Kind of Power</h3>
-
-                <p>The Nazi Party banned Bauhaus for its perceived association with “cosmopolitan” and “Marxist” ideals. That much is documented. But why did the Nazis perceive such an apolitical design school in this way?</p>
-
-                <p>The answer cannot lie in the school’s philosophy, for it was design oriented rather than political or societal and as we’ve seen some designs were incorporated into production.</p>
-
-                <p>It also couldn’t be its students, because there was no unified student political affiliation and some were even National Socialists themselves.</p>
-
-                <p>What made Hitler see Bauhaus as “the other”?</p>
-
-                <p>I believe the answer lies not in what it represented, <em>Ding an sich</em>, but in what its design philosophy, and the items it produced, symbolized.</p>
-
-                <p>Symbols are emotion given form. Their power comes from what they can make you feel, not think. In fact, the strongest symbols can override or directly contradict even the most compelling logical arguments, requiring no persuasion, no arguments. It takes time, and work, to forge a symbol into something that powerful. But once you do, the results are astounding.</p>
-
-                
-
-                <p>When you look at the piece <em>Faun by Moonlight</em> by Léon Spilliaert, do you not feel a certain sense of dread? A sense that you’ve stumbled upon something you shouldn’t. That whatever circumstances led you to it are equally unsettling? The devil, guiding a flock of goats free and in the open, while you appear to be the one hiding, the trees covering you, equal parts frozen by fear and captivated.</p>
-
-                <p>And yet, that isn’t the devil. It’s a faun—it’s right in the title: <em>Faun by Moonlight</em>. Half man, half goat, these Roman mythical creatures were peaceful, if at times mischievous, woodland guides. If you showed this to an ancient Roman, he would likely ask why it was depicted in such sinister lighting, but to him it would be no more intimidating than a garden gnome.</p>
-
-                <p>But can you see it that way? Can you see a garden gnome in inappropriately creepy lighting? Two thousand years of Judeo-Christian tradition transformed a benign Roman mythical creature into the embodiment of evil itself.</p>
-
-                <p>Had Roman theology prevailed, we would likely see the crucified Christ as a strange and incomprehensible symbol of a tortured God, a barbaric symbol of reverence. We would be horrified at the willingness of early Christians to be crucified themselves, a slow, agonizing death.</p>
-
-                <p>Crucified victims could survive for three or more days, and the Romans had become so good at avoiding major arteries that the most common cause of death was asphyxiation, exposure, and dehydration.</p>
-
-                <p>The cross was, for centuries, a shameful instrument of torture, and execution, not salvation.</p>
-
-                <p>Yet Christianity did prevail, and so now we see Roman and Greek Gods as little more than naturalistic deities that, granted, make excellent material for video games and movies, but few would take you very seriously if you said you were praying to Zeus.</p>
-
-                <p>To the victors come the spoils. And in the war for cultural dominion, no more precious spoil exists than truth itself. Truth is what your symbols represent. Truth is what your symbols make you feel.</p>
-
-                <h3>The Power of the Vernacular</h3>
-
-                <p>Culture has always resided more in a people’s objects than in their monuments. Cultures can, and do, borrow artistic and architectural styles without compromising their own national identity. Americans can build Greek-style capitols and remain perfectly American. Italian sculptors can pay homage to classical styles and stay Italian.</p>
-
-                <p>These are symbols you look at, not objects you live with.</p>
-
-                <p>Yet, could the same be said for their cutlery? Their chairs, cups, beds? Can the unique cultural and environmental characteristics that shaped these everyday objects through the centuries be transplanted without consequence, even within similar cultural components? Not easily.</p>
-
-                <p>The Chinese developed chopsticks around 5,000 years ago, originally as cooking utensils and later refined for eating, their design was adapted for small pieces of food and communal eating, partly influenced by Confucian values of community and harmony rather than individual consumption.</p>
-
-                <p>Japanese chopsticks evolved differently. These were shorter, tapered, and specifically designed to pick up rice grains, symbolizing Japanese emphasis on precision, ritual, and personal composure. Korean chopsticks took yet another form, as they were flatter, made of metal, and designed for Korea’s specific culinary traditions.</p>
-
-                <p>In Europe it was no different. In the North, for instance, chairs developed high backs and enclosed sides, a sort of winged design that blocked drafts and retained heat in the colder northern climate. English and Dutch chairs from the 17th–18th centuries had thinner backs but still featured heavy upholstery and were constructed of thick wood for insulation. In Italy, where the climate is warmer, Renaissance chairs had low backs, no upholstery, with caned or rush seats that allowed more air circulation. And finally, Spanish chairs featured leather slung between posts rather than padded seats, cooling the seater.</p>
-
-                <p>A Roman household filled with Chinese furniture, a Chinese household with Italian tableware, a Scandinavian bed in a Mexican home would (in the past) have fundamentally altered what it meant to live as a Roman, Chinese, or Mexican. These objects are the texture of a people’s daily life, and daily life is culture.</p>
-
-                <p>Hitler’s obsession with symbols, old and new, very likely allowed him to recognize Bauhaus’s symbolic power, and that of its products, beyond the “Marxist” or “Cosmopolitan” labels. These categories were usually one-size-fits-all classifications for bans, not explanations. And what Bauhaus’s design philosophy symbolized, rather than what it was, was antithetical to his regime.</p>
-
-                <p>A German household filled with Bauhaus furniture would look identical to a French one, to an American one. The mass-produced, minimalist chair, lamp, bed, cup, carried no national character and none of the specificities that we explored.</p>
-
-                <p>When products are designed for universal consumption rather than regional specifics or tradition, the national characteristics that once distinguished cultures erode. What remains is the universal consumer, defined by a hierarchy of products, not their identity.</p>
-
-                <p>Whereas once status and identity were separate and distinguishable categories of existence in a society—a nobleman may afford a richer, more expensive chair yet with the same fundamental characteristics that an apothecary could—now became the one and the same. Identity and Status have now become indistinguishable from each other. When the objects of daily life become identical across borders, national heterogeneity dissolves, and with it, its identity.</p>
-
-                <p>Bauhaus symbolized the iPhone, symbolized the Ikea, symbolized the Zara.</p>
-
-                <p>This homogeneity represents then a fundamental shift in power. In traditional societies states control identity through symbols, monuments, and rituals. Mass production, and in turn mass consumption, has transferred that power to whoever controls both manufacturing and design. The state might control the public square, but corporations control your most private possessions. They now dictate style, status, and trends. Whoever controls what is produced shapes what is owned and, consequently, how people understand themselves.</p>
-
-                <p>This was what made Bauhaus the “other.” This was the incompatibility. It was a vision of a world where German homes looked like French homes looked like American homes, where the intimate sphere of daily life, the space where cultural identity had always been most intimately expressed, became internationally uniform. Whether they understood the consequences of this philosophy, we can’t say for certain, but for a regime built on racial and national distinction, on blood and soil, on the unique character of the <em>Volk</em>, this represented an impossible contradiction.</p>
-
-                <p>And so, it had to be closed.</p>
-                
-                <h3>The Good War</h3>
-                
-                <p>Hitler was not unique in understanding symbols. If anything, fascism’s grasp of symbolic power derived from its overreliance on them. But fascists were not alone in wielding symbolic power, nor were they the most effective at it.</p>
-                
-                <p>As the dust settled, the victors of World War II began cementing the narrative they had been building even before the war started.</p>
-                
-                <p>America, Britain, and Russia projected their sins onto the swastika in a purification ritual and, just like that, were exculpated of their past sins.</p>
-                
-                <p>Which were many.</p>
-                
-                <p>In 1939, Britain ruled over the largest colonial empire in history, at one point controlling nearly 23% of the world’s population. It built this empire as all empires are built, and as Hitler aimed to build his—through conquest, bloodshed, and misery. It held it through no softer means.</p>
-                
-                <p>The Soviet Union was bloodier still. Robert Conquest estimates no fewer than 20 million lost their lives as a consequence of Stalin’s policies. It was so bad that as the Wehrmacht advanced through Soviet-controlled territory, they were often received as liberators, not invaders.</p>
-                
-                <p>The United States’ own catalogue of atrocities, before and after the war, would require an essay of its own.</p>
-                
-                <p>It worked. It worked so well that even questioning these empires’ moral legitimacy, even drawing equivalence between Nazi atrocities and those committed by the Allies invites accusations of revisionism, or worse.</p>
-                
-                <p>A collection of genocidal empires fought a genocidal empire for control of the world, won, and called it “the good war.”</p>
-                
-                <p>The symbolic work given to WWII was thorough enough that I must then conclude these paragraphs with a statement on the obvious—Nazism is, and sadly continues to be, a scourge on earth. The suffering it produced, for suffering’s sake, means that erradicating it was the right thin to do. But suffering has been the price others have paid for the ventures of the empires fighting in this war. A price paid for their greed, for bloodlust, for nothing at all save the desire to conquer.</p>
-                
-                <p>When symbols control your feelings, one must ask: How does this make me feel, and why?</p>
-                
-                <h3>A Hierarchy of Suffering</h3>
-                
-                <p>There was one other symbol that emerged from the ashes of Europe. The Holocaust has become perhaps the most powerful symbol of the twentieth century. Its industrial systematization, bureaucratic totality, and explicit goal of complete extermination were, indeed, distinctive in its brutality.</p>
-                
-                <p>But distinctive features do not create a hierarchy of suffering. A murdered Congolese child under Leopold’s terror is not less dead than a murdered Jewish child in Auschwitz. A starved Bengali child during Churchill’s policies is not less worthy of remembrance. The annihilated indigenous peoples of the Americas are not footnotes.</p>
-                
-                <p>Since October 7th, 2023, over 40,000 Palestinians have been killed in Gaza. This is a conservative estimate and doesn’t account for the thousands buried under rubble or indirect deaths from starvation, disease, and destroyed healthcare infrastructure. Before October 7th, 2023 had already seen the deadliest year for Palestinians in the West Bank in nearly two decades, with over 200 killed from military operations, airstrikes on Gaza, raids in the West Bank, checkpoint shootings, settler violence often committed with state backing or impunity, and the killing of children throwing stones.</p>
-                
-                <p>Since 1967, over 700,000 Israeli settlers have moved into the West Bank and East Jerusalem. These settlements are internationally recognized as illegal, and yet continue expanding every year.</p>
-                
-                <p>Millions of Palestinians live under a permit system that controls their movement between fragmented zones and requires military approval to travel between cities in their own land.</p>
-                
-                <p>Gaza, home to over 2 million people in 140 square miles, has been under blockade since 2007. Its borders are controlled, its imports restricted, its population unable to leave. The West Bank is carved into Areas A, B, and C, separated by checkpoints, walls, and roads Palestinians cannot use.</p>
-                
-                <p>Since 1967, we have seen the same pattern of illegal occupation, murder, engineered starvation, ghettoization, and segregation, and yet to even mention this continues to be incredibly controversial. News organizations, which have shown moral grit in accusing Putin of war crimes, strangely shy away from pointing the same finger at Israel when it does, by all available metrics, far worse.</p>
-                
-                <h3>A Moral Inequivalent</h3>
-                
-                <p>The mythologization of the Holocaust has created a framework where governments, news organizations, and populations fear associating Israeli Jews with the same instincts that produced it.</p>
-                
-                <p>This symbolic power positions the Holocaust as an atrocity that cannot be compared or repeated, because nothing matches its specific method, even if the spirit, and the outcome, is identical.</p>
-                
-                <p>But how? How can Israel levy this atrocity with such efficiency?</p>
-                
-                <p>I believe the answer lies in the very foundation of Israel as a modern state. Its direct association with the Holocaust—their victims were the very first to settle—has allowed the Israeli government to levy its symbolic power as a shield on which it deflects all of its (many) sins, much like the previously mentioned allies.</p>
-                
-                <p>And so, an unpayable moral debt is created to which all nations must, and do, answer. And they answer it with military aid that is used to dismember children, they answer it with complicity and they answer it with voluntary complacency to its crimes.</p>
-                
-                <p>The comparison becomes “unthinkable” not because the hatred differs, but because the symbol prevents us from feeling the parallel.</p>
-                
-                <p>This is what symbols do. They control not just what we see, or what we think, but what we can feel. The Holocaust demands “never again” while somehow permitting “again and again,” so long as the methods differ from the template.</p>
-                
-                <p>This is what symbols do. They control you. They control me. Those who wield symbolic power struggle for dominion over human consciousness itself.</p>
-                
-                <p>The question “what am I incapable of considering in its presence?” is, for symbols, far more important than “what does it mean?” for that is how their control is exerted over you.</p>
+        <aside class="meta-sidebar">
+            <div class="sticky-wrapper">
+                <div class="tldr-box">
+                    <span class="tldr-label">TL;DR</span>
+                    <p class="tldr-text">The erasure of the "other" is foundational, not reactionary. Total systems cannot accommodate internal contradictions.</p>
+                </div>
             </div>
+        </aside>
+
+        <article class="article-body">
+            
+            <p class="lead-paragraph">In a 2017 BBC article titled "The Endless Influence of Bauhaus," Mr. William Cook asks: "Why did the Nazis feel so threatened by the Bauhaus? Why were they so scared of an art school that made modernist furniture and kitchenware?"</p>
+
+            <p>Mr. Cook answers his own question: "Because it represented a worldview which was the complete opposite of National Socialism." This is a misconception both in essence and in effect.</p>
+
+            <p>In essence because National Socialists didn't see Bauhaus as the "complete opposite" of their ideology. Bauhaus products like Marianne Brandt's lamps remained in production, and former Bauhaus students held reputable positions in the regime.</p>
+
+            <p>In effect, because it wasn't out of fear. For seventy-odd years, historians have portrayed extremist political movements as nervous, prickly little things that ban, shoot, and imprison "otherness" out of fear—a fundamental misunderstanding of both the resilience of these movements and the conditions absolute power needs to operate.</p>
+
+            <div class="pull-quote">
+                "The erasure of the 'other' in totalitarian regimes is foundational, not reactionary."
+            </div>
+
+            <p>The "other" can only exist as an external force to be defeated, never tolerated, for tolerance risks contaminating the coherence a totalitarian regime demands. To Mr. Cook's question "Why did the Nazis feel so threatened by the Bauhaus?" then we can answer: <strong>they weren't. They were doing housekeeping.</strong></p>
+
+            <h3>The Bauhaus</h3>
+
+            <p>The Bauhaus was founded in 1919 by architect Walter Gropius. Perhaps the most peculiar aspect of its artistic philosophy was just how seemingly innocuous it was. There were none of the over-the-top political manifestos of the Futurists or Dadaists. Its core principle was simple: <em>Form must follow function</em>.</p>
+
+            <h3>A Peculiar Kind of Power</h3>
+
+            <p>The Nazi Party banned Bauhaus for its perceived association with "cosmopolitan" and "Marxist" ideals. But why did the Nazis perceive such an apolitical design school in this way? I believe the answer lies not in what it represented, <em>Ding an sich</em>, but in what its design philosophy symbolized.</p>
+
+            <div class="visual-placeholder">
+                [Image: Faun by Moonlight by Léon Spilliaert]
+            </div>
+
+            <p>When you look at the piece <em>Faun by Moonlight</em> by Léon Spilliaert, do you not feel a certain sense of dread? The devil, guiding a flock of goats? Yet, that isn't the devil. It's a faun—a benign Roman mythical creature. Two thousand years of Judeo-Christian tradition transformed a benign Roman mythical creature into the embodiment of evil itself.</p>
+
+            <div class="pull-quote">
+                "To the victors come the spoils. And in the war for cultural dominion, no more precious spoil exists than truth itself."
+            </div>
+
+            <h3>The Power of the Vernacular</h3>
+
+            <p>Culture has always resided more in a people's objects than in their monuments. Cultures can borrow artistic and architectural styles without compromising their own national identity. These are symbols you look at, not objects you live with.</p>
+
+            <p>Yet, could the same be said for their cutlery? Their chairs, cups, beds? Can the unique cultural and environmental characteristics that shaped these everyday objects be transplanted without consequence?</p>
+
+            <div class="highlight-box">
+                <p><strong>Northern Europe:</strong> Chairs developed high backs and enclosed sides (winged designs) to block drafts and retain heat.</p>
+                <p><strong>Italy:</strong> Renaissance chairs had low backs and caned seats to allow air circulation in the warmer climate.</p>
+                <p><strong>Spain:</strong> Chairs featured leather slung between posts rather than padded seats, cooling the seater.</p>
+            </div>
+
+            <p>Hitler's obsession with symbols allowed him to recognize Bauhaus's symbolic power. A German household filled with Bauhaus furniture would look identical to a French one, to an American one. The mass-produced, minimalist chair carried no national character.</p>
+
+            <p>When products are designed for universal consumption, the national characteristics that once distinguished cultures erode. <strong>Identity and Status have now become indistinguishable from each other.</strong></p>
+
+            <p>Bauhaus symbolized the iPhone, symbolized the Ikea, symbolized the Zara. This was a vision of a world where the intimate sphere of daily life became internationally uniform. For a regime built on racial and national distinction, this represented an impossible contradiction.</p>
+
+            <h3>The Good War</h3>
+
+            <p>Hitler was not unique in understanding symbols. As the dust settled, the victors of World War II began cementing the narrative they had been building. America, Britain, and Russia projected their sins onto the swastika in a purification ritual and, just like that, were exculpated of their past sins.</p>
+
+            <p>A collection of genocidal empires fought a genocidal empire for control of the world, won, and called it "the good war."</p>
+
+            <h3>A Hierarchy of Suffering</h3>
+
+            <p>The Holocaust has become perhaps the most powerful symbol of the twentieth century. But distinctive features do not create a hierarchy of suffering. A murdered Congolese child under Leopold's terror is not less dead than a murdered Jewish child in Auschwitz.</p>
+
+            <div class="highlight-box">
+                <p><strong>Since Oct 7th, 2023:</strong> Over 40,000 Palestinians have been killed in Gaza (conservative estimate).</p>
+                <p><strong>Since 1967:</strong> Over 700,000 Israeli settlers have moved into the West Bank and East Jerusalem illegally.</p>
+                <p><strong>Gaza Blockade:</strong> Over 2 million people confined to 140 square miles since 2007.</p>
+            </div>
+
+            <p>Since 1967, we have seen the same pattern of illegal occupation, murder, engineered starvation, ghettoization, and segregation, and yet to even mention this continues to be incredibly controversial.</p>
+
+            <h3>A Moral Inequivalent</h3>
+
+            <p>The mythologization of the Holocaust has created a framework where governments fear associating Israeli Jews with the same instincts that produced it. This symbolic power positions the Holocaust as an atrocity that cannot be compared or repeated.</p>
+
+            <p>And so, an unpayable moral debt is created to which all nations must answer. And they answer it with military aid used to dismember children, and with voluntary complacency to its crimes.</p>
+
+            <p>This is what symbols do. They control not just what we see, or what we think, but what we can feel.</p>
+
+            <p>The question <strong>"what am I incapable of considering in its presence?"</strong> is, for symbols, far more important than "what does it mean?" for that is how their control is exerted over you.</p>
+
         </article>
+
     </main>
-    
-    <footer class="footer">
-        <div class="copyright">© 2025 Faun by Moonlight. All rights reserved.</div>
+
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
+
+    <footer>
+        © 2025 Faun by Moonlight. All rights reserved.
     </footer>
+
     <script>
-        const logo = document.getElementById('logo');
-        if (logo) {
-            const colors = ['word-faun', 'word-by', 'word-moonlight'];
-            const words = logo.textContent.split(' ');
-            logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
+        // --- SCROLL PROGRESS LOGIC ---
+        window.onscroll = function() {myFunction()};
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
         }
+
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const interactive = document.querySelectorAll('a, button, .article-body');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('open');
+                navMenu.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
