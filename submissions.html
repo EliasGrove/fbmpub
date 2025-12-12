@@ -12,8 +12,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
-            /* Updated to match other pages */
-            --c-bg: #0a0a0a; 
+            /* UPDATED: Changed to pure black #000000 */
+            --c-bg: #000000; 
             --c-text: #e0e0e0;
             --c-red: #E60026;
             --c-blue: #0047BB;
@@ -60,8 +60,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            /* Updated background to match other pages */
-            background: rgba(10, 10, 10, 0.95);
+            /* UPDATED: Changed to pure black rgba */
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -143,7 +143,7 @@
         /* --- VIDEO STYLING --- */
         .header-bg-video {
             position: absolute;
-            top: auto;          
+            top: auto;           
             bottom: -10%;        /* Anchored bottom */
             right: 0; 
             transform: translateX(30%); /* Push right off-screen */
@@ -433,7 +433,9 @@
             .page-title { font-size: 4rem; }
             .submission-container { display: flex; flex-direction: column; }
             .sticky-header { 
-                position: relative; top: 0; padding: 30px; border-right: none; background: #080808; 
+                position: relative; top: 0; padding: 30px; border-right: none; 
+                /* UPDATED: Changed to use the variable for pure black */
+                background: var(--c-bg); 
                 display: flex; align-items: center; gap: 15px;
             }
             .section-number { font-size: 2rem; margin-bottom: 0; }
