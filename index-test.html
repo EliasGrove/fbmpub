@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Faun by Moonlight</title>
+    <title>Our Authors - Faun by Moonlight</title>
+    <meta name="description" content="Meet the talented authors featured in Faun by Moonlight Volume 1: Oly Weary and Eduardo Garcia.">
+    <link rel="canonical" href="https://www.faunbymoonlight.com/volumes/authors-vol-1">
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
@@ -12,7 +14,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
-            /* Updated to match Volumes Page */
             --c-bg: #0a0a0a; 
             --c-text: #e0e0e0;
             --c-red: #E60026;
@@ -21,6 +22,7 @@
             --c-border: #333;
             --f-head: "alfarn", serif;
             --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
         }
 
         body { 
@@ -48,7 +50,7 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid var(--c-red);
+            border: 1px solid var(--c-yellow);
             mix-blend-mode: normal;
         }
 
@@ -60,7 +62,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            /* Updated to match Volumes darker theme */
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -100,157 +101,147 @@
         .burger { display: none; } 
         .mobile-menu-overlay { display: none; }
 
-        /* --- HEADER SECTION --- */
-        .header-section {
-            padding: 180px 40px 60px 40px;
+        /* --- HERO HEADER --- */
+        .authors-hero {
+            padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            position: relative; /* Necessary for absolute video */
-            overflow: hidden;   /* Clips the video */
+            text-align: left;
         }
-        
-        .huge-title {
-            font-family: var(--f-head);
-            font-size: 10vw;
-            line-height: 0.8;
-            color: #fff;
-            text-transform: uppercase;
-            margin: 0;
-            position: relative;
-            z-index: 2; /* Ensures text is above video */
-        }
-
-        .header-meta {
-            text-align: right;
-            font-family: var(--f-body);
-            color: #888;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            max-width: 300px;
-            position: relative;
-            z-index: 2; /* Ensures text is above video */
-        }
-        .header-meta strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1.2rem; }
-
-        /* --- HEADER VIDEO --- */
-        .header-bg-video {
-            position: absolute;
-            /* Moved center point down */
-            top: 60%;
-            right: 0; 
-            /* Pushed further right and kept centered vertically relative to new top */
-            transform: translateY(-50%) translateX(30%); 
-            /* Slightly increased height */
-            height: 90%; 
-            width: auto;
-            z-index: 1; 
-            pointer-events: none;
-            mix-blend-mode: screen; 
-            opacity: 0.9;
-        }
-
-        /* --- THE BLOG INDEX (LIST) --- */
-        .blog-index {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .blog-row {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 200px; 
-            gap: 40px;
-            padding: 60px 40px;
-            border-bottom: 1px solid var(--c-border);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            align-items: flex-start;
-        }
-
-        /* --- NEW COLOR MAPPING (HOVER) --- */
-        
-        /* 1. Title turns RED */
-        .blog-row:hover .entry-title {
-            color: var(--c-red);
-        }
-
-        /* 2. Description turns YELLOW */
-        .blog-row:hover .entry-excerpt {
-            color: var(--c-yellow);
-            opacity: 1;
-        }
-
-        /* 3. Button (Tag) turns BLUE (Solid background) */
-        .blog-row:hover .meta-pill {
-            background-color: var(--c-blue);
-            border-color: var(--c-blue);
-            color: #fff; /* White text on Blue background */
-        }
-        
-        /* Date just turns white for clarity */
-        .blog-row:hover .entry-date {
-            color: #fff;
-        }
-
-        /* Center Column */
-        .entry-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .entry-date {
+        .hero-label {
             font-family: var(--f-body);
             font-weight: 700;
-            font-size: 0.9rem;
-            color: #666;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            color: #666;
+            display: block;
+            margin-bottom: 20px;
         }
-
-        .entry-title {
+        .hero-title {
             font-family: var(--f-head);
-            font-size: 5.5rem; 
+            font-size: 7rem;
             line-height: 0.9;
             color: #fff;
-            transition: color 0.3s ease;
+            text-transform: uppercase;
             margin: 0;
-            max-width: 90%;
         }
 
-        .entry-excerpt {
-            font-family: var(--f-body);
-            font-size: 1.3rem; 
-            color: #aaa;
-            max-width: 800px; 
-            line-height: 1.4;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-            margin-top: 10px;
+        /* --- AUTHOR SHOWCASE (The Core Layout) --- */
+        .author-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Split Screen */
+            min-height: 90vh; /* Full screen feel */
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        /* Alternate Layout for 2nd Author */
+        .author-section.alt {
+            direction: rtl; /* Easy way to flip columns */
+        }
+        .author-section.alt > * {
+            direction: ltr; /* Reset text direction inside */
+        }
+
+        /* --- VISUAL SIDE (Cover Art) --- */
+        .visual-col {
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-right: 1px solid var(--c-border);
+            /* Subtle background tint based on theme */
+            background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+        }
+        .author-section.alt .visual-col { border-right: none; border-left: 1px solid var(--c-border); }
+
+        .book-cover {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            transition: transform 0.4s ease;
+            filter: grayscale(20%);
+        }
+        .author-section:hover .book-cover {
+            transform: scale(1.02) rotate(-1deg);
+            filter: grayscale(0%);
+        }
+
+        /* --- CONTENT SIDE --- */
+        .content-col {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .author-name {
+            font-family: var(--f-head);
+            font-size: 5rem;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .author-bio {
+            font-family: var(--f-display);
+            font-size: 1.5rem;
+            line-height: 1.3;
+            color: #fff;
+            margin-bottom: 40px;
+            border-left: 2px solid #444;
+            padding-left: 20px;
+        }
+
+        /* Editor Note Styling */
+        .editor-note {
+            background: #111;
+            padding: 30px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            position: relative;
         }
         
-        /* Right Column */
-        .entry-meta {
-            display: flex;
-            justify-content: flex-end;
-            padding-top: 5px;
-        }
-
-        .meta-pill {
-            padding: 10px 20px;
-            border: 1px solid #444;
-            border-radius: 50px;
-            font-size: 0.85rem;
+        .note-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #888;
-            transition: all 0.3s;
-            white-space: nowrap;
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
         }
+
+        .note-text {
+            font-family: var(--f-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .note-text p { margin-bottom: 15px; }
+        .note-text p:last-child { margin-bottom: 0; }
+
+        .contact-line {
+            font-family: var(--f-body);
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* --- COLOR THEMES --- */
+        
+        /* Oly (Red) */
+        .theme-red .author-name { color: var(--c-red); }
+        .theme-red .editor-note { border-left: 4px solid var(--c-red); }
+        .theme-red .book-cover { box-shadow: 0 30px 60px rgba(230, 0, 38, 0.15); }
+
+        /* Eduardo (Blue) */
+        .theme-blue .author-name { color: var(--c-blue); }
+        .theme-blue .editor-note { border-left: 4px solid var(--c-blue); }
+        .theme-blue .book-cover { box-shadow: 0 30px 60px rgba(0, 71, 187, 0.15); }
 
         /* --- SOCIALS SECTION --- */
         .socials-section {
@@ -284,13 +275,10 @@
             filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
         }
 
-        .social-link:hover {
-            transform: translateY(-2px);
-        }
+        .social-link:hover { transform: translateY(-2px); }
 
         /* --- FOOTER --- */
         footer {
-            margin-top: auto;
             padding: 40px;
             text-align: center;
             color: #555;
@@ -302,10 +290,6 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            /* Fix cursor */
-            * { cursor: auto !important; }
-            .cursor { display: none !important; }
-
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -323,26 +307,23 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* Layout Shift */
-            .header-section { flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px; }
-            .huge-title { font-size: 15vw; }
-            .header-meta { text-align: left; }
-            
-            /* Mobile Video Adjustments */
-            .header-bg-video {
-                height: 50%;
-                top: auto;
-                bottom: 0;
-                transform: translateX(30%);
-                opacity: 0.5;
-            }
-            
-            .blog-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 20px; }
-            .entry-title { font-size: 3rem; }
-            .entry-excerpt { font-size: 1.1rem; }
-            .entry-meta { justify-content: flex-start; }
+            .authors-hero { padding: 120px 20px 40px 20px; }
+            .hero-title { font-size: 4rem; }
 
-            /* Stack socials slightly closer on mobile */
+            /* Collapse Grid */
+            .author-section { grid-template-columns: 1fr; min-height: auto; }
+            .author-section.alt { direction: ltr; } /* Reset flip for mobile */
+            
+            .visual-col { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); order: 1; }
+            .content-col { padding: 40px 20px; order: 2; }
+            
+            .author-section.alt .visual-col { border-left: none; }
+
+            .author-name { font-size: 3.5rem; }
+            .author-bio { font-size: 1.2rem; }
+            
+            .book-cover { max-width: 250px; }
+            
             .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
@@ -360,7 +341,7 @@
         <div class="desktop-menu">
             <a href="who-we-are" class="nav-link">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
-            <a href="blog" class="nav-link active">Blog</a>
+            <a href="blog" class="nav-link">Blog</a>
             <a href="submissions" class="nav-link">Submit</a>
             <a href="faq" class="nav-link">FAQ</a>
             <a href="support-us" class="nav-link">Support Us</a>
@@ -376,89 +357,73 @@
     <div class="mobile-menu-overlay" id="navMenu">
         <a href="who-we-are" class="nav-link">Who We Are</a>
         <a href="volumes" class="nav-link">Volumes</a>
-        <a href="blog" class="nav-link active">Blog</a>
+        <a href="blog" class="nav-link">Blog</a>
         <a href="submissions" class="nav-link">Submit</a>
         <a href="faq" class="nav-link">FAQ</a>
         <a href="support-us" class="nav-link">Support Us</a>
         <a href="contact" class="nav-link">Contact</a>
     </div>
 
-    <header class="header-section">
-        <h1 class="huge-title">The<br>Feed</h1>
-        <div class="header-meta">
-        </div>
-        
-        <video class="header-bg-video" autoplay muted loop playsinline>
-            <source src="images/blog-video.mp4" type="video/mp4">
-        </video>
+    <header class="authors-hero">
+        <span class="hero-label">The Architects</span>
+        <h1 class="hero-title">Volume 01:<br>Authors</h1>
     </header>
 
-    <main class="blog-index">
+    <main>
+        
+        <article class="author-section theme-red">
+            
+            <div class="visual-col">
+                <img src="../volumes/olycover.png" alt="Interrogation by Oly Weary" class="book-cover">
+            </div>
 
-        <a href="blog-algorithmic-nuance" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Dec 11, 2025</span>
-                <h2 class="entry-title">The Algorithmic Death of Nuance</h2>
-                <p class="entry-excerpt">
-                    Why we left X, context collapse, and why engagement-farming is destroying the ability to have a conversation about art.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Tech/Culture</span>
-            </div>
-        </a>
+            <div class="content-col">
+                <h2 class="author-name">Oly<br>Weary</h2>
+                <div class="author-bio">
+                    Oly Weary has never been published until now. He’s a British-born, Spanish-residing writer who loves to create absurdist stories.
+                </div>
 
-        <a href="blog-death-of-literature" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Dec 08, 2025</span>
-                <h2 class="entry-title">The Death of Literature</h2>
-                <p class="entry-excerpt">
-                    Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever. So why does it feel like something is dying?
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Opinion</span>
-            </div>
-        </a>
+                <div class="editor-note">
+                    <span class="note-label">Editor's Note</span>
+                    <div class="note-text">
+                        <p>"Interrogation" manages to subvert the Absurdist genre. In the works of Camus, Kafka, Beckett or Ionesco there has always been a distinction between the absurd and the character. These were individuals confronted with the absurd of their circumstances.</p>
+                        <p>This is absurdism where the subject and the absurd has been completely defeated. Resistance isn’t futile, it’s simply incomprehensible.</p>
+                    </div>
+                </div>
 
-        <a href="blog-ai-statement.html" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Dec 01, 2025</span>
-                <h2 class="entry-title">Statement on A.I.</h2>
-                <p class="entry-excerpt">
-                    We not only don’t have an issue with the existence or usage of AI, but we welcome it. However, generating art and brainstorming with tools are two very different things.
-                </p>
+                <div class="contact-line">
+                    Want to speak to Oly? <a href="../contact" style="color: #fff; text-decoration: underline;">Send us a message</a> and we’ll put him through.
+                </div>
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Editorial</span>
-            </div>
-        </a>
 
-        <a href="who-should-die.html" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Nov 28, 2025</span>
-                <h2 class="entry-title">Who Should Die</h2>
-                <p class="entry-excerpt">
-                    If both Mr. Mangione and Mr. Thompson have caused verifiable harm, why is one in jail and the other wasn't? An inquiry into the nature of the State, harm, and punishment.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Philosophy</span>
-            </div>
-        </a>
+        </article>
 
-        <a href="national-socialists-v-chairs.html" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Nov 1, 2025</span>
-                <h2 class="entry-title">National Socialists V Chairs</h2>
-                <p class="entry-excerpt">
-                    Why did the Nazis feel so threatened by the Bauhaus? They weren’t. They were doing housekeeping. An essay on symbols and totalitarianism.
-                </p>
+        <article class="author-section alt theme-blue">
+            
+            <div class="visual-col">
+                <img src="../volumes/garciacover.png" alt="Concerning the Vampire by Eduardo Garcia" class="book-cover">
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">History</span>
+
+            <div class="content-col">
+                <h2 class="author-name">Eduardo<br>Garcia</h2>
+                <div class="author-bio">
+                    Eduardo Garcia has been published twice in a local magazine, which is no longer in operation. He hails from Argentina and likes to write in his spare time.
+                </div>
+
+                <div class="editor-note">
+                    <span class="note-label">Editor's Note</span>
+                    <div class="note-text">
+                        <p>In "Concerning the Vampire" a centenarian vampire writes a formal complaint to a county court judge claiming to be the victim of identity theft. It’s a delightful exploration of the 19th-century high-society fascination with all things occult.</p>
+                        <p>It speaks of agency, identity, celebrity culture, and an immigrant’s persistent anxiety that there are invisible networks of belonging he’ll never access.</p>
+                    </div>
+                </div>
+
+                <div class="contact-line">
+                    Want to speak to Eduardo? <a href="../contact" style="color: #fff; text-decoration: underline;">Send us a message</a> and we’ll put him through.
+                </div>
             </div>
-        </a>
+
+        </article>
 
     </main>
 
@@ -491,7 +456,7 @@
     <script>
         // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .blog-row');
+        const interactive = document.querySelectorAll('a, button, .author-section');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
