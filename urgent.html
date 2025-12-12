@@ -6,24 +6,10 @@
     
     <title>Urgent - Faun by Moonlight</title>
     <meta name="title" content="Urgent - Faun by Moonlight">
-    <meta name="description" content="Join Faun by Moonlight in supporting the Palestine Children's Relief Fund to provide medical care and humanitarian relief to children in Gaza.">
-    
-    <link rel="canonical" href="https://www.faunbymoonlight.com/urgent">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://faunbymoonlight.com/urgent">
-    <meta property="og:title" content="Urgent - Faun by Moonlight">
-    <meta property="og:description" content="Help us support children in Gaza through the Palestine Children's Relief Fund.">
-    <meta property="og:image" content="https://faunbymoonlight.com/images/2.png">
+    <meta name="description" content="Join Faun by Moonlight in supporting the Palestine Children's Relief Fund.">
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
-    <link rel="preconnect" href="https://use.typekit.net">
-
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -33,440 +19,511 @@
     </script>
 
     <style>
-        /* --- CORE RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
         :root {
-            /* SENSITIVE DARK THEME VARIABLES */
-            --c-bg-warm: #2b2826;   /* Deep warm charcoal/sepia tone */
-            --c-text-light: #e0ddc5; /* Warm off-white/cream text */
-            --c-alert-deep: #b71c1c; /* Deep solemn red for urgency */
-            --c-nav-bg: #1a1614;     /* Slightly darker for header */
-            
+            /* WARM DARK THEME */
+            --c-bg: #1c1a19;   /* Dark Warm Beige/Sepia Black */
+            --c-text: #e6e0d4; /* Warm Bone White */
+            --c-red: #d32f2f;  /* Deep Solemn Red */
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #3d3a36; /* Lighter border to match warm bg */
             --f-head: "alfarn", serif;
             --f-body: "neue-kabel", sans-serif;
+            --f-display: "dunbar-tall", sans-serif;
         }
 
-        body {
+        body { 
+            background-color: var(--c-bg); 
             font-family: var(--f-body);
-            background-color: var(--c-bg-warm);
-            color: var(--c-text-light);
+            color: var(--c-text);
+            overflow-x: hidden; 
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.7; /* Slightly increased line height for easier reading */
+            display: flex; flex-direction: column;
         }
 
-        /* --- ANNOUNCEMENT BAR --- */
-        #global-announcement, .announcement-bar {
-            position: relative;
-            z-index: 10000;
-            background-color: var(--c-alert-deep);
-            color: #ffffff;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 10px 20px;
+        /* Deep Red Selection */
+        ::selection {
+            background: var(--c-red);
+            color: #fff;
         }
-        .announcement-bar a { color: #FFD100; text-decoration: underline; font-weight: 700; }
-        .announcement-bar a:hover { color: #fff; text-decoration: none; }
+
+        /* --- SCROLL PROGRESS BAR --- */
+        .progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
+        }
+        .progress-bar {
+            height: 4px; background: var(--c-red); width: 0%;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid var(--c-red);
+            mix-blend-mode: normal;
+        }
 
         /* --- NAVIGATION --- */
-        .nav-header {
-            position: sticky;
-            top: 0;
-            z-index: 9999;
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: var(--c-nav-bg);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 25px 40px;
+            background: rgba(28, 26, 25, 0.95); /* Matches warm bg */
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--c-border);
         }
 
-        .logo {
+        .nav-brand {
             font-family: var(--f-head);
             font-size: 1.5rem;
-            color: var(--c-text-light);
+            color: #fff;
             text-decoration: none;
             letter-spacing: 1px;
+            display: flex; gap: 0.4rem;
         }
-        /* Muted brand colors for this specific page header */
-        .word-faun { color: #a83232; } .word-by { color: #4a6fa5; } .word-moonlight { color: #c7a938; }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
 
-        .nav-tabs { display: flex; gap: 25px; }
-        
-        .nav-tab {
+        .desktop-menu { display: flex; gap: 25px; }
+        .nav-link {
             font-family: var(--f-body);
             font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
             color: #888;
             text-decoration: none;
             text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        .nav-tab:hover, .nav-tab.active { color: var(--c-text-light); }
-        /* Active state specifically for this page */
-        .nav-tab.urgent-active { color: var(--c-alert-deep); }
-
-        .hamburger { display: none; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; cursor: pointer; }
-        .hamburger span { width: 100%; height: 2px; background-color: var(--c-text-light); }
-        #nav-toggle { display: none; }
-
-        /* --- MAIN CONTENT: THE LETTER --- */
-        .main-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            padding: 60px 20px 100px 20px;
-        }
-
-        .letter-container {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .page-title {
-            font-family: var(--f-head);
-            font-size: 3.5rem;
-            line-height: 1;
-            color: var(--c-alert-deep);
-            margin-bottom: 2rem;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .intro-lead {
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            line-height: 1.5;
-            color: #fff; /* Slightly brighter for emphasis */
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 2rem;
-        }
-
-        /* Content Styling */
-        .content-body p {
-            font-size: 1.15rem;
-            margin-bottom: 1.5rem;
-            color: var(--c-text-light);
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
         }
         
-        /* Inline Links Styling */
-        .content-body a.text-link {
-            color: var(--c-alert-deep);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            transition: color 0.3s;
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        .burger { display: none; } 
+        .mobile-menu-overlay { display: none; }
+
+        /* --- HERO SECTION --- */
+        .statement-hero {
+            padding: 180px 40px 80px 40px;
+            border-bottom: 1px solid var(--c-border);
         }
-        .content-body a.text-link:hover {
-            color: #fff;
+        
+        .hero-meta {
+            display: flex; justify-content: space-between; margin-bottom: 20px;
+            font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #888; font-size: 0.9rem;
         }
 
+        .hero-title {
+            font-family: var(--f-head);
+            font-size: 8rem;
+            line-height: 0.8;
+            color: var(--c-red); /* Red title for urgency */
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* --- CONTENT GRID --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            min-height: 100vh;
+        }
+
+        /* Left Sticky Sidebar */
+        .meta-sidebar {
+            border-right: 1px solid var(--c-border);
+            padding: 60px 40px;
+            position: relative;
+        }
+        .sticky-wrapper {
+            position: sticky;
+            top: 120px;
+        }
+        
+        /* Sidebar Action Box */
+        .action-box {
+            border: 1px solid var(--c-red);
+            padding: 30px;
+            background: rgba(211, 47, 47, 0.05);
+            text-align: center;
+        }
+        .action-label {
+            display: block; font-family: var(--f-body); font-weight: 700; 
+            text-transform: uppercase; color: var(--c-red); margin-bottom: 15px; letter-spacing: 2px;
+        }
+        .btn-donate {
+            display: inline-block;
+            width: 100%;
+            padding: 15px 0;
+            background: var(--c-red);
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--f-display);
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-donate:hover {
+            background: #fff;
+            color: var(--c-red);
+        }
+
+        /* Right Content Area */
+        .article-body {
+            padding: 80px 120px; 
+            font-family: var(--f-body);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--c-text);
+            max-width: 1100px;
+        }
+
+        .article-body p { margin-bottom: 1.5rem; }
+
+        /* Typography Styling */
+        .lead-paragraph {
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--c-border);
+            padding-bottom: 3rem;
+        }
+
+        .pull-quote {
+            font-family: var(--f-head);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            color: var(--c-red);
+            margin: 3rem 0;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--c-border);
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        /* Image Styling */
         .content-image {
             width: 100%;
             height: auto;
-            border-radius: 4px;
-            margin: 2.5rem 0;
-            border: 1px solid rgba(255,255,255,0.1);
-            /* Slight filter to mesh better with the warm dark background */
-            filter: sepia(25%) contrast(0.95) brightness(0.9); 
+            border: 1px solid var(--c-border);
+            margin: 2rem 0;
+            /* Sepia filter to blend with the warm background */
+            filter: sepia(30%) contrast(0.9) brightness(0.9);
         }
 
-        /* Donation Box */
-        .donation-box {
-            background: rgba(183, 28, 28, 0.1); /* Deep red tint */
-            border: 1px solid var(--c-alert-deep);
+        .highlight-box {
+            background: rgba(255,255,255,0.03);
             padding: 40px;
-            margin: 3rem 0;
-            text-align: center;
-            border-radius: 4px;
+            border: 1px solid var(--c-border);
+            margin: 2rem 0;
         }
-
-        .btn-donate {
-            display: inline-block;
-            background-color: var(--c-alert-deep);
-            color: var(--c-text-light);
-            padding: 18px 40px;
-            font-family: var(--f-body);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-            border-radius: 2px;
-            transition: background 0.3s, transform 0.2s;
-            margin-top: 15px;
-        }
-        .btn-donate:hover {
-            background-color: #d32f2f; /* Slightly brighter on hover */
+        .highlight-box h3 {
+            font-family: var(--f-head);
+            font-size: 1.8rem;
             color: #fff;
-            transform: translateY(-2px);
+            margin-bottom: 20px;
         }
-
-        /* Lists */
-        ul {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-            border-left: 2px solid rgba(255,255,255,0.1);
-        }
-        li {
-            margin-bottom: 0.8rem;
-            padding-left: 15px;
+        .highlight-box ul {
             list-style: none;
-            position: relative;
+            padding: 0;
         }
-        li::before {
+        .highlight-box li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #ccc;
+        }
+        .highlight-box li::before {
             content: "•";
             position: absolute;
-            left: -5px;
-            color: var(--c-alert-deep);
+            left: 0;
+            color: var(--c-red);
         }
-        li strong { color: #fff; font-weight: 600; }
-
-        /* Section dividers */
-        hr.divider {
-            border: 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin: 3rem 0;
-        }
-
-        /* Signature */
-        .signature {
-            margin-top: 3rem;
-            font-family: var(--f-head);
-            font-size: 1.4rem;
-            color: var(--c-text-light);
-            opacity: 0.8;
-        }
-
-        /* --- RESOURCES SECTION --- */
-        .resources-section {
-            margin-top: 5rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .resources-section h3 {
-            font-family: var(--f-body);
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2rem;
-            color: #888;
-        }
-
-        .resource-group { margin-bottom: 2rem; }
-        .resource-group h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-            font-weight: 600;
-        }
-        .resource-group ul { border-left: none; padding-left: 0; }
-        .resource-group li { padding-left: 0; margin-bottom: 0.5rem; font-size: 1rem; }
-        .resource-group li::before { content: none; }
         
-        .resource-link {
-            color: var(--c-text-light);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-color: rgba(255,255,255,0.3);
-            transition: all 0.3s;
+        /* Links in text */
+        .article-body a { color: #fff; text-decoration: underline; text-decoration-color: var(--c-red); }
+        .article-body a:hover { color: var(--c-red); }
+
+        strong { color: #fff; font-weight: 700; }
+
+        /* --- SOCIALS SECTION --- */
+        .socials-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background-color: var(--c-bg);
+            border-top: 1px solid var(--c-border);
         }
-        .resource-link:hover { text-decoration-color: var(--c-alert-deep); color: #fff; }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+
+        .social-link svg {
+            width: 24px; height: 24px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+        .social-link:hover { transform: translateY(-2px); }
 
         /* --- FOOTER --- */
-        .footer {
-            background: var(--c-nav-bg);
-            color: #666;
+        footer {
             padding: 40px;
             text-align: center;
+            color: #666;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid var(--c-border);
         }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
-        .footer-link { color: #666; transition: color 0.3s; }
-        .footer-link:hover { color: #fff; }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .nav-header { padding: 15px 20px; }
-            .nav-tabs { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--c-nav-bg); padding: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
-            #nav-toggle:checked ~ .nav-tabs { display: flex; }
-            .hamburger { display: flex; }
-            .nav-tab { font-size: 1.1rem; padding: 10px; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .burger.open span:nth-child(2) { opacity: 0; }
+            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .mobile-menu-overlay {
+                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: var(--c-bg); flex-direction: column; justify-content: center; align-items: center;
+                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
+            }
+            .mobile-menu-overlay.active { transform: translateY(0); }
+            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+            .statement-hero { padding: 120px 20px 40px 20px; }
+            .hero-title { font-size: 4rem; }
             
-            .main-wrapper { padding: 40px 20px; }
-            .page-title { font-size: 2.5rem; }
-            .intro-lead { font-size: 1.15rem; text-align: left; }
-            .donation-box { padding: 25px 15px; }
-            .btn-donate { width: 100%; padding: 15px; font-size: 0.9rem; }
+            .content-grid { grid-template-columns: 1fr; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
+            .sticky-wrapper { position: relative; top: 0; }
+            
+            .article-body { padding: 40px 20px; font-size: 1.1rem; }
+            .lead-paragraph { font-size: 1.3rem; }
+            .pull-quote { font-size: 1.8rem; padding: 30px 0; }
+            
+            .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <div id="global-announcement"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
 
-    <nav class="nav-header">
-        <a href="index" class="logo" id="logo">Faun by Moonlight</a>
-        
-        <label for="nav-toggle" class="hamburger">
-            <span></span><span></span><span></span>
-        </label>
-        <input type="checkbox" id="nav-toggle">
-        
-        <div class="nav-tabs">
-            <a href="who-we-are" class="nav-tab">Who We Are</a>
-            <a href="volumes" class="nav-tab">Volumes</a>
-            <a href="blog" class="nav-tab">Blog</a>
-            <a href="submissions" class="nav-tab">Submit</a>
-            <a href="faq" class="nav-tab">FAQ</a>
-            <a href="support-us" class="nav-tab">Support Us</a>
-            <a href="urgent" class="nav-tab urgent-active">Urgent Appeal</a>
-            <a href="contact" class="nav-tab">Contact</a>
+    <div class="cursor" id="cursor"></div>
+
+    <nav class="navbar">
+        <a href="index" class="nav-brand">
+            <span class="brand-word word-f">FAUN</span>
+            <span class="brand-word word-b">BY</span>
+            <span class="brand-word word-m">MOONLIGHT</span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link">Blog</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link active" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
-    
-    <main class="main-wrapper">
-        <article class="letter-container">
-            <h1 class="page-title">Urgent</h1>
-            
-            <p class="intro-lead">
-                When we look at history, hindsight likes to tell us we would've acted better, more humanely in the face of great tragedies, more urgently if those suffering asked for our help.
-            </p>
 
-            <div class="content-body">
-                <p>More than 50,000 children have been killed or wounded in Palestine since October 7th, 2023. This means at least one Palestinian child has been killed or wounded every hour, on average, over nearly 23 months of war. By mid-December 2023, 1,000 children had already lost one or both legs, and at least 21,000 children have been left permanently disabled.</p>
-                
-                <p>These children are asking for your help. We, at Faun by Moonlight, are asking for your help.</p>
-                
-                <img src="images/2.jpg" alt="A view of the humanitarian situation" class="content-image">
-                
-                <div class="donation-box">
-                    <p style="font-weight: 600; margin-bottom: 20px; color: #fff; font-size: 1.2rem;">We encourage you to donate to the Palestine Children's Relief Fund (PCRF).</p>
-                    <a href="https://www.pcrf.net/donate" class="btn-donate" target="_blank" rel="noopener">Donate Now via PCRF</a>
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
+
+    <header class="statement-hero">
+        <div class="hero-meta">
+            <span>Humanitarian Appeal</span>
+            <span>2023 — Present</span>
+        </div>
+        <h1 class="hero-title">Urgent</h1>
+    </header>
+
+    <main class="content-grid">
+        
+        <aside class="meta-sidebar">
+            <div class="sticky-wrapper">
+                <div class="action-box">
+                    <span class="action-label">Make a Difference</span>
+                    <p style="margin-bottom: 20px; color: #aaa; font-size: 0.9rem;">Direct donation to Palestine Children's Relief Fund.</p>
+                    <a href="https://www.pcrf.net/donate" target="_blank" class="btn-donate">Donate Now</a>
                 </div>
+            </div>
+        </aside>
 
-                <p>The PCRF is a nonprofit humanitarian organization dedicated to providing medical care and humanitarian relief to children in the Middle East, regardless of their religion or nationality. Since 1991, they've been sending volunteer medical teams to provide free surgeries and treatments, sponsoring children who need specialized care abroad, building pediatric cancer departments, providing medical equipment and humanitarian aid, and training local doctors and nurses.</p> 
-                
-                <p>In Gaza specifically, the PCRF is one of the few organizations still able to provide critical medical supplies, emergency care, and life-saving treatment to injured and sick children.</p>
-                
-                <hr class="divider">
+        <article class="article-body">
+            
+            <p class="lead-paragraph">When we look at history, hindsight likes to tell us we would've acted better, more humanely in the face of great tragedies, more urgently if those suffering asked for our help.</p>
 
-                <p style="font-size: 1.3rem; color: #fff; margin-bottom: 1rem;"><strong>Our Commitment to You</strong></p>
-                <p>Readers who send us proof of their donation will be included in our "FBM THANKS" section recognizing you as part of a community that chose to act, as well as a personal email from our editor-in-chief.</p>
+            <p>More than 50,000 children have been killed or wounded in Palestine since October 7th, 2023. This means at least one Palestinian child has been killed or wounded every hour, on average, over nearly 23 months of war. By mid-December 2023, 1,000 children had already lost one or both legs, and at least 21,000 children have been left permanently disabled.</p>
+
+            <div class="pull-quote">
+                "These children are asking for your help. We, at Faun by Moonlight, are asking for your help."
+            </div>
+
+            <img src="images/2.jpg" alt="Humanitarian Appeal" class="content-image">
+
+            <p>We encourage you to donate to the <strong>Palestine Children's Relief Fund (PCRF)</strong>. The PCRF is a nonprofit humanitarian organization dedicated to providing medical care and humanitarian relief to children in the Middle East, regardless of their religion or nationality.</p>
+            
+            <p>Since 1991, they've been sending volunteer medical teams to provide free surgeries and treatments, sponsoring children who need specialized care abroad, building pediatric cancer departments, providing medical equipment and humanitarian aid, and training local doctors and nurses. In Gaza specifically, the PCRF is one of the few organizations still able to provide critical medical supplies, emergency care, and life-saving treatment to injured and sick children.</p>
+
+            <div class="highlight-box">
+                <h3>Our Commitment to You</h3>
+                <p>Readers who send us proof of their donation will be included in our "FBM THANKS" section, recognizing you as part of a community that chose to act.</p>
                 
-                <p>If you donate <strong>$100 or more</strong>, we offer:</p>
+                <p style="margin-top: 20px;"><strong>If you donate $100 or more:</strong></p>
                 <ul>
                     <li>One full year of free monthly Volumes</li>
                     <li>Free access to all planned future exclusive content</li>
                     <li>Your name in our "FBM THANKS" section</li>
                     <li>A personal thank you message from our editor-in-chief</li>
                 </ul>
-                
-                <p>If you donate <strong>$200 or more</strong>, you receive all benefits above, plus:</p>
+
+                <p style="margin-top: 20px;"><strong>If you donate $200 or more:</strong></p>
                 <ul>
-                    <li>Free line edits for your work (short story or novel), even if not published by us.</li>
-                    <li>A letter of recommendation for your future submissions to other magazines.</li>
+                    <li>All previous benefits</li>
+                    <li>Free line edits for your work (short story or novel)</li>
+                    <li>A letter of recommendation for your future submissions</li>
                 </ul>
-                
-                <hr class="divider">
-
-                <p>We understand if you are unable to donate—times are tough. In these cases, engage and share content discussing these atrocities. Awareness is a powerful tool in its own right.</p>
-                
-                <p>We hope that you decide to act. We hope we never again need to wait for hindsight to understand what must be done.</p>
-                
-                <div class="signature">
-                    Thank you,<br>
-                    The Faun by Moonlight Team
-                </div>
             </div>
 
-            <div class="resources-section">
-                <h3>Additional Resources & Documentation</h3>
-                
-                <div class="resource-group">
-                    <h4>Children in Gaza</h4>
-                    <ul>
-                        <li><a href="https://www.unicef.org/emergencies/children-gaza-need-lifesaving-support" class="resource-link" target="_blank" rel="noopener">UNICEF - Children in Gaza need lifesaving support</a></li>
-                        <li><a href="https://www.unicef.org/press-releases/unimaginable-horrors-more-50000-children-reportedly-killed-or-injured-gaza-strip" class="resource-link" target="_blank" rel="noopener">UNICEF - 50,000+ children killed or injured</a></li>
-                    </ul>
-                </div>
+            <p>We understand if you are unable to donate—Times are tough, cost of living is high, and the realities of each of our daily lives can prohibit us from acting the way our hearts wish us to. In these cases, engage and share content discussing these atrocities. Awareness is a powerful tool in its own right.</p>
 
-                <div class="resource-group">
-                    <h4>Attacks on Hospitals</h4>
-                    <ul>
-                        <li><a href="https://www.ohchr.org/en/press-releases/2024/12/pattern-israeli-attacks-gaza-hospitals-raises-grave-concerns-report" class="resource-link" target="_blank" rel="noopener">UN OHCHR report on hospital attacks</a></li>
-                        <li><a href="https://www.who.int/news/item/22-05-2025-health-system-at-breaking-point-as-hostilities-further-intensify--who-warns" class="resource-link" target="_blank" rel="noopener">WHO - Health system at breaking point</a></li>
-                    </ul>
-                </div>
+            <p>We hope that you decide to act. We hope we never again need to wait for hindsight to understand what must be done.</p>
 
-                <div class="resource-group">
-                    <h4>International Court of Justice Genocide Case</h4>
-                    <ul>
-                        <li><a href="https://www.icj-cij.org/case/192" class="resource-link" target="_blank" rel="noopener">Official ICJ Case Page</a></li>
-                        <li><a href="https://www.hrw.org/news/2024/01/26/gaza-world-court-orders-israel-prevent-genocide" class="resource-link" target="_blank" rel="noopener">Human Rights Watch - ICJ orders Israel to prevent genocide</a></li>
-                    </ul>
-                </div>
-            </div>
+            <p><em>Thank you,<br>Faun by Moonlight Team</em></p>
+
+            <hr style="border: 0; border-top: 1px solid var(--c-border); margin: 3rem 0;">
+
+            <h3>Additional Resources</h3>
+            <p><strong>Children in Gaza:</strong> <a href="https://www.unicef.org/emergencies/children-gaza-need-lifesaving-support" target="_blank">UNICEF Report</a></p>
+            <p><strong>Attacks on Hospitals:</strong> <a href="https://www.who.int/news/item/22-05-2025-health-system-at-breaking-point-as-hostilities-further-intensify--who-warns" target="_blank">WHO Statement</a></p>
+            <p><strong>ICJ Genocide Case:</strong> <a href="https://www.icj-cij.org/case/192" target="_blank">Official ICJ Case Page</a></p>
+
         </article>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://x.com/faunbymoonlight" class="footer-link" target="_blank" aria-label="X">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" class="footer-link" target="_blank" aria-label="Bluesky">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.131 2.032-.256 3.074.327 4.132c1.88 3.416 5.142 6.421 6.873 7.586-1.73.934-4.109 2.69-4.872 6.037-.414 1.815.68 4.479 2.695 4.248 2.643-.303 5.196-4.557 6.977-8.416 1.78 3.86 4.333 8.113 6.977 8.416 2.015.23 3.108-2.433 2.695-4.248-.763-3.347-3.142-5.103-4.872-6.037 1.73-1.165 4.992-4.17 6.873-7.586.583-1.058.458-2.1-.575-2.567-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" class="footer-link" target="_blank" aria-label="YouTube">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-            </a>
-            <a href="contact" class="footer-link" aria-label="Contact">
-                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"/></svg>
-            </a>
-        </div>
-        <div class="copyright">
-            © 2025 Faun by Moonlight. All rights reserved.
-        </div>
+    <div class="socials-section">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+
+        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+    </div>
+
+    <footer>
+        © 2025 Faun by Moonlight. All rights reserved.
     </footer>
 
     <script>
-        // Announcement loader
-        fetch('announcement')
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('No announcement found');
-            })
-            .then(data => {
-                document.getElementById('global-announcement').innerHTML = data;
-            })
-            .catch(error => {
-                console.log('Announcement system:', error.message);
-                document.getElementById('global-announcement').style.display = 'none';
-            });
-
-        // Logo color logic - using mute colors for this page
-        function colorLogo() {
-            const logo = document.getElementById('logo');
-            if (logo) {
-                // Using slightly muted versions of the brand colors for this somber page
-                const colors = ['word-faun', 'word-by', 'word-moonlight'];
-                const words = logo.textContent.split(' ');
-                logo.innerHTML = words.map((word, i) => `<span class="${colors[i]}">${word}</span>`).join(' ');
-            }
+        // --- SCROLL PROGRESS LOGIC ---
+        window.onscroll = function() {myFunction()};
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
         }
 
-        window.addEventListener('load', () => {
-            colorLogo();
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const interactive = document.querySelectorAll('a, button, .article-body, .btn-donate');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('open');
+                navMenu.classList.remove('active');
+            });
         });
     </script>
 </body>
