@@ -12,7 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
-            /* Updated to match other pages */
+            /* Fallback bg */
             --c-bg: #0a0a0a; 
             --c-text: #e0e0e0;
             --c-red: #E60026;
@@ -30,6 +30,29 @@
             overflow-x: hidden; 
             min-height: 100vh;
             display: flex; flex-direction: column;
+        }
+
+        /* --- BACKGROUND VIDEO SETUP --- */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -2; /* Behind everything */
+            object-fit: cover;
+        }
+
+        /* Overlay to ensure text readability over the video */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85); /* Dark overlay */
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- CUSTOM CURSOR --- */
@@ -60,8 +83,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            /* Updated background to match other pages */
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.8); /* Slightly more transparent to show video blur */
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -103,7 +125,7 @@
         /* --- MARQUEE ALERT --- */
         .alert-ticker {
             padding-top: 100px; /* Space for nav */
-            background: var(--c-bg);
+            background: rgba(10, 10, 10, 0.9);
             border-bottom: 1px solid var(--c-border);
             overflow: hidden;
             white-space: nowrap;
@@ -153,7 +175,9 @@
             position: sticky;
             top: 85px; 
             height: fit-content;
-            background: var(--c-bg);
+            /* Transparent bg to show video blur */
+            background: rgba(10, 10, 10, 0.6); 
+            backdrop-filter: blur(5px);
             z-index: 10;
         }
         .section-number {
@@ -195,8 +219,9 @@
         .scroll-content {
             padding: 60px 80px;
             border-bottom: 1px solid var(--c-border);
-            font-size: 1.15rem; /* Standardized size */
-            line-height: 1.8;   /* Improved line height */
+            background: rgba(10, 10, 10, 0.85); /* Semi-transparent background */
+            font-size: 1.15rem; 
+            line-height: 1.8;   
             color: #ccc;
         }
         .scroll-content h3 { 
@@ -212,7 +237,7 @@
         .scroll-content li { 
             margin-bottom: 15px; 
             padding-left: 20px; 
-            border-left: 3px solid #333; /* Default border color, overridden by theme */
+            border-left: 3px solid #333; 
             color: #e0e0e0;
         }
 
@@ -232,7 +257,6 @@
             background: #0e0e0e;
             padding: 50px;
             border: 1px solid var(--c-border);
-            /* EDITED: Changed margin to center the module */
             margin: 20px auto 0 auto; 
             max-width: 800px;
         }
@@ -301,7 +325,6 @@
             background: var(--c-yellow);
             border-color: var(--c-yellow);
         }
-        /* Fix for custom checkmark visibility */
         .checkbox-wrapper input:checked::before { transform: scale(1); background-color: #000; } 
         
         .reveal-box { position: relative; overflow: hidden; }
@@ -351,7 +374,7 @@
             justify-content: center;
             align-items: center;
             gap: 30px;
-            background-color: var(--c-bg);
+            background-color: rgba(10, 10, 10, 0.9);
             border-top: 1px solid var(--c-border);
         }
 
@@ -389,6 +412,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             border-top: 1px solid var(--c-border);
+            background: var(--c-bg);
         }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
@@ -414,7 +438,7 @@
             .page-title { font-size: 4rem; }
             .submission-container { display: flex; flex-direction: column; }
             .sticky-header { 
-                position: relative; top: 0; padding: 30px; border-right: none; background: #080808; 
+                position: relative; top: 0; padding: 30px; border-right: none; background: rgba(10,10,10,0.8); 
                 display: flex; align-items: center; gap: 15px;
             }
             .section-number { font-size: 2rem; margin-bottom: 0; }
@@ -428,6 +452,11 @@
 </head>
 <body>
     <div class="cursor" id="cursor"></div>
+
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/submissions.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
 
     <nav class="navbar">
         <a href="index" class="nav-brand">
