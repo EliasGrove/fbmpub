@@ -89,10 +89,10 @@
             bottom: 5vh; 
             left: 5vw;
             display: flex;
-            gap: 15px; /* Consistent spacing */
+            gap: 15px; 
             font-family: "dunbar-tall", sans-serif; 
             font-weight: 900;
-            font-size: 14vw; /* Uniform Size */
+            font-size: 14vw; 
             line-height: 0.8;
             z-index: 3;
             mix-blend-mode: exclusion; 
@@ -101,7 +101,7 @@
         }
 
         .fbm-letter {
-            color: #fff; /* Default White */
+            color: #fff; 
             transition: color 0.4s ease;
         }
 
@@ -148,7 +148,7 @@
 
         /* HOVER: Smooth Expansion + Gradient Cycle */
         .enter-trigger:hover {
-            letter-spacing: 12px; /* Elegant breathing */
+            letter-spacing: 12px; 
             animation: slowColorCycle 4s infinite alternate;
         }
 
@@ -241,37 +241,59 @@
                 left: -10%; 
                 height: 60vh; 
                 top: 15%; 
-                opacity: 0; /* Start hidden for animation */
+                opacity: 0; 
                 mix-blend-mode: normal; 
                 filter: grayscale(100%) contrast(1.1);
-                animation: mobileImageFadeIn 1.5s ease-out forwards 0.2s; /* Subtle entry */
+                /* Starts fading in AFTER logo move starts */
+                animation: mobileImageFadeIn 2s ease-out forwards 1.8s; 
             }
 
+            .vertical-text { display: none; }
+
+            /* --- THE CHOREOGRAPHY --- */
+
+            /* 1. The Container Move (Center -> Corner) */
             .fbm-logo { 
                 font-size: 18vw; 
+                gap: 5px;
+                /* Base state is final state (bottom left) */
                 bottom: 8dvh; 
                 left: 5vw; 
-                gap: 5px; 
+                
+                /* Animation Sequence */
+                animation: moveLogoContainer 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
 
+            /* 2. The Letters (Pop in Center) */
+            .fbm-letter {
+                opacity: 0;
+                display: inline-block;
+                animation: letterPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+            /* Staggered Delays */
+            .letter-f { animation-delay: 0.2s; color: var(--color-f); }
+            .letter-b { animation-delay: 0.6s; color: var(--color-b); }
+            .letter-m { animation-delay: 1.0s; color: var(--color-m); }
+
+            /* 3. The Content Reveal (Fade In After Move) */
             .enter-trigger { 
                 left: 50%; 
                 top: 50%; 
                 font-size: 2rem;
                 width: 100%;
                 text-align: center;
-                opacity: 0; /* Start hidden */
-                animation: mobileEnterFadeIn 1s ease-out forwards 2.5s; /* Enters after letters */
+                opacity: 0; 
+                /* Delays until logo has landed */
+                animation: mobileContentFadeIn 1.5s ease-out forwards 2.5s; 
             }
-
-            .vertical-text { display: none; }
 
             .footer-group { 
                 right: 20px; 
                 bottom: 8dvh; 
                 align-items: flex-end; 
-                opacity: 0; /* Start hidden */
-                animation: mobileFooterFadeIn 1s ease-out forwards 3.0s; /* Enters last */
+                opacity: 0; 
+                /* Delays until logo has landed */
+                animation: mobileContentFadeIn 1.5s ease-out forwards 2.8s; 
             }
 
             .featured-links { flex-direction: column; gap: 5px; }
@@ -280,36 +302,35 @@
             .cursor { display: none; }
             * { cursor: auto; }
 
-            /* --- MOBILE-ONLY ANIMATION KEYFRAMES --- */
+            /* --- KEYFRAMES --- */
 
-            /* Logo Letter Individual Animations */
-            .fbm-letter {
-                opacity: 0;
-                display: inline-block;
-                /* The animation: name duration timing fill-mode delay */
-                animation: letterPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            /* Controls the Logo Container Position */
+            @keyframes moveLogoContainer {
+                0% {
+                    /* Start: Center of Screen */
+                    bottom: 50%;
+                    left: 50%;
+                    transform: translate(-50%, 50%) scale(1.6); /* Large */
+                }
+                40% {
+                    /* Hold Center while letters pop */
+                    bottom: 50%;
+                    left: 50%;
+                    transform: translate(-50%, 50%) scale(1.6);
+                }
+                100% {
+                    /* End: Bottom Left Corner */
+                    bottom: 8dvh;
+                    left: 5vw;
+                    transform: translate(0, 0) scale(1); /* Normal Size */
+                }
             }
 
-            /* Staggered Delays for F-B-M */
-            .letter-f { 
-                animation-delay: 0.5s; 
-                color: var(--color-f); /* Force color on mobile */
-            }
-            .letter-b { 
-                animation-delay: 1.0s; 
-                color: var(--color-b); /* Force color on mobile */
-            }
-            .letter-m { 
-                animation-delay: 1.5s; 
-                color: var(--color-m); /* Force color on mobile */
-            }
-
-            /* Keyframes: Drop in slightly, opacity 0->1 */
             @keyframes letterPop {
                 0% { 
                     opacity: 0; 
                     transform: translateY(-20px) scale(0.9);
-                    filter: blur(5px);
+                    filter: blur(10px);
                 }
                 100% { 
                     opacity: 1; 
@@ -318,25 +339,22 @@
                 }
             }
 
-            /* Image Fade */
             @keyframes mobileImageFadeIn {
                 to { opacity: 0.8; }
             }
 
-            /* Enter Button Fade & Slide Up */
-            @keyframes mobileEnterFadeIn {
-                0% { 
-                    opacity: 0; 
-                    transform: translate(-50%, -40%); /* Slightly lower */
-                }
-                100% { 
-                    opacity: 1; 
-                    transform: translate(-50%, -50%); /* Center */
-                }
+            @keyframes mobileContentFadeIn {
+                0% { opacity: 0; transform: translate(-50%, -45%); } /* Slide up effect for Enter */
+                100% { opacity: 1; transform: translate(-50%, -50%); }
             }
-
-            /* Footer Fade */
-            @keyframes mobileFooterFadeIn {
+            
+            /* Different transform for footer since it's bottom-right anchored */
+            .footer-group {
+                 /* Override the transform from contentFadeIn for the footer specifically */
+                 animation-name: mobileFooterFade;
+            }
+            @keyframes mobileFooterFade {
+                from { opacity: 0; }
                 to { opacity: 1; }
             }
         }
