@@ -104,6 +104,8 @@
         .page-header {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative; /* Added for video */
+            overflow: hidden;   /* Added for video */
         }
         .super-title {
             font-family: var(--f-head);
@@ -112,6 +114,8 @@
             text-transform: uppercase;
             color: #fff;
             margin: 0;
+            position: relative; /* Sit above video */
+            z-index: 2;
         }
         .intro-text {
             max-width: 600px;
@@ -119,9 +123,29 @@
             font-size: 1.2rem;
             line-height: 1.5;
             color: #888;
-            border-left: 2px solid var(--c-yellow); /* Yellow Accent */
+            border-left: 2px solid var(--c-yellow); 
             padding-left: 20px;
+            position: relative; /* Sit above video */
+            z-index: 2;
         }
+
+        /* --- VIDEO STYLE (Consistent with other pages) --- */
+        .header-bg-video {
+            position: absolute;
+            top: 50%;
+            right: 0; 
+            transform: translateY(-50%) translateX(10%); 
+            height: 85%; 
+            width: auto;
+            z-index: 1; 
+            pointer-events: none;
+            mix-blend-mode: screen; 
+            opacity: 0.9;
+        }
+        /* Safari Hacks */
+        .header-bg-video::-webkit-media-controls { display: none !important; }
+        .header-bg-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+
 
         /* --- SPLIT LAYOUT CONTAINER --- */
         .contact-grid {
@@ -322,6 +346,14 @@
 
             .page-header { padding: 120px 20px 40px 20px; }
             .super-title { font-size: 4rem; }
+
+            /* Mobile Video Adjustments */
+            .header-bg-video {
+                height: 80%;
+                top: 60%;
+                opacity: 0.5;
+                transform: translateY(-50%) translateX(40%);
+            }
             
             .contact-grid { grid-template-columns: 1fr; }
             .channels-panel { border-right: none; }
@@ -372,6 +404,10 @@
         <div class="intro-text">
             For general inquiries, business matters, or questions about the magazine. We read everything, even if we can't reply to everything immediately.
         </div>
+
+        <video class="header-bg-video" autoplay muted loop playsinline webkit-playsinline>
+            <source src="images/contact.mp4" type="video/mp4">
+        </video>
     </header>
 
     <main class="contact-grid">
@@ -472,6 +508,15 @@
                 burgerBtn.classList.remove('open');
                 navMenu.classList.remove('active');
             });
+        });
+
+        // --- VIDEO AUTOPLAY FIX (For Safari/iOS) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.querySelector('.header-bg-video');
+            if(vid) {
+                vid.muted = true;
+                vid.play().catch(e => console.log("Autoplay blocked by browser policy:", e));
+            }
         });
     </script>
 </body>
