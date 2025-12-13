@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faun by Moonlight</title>
     
+    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,8 +15,6 @@
 
       gtag('config', 'G-3ETBBLP43M');
     </script>
-
-    <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
     <style>
         /* --- CORE RESET & CURSOR --- */
@@ -230,78 +230,115 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- RESPONSIVE FIXES (MOBILE ONLY) --- */
+        /* --- RESPONSIVE FIXES (MOBILE ANIMATIONS) --- */
         @media (max-width: 768px) {
             
-            /* 1. FRESH IMAGE LAYOUT */
+            /* 1. Disable Video on Mobile */
+            #bg-video { display: none; }
+            
+            /* 2. Reset Layout for Mobile */
             .watcher-img { 
-                left: 50%;
-                transform: translateX(-50%); /* Center strictly */
-                height: 55vh; 
-                top: 18%; 
-                opacity: 0.7; 
-                mix-blend-mode: normal; /* Safe for mobile */
+                left: -10%; 
+                height: 60vh; 
+                top: 15%; 
+                opacity: 0; /* Start hidden for animation */
+                mix-blend-mode: normal; 
                 filter: grayscale(100%) contrast(1.1);
+                animation: mobileImageFadeIn 1.5s ease-out forwards 0.2s; /* Subtle entry */
             }
 
-            /* 2. BOLD LOGO */
             .fbm-logo { 
-                font-size: 22vw; /* Larger, bolder impact */
-                bottom: 10dvh; 
-                left: 20px; 
+                font-size: 18vw; 
+                bottom: 8dvh; 
+                left: 5vw; 
                 gap: 5px; 
             }
 
-            /* 3. SNAPPY ENTER BUTTON */
             .enter-trigger { 
+                left: 50%; 
+                top: 50%; 
+                font-size: 2rem;
                 width: 100%;
                 text-align: center;
-                font-size: 12vw; /* Massive, magazine header style */
-                letter-spacing: 1px;
-                /* Mobile-only heartbeat animation since we have no hover */
-                animation: mobilePulse 3s ease-in-out infinite;
-            }
-            
-            @keyframes mobilePulse {
-                0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-                50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-                100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-            }
-
-            /* 4. CLEAN FOOTER */
-            .footer-group { 
-                right: 0; left: 0; /* Full width container */
-                bottom: 3dvh; 
-                padding: 0 20px;
-                display: flex;
-                flex-direction: row; /* Keep them in a row for space efficiency */
-                justify-content: space-between;
-                align-items: flex-end;
-            }
-
-            .cta-small {
-                align-self: auto;
-                font-size: 0.75rem;
-            }
-
-            /* Featured block aligned right */
-            .footer-group > div:last-child {
-                text-align: right;
-            }
-
-            .featured-links { 
-                gap: 10px; 
-            }
-            
-            .featured-link {
-                font-size: 0.65rem; /* Slightly smaller to fit all in one line */
+                opacity: 0; /* Start hidden */
+                animation: mobileEnterFadeIn 1s ease-out forwards 2.5s; /* Enters after letters */
             }
 
             .vertical-text { display: none; }
+
+            .footer-group { 
+                right: 20px; 
+                bottom: 8dvh; 
+                align-items: flex-end; 
+                opacity: 0; /* Start hidden */
+                animation: mobileFooterFadeIn 1s ease-out forwards 3.0s; /* Enters last */
+            }
+
+            .featured-links { flex-direction: column; gap: 5px; }
             
-            /* Disable custom cursor logic */
+            /* Hide custom cursor */
             .cursor { display: none; }
             * { cursor: auto; }
+
+            /* --- MOBILE-ONLY ANIMATION KEYFRAMES --- */
+
+            /* Logo Letter Individual Animations */
+            .fbm-letter {
+                opacity: 0;
+                display: inline-block;
+                /* The animation: name duration timing fill-mode delay */
+                animation: letterPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+
+            /* Staggered Delays for F-B-M */
+            .letter-f { 
+                animation-delay: 0.5s; 
+                color: var(--color-f); /* Force color on mobile */
+            }
+            .letter-b { 
+                animation-delay: 1.0s; 
+                color: var(--color-b); /* Force color on mobile */
+            }
+            .letter-m { 
+                animation-delay: 1.5s; 
+                color: var(--color-m); /* Force color on mobile */
+            }
+
+            /* Keyframes: Drop in slightly, opacity 0->1 */
+            @keyframes letterPop {
+                0% { 
+                    opacity: 0; 
+                    transform: translateY(-20px) scale(0.9);
+                    filter: blur(5px);
+                }
+                100% { 
+                    opacity: 1; 
+                    transform: translateY(0) scale(1);
+                    filter: blur(0);
+                }
+            }
+
+            /* Image Fade */
+            @keyframes mobileImageFadeIn {
+                to { opacity: 0.8; }
+            }
+
+            /* Enter Button Fade & Slide Up */
+            @keyframes mobileEnterFadeIn {
+                0% { 
+                    opacity: 0; 
+                    transform: translate(-50%, -40%); /* Slightly lower */
+                }
+                100% { 
+                    opacity: 1; 
+                    transform: translate(-50%, -50%); /* Center */
+                }
+            }
+
+            /* Footer Fade */
+            @keyframes mobileFooterFadeIn {
+                to { opacity: 1; }
+            }
         }
     </style>
 </head>
