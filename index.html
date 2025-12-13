@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3ETBBLP43M');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faun by Moonlight</title>
@@ -133,7 +142,7 @@
             letter-spacing: 2px;
             z-index: 10;
             mix-blend-mode: normal; 
-            transition: letter-spacing 0.8s ease, color 0.5s ease;
+            transition: letter-spacing 0.8s ease, color 0.5s ease, transform 0.2s ease;
             white-space: nowrap;
         }
 
@@ -221,43 +230,68 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- RESPONSIVE FIXES --- */
+        /* --- RESPONSIVE FIXES (MOBILE BOLD REFRESH) --- */
         @media (max-width: 768px) {
+            
+            /* 1. Standard Touch Cursors */
+            * { cursor: auto; }
+            .cursor { display: none; }
+
+            /* 2. Bold Image Positioning */
             .watcher-img { 
-                left: -10%; 
-                height: 60vh; 
+                left: -15%; 
+                height: 55vh; 
                 top: 15%; 
-                opacity: 0.8; 
-                /* FIX: Screen blend mode makes images invisible on mobile dark mode, use normal */
+                opacity: 0.85; /* Slightly higher for punchiness */
                 mix-blend-mode: normal; 
                 filter: grayscale(100%) contrast(1.1);
             }
+
+            /* 3. Massive, Snappy Logo */
             .fbm-logo { 
-                font-size: 18vw; 
-                /* FIX: Use dvh to avoid bottom bar overlap */
-                bottom: 8dvh; 
+                font-size: 20vw; /* BOLDER */
+                bottom: 6dvh; 
                 left: 5vw; 
-                gap: 5px; 
+                gap: 2px; /* Tighter tracking looks more modern */
             }
+
+            /* 4. The Enter Button - High Value Feel */
             .enter-trigger { 
                 left: 50%; 
                 top: 50%; 
-                font-size: 2rem;
+                font-size: 3.5rem; /* Larger on mobile for confidence */
                 width: 100%;
                 text-align: center;
+                /* Remove hover effect on mobile, replace with active state */
+                animation: none; 
+                letter-spacing: 4px;
             }
-            .vertical-text { display: none; }
-            .footer-group { 
-                right: 20px; 
-                /* FIX: Use dvh to avoid bottom bar overlap */
-                bottom: 8dvh; 
-                align-items: flex-end; 
-            }
-            .featured-links { flex-direction: column; gap: 5px; }
             
-            /* Hide custom cursor on touch devices to prevent lag */
-            .cursor { display: none; }
-            * { cursor: auto; }
+            /* Snappy tap effect */
+            .enter-trigger:active {
+                transform: translate(-50%, -50%) scale(0.95);
+                color: var(--color-f); /* Flashes red on tap */
+            }
+
+            /* 5. Clean Footer */
+            .vertical-text { display: none; }
+            
+            .footer-group { 
+                right: 5vw; 
+                bottom: 6dvh; 
+                align-items: flex-end; 
+                gap: 20px; /* More breathing room */
+            }
+            
+            .featured-links { 
+                flex-direction: column; 
+                gap: 8px; /* Easier to tap individual links */
+            }
+            
+            .featured-link {
+                font-size: 0.8rem; /* Slightly larger for readability */
+                padding: 2px 0; /* Increase touch target */
+            }
         }
     </style>
 </head>
