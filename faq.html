@@ -7,6 +7,15 @@
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3ETBBLP43M');
+    </script>
+
     <style>
         /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -132,7 +141,7 @@
         }
         .header-meta strong { color: var(--c-yellow); display: block; margin-bottom: 5px; font-size: 1.2rem; }
 
-        /* --- VIDEO STYLE FIX FOR SAFARI --- */
+        /* --- VIDEO STYLE --- */
         .header-bg-video {
             position: absolute;
             top: 50%;
@@ -141,19 +150,13 @@
             height: 85%; 
             width: auto;
             z-index: 1; 
-            pointer-events: none; /* Crucial: Makes it unclickable */
+            pointer-events: none;
             mix-blend-mode: screen; 
             opacity: 0.9;
         }
 
-        /* Hides the default play button overlay on Safari/iOS */
-        .header-bg-video::-webkit-media-controls {
-            display: none !important;
-        }
-        .header-bg-video::-webkit-media-controls-start-playback-button {
-            display: none !important;
-            -webkit-appearance: none;
-        }
+        .header-bg-video::-webkit-media-controls { display: none !important; }
+        .header-bg-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
 
         /* --- THE FAQ GRID --- */
         .faq-container {
@@ -292,8 +295,14 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE CHANGES --- */
         @media (max-width: 900px) {
+            
+            /* 1. Reset Cursor */
+            * { cursor: auto !important; }
+            .cursor { display: none !important; }
+
+            /* 2. Menu Logic */
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -311,29 +320,65 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* Layout Shift */
-            .header-section { flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px; }
-            .huge-title { font-size: 15vw; }
-            .header-meta { text-align: left; }
+            /* 3. Header & Video Removal */
+            .header-bg-video { display: none !important; }
 
-            /* Video Mobile Adjustments */
-            .header-bg-video {
-                height: 80%;
-                top: 60%;
-                opacity: 0.5;
-                transform: translateY(-50%) translateX(40%);
+            .header-section { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                padding: 120px 20px 40px 20px; 
+                gap: 20px;
+                /* Subtle radial spotlight to replace video */
+                background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
 
-            /* Mobile Stack */
-            .faq-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 20px; }
+            .huge-title { 
+                font-size: 15vw; 
+                opacity: 0; /* Start hidden for animation */
+                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
+            }
+            .header-meta { text-align: left; }
+
+            /* 4. Layout Stacking & Sticky Headers */
+            .faq-row { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+                padding: 40px 20px; 
+                
+                /* Animation for rows */
+                opacity: 0;
+                transform: translateY(20px);
+                animation: mobileFadeUp 0.6s ease-out forwards;
+            }
+            
             .faq-q { font-size: 1.5rem; }
             .faq-a { max-width: 100%; font-size: 1rem; }
             
-            .sector-header { padding: 20px 20px; top: 0; position: relative; }
+            /* Make sector headers stick below nav properly on mobile */
+            .sector-header { 
+                padding: 20px 20px; 
+                top: 70px; /* Adjust for mobile nav height */
+                position: sticky; 
+            }
             .sector-title { font-size: 2.5rem; }
             .sector-id { font-size: 2.5rem; }
 
             .socials-section { gap: 20px; padding: 40px 20px; }
+
+            /* 5. Mobile Animations Keyframes */
+            @keyframes mobileSlideUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes mobileFadeUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Staggering the first few items for a snappy feel */
+            .sector-01 .faq-row:nth-child(2) { animation-delay: 0.4s; }
+            .sector-01 .faq-row:nth-child(3) { animation-delay: 0.5s; }
+            .sector-01 .faq-row:nth-child(4) { animation-delay: 0.6s; }
         }
     </style>
 </head>
@@ -531,15 +576,18 @@
         const cursor = document.getElementById('cursor');
         const interactive = document.querySelectorAll('a, button, .faq-row');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Mousemove only on non-touch devices
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        interactive.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            interactive.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
         // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
