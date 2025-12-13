@@ -105,8 +105,8 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            position: relative; /* Necessary for video positioning */
-            overflow: hidden;   /* Keeps video contained */
+            position: relative; 
+            overflow: hidden;   
         }
         
         .huge-title {
@@ -116,7 +116,7 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
-            position: relative; /* Ensure text sits above video */
+            position: relative; 
             z-index: 2;
         }
 
@@ -127,12 +127,12 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             max-width: 300px;
-            position: relative; /* Ensure text sits above video */
+            position: relative; 
             z-index: 2;
         }
         .header-meta strong { color: var(--c-yellow); display: block; margin-bottom: 5px; font-size: 1.2rem; }
 
-        /* --- VIDEO STYLE (From Volumes Page) --- */
+        /* --- VIDEO STYLE FIX FOR SAFARI --- */
         .header-bg-video {
             position: absolute;
             top: 50%;
@@ -141,9 +141,18 @@
             height: 85%; 
             width: auto;
             z-index: 1; 
-            pointer-events: none;
+            pointer-events: none; /* Crucial: Makes it unclickable */
             mix-blend-mode: screen; 
             opacity: 0.9;
+        }
+
+        /* Hides the default play button overlay on Safari/iOS */
+        .header-bg-video::-webkit-media-controls {
+            display: none !important;
+        }
+        .header-bg-video::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
         }
 
         /* --- THE FAQ GRID --- */
@@ -168,7 +177,7 @@
         
         .sector-title {
             font-family: var(--f-head);
-            font-size: 4rem; /* Matched size */
+            font-size: 4rem; 
             text-transform: uppercase;
             line-height: 0.9;
             transition: color 0.3s;
@@ -176,7 +185,7 @@
 
         .sector-id {
             font-family: var(--f-head);
-            font-size: 4rem; /* Matched size */
+            font-size: 4rem; 
             line-height: 0.9;
             opacity: 1;
             transition: color 0.3s;
@@ -369,7 +378,7 @@
         <div class="header-meta">
         </div>
 
-        <video class="header-bg-video" autoplay muted loop playsinline>
+        <video class="header-bg-video" autoplay muted loop playsinline webkit-playsinline>
             <source src="images/faq.mp4" type="video/mp4">
         </video>
     </header>
@@ -546,6 +555,16 @@
                 burgerBtn.classList.remove('open');
                 navMenu.classList.remove('active');
             });
+        });
+
+        // --- VIDEO AUTOPLAY FIX (For Safari/iOS) ---
+        // This forces the video to mute and play programmatically if the browser blocks the HTML tag
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.querySelector('.header-bg-video');
+            if(vid) {
+                vid.muted = true;
+                vid.play().catch(e => console.log("Autoplay blocked by browser policy:", e));
+            }
         });
     </script>
 </body>
