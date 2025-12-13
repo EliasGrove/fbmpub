@@ -129,11 +129,14 @@
         .statement-hero {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-meta {
             display: flex; justify-content: space-between; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #888; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
@@ -143,6 +146,7 @@
             color: var(--c-red); /* Red title for urgency */
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
         }
 
         /* --- CONTENT GRID --- */
@@ -313,8 +317,14 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE QUERIES --- */
         @media (max-width: 900px) {
+            
+            /* 1. Reset Cursor */
+            * { cursor: auto !important; }
+            .cursor { display: none !important; }
+
+            /* 2. Menu Logic */
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -332,18 +342,57 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            .statement-hero { padding: 120px 20px 40px 20px; }
-            .hero-title { font-size: 4rem; }
+            /* 3. Hero & Header */
+            .statement-hero { 
+                padding: 120px 20px 60px 20px; 
+                /* Warm radial gradient to match the theme instead of video */
+                background: radial-gradient(circle at top right, #332f2d, var(--c-bg));
+            }
+            .hero-title { 
+                font-size: 4rem; 
+                opacity: 0;
+                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
+            }
             
-            .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            /* 4. Grid Stack */
+            .content-grid { display: flex; flex-direction: column; }
             
-            .article-body { padding: 40px 20px; font-size: 1.1rem; }
+            /* 5. Sidebar (Donate Box) */
+            .meta-sidebar { 
+                border-right: none; 
+                border-bottom: 1px solid var(--c-border); 
+                padding: 40px 20px; 
+                order: -1; /* Puts donation box ABOVE article on mobile */
+                
+                opacity: 0;
+                transform: translateY(20px);
+                animation: mobileFadeUp 0.6s ease-out forwards 0.4s;
+            }
+            .sticky-wrapper { position: static; top: 0; }
+            
+            /* 6. Article Body */
+            .article-body { 
+                padding: 40px 20px; 
+                font-size: 1.1rem; 
+                
+                opacity: 0;
+                transform: translateY(20px);
+                animation: mobileFadeUp 0.6s ease-out forwards 0.6s;
+            }
             .lead-paragraph { font-size: 1.3rem; }
             .pull-quote { font-size: 1.8rem; padding: 30px 0; }
             
             .socials-section { gap: 20px; padding: 40px 20px; }
+
+            /* 7. Animations */
+            @keyframes mobileSlideUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes mobileFadeUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
         }
     </style>
 </head>
@@ -500,15 +549,18 @@
         const cursor = document.getElementById('cursor');
         const interactive = document.querySelectorAll('a, button, .article-body, .btn-donate');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Only run mouse logic on desktop
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        interactive.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            interactive.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
         // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
