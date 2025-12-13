@@ -7,6 +7,15 @@
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3ETBBLP43M');
+    </script>
+
     <style>
         /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -130,7 +139,6 @@
             position: absolute;
             top: 50%;
             right: 0; 
-            /* Changed from 25% to 10% to bring it back to the left slightly */
             transform: translateY(-50%) translateX(10%); 
             height: 85%; 
             width: auto;
@@ -346,12 +354,13 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE QUERIES --- */
         @media (max-width: 900px) {
-            /* Fix cursor on mobile */
+            /* 1. Reset Cursor */
             * { cursor: auto !important; }
             .cursor { display: none !important; }
 
+            /* 2. Menu Logic */
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -361,7 +370,7 @@
 
             .mobile-menu-overlay {
                 display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background: var(--c-bg); flex-direction: column; justify-content: center; align-items: center;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
                 gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
                 z-index: 1001;
             }
@@ -369,29 +378,79 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            .page-title { font-size: 4rem; }
-            /* Adjusted header padding on mobile to account for potential video interference */
-            .archive-header { padding: 120px 20px 40px 20px; }
-            
-            /* Hide or adjust video on mobile if it clutters */
-            .header-bg-video {
-                height: 80%;
-                top: 60%;
-                opacity: 0.5;
-                transform: translateY(-50%) translateX(40%);
+            /* 3. Header & Video Removal */
+            .header-bg-video { display: none !important; }
+
+            .archive-header { 
+                padding: 120px 20px 40px 20px; 
+                /* Subtle radial spotlight to replace video */
+                background: radial-gradient(circle at top right, #1a1a1a, #000);
+            }
+
+            .page-title { 
+                font-size: 15vw; 
+                opacity: 0;
+                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
             }
             
-            .volume-row { grid-template-columns: 1fr; min-height: auto; padding-bottom: 60px; }
-            .vol-visual { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); }
+            .page-subtitle {
+                opacity: 0;
+                animation: mobileSlideUp 0.8s ease-out forwards 0.3s;
+            }
+            
+            /* 4. Volume Row Stacking & Animations */
+            .volume-row { 
+                grid-template-columns: 1fr; 
+                min-height: auto; 
+                padding-bottom: 60px; 
+                
+                /* Animation Setup */
+                opacity: 0;
+                transform: translateY(30px);
+                animation: mobileFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            }
+            
+            /* Staggered Delay */
+            .volume-row:nth-of-type(1) { animation-delay: 0.4s; }
+            .volume-row:nth-of-type(2) { animation-delay: 0.6s; }
+            .volume-row:nth-of-type(3) { animation-delay: 0.8s; }
+
+            .vol-visual { 
+                padding: 40px 20px; 
+                border-right: none; 
+                border-bottom: 1px solid var(--c-border); 
+            }
+            
             .vol-data { padding: 40px 20px; }
-            .vol-cover { max-width: 250px; filter: grayscale(0%); }
-            .bg-number { font-size: 15rem; top: 20px; right: 20px; opacity: 0.5; }
+            
+            .vol-cover { 
+                max-width: 250px; 
+                filter: grayscale(0%); /* Full color on mobile default */
+            }
+            
+            .bg-number { 
+                font-size: 15rem; 
+                top: 20px; 
+                right: 20px; 
+                opacity: 0.5; 
+            }
+            
             .vol-title { font-size: 3rem; }
+            
             .actions-group { flex-direction: column; width: 100%; }
             .btn-bold { width: 100%; text-align: center; }
             
-            /* Stack socials on mobile slightly closer */
             .socials-section { gap: 20px; padding: 40px 20px; }
+
+            /* 5. Mobile Keyframes */
+            @keyframes mobileSlideUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes mobileFadeUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
         }
     </style>
 </head>
@@ -553,15 +612,18 @@
         const cursor = document.getElementById('cursor');
         const interactive = document.querySelectorAll('a, button, .vol-cover');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Only run mouse logic on desktop
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        interactive.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            interactive.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
         // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
