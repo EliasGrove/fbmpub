@@ -7,6 +7,15 @@
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3ETBBLP43M');
+    </script>
+
     <style>
         /* --- RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -231,22 +240,20 @@
         @media (max-width: 900px) {
             
             /* --- 1. REMOVE CUSTOM CURSOR ON MOBILE --- */
-            * { cursor: auto !important; } /* Restore native touch/mouse pointer */
+            * { cursor: auto !important; } 
             .cursor { display: none !important; }
 
-            /* --- FIXED: MOBILE VIDEO --- */
-            #bg-video {
-                opacity: 0.5;      
-                z-index: -1;       
-            }
+            /* --- 2. DISABLE VIDEO & FIX BACKGROUND --- */
+            #bg-video { display: none !important; }
             
             .content-scroll { 
                 width: 100%; 
                 margin-left: 0; 
                 padding: 120px 30px 100px 30px; 
                 border-left: none; 
-                /* Transparent background allows full video to show through */
-                background: rgba(10,10,10,0.7); 
+                /* Subtle radial spotlight instead of video */
+                background: radial-gradient(circle at top right, #1a1a1a, #000); 
+                min-height: 100dvh;
             }
             
             .socials-fixed-bottom { 
@@ -254,7 +261,7 @@
                 width: 100%; 
                 padding: 30px; 
                 justify-content: center; 
-                background: linear-gradient(to top, #0a0a0a 80%, transparent);
+                background: linear-gradient(to top, #000 80%, transparent);
             }
             
             /* -- BURGER MENU LOGIC -- */
@@ -263,6 +270,7 @@
                 justify-content: space-between; 
                 padding: 15px 20px; 
                 align-items: center;
+                background: #000;
             }
 
             .burger { display: flex; }
@@ -273,7 +281,7 @@
                 top: 100%; 
                 left: 0;
                 width: 100%;
-                background: rgba(10, 10, 10, 0.98);
+                background: #000;
                 flex-direction: column;
                 align-items: center;
                 gap: 25px;
@@ -285,6 +293,31 @@
             .nav-menu.active { display: flex; }
             .nav-link { font-size: 1.2rem; }
             .super-title { font-size: 3.5rem; }
+
+            /* --- 3. HIGH VALUE ANIMATIONS (Mobile Only) --- */
+            /* This creates a staggered cascade effect for text reading */
+            
+            .sub-title, .super-title, .prose p {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: mobileFadeUp 0.8s ease-out forwards;
+            }
+
+            .sub-title { animation-delay: 0.1s; }
+            .super-title { animation-delay: 0.2s; }
+            
+            .prose p:nth-of-type(1) { animation-delay: 0.3s; }
+            .prose p:nth-of-type(2) { animation-delay: 0.4s; }
+            .prose p:nth-of-type(3) { animation-delay: 0.5s; }
+            .prose p:nth-of-type(4) { animation-delay: 0.6s; }
+            .prose p:nth-of-type(5) { animation-delay: 0.7s; }
+
+            @keyframes mobileFadeUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
         }
     </style>
 </head>
@@ -367,15 +400,18 @@
         // Added .burger to interactive elements
         const allInteractive = document.querySelectorAll('a, button, .brand-word, .burger'); 
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Only run mouse tracking on non-touch devices
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        allInteractive.forEach(item => {
-            item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            allInteractive.forEach(item => {
+                item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
         // --- BURGER MENU LOGIC ---
         const burger = document.querySelector('.burger');
