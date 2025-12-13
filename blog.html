@@ -7,12 +7,20 @@
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3ETBBLP43M');
+    </script>
+
     <style>
         /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
-            /* Updated to match Volumes Page */
             --c-bg: #0a0a0a; 
             --c-text: #e0e0e0;
             --c-red: #E60026;
@@ -60,7 +68,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 40px;
-            /* Updated to match Volumes darker theme */
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -107,8 +114,8 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            position: relative; /* Necessary for absolute video */
-            overflow: hidden;   /* Clips the video */
+            position: relative; 
+            overflow: hidden; 
         }
         
         .huge-title {
@@ -119,7 +126,7 @@
             text-transform: uppercase;
             margin: 0;
             position: relative;
-            z-index: 2; /* Ensures text is above video */
+            z-index: 2; 
         }
 
         .header-meta {
@@ -130,19 +137,16 @@
             letter-spacing: 1px;
             max-width: 300px;
             position: relative;
-            z-index: 2; /* Ensures text is above video */
+            z-index: 2; 
         }
         .header-meta strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1.2rem; }
 
         /* --- HEADER VIDEO --- */
         .header-bg-video {
             position: absolute;
-            /* Moved center point down */
             top: 60%;
             right: 0; 
-            /* Pushed further right and kept centered vertically relative to new top */
             transform: translateY(-50%) translateX(30%); 
-            /* Slightly increased height */
             height: 90%; 
             width: auto;
             z-index: 1; 
@@ -171,29 +175,14 @@
         }
 
         /* --- NEW COLOR MAPPING (HOVER) --- */
-        
-        /* 1. Title turns RED */
-        .blog-row:hover .entry-title {
-            color: var(--c-red);
-        }
-
-        /* 2. Description turns YELLOW */
-        .blog-row:hover .entry-excerpt {
-            color: var(--c-yellow);
-            opacity: 1;
-        }
-
-        /* 3. Button (Tag) turns BLUE (Solid background) */
+        .blog-row:hover .entry-title { color: var(--c-red); }
+        .blog-row:hover .entry-excerpt { color: var(--c-yellow); opacity: 1; }
         .blog-row:hover .meta-pill {
             background-color: var(--c-blue);
             border-color: var(--c-blue);
-            color: #fff; /* White text on Blue background */
+            color: #fff; 
         }
-        
-        /* Date just turns white for clarity */
-        .blog-row:hover .entry-date {
-            color: #fff;
-        }
+        .blog-row:hover .entry-date { color: #fff; }
 
         /* Center Column */
         .entry-content {
@@ -300,12 +289,14 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE QUERIES --- */
         @media (max-width: 900px) {
-            /* Fix cursor */
+            
+            /* 1. Reset Cursor */
             * { cursor: auto !important; }
             .cursor { display: none !important; }
 
+            /* 2. Menu Logic */
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -323,27 +314,65 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* Layout Shift */
-            .header-section { flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px; }
-            .huge-title { font-size: 15vw; }
-            .header-meta { text-align: left; }
-            
-            /* Mobile Video Adjustments */
-            .header-bg-video {
-                height: 50%;
-                top: auto;
-                bottom: 0;
-                transform: translateX(30%);
-                opacity: 0.5;
+            /* 3. Header & Video Removal */
+            .header-bg-video { display: none !important; }
+
+            .header-section { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                padding: 120px 20px 40px 20px; 
+                gap: 20px;
+                /* Subtle radial spotlight to replace video */
+                background: radial-gradient(circle at top right, #1a1a1a, #000);
+            }
+
+            .huge-title { 
+                font-size: 15vw; 
+                opacity: 0;
+                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
+            }
+            .header-meta { 
+                text-align: left; 
+                opacity: 0;
+                animation: mobileSlideUp 0.8s ease-out forwards 0.3s;
             }
             
-            .blog-row { grid-template-columns: 1fr; gap: 20px; padding: 40px 20px; }
+            /* 4. Blog Feed Animation */
+            .blog-row { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+                padding: 40px 20px; 
+                
+                /* Animation Start State */
+                opacity: 0;
+                transform: translateY(30px);
+                animation: mobileFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            }
+            
+            /* Staggered Delay for the feed effect */
+            .blog-row:nth-child(1) { animation-delay: 0.4s; }
+            .blog-row:nth-child(2) { animation-delay: 0.6s; }
+            .blog-row:nth-child(3) { animation-delay: 0.8s; }
+            .blog-row:nth-child(4) { animation-delay: 1.0s; }
+            .blog-row:nth-child(5) { animation-delay: 1.2s; }
+
             .entry-title { font-size: 3rem; }
             .entry-excerpt { font-size: 1.1rem; }
-            .entry-meta { justify-content: flex-start; }
+            
+            /* Pill moves to bottom on mobile or top? Let's keep consistent flow */
+            .entry-meta { justify-content: flex-start; order: -1; margin-bottom: 10px; }
 
-            /* Stack socials slightly closer on mobile */
             .socials-section { gap: 20px; padding: 40px 20px; }
+
+            /* 5. Mobile Keyframes */
+            @keyframes mobileSlideUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes mobileFadeUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
         }
     </style>
 </head>
