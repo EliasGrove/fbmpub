@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faun by Moonlight</title>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ETBBLP43M"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -10,10 +14,6 @@
       gtag('config', 'G-3ETBBLP43M');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faun by Moonlight</title>
-    
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
     <style>
@@ -142,7 +142,7 @@
             letter-spacing: 2px;
             z-index: 10;
             mix-blend-mode: normal; 
-            transition: letter-spacing 0.8s ease, color 0.5s ease, transform 0.2s ease;
+            transition: letter-spacing 0.8s ease, color 0.5s ease;
             white-space: nowrap;
         }
 
@@ -230,68 +230,78 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- RESPONSIVE FIXES (MOBILE BOLD REFRESH) --- */
+        /* --- RESPONSIVE FIXES (MOBILE ONLY) --- */
         @media (max-width: 768px) {
             
-            /* 1. Standard Touch Cursors */
-            * { cursor: auto; }
-            .cursor { display: none; }
-
-            /* 2. Bold Image Positioning */
+            /* 1. FRESH IMAGE LAYOUT */
             .watcher-img { 
-                left: -15%; 
+                left: 50%;
+                transform: translateX(-50%); /* Center strictly */
                 height: 55vh; 
-                top: 15%; 
-                opacity: 0.85; /* Slightly higher for punchiness */
-                mix-blend-mode: normal; 
+                top: 18%; 
+                opacity: 0.7; 
+                mix-blend-mode: normal; /* Safe for mobile */
                 filter: grayscale(100%) contrast(1.1);
             }
 
-            /* 3. Massive, Snappy Logo */
+            /* 2. BOLD LOGO */
             .fbm-logo { 
-                font-size: 20vw; /* BOLDER */
-                bottom: 6dvh; 
-                left: 5vw; 
-                gap: 2px; /* Tighter tracking looks more modern */
+                font-size: 22vw; /* Larger, bolder impact */
+                bottom: 10dvh; 
+                left: 20px; 
+                gap: 5px; 
             }
 
-            /* 4. The Enter Button - High Value Feel */
+            /* 3. SNAPPY ENTER BUTTON */
             .enter-trigger { 
-                left: 50%; 
-                top: 50%; 
-                font-size: 3.5rem; /* Larger on mobile for confidence */
                 width: 100%;
                 text-align: center;
-                /* Remove hover effect on mobile, replace with active state */
-                animation: none; 
-                letter-spacing: 4px;
+                font-size: 12vw; /* Massive, magazine header style */
+                letter-spacing: 1px;
+                /* Mobile-only heartbeat animation since we have no hover */
+                animation: mobilePulse 3s ease-in-out infinite;
             }
             
-            /* Snappy tap effect */
-            .enter-trigger:active {
-                transform: translate(-50%, -50%) scale(0.95);
-                color: var(--color-f); /* Flashes red on tap */
+            @keyframes mobilePulse {
+                0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+                50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+                100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
             }
 
-            /* 5. Clean Footer */
-            .vertical-text { display: none; }
-            
+            /* 4. CLEAN FOOTER */
             .footer-group { 
-                right: 5vw; 
-                bottom: 6dvh; 
-                align-items: flex-end; 
-                gap: 20px; /* More breathing room */
+                right: 0; left: 0; /* Full width container */
+                bottom: 3dvh; 
+                padding: 0 20px;
+                display: flex;
+                flex-direction: row; /* Keep them in a row for space efficiency */
+                justify-content: space-between;
+                align-items: flex-end;
             }
-            
+
+            .cta-small {
+                align-self: auto;
+                font-size: 0.75rem;
+            }
+
+            /* Featured block aligned right */
+            .footer-group > div:last-child {
+                text-align: right;
+            }
+
             .featured-links { 
-                flex-direction: column; 
-                gap: 8px; /* Easier to tap individual links */
+                gap: 10px; 
             }
             
             .featured-link {
-                font-size: 0.8rem; /* Slightly larger for readability */
-                padding: 2px 0; /* Increase touch target */
+                font-size: 0.65rem; /* Slightly smaller to fit all in one line */
             }
+
+            .vertical-text { display: none; }
+            
+            /* Disable custom cursor logic */
+            .cursor { display: none; }
+            * { cursor: auto; }
         }
     </style>
 </head>
