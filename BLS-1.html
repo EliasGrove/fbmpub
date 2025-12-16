@@ -184,11 +184,17 @@
 
         .hero-title {
             font-family: var(--f-head);
-            font-size: 7rem;
-            line-height: 0.9;
+            /* Reduced font size slightly so the 3 new paragraphs fit well */
+            font-size: 4rem; 
+            line-height: 1.2;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+        }
+        
+        /* Spacing for the new title paragraphs */
+        .hero-title p {
+            margin-bottom: 0.5rem;
         }
 
         /* --- CONTENT GRID --- */
@@ -208,8 +214,9 @@
             position: sticky;
             top: 150px; 
         }
+        /* TLDR removed from HTML, classes kept for safety but unused */
         .tldr-box {
-            border-left: 2px solid var(--c-yellow); /* Yellow Accent */
+            border-left: 2px solid var(--c-yellow); 
             padding-left: 20px;
         }
         .tldr-label {
@@ -239,8 +246,9 @@
             line-height: 1.1;
         }
 
-        /* Typography Styling */
+        /* Typography Styling - Classes kept for reference but elements removed or simplified */
         .lead-paragraph {
+            /* Styles formerly used for lead paragraph */
             font-size: 1.6rem;
             line-height: 1.5;
             color: #fff;
@@ -253,7 +261,7 @@
             font-family: var(--f-head);
             font-size: 2.5rem;
             line-height: 1.2;
-            color: var(--c-yellow); /* Yellow Quote */
+            color: var(--c-yellow); 
             margin: 3rem 0;
             padding: 0 40px;
             text-align: center;
@@ -351,14 +359,14 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .statement-hero { padding: 120px 20px 40px 20px; }
-            .hero-title { font-size: 3.5rem; }
+            .hero-title { font-size: 2.5rem; }
             
             .content-grid { grid-template-columns: 1fr; }
             .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
             .sticky-wrapper { position: relative; top: 0; }
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
-            .lead-paragraph { font-size: 1.3rem; }
+            /* Adjusted for removed classes */
             .pull-quote { font-size: 1.8rem; padding: 30px 0; }
             .visual-placeholder { height: 200px; }
             
@@ -445,35 +453,32 @@
 
     <header class="statement-hero">
         <div class="hero-meta">
-            <span>Finance</span>
-            <span>Dec 16, 2025</span>
+            <span>PART 1: When Life Gives You Lemons</span>
         </div>
-        <h1 class="hero-title">The Lemonade<br>Empire</h1>
+        <div class="hero-title">
+            <p>Name: Best Lemonade Inc.</p>
+            <p>Exchange: NYSE (New York Stock Exchange)</p>
+            <p>Ticker: BLS</p>
+        </div>
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                <div class="tldr-box">
-                    <span class="tldr-label">TL;DR</span>
-                    <p class="tldr-text">We stopped selling lemonade ages ago. Now we sell the <em>idea</em> of lemonade to the stock market. It pays better.</p>
                 </div>
-            </div>
         </aside>
 
         <article class="article-body">
             
-            <p class="lead-paragraph">You are the proud CEO of <strong>Best Lemonade Stand Inc. (BLS)</strong>, a single lemonade stand in an affluent residential neighborhood. It is so successful that, believe it or not, it’s listed on the New York Stock Exchange.</p>
+            <p>You are the proud CEO of <strong>Best Lemonade Stand Inc. (BLS)</strong>, a single lemonade stand in an affluent residential neighborhood. It is so successful that, believe it or not, it’s listed on the New York Stock Exchange.</p>
 
             <p>BLS has just closed a phenomenal deal with <strong>Total & Complete Lemons Inc. (TCL)</strong>, a lemon supplier which, go figure, is also listed on the NYSE. For five years, TCL will supply BLS with $50 million worth of lemons. Nearly 50% of all lemons picked by TCL will now go directly to BLS.</p>
 
             <p>But there was something else exchanged in this deal besides lemons. You see, in this contract, TCL isn’t just obligated to supply BLS with lots and lots of lemons—it must also grant BLS a block of company shares. Your army of lawyers, accountants, analysts, and consultants call it a “Strategic Equity Investment,” but your PR and Marketing Team prefers “Strategic Alliance.”</p>
             
-            <div class="highlight-box">
-                <p><strong>The Market Reaction:</strong></p>
-                <p>Over on Wall Street, investors hear the news and think, “Oh wow! Oh God, oh Man! The largest lemonade stand in the world is buying lemons for five years from this supplier! BLS must be selling a lot to need so many lemons! And TCL is set for five years! Both their stocks are sure to rise!”</p>
-            </div>
+            <p><strong>The Market Reaction:</strong></p>
+            <p>Over on Wall Street, investors hear the news and think, “Oh wow! Oh God, oh Man! The largest lemonade stand in the world is buying lemons for five years from this supplier! BLS must be selling a lot to need so many lemons! And TCL is set for five years! Both their stocks are sure to rise!”</p>
 
             <p>So investors buy, and both companies’ stocks soar. And just like that, BLS recoups (in market value) double the $50 million invested for the next five years. Meanwhile, TCL can double, triple, or even quadruple its market valuation, which, in turn, adds even more to BLS’s balance sheet thanks to the TCL stock it owns.</p>
 
@@ -489,10 +494,6 @@
             
             <p>In return, I’m sure they can develop their robots to only be able to squeeze <em>your</em> lemons. They’re smart, they’ll find a way… but they’re not your lemons, they are the lemons you bought from TCL, in which, coincidentally, you ALSO own a portion.</p>
 
-            <div class="pull-quote">
-                "You are making money out of literally thin air."
-            </div>
-
             <h2>The Super Juice Play</h2>
 
             <p>One more, one more. Suppose <strong>EZPZ</strong>, a small lab, invents a “super lemon juice” that’s always fresh, but they can’t afford to build a factory to process it. You step in and offer to build the factory and sell the product for them.</p>
@@ -500,10 +501,6 @@
             <p>This will be a “premium lemonade”, for which you can charge extra. In exchange, you take half of all profits, and own 20% of EZPZ (the boring name is equity stake).</p>
             
             <p>When super lemon becomes an instant hit for its freshness and deliciousness, the lab’s value triples, your stake goes up accordingly, you sell a ton of premium lemonade, you sell even more standard lemonade because it’s comparatively cheaper, which means that your stocks increase in value, which means you buy more lemons, yada, yada.</p>
-
-            <div class="visual-placeholder">
-                 [Image: Circular Flow of Capital / Lemonade]
-            </div>
 
             <p>Now, I know this all sounds super exciting, because it is! But most importantly, you are making millions without selling a single lemonade! You could just leave it be, right? You could say, “Well ain’t this swell, I’m making all of this money from investments, selling lemonade is extra.” But you are missing a big, big part of the opportunity that has just landed in your lap.</p>
 
