@@ -30,6 +30,7 @@
             --c-border: #333;
             --f-head: "Playfair Display", serif;
             --f-body: "Inter", sans-serif;
+            --ticker-height: 35px;
         }
 
         body { 
@@ -39,6 +40,7 @@
             overflow-x: hidden; 
             min-height: 100vh;
             display: flex; flex-direction: column;
+            padding-top: var(--ticker-height); /* Push body down for ticker */
         }
 
         /* Yellow Selection for this page */
@@ -47,9 +49,56 @@
             color: #000;
         }
 
+        /* --- TOP STOCK TICKER --- */
+        .stock-ticker-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--ticker-height);
+            background: #000;
+            z-index: 10002; /* Above Navbar */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-family: "Courier New", monospace; /* Stock ticker font */
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #000; /* Black text on colored blocks */
+            height: var(--ticker-height);
+            text-transform: uppercase;
+        }
+
+        /* Color Cycling for Blocks */
+        .ticker-item:nth-child(3n+1) { background-color: var(--c-red); }
+        .ticker-item:nth-child(3n+2) { background-color: var(--c-blue); color: #fff; }
+        .ticker-item:nth-child(3n+3) { background-color: var(--c-yellow); }
+
+        .ticker-value { margin-left: 10px; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
         /* --- SCROLL PROGRESS BAR (Yellow) --- */
         .progress-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
+            position: fixed; 
+            top: var(--ticker-height); /* Below ticker */
+            left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
         }
         .progress-bar {
             height: 4px; background: var(--c-yellow); width: 0%;
@@ -78,7 +127,8 @@
         /* --- NAVIGATION --- */
         .navbar {
             position: fixed;
-            top: 0; left: 0; width: 100%;
+            top: var(--ticker-height); /* Below Ticker */
+            left: 0; width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -157,7 +207,7 @@
         }
         .sticky-wrapper {
             position: sticky;
-            top: 120px;
+            top: 150px; /* Adjusted for ticker + nav */
         }
         .tldr-box {
             border-left: 2px solid var(--c-yellow); /* Yellow Accent */
@@ -318,6 +368,42 @@
     </style>
 </head>
 <body>
+    <div class="stock-ticker-wrapper">
+        <div class="ticker-track">
+            <div class="ticker-item">BLS <span class="ticker-value">▲ +200%</span></div>
+            <div class="ticker-item">TCL <span class="ticker-value">▲ +150%</span></div>
+            <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
+            <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
+            <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
+            <div class="ticker-item">CUPS <span class="ticker-value">▲ +45%</span></div>
+            <div class="ticker-item">SQZY <span class="ticker-value">▲ +120%</span></div>
+            <div class="ticker-item">ETHC <span class="ticker-value">▼ -100%</span></div>
+            <div class="ticker-item">CASH <span class="ticker-value">▲ +500%</span></div>
+            <div class="ticker-item">FAIR <span class="ticker-value">▼ -60%</span></div>
+            <div class="ticker-item">LMN <span class="ticker-value">▲ +10%</span></div>
+            <div class="ticker-item">RISK <span class="ticker-value">▼ 0%</span></div>
+            <div class="ticker-item">HYPE <span class="ticker-value">▲ +1000%</span></div>
+            <div class="ticker-item">REAL <span class="ticker-value">▼ -50%</span></div>
+            <div class="ticker-item">WLL <span class="ticker-value">▲ +5%</span></div>
+
+            <div class="ticker-item">BLS <span class="ticker-value">▲ +200%</span></div>
+            <div class="ticker-item">TCL <span class="ticker-value">▲ +150%</span></div>
+            <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
+            <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
+            <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
+            <div class="ticker-item">CUPS <span class="ticker-value">▲ +45%</span></div>
+            <div class="ticker-item">SQZY <span class="ticker-value">▲ +120%</span></div>
+            <div class="ticker-item">ETHC <span class="ticker-value">▼ -100%</span></div>
+            <div class="ticker-item">CASH <span class="ticker-value">▲ +500%</span></div>
+            <div class="ticker-item">FAIR <span class="ticker-value">▼ -60%</span></div>
+            <div class="ticker-item">LMN <span class="ticker-value">▲ +10%</span></div>
+            <div class="ticker-item">RISK <span class="ticker-value">▼ 0%</span></div>
+            <div class="ticker-item">HYPE <span class="ticker-value">▲ +1000%</span></div>
+            <div class="ticker-item">REAL <span class="ticker-value">▼ -50%</span></div>
+            <div class="ticker-item">WLL <span class="ticker-value">▲ +5%</span></div>
+        </div>
+    </div>
+
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
