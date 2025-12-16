@@ -29,6 +29,7 @@
             --c-border: #333;
             --f-head: "alfarn", serif;
             --f-body: "neue-kabel", sans-serif;
+            --ticker-height: 40px;
         }
 
         body { 
@@ -38,6 +39,48 @@
             overflow-x: hidden; 
             min-height: 100vh;
             display: flex; flex-direction: column;
+        }
+
+        /* --- STOCK TICKER (SCROLLS AWAY) --- */
+        .stock-ticker-wrapper {
+            position: relative; 
+            width: 100%;
+            height: var(--ticker-height);
+            background: #000;
+            border-bottom: 1px solid #222;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            z-index: 10005;
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: scroll 35s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Ticker Colors */
+        .ticker-item:nth-child(3n+1) { color: var(--c-red); }
+        .ticker-item:nth-child(3n+2) { color: var(--c-blue); }
+        .ticker-item:nth-child(3n+3) { color: var(--c-yellow); }
+
+        .ticker-value { margin-left: 10px; opacity: 0.8; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
 
         /* --- CUSTOM CURSOR --- */
@@ -61,8 +104,9 @@
         }
 
         /* --- NAVIGATION --- */
+        /* Changed to sticky to support the ticker layout */
         .navbar {
-            position: fixed;
+            position: sticky;
             top: 0; left: 0; width: 100%;
             display: flex;
             justify-content: space-between;
@@ -109,7 +153,7 @@
 
         /* --- HEADER SECTION --- */
         .header-section {
-            padding: 180px 40px 60px 40px;
+            padding: 140px 40px 60px 40px; /* Reduced top padding slightly since nav is sticky */
             border-bottom: 1px solid var(--c-border);
             display: flex;
             justify-content: space-between;
@@ -377,6 +421,43 @@
     </style>
 </head>
 <body>
+    
+    <div class="stock-ticker-wrapper">
+        <div class="ticker-track">
+            <div class="ticker-item">BLS <span class="ticker-value">▲ +200%</span></div>
+            <div class="ticker-item">TCL <span class="ticker-value">▲ +150%</span></div>
+            <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
+            <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
+            <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
+            <div class="ticker-item">CUPS <span class="ticker-value">▲ +45%</span></div>
+            <div class="ticker-item">SQZY <span class="ticker-value">▲ +120%</span></div>
+            <div class="ticker-item">ETHC <span class="ticker-value">▼ -100%</span></div>
+            <div class="ticker-item">CASH <span class="ticker-value">▲ +500%</span></div>
+            <div class="ticker-item">FAIR <span class="ticker-value">▼ -60%</span></div>
+            <div class="ticker-item">LMN <span class="ticker-value">▲ +10%</span></div>
+            <div class="ticker-item">RISK <span class="ticker-value">▼ 0%</span></div>
+            <div class="ticker-item">HYPE <span class="ticker-value">▲ +1000%</span></div>
+            <div class="ticker-item">REAL <span class="ticker-value">▼ -50%</span></div>
+            <div class="ticker-item">WLL <span class="ticker-value">▲ +5%</span></div>
+
+            <div class="ticker-item">BLS <span class="ticker-value">▲ +200%</span></div>
+            <div class="ticker-item">TCL <span class="ticker-value">▲ +150%</span></div>
+            <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
+            <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
+            <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
+            <div class="ticker-item">CUPS <span class="ticker-value">▲ +45%</span></div>
+            <div class="ticker-item">SQZY <span class="ticker-value">▲ +120%</span></div>
+            <div class="ticker-item">ETHC <span class="ticker-value">▼ -100%</span></div>
+            <div class="ticker-item">CASH <span class="ticker-value">▲ +500%</span></div>
+            <div class="ticker-item">FAIR <span class="ticker-value">▼ -60%</span></div>
+            <div class="ticker-item">LMN <span class="ticker-value">▲ +10%</span></div>
+            <div class="ticker-item">RISK <span class="ticker-value">▼ 0%</span></div>
+            <div class="ticker-item">HYPE <span class="ticker-value">▲ +1000%</span></div>
+            <div class="ticker-item">REAL <span class="ticker-value">▼ -50%</span></div>
+            <div class="ticker-item">WLL <span class="ticker-value">▲ +5%</span></div>
+        </div>
+    </div>
+
     <div class="cursor" id="cursor"></div>
 
     <nav class="navbar">
@@ -423,6 +504,19 @@
     </header>
 
     <main class="blog-index">
+
+        <a href="BLS-1.html" class="blog-row">
+            <div class="entry-content">
+                <span class="entry-date">Dec 16, 2025</span>
+                <h2 class="entry-title">The Lemonade Empire</h2>
+                <p class="entry-excerpt">
+                    You are the proud CEO of Best Lemonade Stand Inc. It is so successful that, believe it or not, it’s listed on the New York Stock Exchange. A story about finance, lemons, and thin air.
+                </p>
+            </div>
+            <div class="entry-meta">
+                <span class="meta-pill">Finance</span>
+            </div>
+        </a>
 
         <a href="blog-algorithmic-nuance" class="blog-row">
             <div class="entry-content">
