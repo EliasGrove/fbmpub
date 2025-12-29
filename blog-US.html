@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REC - Faun by Moonlight</title>
+    <title>US - Faun by Moonlight</title>
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     
@@ -40,13 +40,12 @@
             display: flex; flex-direction: column;
         }
 
-        /* Blue Selection for this page */
         ::selection {
             background: var(--c-blue);
             color: #fff;
         }
 
-        /* --- SCROLL PROGRESS BAR (Blue) --- */
+        /* --- SCROLL PROGRESS BAR --- */
         .progress-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10001; background: transparent;
         }
@@ -70,7 +69,7 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid var(--c-blue); /* Blue Border */
+            border: 1px solid var(--c-blue);
             mix-blend-mode: normal;
         }
 
@@ -144,11 +143,10 @@
         /* --- CONTENT GRID --- */
         .content-grid {
             display: grid;
-            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            grid-template-columns: 350px 1fr;
             min-height: 100vh;
         }
 
-        /* Left Sticky Sidebar */
         .meta-sidebar {
             border-right: 1px solid var(--c-border);
             padding: 60px 40px;
@@ -159,16 +157,6 @@
             top: 120px;
         }
 
-        .sidebar-info {
-            font-family: var(--f-body);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        /* Right Content Area */
         .article-body {
             padding: 80px 120px; 
             font-family: var(--f-body);
@@ -183,17 +171,9 @@
             font-family: var(--f-head); 
             font-size: 2.5rem; 
             color: #fff; 
-            margin: 3rem 0 1.5rem 0; 
+            margin: 3.5rem 0 1.5rem 0; 
             text-transform: uppercase;
         }
-        
-        .article-body a {
-            color: var(--c-blue);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-        .article-body a:hover { border-color: var(--c-blue); }
 
         /* --- SOCIALS SECTION --- */
         .socials-section {
@@ -238,15 +218,10 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
-            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-            .burger.open span:nth-child(2) { opacity: 0; }
-            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
             .mobile-menu-overlay {
                 display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
                 background: #000; flex-direction: column; justify-content: center; align-items: center;
@@ -254,19 +229,11 @@
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
-            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
-            .mobile-menu-overlay .nav-link:hover { color: #fff; }
-
             .statement-hero { padding: 120px 20px 40px 20px; }
-            .hero-title { font-size: 4rem; }
-            
+            .hero-title { font-size: 5rem; }
             .content-grid { grid-template-columns: 1fr; }
             .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
-            
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
-            
-            .socials-section { gap: 20px; padding: 40px 20px; }
         }
     </style>
 </head>
@@ -300,32 +267,19 @@
         </button>
     </nav>
 
-    <div class="mobile-menu-overlay" id="navMenu">
-        <a href="who-we-are" class="nav-link">Who We Are</a>
-        <a href="volumes" class="nav-link">Volumes</a>
-        <a href="blog" class="nav-link active">Blog</a>
-        <a href="submissions" class="nav-link">Submit</a>
-        <a href="faq" class="nav-link">FAQ</a>
-        <a href="support-us" class="nav-link">Support Us</a>
-        <a href="contact" class="nav-link">Contact</a>
-    </div>
-
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Film / Culture</span>
             <span>Dec 29, 2025</span>
         </div>
-        <h1 class="hero-title">REC</h1>
+        <h1 class="hero-title">US</h1>
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                <div class="sidebar-info">
-                    <p>Words by Faun</p>
-                    <p>Reading Time: 8 min</p>
-                </div>
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
             </div>
         </aside>
 
@@ -333,15 +287,15 @@
             
             <h2>quid pro quo</h2>
             <p>When I was 13, I had a pretty sweet deal going with the video-rental lady. I’d download songs for her MP3 player—procured from various shady sites in the public library computer—and in return, she’d look the other way when I rented horror movies. It was a wordless quid pro quo. I’d ask, “What are we listening to today?” and she’d hand me a list, and the device, without so much as a smile. I’d return with her music, and take home a stack of movies to watch in secret on my laptop.</p>
-            
+
             <p>That shop, which closed in 2009, provided much of my early cinematic exposure. I’d love to blame streaming for its demise, but the place was destined for failure. Popular titles were always out, leaving us with bizarre B-movies like <em>Deadly Swarm</em>, a 2003 film about mutated flies that kill you from under your skin. It holds a proud 12% on Rotten Tomatoes.</p>
 
-            <p>Yet, among those gems, I found a cover that captivated me: a woman’s face half-obscured by darkness, with a simple, three-letter title: <strong>Rec</strong>. The back showed a creepy kid, a screaming woman covered in blood, and various promises of it being the scariest movie of its kind. I was, of course, sold.</p>
+            <p>Yet, among those gems, I found a cover that captivated me: a woman’s face half-obscured by darkness, with a simple, three-letter title: <em>Rec</em>. The back showed a creepy kid, a screaming woman covered in blood, and various promises of it being the scariest movie of its kind. I was, of course, sold.</p>
 
             <p>Released in 2008, this Spanish flick follows Angela Vidal, a reporter filming a light-hearted segment at a Barcelona fire station for a show called <em>Mientras Usted Duerme</em> (While You Sleep). What begins as a piece for bored insomniacs quickly turns into a nightmare, when she follows the crew into a residential building for a standard welfare check, only to find the building suddenly quarantined as a virus transforms the residents into violent creatures.</p>
 
             <p>It was unlike anything I had ever seen. While found-footage was already an established genre, pioneered by <em>The Blair Witch Project</em>, and revitalized by <em>Paranormal Activity</em>, <em>Rec</em> felt uniquely grounded. Most of the actors weren't professionals. The firefighters, excluding the leads, were real-life first responders. The fire chief’s awkward delivery and nervous glances were genuine because he was the actual chief of the station. Most scares were unscripted; Angela jumps and screams as a door is kicked down, because she didn’t know it would happen. When a body falls through the middle of the stairwell, sending the entire cast into a frenzy, only the police officer leading them away knew it would happen. When Angela screams and curses, unable to find a set of keys that would lead her to safety, her swears and screams of frustration were genuine because she wasn’t told where they were.</p>
-            
+
             <p>That authenticity is irreplaceable.</p>
 
             <p>For Iberian viewers, the horror hit differently. Most horror movies are American, set in American homes with American customs. While fear is universal, those scares often feel foreign, which provides a layer of subconscious solace; a distance to hide away in. With <em>Rec</em>, I had no such safety. The building was nearly identical to the one I was raised in. The fire station looked and sounded exactly like the one my grandfather, a volunteer firefighter, used to take me to, down to the specific bang of the old truck doors, the noise of the canteen, or the locker rooms.</p>
@@ -350,13 +304,13 @@
 
             <p>When it was revealed that the central figure, Niña Medeiros, was Portuguese (complete with the same creepy Fátima saint imagery we’re exposed to as children by our grandmothers) the deal was sealed. For weeks afterward, I ran all the way up to my fourth-floor apartment in terror of those stairs.</p>
 
-            <p>So, imagine my surprise when, years later, I discovered the American remake, <strong>Quarantine</strong>. Released less than a year later, it was a nearly shot-for-shot copy, right down to the lead’s name which the wonderful Jennifer Carpenter decided to pronounce as “AN-juh-luh VIH-dah.”</p>
+            <p>So, imagine my surprise when, years later, I discovered the American remake, <em>Quarantine</em>. Released less than a year later, it was a nearly shot-for-shot copy, right down to the lead’s name which the wonderful Jennifer Carpenter decided to pronounce as “AN-juh-luh VIH-dah.”</p>
 
             <p>By every metric, the movie was atrocious. While <em>Rec</em> opted for the same camera regular news reporters use, <em>Quarantine</em> opted for a high-end cinematic camera, stripping away the grit and personality. The "building" looked like a cheap plaster set (because that’s what it was), and the natural awkwardness of the original cast was replaced by sexually inappropriate firefighters and residents who seemed merely… bothered by the apocalypse. It traded chaotic tension for stiff action and dizzying digital zooms.</p>
 
             <p>Over the years, <em>Rec</em> went on to develop a cult following, while <em>Quarantine</em> is generally seen as a cheap cash-grab and managed a 45% on Rotten Tomatoes, compared to 90% for its Spanish counterpart.</p>
 
-            <p>But this is far from unique; in fact the term “American remake” is rarely used as a term of endearment for a movie—<strong>Oldboy</strong>, the 2003 South Korean cult classic, boasts a 93% on the site, whereas its American remake has 37%. The original <strong>Wicker Man</strong> has 82%, the US version has 17%. The French movie <strong>The Intouchables</strong> has 73%, whereas its American remake squeezed 43%. <strong>Goodnight Mommy</strong>, the 2014 original German version, has 85%; the American remake in 2022, 37%.</p>
+            <p>But this is far from unique; in fact the term “American remake” is rarely used as a term of endearment for a movie—<em>Oldboy</em>, the 2003 South Korean cult classic, boasts a 93% on the site, whereas its American remake has 37%. The original <em>Wicker Man</em> has 82%, the US version has 17%. The French movie <em>The Intouchables</em> has 73%, whereas its American remake squeezed 43%. <em>Goodnight Mommy</em>, the 2014 original German version, has 85%; the American remake in 2022, 37%.</p>
 
             <p>But why?</p>
 
@@ -382,7 +336,7 @@
             <p>Successful remakes understand this perfectly. <em>The Departed</em> took the Hong Kong-based <em>Infernal Affairs</em> and made it deeply, specifically Bostonian. The American reboot of <em>The Ring</em> provided unique insight into American repatriation and the hereditary consequences of ancestral actions. <em>The Girl with the Dragon Tattoo</em> proves that a complete cultural transmutation isn't always mandatory, as the story remained in Sweden, portraying Swedish characters. The most important aspect, clearly, is respecting a story's relationship to its own culture. That is what makes or breaks an adaptation.</p>
 
             <h2>Greek-Ish</h2>
-            <p>When I found out Hollywood was adapting the Greek epic <strong>The Odyssey</strong>, with Christopher Nolan directing, I shuddered. Nolan is a blockbuster director defined by high action and high concepts. In his pursuit of intricate stories and fast-paced spectacle, he’s never been shy about discarding logic; his inconsistencies are usually obscured by the next explosion, upgrading from cars (no-cgi) to hospitals(no-cgi), to aerial battles (no-cgi), and finally to a full nuclear detonation (no-cgi). His scripts often fall apart under the lightest scrutiny, but Nolan maintains such a consistent pace that the films support their own weight just long enough to avoid collapsing before the credits roll. Interestingly, Nolan’s claim to fame was <em>Insomnia</em>, an adaptation of the Norwegian movie of the same name, but the inkling of hope that gave me, was quickly snuffed out.</p>
+            <p>When I found out Hollywood was adapting the Greek epic <em>The Odyssey</em>, with Christopher Nolan directing, I shuddered. Nolan is a blockbuster director defined by high action and high concepts. In his pursuit of intricate stories and fast-paced spectacle, he’s never been shy about discarding logic; his inconsistencies are usually obscured by the next explosion, upgrading from cars (no-cgi) to hospitals(no-cgi), to aerial battles (no-cgi), and finally to a full nuclear detonation (no-cgi). His scripts often fall apart under the lightest scrutiny, but Nolan maintains such a consistent pace that the films support their own weight just long enough to avoid collapsing before the credits roll. Interestingly, Nolan’s claim to fame was <em>Insomnia</em>, an adaptation of the Norwegian movie of the same name, but the inkling of hope that gave me was quickly snuffed out.</p>
 
             <p>In the age of the internet, the word “Epic” has drifted far from its Greek origin. "Epic fail" or "epic battle" conveys a sense of a grand, high-stakes event. However, in Greek, <em>epikos</em> simply means “story.” <em>The Odyssey</em> is epic by virtue of being a narrative, just like the <em>Dune</em> books or the <em>Twilight</em> series. If you read that ancient poem expecting a non-stop tale of battling gods and monsters, you will be sorely disappointed. Those elements are secondary to godly bickering, Odysseus pleading for help to get home, courtly etiquette, bureaucracy, rude guests and negotiations.</p>
 
@@ -408,33 +362,18 @@
 
             <p>We shall see what the final product looks like as more trailers, and the movie itself, arrive. For now, I am not hopeful.</p>
 
-            <p><a href="submissions">Submit Your Work &rarr;</a></p>
-
-            <p>Thank you, and remember: Be Unpublishable.</p>
-
         </article>
-
     </main>
 
     <div class="socials-section">
-        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-
         <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
         </a>
-
-        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-
         <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-        </a>
-
-        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
-             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         </a>
     </div>
 
@@ -443,7 +382,6 @@
     </footer>
 
     <script>
-        // --- SCROLL PROGRESS LOGIC ---
         window.onscroll = function() {myFunction()};
         function myFunction() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -452,34 +390,22 @@
             document.getElementById("myBar").style.width = scrolled + "%";
         }
 
-        // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .article-body p, .article-body h2');
-
+        const interactive = document.querySelectorAll('a, button, .article-body h2, .article-body p');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-
         interactive.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
         const navMenu = document.getElementById('navMenu');
-
         burgerBtn.addEventListener('click', () => {
             burgerBtn.classList.toggle('open');
             navMenu.classList.toggle('active');
-        });
-
-        navMenu.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                burgerBtn.classList.remove('open');
-                navMenu.classList.remove('active');
-            });
         });
     </script>
 </body>
