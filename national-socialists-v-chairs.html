@@ -140,7 +140,7 @@
 
         .hero-title {
             font-family: var(--f-head);
-            /* UPDATED: Reduced font size significantly */
+            /* SMALLER FONT SIZE */
             font-size: clamp(3rem, 7vw, 5.5rem);
             line-height: 0.9;
             color: #fff;
@@ -153,7 +153,7 @@
         /* --- HEADER IMAGE --- */
         .header-bg-img {
             position: absolute;
-            /* UPDATED: Lowered the image by changing top from 50% to 75% */
+            /* LOWERED POSITION (75%) */
             top: 75%;
             right: 0;
             transform: translateY(-50%) translateX(10%);
@@ -207,7 +207,7 @@
 
         .article-body p { margin-bottom: 2rem; }
 
-        /* --- ARTICLE SPECIFIC TYPOGRAPHY --- */
+        /* --- SIMPLE TEXT STYLES (NO BOXES) --- */
         .article-body h3 {
             font-family: var(--f-head);
             font-size: 2.2rem;
@@ -226,43 +226,10 @@
             padding-bottom: 3rem;
         }
 
-        .pull-quote {
-            font-family: var(--f-head);
-            font-size: 2.5rem;
-            line-height: 1.2;
-            color: var(--c-red);
-            margin: 3rem 0;
-            text-align: center;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-            padding: 40px;
-        }
-
-        .highlight-box {
-            background: #111;
-            padding: 40px;
-            border: 1px solid #333;
-            margin: 2rem 0;
-        }
-        .highlight-box p { margin-bottom: 10px; color: #fff; font-size: 1.1rem;}
+        /* Removed highlight-box, pull-quote, visual-placeholder styles */
         
         strong { color: #fff; font-weight: 700; }
         em { color: #fff; font-style: italic; }
-
-        .visual-placeholder {
-            width: 100%;
-            height: 400px;
-            background: #111;
-            border: 1px dashed #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-family: var(--f-body);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 40px 0;
-        }
 
         /* --- SOCIALS SECTION --- */
         .socials-section {
@@ -327,7 +294,6 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .statement-hero { padding: 120px 20px 40px 20px; min-height: auto; }
-            /* UPDATED: Reduced responsive font size */
             .hero-title { font-size: 3rem; }
             .header-bg-img { display: none; }
             
@@ -337,8 +303,6 @@
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             .lead-paragraph { font-size: 1.3rem; }
-            .pull-quote { font-size: 1.8rem; padding: 30px 0; }
-            .visual-placeholder { height: 200px; }
             
             .socials-section { gap: 20px; padding: 40px 20px; }
         }
@@ -411,9 +375,7 @@
 
             <p>In effect, because it wasn't out of fear. For seventy-odd years, historians have portrayed extremist political movements as nervous, prickly little things that ban, shoot, and imprison "otherness" out of fear—a fundamental misunderstanding of both the resilience of these movements and the conditions absolute power needs to operate.</p>
 
-            <div class="pull-quote">
-                "The erasure of the 'other' in totalitarian regimes is foundational, not reactionary."
-            </div>
+            <p>"The erasure of the 'other' in totalitarian regimes is foundational, not reactionary."</p>
 
             <p>The "other" can only exist as an external force to be defeated, never tolerated, for tolerance risks contaminating the coherence a totalitarian regime demands. To Mr. Cook's question "Why did the Nazis feel so threatened by the Bauhaus?" then we can answer: they weren't. They were doing housekeeping.</p>
 
@@ -425,15 +387,11 @@
 
             <p>The Nazi Party banned Bauhaus for its perceived association with "cosmopolitan" and "Marxist" ideals. But why did the Nazis perceive such an apolitical design school in this way? I believe the answer lies not in what it represented, <em>Ding an sich</em>, but in what its design philosophy symbolized.</p>
 
-            <div class="visual-placeholder">
-                [Image: Faun by Moonlight by Léon Spilliaert]
-            </div>
+            <p>[Image: Faun by Moonlight by Léon Spilliaert]</p>
 
             <p>When you look at the piece <em>Faun by Moonlight</em> by Léon Spilliaert, do you not feel a certain sense of dread? The devil, guiding a flock of goats? Yet, that isn't the devil. It's a faun—a benign Roman mythical creature. Two thousand years of Judeo-Christian tradition transformed a benign Roman mythical creature into the embodiment of evil itself.</p>
 
-            <div class="pull-quote">
-                "To the victors come the spoils. And in the war for cultural dominion, no more precious spoil exists than truth itself."
-            </div>
+            <p>"To the victors come the spoils. And in the war for cultural dominion, no more precious spoil exists than truth itself."</p>
 
             <h3>The Power of the Vernacular</h3>
 
@@ -441,11 +399,9 @@
 
             <p>Yet, could the same be said for their cutlery? Their chairs, cups, beds? Can the unique cultural and environmental characteristics that shaped these everyday objects be transplanted without consequence?</p>
 
-            <div class="highlight-box">
-                <p><strong>Northern Europe:</strong> Chairs developed high backs and enclosed sides (winged designs) to block drafts and retain heat.</p>
-                <p><strong>Italy:</strong> Renaissance chairs had low backs and caned seats to allow air circulation in the warmer climate.</p>
-                <p><strong>Spain:</strong> Chairs featured leather slung between posts rather than padded seats, cooling the seater.</p>
-            </div>
+            <p>Northern Europe: Chairs developed high backs and enclosed sides (winged designs) to block drafts and retain heat.</p>
+            <p>Italy: Renaissance chairs had low backs and caned seats to allow air circulation in the warmer climate.</p>
+            <p>Spain: Chairs featured leather slung between posts rather than padded seats, cooling the seater.</p>
 
             <p>Hitler's obsession with symbols allowed him to recognize Bauhaus's symbolic power. A German household filled with Bauhaus furniture would look identical to a French one, to an American one. The mass-produced, minimalist chair carried no national character.</p>
 
@@ -463,11 +419,9 @@
 
             <p>The Holocaust has become perhaps the most powerful symbol of the twentieth century. But distinctive features do not create a hierarchy of suffering. A murdered Congolese child under Leopold's terror is not less dead than a murdered Jewish child in Auschwitz.</p>
 
-            <div class="highlight-box">
-                <p><strong>Since Oct 7th, 2023:</strong> Over 40,000 Palestinians have been killed in Gaza (conservative estimate).</p>
-                <p><strong>Since 1967:</strong> Over 700,000 Israeli settlers have moved into the West Bank and East Jerusalem illegally.</p>
-                <p><strong>Gaza Blockade:</strong> Over 2 million people confined to 140 square miles since 2007.</p>
-            </div>
+            <p>Since Oct 7th, 2023: Over 40,000 Palestinians have been killed in Gaza (conservative estimate).</p>
+            <p>Since 1967: Over 700,000 Israeli settlers have moved into the West Bank and East Jerusalem illegally.</p>
+            <p>Gaza Blockade: Over 2 million people confined to 140 square miles since 2007.</p>
 
             <p>Since 1967, we have seen the same pattern of illegal occupation, murder, engineered starvation, ghettoization, and segregation, and yet to even mention this continues to be incredibly controversial.</p>
 
