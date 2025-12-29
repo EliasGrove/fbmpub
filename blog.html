@@ -37,7 +37,7 @@
             color: var(--c-text);
             overflow-x: hidden; 
             min-height: 100vh;
-            display: flex; flex-diUStion: column;
+            display: flex; flex-direction: column;
         }
 
         /* --- STOCK TICKER --- */
@@ -50,7 +50,7 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            z-index: 10005; /* Cursor must be higher than this */
+            z-index: 10005; 
         }
 
         .ticker-track {
@@ -81,7 +81,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* --- CUSTOM CURSOR FIXED --- */
+        /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -89,7 +89,7 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 10010; /* Higher than ticker and navbar */
+            z-index: 10010; 
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
             mix-blend-mode: exclusion;
@@ -170,17 +170,6 @@
             z-index: 2; 
         }
 
-        .header-meta {
-            text-align: right;
-            font-family: var(--f-body);
-            color: #888;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            max-width: 300px;
-            position: relative;
-            z-index: 2; 
-        }
-
         .header-bg-video {
             position: absolute;
             top: 60%;
@@ -195,7 +184,7 @@
         }
 
         /* --- THE BLOG INDEX --- */
-        .blog-index { display: flex; flex-diUStion: column; width: 100%; }
+        .blog-index { display: flex; flex-direction: column; width: 100%; }
 
         .blog-row {
             position: relative;
@@ -214,7 +203,7 @@
         .blog-row:hover .meta-pill { background-color: var(--c-blue); border-color: var(--c-blue); color: #fff; }
         .blog-row:hover .entry-date { color: #fff; }
 
-        .entry-content { display: flex; flex-diUStion: column; gap: 15px; }
+        .entry-content { display: flex; flex-direction: column; gap: 15px; }
 
         .entry-date {
             font-family: var(--f-body);
@@ -296,7 +285,7 @@
             * { cursor: auto !important; }
             .cursor { display: none !important; }
             .desktop-menu { display: none; }
-            .burger { display: flex; flex-diUStion: column; gap: 6px; background: none; border: none; z-index: 1002; }
+            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
             .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .burger.open span:nth-child(2) { opacity: 0; }
@@ -304,14 +293,14 @@
 
             .mobile-menu-overlay {
                 display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background: #000; flex-diUStion: column; justify-content: center; align-items: center;
+                background: #000; flex-direction: column; justify-content: center; align-items: center;
                 gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
             .header-bg-video { display: none !important; }
             .header-section { 
-                flex-diUStion: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
+                flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
             .huge-title { font-size: 15vw; }
@@ -384,7 +373,6 @@
 
     <header class="header-section">
         <h1 class="huge-title">The<br>Feed</h1>
-        <div class="header-meta"></div>
         <video class="header-bg-video" autoplay muted loop playsinline>
             <source src="images/blog-video.mp4" type="video/mp4">
         </video>
@@ -397,7 +385,7 @@
                 <span class="entry-date">Dec 29, 2025</span>
                 <h2 class="entry-title">US</h2>
                 <p class="entry-excerpt">
-                    The problem with American remakes
+                    The problem with American Remakes
                 </p>
             </div>
             <div class="entry-meta">
@@ -458,7 +446,7 @@
     <footer>© 2025 Faun by Moonlight. All rights reserved.</footer>
 
     <script>
-        // --- CURSOR LOGIC FIXED ---
+        // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
         const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item');
 
