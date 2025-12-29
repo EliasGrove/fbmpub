@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Algorithmic Death of Nuance - Faun by Moonlight</title>
+    <title>The Death of Nuance - Faun by Moonlight</title>
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
     
@@ -123,28 +123,51 @@
 
         /* --- HERO SECTION --- */
         .statement-hero {
-            padding: 180px 40px 80px 40px;
+            padding: 220px 40px 140px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 60vh;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
             font-family: var(--f-head);
-            font-size: 8rem;
+            font-size: clamp(6rem, 15vw, 12rem);
             line-height: 0.8;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
+            pointer-events: none;
+        }
+
+        /* --- HEADER IMAGE (110% Scaling) --- */
+        .header-bg-img {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) translateX(10%);
+            height: 110%; 
+            width: auto;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.7;
         }
 
         /* --- CONTENT GRID --- */
         .content-grid {
             display: grid;
-            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            grid-template-columns: 350px 1fr;
             min-height: 100vh;
         }
 
@@ -157,6 +180,18 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-blue); 
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Right Content Area */
@@ -233,12 +268,13 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            .statement-hero { padding: 120px 20px 40px 20px; }
+            .statement-hero { padding: 120px 20px 40px 20px; min-height: auto; }
             .hero-title { font-size: 4rem; }
+            .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center; }
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             
@@ -289,16 +325,18 @@
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Tech / Culture</span>
-            <span>Nov 22, 2025</span>
         </div>
-        <h1 class="hero-title">The Algorithmic<br>Death of Nuance</h1>
+        <h1 class="hero-title">The Death<br>of Nuance</h1>
+        <img src="blog-images/blog-nuance.png" alt="Death of Nuance illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                </div>
+                <div class="sidebar-date">Nov 22, 2025</div>
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
+            </div>
         </aside>
 
         <article class="article-body">
@@ -331,7 +369,7 @@
 
             <p>If you are one of these voices, we ask that you please head over to our website and send us your work. We would love to hear from you.</p>
 
-            <p><a href="submissions">Submit Your Work &rarr;</a></p>
+            <p><a href="submissions" style="color: var(--c-blue); text-decoration: none; font-weight: bold;">Submit Your Work &rarr;</a></p>
 
             <p>Thank you, and remember: Be Unpublishable.</p>
 
