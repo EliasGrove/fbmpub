@@ -124,11 +124,14 @@
         .statement-hero {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
@@ -138,6 +141,21 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
+        }
+
+        /* --- HEADER IMAGE --- */
+        .header-bg-img {
+            position: absolute;
+            top: 60%;
+            right: 0;
+            transform: translateY(-50%) translateX(15%);
+            height: 80%; 
+            width: auto;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.8;
         }
 
         /* --- CONTENT GRID --- */
@@ -147,6 +165,7 @@
             min-height: 100vh;
         }
 
+        /* Left Sticky Sidebar */
         .meta-sidebar {
             border-right: 1px solid var(--c-border);
             padding: 60px 40px;
@@ -155,8 +174,21 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-blue); /* Match accent color */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Right Content Area */
         .article-body {
             padding: 80px 120px; 
             font-family: var(--f-body);
@@ -231,8 +263,10 @@
             .mobile-menu-overlay.active { transform: translateY(0); }
             .statement-hero { padding: 120px 20px 40px 20px; }
             .hero-title { font-size: 5rem; }
+            .header-bg-img { display: none; }
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center;}
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
         }
     </style>
@@ -267,18 +301,29 @@
         </button>
     </nav>
 
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link active">Blog</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
+
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Film / Culture</span>
-            <span>Dec 29, 2025</span>
         </div>
         <h1 class="hero-title">US</h1>
+        <img src="blog-images/blog-us.png" alt="US Film illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
+                <div class="sidebar-date">Dec 29, 2025</div>
                 <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
             </div>
         </aside>
@@ -377,9 +422,7 @@
         </a>
     </div>
 
-    <footer>
-        © 2025 Faun by Moonlight. All rights reserved.
-    </footer>
+    <footer>© 2025 Faun by Moonlight. All rights reserved.</footer>
 
     <script>
         window.onscroll = function() {myFunction()};
