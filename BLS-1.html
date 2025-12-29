@@ -26,7 +26,6 @@
             --c-blue: #0047BB;
             --c-yellow: #FFD100;
             --c-border: #333;
-            /* RESTORED: Original Font Families */
             --f-head: "alfarn", serif;
             --f-body: "neue-kabel", sans-serif;
             --f-display: "dunbar-tall", sans-serif;
@@ -49,12 +48,11 @@
         }
 
         /* --- STOCK TICKER (SCROLLS AWAY) --- */
-        /* Position relative ensures it sits at the top but moves up when user scrolls */
         .stock-ticker-wrapper {
             position: relative; 
             width: 100%;
             height: var(--ticker-height);
-            background: #000; /* Pitch Black Background */
+            background: #000;
             border-bottom: 1px solid #222;
             overflow: hidden;
             display: flex;
@@ -72,14 +70,13 @@
             display: flex;
             align-items: center;
             padding: 0 30px;
-            font-family: var(--f-body); /* Using your body font for cleaner look */
+            font-family: var(--f-body);
             font-weight: 700;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Ticker Colors: Text Only */
         .ticker-item:nth-child(3n+1) { color: var(--c-red); }
         .ticker-item:nth-child(3n+2) { color: var(--c-blue); }
         .ticker-item:nth-child(3n+3) { color: var(--c-yellow); }
@@ -95,7 +92,7 @@
         .progress-container {
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 4px; 
-            z-index: 10006; /* Topmost */
+            z-index: 10006;
             background: transparent;
         }
         .progress-bar {
@@ -123,7 +120,6 @@
         }
 
         /* --- NAVIGATION (STICKY) --- */
-        /* Sticks to top when ticker scrolls out of view */
         .navbar {
             position: sticky; 
             top: 0;
@@ -173,32 +169,51 @@
 
         /* --- HERO SECTION --- */
         .statement-hero {
-            padding: 180px 40px 80px 40px;
+            padding: 220px 40px 140px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 60vh;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
             font-family: var(--f-head);
-            font-size: 4rem; 
-            line-height: 1.2;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
+            pointer-events: none;
         }
-        
-        .hero-title p {
-            margin-bottom: 0.5rem;
+
+        /* --- HEADER IMAGE (LARGER & BETTER FRAMED) --- */
+        .header-bg-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 150%; 
+            width: auto;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.7;
         }
 
         /* --- CONTENT GRID --- */
         .content-grid {
             display: grid;
-            grid-template-columns: 350px 1fr; /* Sticky Sidebar + Content */
+            grid-template-columns: 350px 1fr;
             min-height: 100vh;
         }
 
@@ -210,7 +225,19 @@
         }
         .sticky-wrapper {
             position: sticky;
-            top: 150px; 
+            top: 150px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-yellow); 
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Right Content Area */
@@ -225,8 +252,6 @@
 
         .article-body p { margin-bottom: 1.5rem; }
         
-        /* Removed H2 styling block */
-
         /* --- SOCIALS SECTION --- */
         .socials-section {
             padding: 60px 20px;
@@ -289,12 +314,13 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            .statement-hero { padding: 120px 20px 40px 20px; }
+            .statement-hero { padding: 120px 20px 40px 20px; min-height: auto; }
             .hero-title { font-size: 2.5rem; }
+            .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center; }
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             
@@ -383,17 +409,16 @@
         <div class="hero-meta">
             <span>PART 1: When Life Gives You Lemons</span>
         </div>
-        <div class="hero-title">
-            <p>Name: Best Lemonade Inc.</p>
-            <p>Exchange: NYSE (New York Stock Exchange)</p>
-            <p>Ticker: BLS</p>
-        </div>
+        <h1 class="hero-title">The Lemonade<br>Empire</h1>
+        <img src="blog-images/blog-lemonade.png" alt="The Lemonade Empire illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
+                <div class="sidebar-date">Dec 29, 2025</div>
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
             </div>
         </aside>
 
