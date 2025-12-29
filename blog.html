@@ -12,7 +12,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-3ETBBLP43M');
     </script>
 
@@ -41,7 +40,7 @@
             display: flex; flex-direction: column;
         }
 
-        /* --- STOCK TICKER (SCROLLS AWAY) --- */
+        /* --- STOCK TICKER --- */
         .stock-ticker-wrapper {
             position: relative; 
             width: 100%;
@@ -51,7 +50,7 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            z-index: 10005;
+            z-index: 10005; /* Cursor must be higher than this */
         }
 
         .ticker-track {
@@ -71,7 +70,6 @@
             letter-spacing: 1px;
         }
 
-        /* Ticker Colors */
         .ticker-item:nth-child(3n+1) { color: var(--c-red); }
         .ticker-item:nth-child(3n+2) { color: var(--c-blue); }
         .ticker-item:nth-child(3n+3) { color: var(--c-yellow); }
@@ -83,7 +81,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* --- CUSTOM CURSOR --- */
+        /* --- CUSTOM CURSOR FIXED --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -91,7 +89,7 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 10010; /* Higher than ticker and navbar */
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
             mix-blend-mode: exclusion;
@@ -113,7 +111,7 @@
             padding: 25px 40px;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 10000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -183,7 +181,6 @@
             z-index: 2; 
         }
 
-        /* --- HEADER VIDEO --- */
         .header-bg-video {
             position: absolute;
             top: 60%;
@@ -197,12 +194,8 @@
             opacity: 0.9;
         }
 
-        /* --- THE BLOG INDEX (LIST) --- */
-        .blog-index {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+        /* --- THE BLOG INDEX --- */
+        .blog-index { display: flex; flex-direction: column; width: 100%; }
 
         .blog-row {
             position: relative;
@@ -216,22 +209,12 @@
             align-items: flex-start;
         }
 
-        /* --- NEW COLOR MAPPING (HOVER) --- */
         .blog-row:hover .entry-title { color: var(--c-red); }
         .blog-row:hover .entry-excerpt { color: var(--c-yellow); opacity: 1; }
-        .blog-row:hover .meta-pill {
-            background-color: var(--c-blue);
-            border-color: var(--c-blue);
-            color: #fff; 
-        }
+        .blog-row:hover .meta-pill { background-color: var(--c-blue); border-color: var(--c-blue); color: #fff; }
         .blog-row:hover .entry-date { color: #fff; }
 
-        /* Center Column */
-        .entry-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .entry-content { display: flex; flex-direction: column; gap: 15px; }
 
         .entry-date {
             font-family: var(--f-body);
@@ -264,12 +247,7 @@
             margin-top: 10px;
         }
         
-        /* Right Column */
-        .entry-meta {
-            display: flex;
-            justify-content: flex-end;
-            padding-top: 5px;
-        }
+        .entry-meta { display: flex; justify-content: flex-end; padding-top: 5px; }
 
         .meta-pill {
             padding: 10px 20px;
@@ -283,7 +261,7 @@
             white-space: nowrap;
         }
 
-        /* --- SOCIALS SECTION --- */
+        /* --- SOCIALS --- */
         .socials-section {
             padding: 60px 20px;
             display: flex;
@@ -295,47 +273,28 @@
         }
 
         .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-            cursor: none;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: transform 0.3s ease;
         }
 
         .social-link svg {
-            width: 24px;
-            height: 24px;
-            fill: rgba(255, 255, 255, 0.4);
+            width: 24px; height: 24px; fill: rgba(255, 255, 255, 0.4);
             transition: fill 0.3s ease, filter 0.3s ease;
         }
 
-        .social-link:hover svg {
-            fill: #ffffff;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
-        }
+        .social-link:hover svg { fill: #ffffff; filter: drop-shadow(0 0 8px rgba(255,255,255,0.6)); }
+        .social-link:hover { transform: translateY(-2px); }
 
-        .social-link:hover {
-            transform: translateY(-2px);
-        }
-
-        /* --- FOOTER --- */
         footer {
-            margin-top: auto;
-            padding: 40px;
-            text-align: center;
-            color: #555;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-top: auto; padding: 40px; text-align: center; color: #555;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE MOBILE QUERIES --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             * { cursor: auto !important; }
             .cursor { display: none !important; }
-
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -350,57 +309,14 @@
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
-            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
-            .mobile-menu-overlay .nav-link:hover { color: #fff; }
-
             .header-bg-video { display: none !important; }
-
             .header-section { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                padding: 120px 20px 40px 20px; 
-                gap: 20px;
+                flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
-
-            .huge-title { 
-                font-size: 15vw; 
-                opacity: 0;
-                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
-            }
-            .header-meta { 
-                text-align: left; 
-                opacity: 0;
-                animation: mobileSlideUp 0.8s ease-out forwards 0.3s;
-            }
-            
-            .blog-row { 
-                grid-template-columns: 1fr; 
-                gap: 20px; 
-                padding: 40px 20px; 
-                opacity: 0;
-                transform: translateY(30px);
-                animation: mobileFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            }
-            
-            .blog-row:nth-child(1) { animation-delay: 0.4s; }
-            .blog-row:nth-child(2) { animation-delay: 0.6s; }
-            .blog-row:nth-child(3) { animation-delay: 0.8s; }
-
+            .huge-title { font-size: 15vw; }
+            .blog-row { grid-template-columns: 1fr; padding: 40px 20px; }
             .entry-title { font-size: 3rem; }
-            .entry-excerpt { font-size: 1.1rem; }
-            .entry-meta { justify-content: flex-start; order: -1; margin-bottom: 10px; }
-
-            .socials-section { gap: 20px; padding: 40px 20px; }
-
-            @keyframes mobileSlideUp {
-                0% { opacity: 0; transform: translateY(30px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-
-            @keyframes mobileFadeUp {
-                to { opacity: 1; transform: translateY(0); }
-            }
         }
     </style>
 </head>
@@ -428,7 +344,6 @@
             <div class="ticker-item">TCL <span class="ticker-value">▲ +150%</span></div>
             <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
             <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
-            <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
         </div>
     </div>
 
@@ -469,9 +384,7 @@
 
     <header class="header-section">
         <h1 class="huge-title">The<br>Feed</h1>
-        <div class="header-meta">
-        </div>
-        
+        <div class="header-meta"></div>
         <video class="header-bg-video" autoplay muted loop playsinline>
             <source src="images/blog-video.mp4" type="video/mp4">
         </video>
@@ -484,7 +397,7 @@
                 <span class="entry-date">Dec 29, 2025</span>
                 <h2 class="entry-title">REC</h2>
                 <p class="entry-excerpt">
-                    From shady library downloads to the halls of a Barcelona apartment block: why authentic horror requires cultural context, and why the American remake failed to capture the nightmare.
+                    From shady library downloads to the halls of a Barcelona apartment block: why authentic horror requires cultural context.
                 </p>
             </div>
             <div class="entry-meta">
@@ -496,103 +409,76 @@
             <div class="entry-content">
                 <span class="entry-date">Dec 16, 2025</span>
                 <h2 class="entry-title">Best Lemonade Stand Inc.</h2>
-                <p class="entry-excerpt">
-                    PART 1: When life gives you lemons
-                </p>
+                <p class="entry-excerpt">PART 1: When life gives you lemons</p>
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Finance</span>
-            </div>
+            <div class="entry-meta"><span class="meta-pill">Finance</span></div>
         </a>
 
         <a href="blog-algorithmic-nuance" class="blog-row">
             <div class="entry-content">
                 <span class="entry-date">Dec 11, 2025</span>
                 <h2 class="entry-title">The Algorithmic Death of Nuance</h2>
-                <p class="entry-excerpt">
-                    Why we left X, context collapse, and why engagement-farming is destroying the ability to have a conversation about art.
-                </p>
+                <p class="entry-excerpt">Why engagement-farming is destroying the ability to have a conversation about art.</p>
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Tech/Culture</span>
-            </div>
+            <div class="entry-meta"><span class="meta-pill">Tech/Culture</span></div>
         </a>
 
         <a href="blog-death-of-literature" class="blog-row">
             <div class="entry-content">
                 <span class="entry-date">Dec 08, 2025</span>
                 <h2 class="entry-title">The Death of Literature</h2>
-                <p class="entry-excerpt">
-                    Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever. So why does it feel like something is dying?
-                </p>
+                <p class="entry-excerpt">Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever.</p>
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Opinion</span>
-            </div>
+            <div class="entry-meta"><span class="meta-pill">Opinion</span></div>
         </a>
 
         <a href="blog-ai-statement.html" class="blog-row">
             <div class="entry-content">
                 <span class="entry-date">Dec 01, 2025</span>
                 <h2 class="entry-title">Statement on A.I.</h2>
-                <p class="entry-excerpt">
-                    Generating art and brainstorming with tools are two very different things. A reflection on our relationship with emerging technologies.
-                </p>
+                <p class="entry-excerpt">Generating art and brainstorming with tools are two very different things.</p>
             </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Editorial</span>
-            </div>
-        </a>
-
-        <a href="who-should-die.html" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Nov 28, 2025</span>
-                <h2 class="entry-title">Who Should Die</h2>
-                <p class="entry-excerpt">
-                    An inquiry into the nature of the State, harm, and punishment through the lens of modern accountability.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">Philosophy</span>
-            </div>
+            <div class="entry-meta"><span class="meta-pill">Editorial</span></div>
         </a>
 
     </main>
 
     <div class="socials-section">
-        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-
         <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
         </a>
-
-        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-
         <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
         </a>
-
-        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
-             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
     </div>
 
-    <footer>
-        © 2025 Faun by Moonlight. All rights reserved.
-    </footer>
+    <footer>© 2025 Faun by Moonlight. All rights reserved.</footer>
 
     <script>
-        // --- CURSOR LOGIC ---
+        // --- CURSOR LOGIC FIXED ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .blog-row');
+        const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        interactive.forEach(el =>
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- MENU LOGIC ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
