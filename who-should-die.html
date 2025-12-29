@@ -140,9 +140,9 @@
 
         .hero-title {
             font-family: var(--f-head);
-            /* SMALLER FONT SIZE */
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            line-height: 0.9;
+            /* UPDATED: Increased font size significantly */
+            font-size: clamp(5rem, 12vw, 9rem);
+            line-height: 0.85;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
@@ -153,11 +153,11 @@
         /* --- HEADER IMAGE --- */
         .header-bg-img {
             position: absolute;
-            /* LOWERED POSITION (75%) */
             top: 75%;
             right: 0;
             transform: translateY(-50%) translateX(10%);
-            height: 110%; 
+            /* UPDATED: Increased height to zoom in image within the frame */
+            height: 150%; 
             width: auto;
             z-index: 1;
             pointer-events: none;
@@ -282,7 +282,8 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .statement-hero { padding: 120px 20px 40px 20px; min-height: auto; }
-            .hero-title { font-size: 3rem; }
+            /* UPDATED: Increased responsive font size */
+            .hero-title { font-size: 4.5rem; }
             .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
