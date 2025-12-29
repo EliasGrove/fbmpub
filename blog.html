@@ -104,7 +104,6 @@
         }
 
         /* --- NAVIGATION --- */
-        /* Changed to sticky to support the ticker layout */
         .navbar {
             position: sticky;
             top: 0; left: 0; width: 100%;
@@ -153,7 +152,7 @@
 
         /* --- HEADER SECTION --- */
         .header-section {
-            padding: 140px 40px 60px 40px; /* Reduced top padding slightly since nav is sticky */
+            padding: 140px 40px 60px 40px;
             border-bottom: 1px solid var(--c-border);
             display: flex;
             justify-content: space-between;
@@ -183,7 +182,6 @@
             position: relative;
             z-index: 2; 
         }
-        .header-meta strong { color: #fff; display: block; margin-bottom: 5px; font-size: 1.2rem; }
 
         /* --- HEADER VIDEO --- */
         .header-bg-video {
@@ -335,12 +333,9 @@
 
         /* --- RESPONSIVE MOBILE QUERIES --- */
         @media (max-width: 900px) {
-            
-            /* 1. Reset Cursor */
             * { cursor: auto !important; }
             .cursor { display: none !important; }
 
-            /* 2. Menu Logic */
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -358,7 +353,6 @@
             .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
-            /* 3. Header & Video Removal */
             .header-bg-video { display: none !important; }
 
             .header-section { 
@@ -366,7 +360,6 @@
                 align-items: flex-start; 
                 padding: 120px 20px 40px 20px; 
                 gap: 20px;
-                /* Subtle radial spotlight to replace video */
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
 
@@ -381,34 +374,25 @@
                 animation: mobileSlideUp 0.8s ease-out forwards 0.3s;
             }
             
-            /* 4. Blog Feed Animation */
             .blog-row { 
                 grid-template-columns: 1fr; 
                 gap: 20px; 
                 padding: 40px 20px; 
-                
-                /* Animation Start State */
                 opacity: 0;
                 transform: translateY(30px);
                 animation: mobileFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             }
             
-            /* Staggered Delay for the feed effect */
             .blog-row:nth-child(1) { animation-delay: 0.4s; }
             .blog-row:nth-child(2) { animation-delay: 0.6s; }
             .blog-row:nth-child(3) { animation-delay: 0.8s; }
-            .blog-row:nth-child(4) { animation-delay: 1.0s; }
-            .blog-row:nth-child(5) { animation-delay: 1.2s; }
 
             .entry-title { font-size: 3rem; }
             .entry-excerpt { font-size: 1.1rem; }
-            
-            /* Pill moves to bottom on mobile or top? Let's keep consistent flow */
             .entry-meta { justify-content: flex-start; order: -1; margin-bottom: 10px; }
 
             .socials-section { gap: 20px; padding: 40px 20px; }
 
-            /* 5. Mobile Keyframes */
             @keyframes mobileSlideUp {
                 0% { opacity: 0; transform: translateY(30px); }
                 100% { opacity: 1; transform: translateY(0); }
@@ -445,16 +429,6 @@
             <div class="ticker-item">MOM <span class="ticker-value">▼ -99%</span></div>
             <div class="ticker-item">EZPZ <span class="ticker-value">▲ +300%</span></div>
             <div class="ticker-item">POP <span class="ticker-value">▼ -85%</span></div>
-            <div class="ticker-item">CUPS <span class="ticker-value">▲ +45%</span></div>
-            <div class="ticker-item">SQZY <span class="ticker-value">▲ +120%</span></div>
-            <div class="ticker-item">ETHC <span class="ticker-value">▼ -100%</span></div>
-            <div class="ticker-item">CASH <span class="ticker-value">▲ +500%</span></div>
-            <div class="ticker-item">FAIR <span class="ticker-value">▼ -60%</span></div>
-            <div class="ticker-item">LMN <span class="ticker-value">▲ +10%</span></div>
-            <div class="ticker-item">RISK <span class="ticker-value">▼ 0%</span></div>
-            <div class="ticker-item">HYPE <span class="ticker-value">▲ +1000%</span></div>
-            <div class="ticker-item">REAL <span class="ticker-value">▼ -50%</span></div>
-            <div class="ticker-item">WLL <span class="ticker-value">▲ +5%</span></div>
         </div>
     </div>
 
@@ -505,6 +479,19 @@
 
     <main class="blog-index">
 
+        <a href="blog-US.html" class="blog-row">
+            <div class="entry-content">
+                <span class="entry-date">Dec 29, 2025</span>
+                <h2 class="entry-title">REC</h2>
+                <p class="entry-excerpt">
+                    From shady library downloads to the halls of a Barcelona apartment block: why authentic horror requires cultural context, and why the American remake failed to capture the nightmare.
+                </p>
+            </div>
+            <div class="entry-meta">
+                <span class="meta-pill">Film / Culture</span>
+            </div>
+        </a>
+
         <a href="BLS-1.html" class="blog-row">
             <div class="entry-content">
                 <span class="entry-date">Dec 16, 2025</span>
@@ -549,7 +536,7 @@
                 <span class="entry-date">Dec 01, 2025</span>
                 <h2 class="entry-title">Statement on A.I.</h2>
                 <p class="entry-excerpt">
-                    We not only don’t have an issue with the existence or usage of AI, but we welcome it. However, generating art and brainstorming with tools are two very different things.
+                    Generating art and brainstorming with tools are two very different things. A reflection on our relationship with emerging technologies.
                 </p>
             </div>
             <div class="entry-meta">
@@ -562,24 +549,11 @@
                 <span class="entry-date">Nov 28, 2025</span>
                 <h2 class="entry-title">Who Should Die</h2>
                 <p class="entry-excerpt">
-                    If both Mr. Mangione and Mr. Thompson have caused verifiable harm, why is one in jail and the other wasn't? An inquiry into the nature of the State, harm, and punishment.
+                    An inquiry into the nature of the State, harm, and punishment through the lens of modern accountability.
                 </p>
             </div>
             <div class="entry-meta">
                 <span class="meta-pill">Philosophy</span>
-            </div>
-        </a>
-
-        <a href="national-socialists-v-chairs.html" class="blog-row">
-            <div class="entry-content">
-                <span class="entry-date">Nov 1, 2025</span>
-                <h2 class="entry-title">National Socialists V Chairs</h2>
-                <p class="entry-excerpt">
-                    Why did the Nazis feel so threatened by the Bauhaus? They weren’t. They were doing housekeeping. An essay on symbols and totalitarianism.
-                </p>
-            </div>
-            <div class="entry-meta">
-                <span class="meta-pill">History</span>
             </div>
         </a>
 
@@ -621,26 +595,4 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        interactive.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
-
-        // --- MENU LOGIC ---
-        const burgerBtn = document.getElementById('burgerBtn');
-        const navMenu = document.getElementById('navMenu');
-
-        burgerBtn.addEventListener('click', () => {
-            burgerBtn.classList.toggle('open');
-            navMenu.classList.toggle('active');
-        });
-
-        navMenu.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                burgerBtn.classList.remove('open');
-                navMenu.classList.remove('active');
-            });
-        });
-    </script>
-</body>
-</html>
+        interactive.forEach(el =>
