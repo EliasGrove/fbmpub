@@ -171,12 +171,12 @@
 
         .header-bg-video {
             position: absolute;
-            /* CHANGED: Aligned to bottom edge */
-            bottom: 30;
+            /* CHANGED: Increased 'top' to 115% to lower it significantly past the edge */
+            top: 115%; 
             right: 0; 
-            /* CHANGED: Removed translateY */
-            transform: translateX(30%); 
-            height: 120%; 
+            /* CHANGED: Restored the original translateY to keep the animation smooth */
+            transform: translateY(-60%) translateX(30%); 
+            height: 150%; 
             width: auto;
             z-index: 1; 
             pointer-events: none;
