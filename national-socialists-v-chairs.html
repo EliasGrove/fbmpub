@@ -120,7 +120,7 @@
         .burger { display: none; } 
         .mobile-menu-overlay { display: none; }
 
-        /* --- HERO SECTION (MATCHED TO AI PAGE) --- */
+        /* --- HERO SECTION --- */
         .statement-hero {
             padding: 220px 40px 140px 40px;
             border-bottom: 1px solid var(--c-border);
@@ -140,7 +140,7 @@
 
         .hero-title {
             font-family: var(--f-head);
-            font-size: clamp(4rem, 10vw, 8rem);
+            font-size: clamp(4rem, 10vw, 8rem); /* Adjusted slightly for longer title */
             line-height: 0.8;
             color: #fff;
             text-transform: uppercase;
@@ -149,12 +149,13 @@
             pointer-events: none;
         }
 
+        /* --- HEADER IMAGE --- */
         .header-bg-img {
             position: absolute;
             top: 50%;
             right: 0;
             transform: translateY(-40%) translateX(10%);
-            height: 110%;
+            height: 110%; 
             width: auto;
             z-index: 1;
             pointer-events: none;
@@ -187,22 +188,9 @@
             font-family: var(--f-body);
             font-weight: 700;
             font-size: 0.9rem;
-            color: var(--c-red);
+            color: var(--c-red); 
             text-transform: uppercase;
             letter-spacing: 2px;
-        }
-
-        .tldr-box {
-            border-left: 2px solid var(--c-red);
-            padding-left: 20px;
-            margin-top: 20px;
-        }
-        .tldr-label {
-            display: block; font-family: var(--f-body); font-weight: 700; 
-            text-transform: uppercase; color: var(--c-red); margin-bottom: 10px; letter-spacing: 2px; font-size: 0.8rem;
-        }
-        .tldr-text {
-            font-size: 1.1rem; line-height: 1.4; color: #fff; font-family: var(--f-head);
         }
 
         /* Right Content Area */
@@ -216,8 +204,8 @@
         }
 
         .article-body p { margin-bottom: 2rem; }
-        
-        /* Headers in text */
+
+        /* --- ARTICLE SPECIFIC TYPOGRAPHY (From Original Page) --- */
         .article-body h3 {
             font-family: var(--f-head);
             font-size: 2.2rem;
@@ -227,7 +215,6 @@
             font-weight: 400;
         }
 
-        /* Typography Styling */
         .lead-paragraph {
             font-size: 1.6rem;
             line-height: 1.5;
@@ -342,8 +329,8 @@
             .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center; }
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             .lead-paragraph { font-size: 1.3rem; }
@@ -399,7 +386,7 @@
             <span>History</span>
         </div>
         <h1 class="hero-title">National Socialists<br>V Chairs</h1>
-        <img src="blog-images/chairs-hero.png" alt="Bauhaus illustration" class="header-bg-img">
+        <img src="blog-images/nazisvchairs.png" alt="National Socialists V Chairs illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
@@ -408,11 +395,6 @@
             <div class="sticky-wrapper">
                 <div class="sidebar-date">Dec 05, 2025</div>
                 <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
-                
-                <div class="tldr-box">
-                    <span class="tldr-label">TL;DR</span>
-                    <p class="tldr-text">The erasure of the "other" is foundational, not reactionary. Total systems cannot accommodate internal contradictions.</p>
-                </div>
             </div>
         </aside>
 
