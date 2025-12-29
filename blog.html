@@ -150,8 +150,7 @@
 
         /* --- HEADER SECTION --- */
         .header-section {
-            padding: 140px 40px 60px 40px;
-            border-bottom: 1px solid var(--c-border);
+            padding: 140px 40px 40px 40px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -181,6 +180,46 @@
             pointer-events: none;
             mix-blend-mode: screen; 
             opacity: 0.9;
+        }
+
+        /* --- FILTER DROPDOWN --- */
+        .filter-container {
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--c-border);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .filter-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #555;
+        }
+
+        .category-select {
+            background: transparent;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px 15px;
+            font-family: var(--f-body);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .category-select:hover {
+            border-color: var(--c-red);
+        }
+
+        .category-select option {
+            background-color: #111;
+            color: #fff;
         }
 
         /* --- THE BLOG INDEX --- */
@@ -303,6 +342,7 @@
                 flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
+            .filter-container { padding: 20px; }
             .huge-title { font-size: 15vw; }
             .blog-row { grid-template-columns: 1fr; padding: 40px 20px; }
             .entry-title { font-size: 3rem; }
@@ -378,22 +418,33 @@
         </video>
     </header>
 
-    <main class="blog-index">
+    <div class="filter-container">
+        <span class="filter-label">Filter By:</span>
+        <select class="category-select" id="categoryFilter">
+            <option value="all">All Entries</option>
+            <option value="cinema">Cinema</option>
+            <option value="culture">Culture</option>
+            <option value="finance">Finance</option>
+            <option value="literature">Literature</option>
+            <option value="editorial">Editorial</option>
+            <option value="philosophy">Philosophy</option>
+        </select>
+    </div>
 
-        <a href="blog-US.html" class="blog-row">
+    <main class="blog-index" id="blogIndex">
+
+        <a href="blog-US.html" class="blog-row" data-category="cinema">
             <div class="entry-content">
                 <span class="entry-date">Dec 29, 2025</span>
                 <h2 class="entry-title">US</h2>
-                <p class="entry-excerpt">
-                    The problem with American Remakes
-                </p>
+                <p class="entry-excerpt">The problem with American Remakes</p>
             </div>
             <div class="entry-meta">
-                <span class="meta-pill">Film / Culture</span>
+                <span class="meta-pill">Cinema</span>
             </div>
         </a>
 
-        <a href="BLS-1.html" class="blog-row">
+        <a href="BLS-1.html" class="blog-row" data-category="finance">
             <div class="entry-content">
                 <span class="entry-date">Dec 16, 2025</span>
                 <h2 class="entry-title">Best Lemonade Stand Inc.</h2>
@@ -402,31 +453,49 @@
             <div class="entry-meta"><span class="meta-pill">Finance</span></div>
         </a>
 
-        <a href="blog-algorithmic-nuance" class="blog-row">
+        <a href="blog-algorithmic-nuance" class="blog-row" data-category="culture">
             <div class="entry-content">
                 <span class="entry-date">Dec 11, 2025</span>
                 <h2 class="entry-title">The Death of Nuance</h2>
                 <p class="entry-excerpt">Why engagement-farming is destroying the ability to have a conversation about art.</p>
             </div>
-            <div class="entry-meta"><span class="meta-pill">Tech/Culture</span></div>
+            <div class="entry-meta"><span class="meta-pill">Culture</span></div>
         </a>
 
-        <a href="blog-death-of-literature" class="blog-row">
+        <a href="blog-death-of-literature" class="blog-row" data-category="literature">
             <div class="entry-content">
                 <span class="entry-date">Dec 08, 2025</span>
                 <h2 class="entry-title">The Death of Literature</h2>
                 <p class="entry-excerpt">Critics have declared literature dead for a century. Yet, Gen Z is buying more books than ever.</p>
             </div>
-            <div class="entry-meta"><span class="meta-pill">Opinion</span></div>
+            <div class="entry-meta"><span class="meta-pill">Literature</span></div>
         </a>
 
-        <a href="blog-ai-statement.html" class="blog-row">
+        <a href="national-socialists-v-chairs.html" class="blog-row" data-category="culture">
+            <div class="entry-content">
+                <span class="entry-date">Dec 05, 2025</span>
+                <h2 class="entry-title">National Socialists v Chairs</h2>
+                <p class="entry-excerpt">A breakdown of institutional aesthetics and the war on functionalism.</p>
+            </div>
+            <div class="entry-meta"><span class="meta-pill">Culture</span></div>
+        </a>
+
+        <a href="blog-ai-statement.html" class="blog-row" data-category="editorial">
             <div class="entry-content">
                 <span class="entry-date">Dec 01, 2025</span>
                 <h2 class="entry-title">Statement on A.I.</h2>
                 <p class="entry-excerpt">Generating art and brainstorming with tools are two very different things.</p>
             </div>
             <div class="entry-meta"><span class="meta-pill">Editorial</span></div>
+        </a>
+
+        <a href="who-should-die.html" class="blog-row" data-category="philosophy">
+            <div class="entry-content">
+                <span class="entry-date">Nov 10, 2025</span>
+                <h2 class="entry-title">Who Should Die?</h2>
+                <p class="entry-excerpt">Trolley problems, automated ethics, and the cost of the future.</p>
+            </div>
+            <div class="entry-meta"><span class="meta-pill">Philosophy</span></div>
         </a>
 
     </main>
@@ -448,16 +517,18 @@
     <script>
         // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item');
+        
+        const updateInteractiveElements = () => {
+            const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item, select');
+            interactive.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        };
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-        });
-
-        interactive.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
         // --- MENU LOGIC ---
@@ -467,6 +538,26 @@
             burgerBtn.classList.toggle('open');
             navMenu.classList.toggle('active');
         });
+
+        // --- FILTER LOGIC ---
+        const categoryFilter = document.getElementById('categoryFilter');
+        const blogRows = document.querySelectorAll('.blog-row');
+
+        categoryFilter.addEventListener('change', (e) => {
+            const selectedCategory = e.target.value;
+
+            blogRows.forEach(row => {
+                const rowCategory = row.getAttribute('data-category');
+                if (selectedCategory === 'all' || rowCategory === selectedCategory) {
+                    row.style.display = 'grid';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize hover effects
+        updateInteractiveElements();
     </script>
 </body>
 </html>
