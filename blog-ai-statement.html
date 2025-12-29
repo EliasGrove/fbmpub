@@ -124,15 +124,14 @@
         .statement-hero {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
-            position: relative; /* Added to anchor the image */
-            overflow: hidden;   /* Added to clip image overlap */
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
@@ -142,22 +141,22 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
 
-        /* --- NEW: BACKGROUND IMAGE STYLE --- */
+        /* --- NEW: HEADER IMAGE --- */
         .header-bg-img {
             position: absolute;
             top: 50%;
-            right: 0; 
-            transform: translateY(-50%) translateX(20%); 
-            height: 110%; 
+            right: 0;
+            /* Slightly reduced size and position compared to the index video */
+            transform: translateY(-50%) translateX(15%);
+            height: 85%; 
             width: auto;
-            z-index: 1; 
+            z-index: 1;
             pointer-events: none;
-            mix-blend-mode: screen; 
-            opacity: 0.7;
+            mix-blend-mode: screen;
+            opacity: 0.8;
         }
 
         /* --- CONTENT GRID --- */
@@ -176,6 +175,19 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* NEW: SIDEBAR DATE STYLE */
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Right Content Area */
@@ -235,8 +247,6 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            * { cursor: auto !important; }
-            .cursor { display: none !important; }
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -256,15 +266,17 @@
 
             .statement-hero { padding: 120px 20px 40px 20px; }
             .hero-title { font-size: 4rem; }
+            /* Hide header image on smaller screens */
+            .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
-            
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center;}
+            .sidebar-date { margin-bottom: 0; }
+
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             
             .socials-section { gap: 20px; padding: 40px 20px; }
-            .header-bg-img { display: none; } /* Hide image on mobile for clarity */
         }
     </style>
 </head>
@@ -311,17 +323,17 @@
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Editorial Statement</span>
-            <span>Nov 18, 2025</span>
         </div>
         <h1 class="hero-title">The A.I.<br>Question</h1>
-        <img src="blog-images/blog-ai.png" alt="AI Statement Illustration" class="header-bg-img">
+        <img src="blog-images/blog-ai.png" alt="AI illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                </div>
+                <div class="sidebar-date">Nov 18, 2025</div>
+            </div>
         </aside>
 
         <article class="article-body">
@@ -372,7 +384,7 @@
 
             <p>So then we had a very difficult decision to make. I was immediately opposed to the idea of closing submissions for two reasons: 1. Because we hadn’t even published our first issue and were already closing our doors to new writers, while being stuck with the slop we’d already received; and 2. Because we didn’t ask for this feature, and so it felt like we were potentially damaging ourselves for something that was external to us.</p>
 
-            <p>It’s important to note that we don’t blame Author’s Publish for this situation. We had opened our doors, started paying, and so they did what they do and announced it to their readers. We just weren’t prepared.</p>
+            <p>It’s important to note that we don’t blame Author’s Publish for this situation. We had opened our doors, started paying, and so they did what they do and announced it to their readers. We just werent prepared.</p>
 
             <p>I decided to contact the writers that had already submitted their work, explain the situation, and explain that we literally had no way to review all of the submissions while at the same time preparing for our first issue. And so we offered three options:</p>
 
