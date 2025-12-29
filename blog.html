@@ -128,6 +128,12 @@
         .word-b:hover { color: var(--c-blue); }
         .word-m:hover { color: var(--c-yellow); }
 
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
         .desktop-menu { display: flex; gap: 25px; }
         .nav-link {
             font-family: var(--f-body);
@@ -144,6 +150,45 @@
         .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        /* --- FILTER STYLES (NAV INTEGRATED) --- */
+        .nav-filter-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 1px solid #333;
+            padding-right: 30px;
+        }
+
+        .filter-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            color: #555;
+        }
+
+        .category-select {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: var(--f-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            outline: none;
+            cursor: none;
+            padding-right: 5px;
+        }
+
+        .category-select:hover { color: var(--c-red); }
+
+        .category-select option {
+            background-color: #000;
+            color: #fff;
+        }
 
         .burger { display: none; } 
         .mobile-menu-overlay { display: none; }
@@ -169,7 +214,7 @@
             z-index: 2; 
         }
 
-        /* --- HEADER VIDEO --- */
+        /* --- HEADER VIDEO (USER SETTINGS) --- */
         .header-bg-video {
             position: absolute;
             top: 30%;
@@ -183,48 +228,8 @@
             opacity: 0.9;
         }
 
-        /* --- FILTER DROPDOWN --- */
-        .filter-container {
-            padding: 20px 40px;
-            border-bottom: 1px solid var(--c-border);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .filter-label {
-            font-family: var(--f-body);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: #555;
-        }
-
-        .category-select {
-            background: transparent;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 8px 15px;
-            font-family: var(--f-body);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .category-select:hover {
-            border-color: var(--c-red);
-        }
-
-        .category-select option {
-            background-color: #111;
-            color: #fff;
-        }
-
         /* --- THE BLOG INDEX --- */
-        .blog-index { display: flex; flex-direction: column; width: 100%; }
+        .blog-index { display: flex; flex-direction: column; width: 100%; border-top: 1px solid var(--c-border); }
 
         .blog-row {
             position: relative;
@@ -321,10 +326,17 @@
         }
 
         /* --- RESPONSIVE --- */
+        @media (max-width: 1100px) {
+            .nav-filter-wrap { border-right: none; padding-right: 0; }
+            .nav-right-cluster { gap: 20px; }
+        }
+
         @media (max-width: 900px) {
             * { cursor: auto !important; }
             .cursor { display: none !important; }
             .desktop-menu { display: none; }
+            .nav-filter-wrap { margin-left: auto; margin-right: 20px; border: none; padding: 0; }
+            
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
             .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
@@ -343,7 +355,6 @@
                 flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
             }
-            .filter-container { padding: 20px; }
             .huge-title { font-size: 15vw; }
             .blog-row { grid-template-columns: 1fr; padding: 40px 20px; }
             .entry-title { font-size: 3rem; }
@@ -386,20 +397,35 @@
             <span class="brand-word word-m">MOONLIGHT</span>
         </a>
 
-        <div class="desktop-menu">
-            <a href="who-we-are" class="nav-link">Who We Are</a>
-            <a href="volumes" class="nav-link">Volumes</a>
-            <a href="blog" class="nav-link active">Blog</a>
-            <a href="submissions" class="nav-link">Submit</a>
-            <a href="faq" class="nav-link">FAQ</a>
-            <a href="support-us" class="nav-link">Support Us</a>
-            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
-            <a href="contact" class="nav-link">Contact</a>
-        </div>
+        <div class="nav-right-cluster">
+            <div class="nav-filter-wrap">
+                <span class="filter-label">Sort:</span>
+                <select class="category-select" id="categoryFilter">
+                    <option value="all">All</option>
+                    <option value="cinema">Cinema</option>
+                    <option value="culture">Culture</option>
+                    <option value="finance">Finance</option>
+                    <option value="literature">Literature</option>
+                    <option value="editorial">Editorial</option>
+                    <option value="philosophy">Philosophy</option>
+                </select>
+            </div>
 
-        <button class="burger" id="burgerBtn">
-            <span></span><span></span><span></span>
-        </button>
+            <div class="desktop-menu">
+                <a href="who-we-are" class="nav-link">Who We Are</a>
+                <a href="volumes" class="nav-link">Volumes</a>
+                <a href="blog" class="nav-link active">Blog</a>
+                <a href="submissions" class="nav-link">Submit</a>
+                <a href="faq" class="nav-link">FAQ</a>
+                <a href="support-us" class="nav-link">Support Us</a>
+                <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+                <a href="contact" class="nav-link">Contact</a>
+            </div>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </nav>
 
     <div class="mobile-menu-overlay" id="navMenu">
@@ -418,19 +444,6 @@
             <source src="images/blog-video.mp4" type="video/mp4">
         </video>
     </header>
-
-    <div class="filter-container">
-        <span class="filter-label">Filter By:</span>
-        <select class="category-select" id="categoryFilter">
-            <option value="all">All Entries</option>
-            <option value="cinema">Cinema</option>
-            <option value="culture">Culture</option>
-            <option value="finance">Finance</option>
-            <option value="literature">Literature</option>
-            <option value="editorial">Editorial</option>
-            <option value="philosophy">Philosophy</option>
-        </select>
-    </div>
 
     <main class="blog-index" id="blogIndex">
 
