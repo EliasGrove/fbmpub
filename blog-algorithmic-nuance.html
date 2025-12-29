@@ -125,11 +125,14 @@
         .statement-hero {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
@@ -139,6 +142,21 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
+        }
+
+        /* --- HEADER IMAGE --- */
+        .header-bg-img {
+            position: absolute;
+            top: 60%;
+            right: 0;
+            transform: translateY(-50%) translateX(15%);
+            height: 80%; 
+            width: auto;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.8;
         }
 
         /* --- CONTENT GRID --- */
@@ -157,6 +175,18 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Right Content Area */
@@ -235,10 +265,11 @@
 
             .statement-hero { padding: 120px 20px 40px 20px; }
             .hero-title { font-size: 4rem; }
+            .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center;}
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             
@@ -289,16 +320,17 @@
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Tech / Culture</span>
-            <span>Nov 22, 2025</span>
         </div>
         <h1 class="hero-title">The Algorithmic<br>Death of Nuance</h1>
+        <img src="blog-images/blog-nuance.png" alt="Nuance illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                </div>
+                <div class="sidebar-date">Nov 22, 2025</div>
+            </div>
         </aside>
 
         <article class="article-body">
