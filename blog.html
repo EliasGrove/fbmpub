@@ -155,7 +155,10 @@
             justify-content: space-between;
             align-items: flex-end;
             position: relative; 
-            overflow: hidden; 
+            /* IMPORTANT: Higher Z-Index than content below so video sits ON TOP */
+            z-index: 20; 
+            /* IMPORTANT: Overflow visible allows video to bleed out */
+            overflow: visible; 
         }
         
         .huge-title {
@@ -171,11 +174,11 @@
 
         .header-bg-video {
             position: absolute;
-            /* CHANGED: Increased from 50% to 80% to lower the video by 30% */
-            top: 80%; 
+            /* Lowers the video significantly */
+            top: 70%; 
             right: 0; 
-            transform: translateY(-60%) translateX(30%); 
-            height: 150%; /* Increased height significantly from 90% */
+            transform: translateY(-50%) translateX(30%); 
+            height: 160%; 
             width: auto;
             z-index: 1; 
             pointer-events: none;
@@ -190,6 +193,10 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            position: relative;
+            /* Lower Z-Index so it sits BEHIND the header video */
+            z-index: 10; 
+            background: var(--c-bg);
         }
 
         .filter-label {
@@ -224,7 +231,14 @@
         }
 
         /* --- THE BLOG INDEX --- */
-        .blog-index { display: flex; flex-direction: column; width: 100%; }
+        .blog-index { 
+            display: flex; 
+            flex-direction: column; 
+            width: 100%; 
+            position: relative; 
+            z-index: 10; /* Lower than header */
+            background: var(--c-bg); 
+        }
 
         .blog-row {
             position: relative;
