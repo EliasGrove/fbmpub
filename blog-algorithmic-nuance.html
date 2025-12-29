@@ -141,8 +141,9 @@
 
         .hero-title {
             font-family: var(--f-head);
-            font-size: clamp(6rem, 15vw, 12rem);
-            line-height: 0.8;
+            /* Smaller font size clamp */
+            font-size: clamp(4rem, 10vw, 8rem); 
+            line-height: 0.9;
             color: #fff;
             text-transform: uppercase;
             margin: 0;
@@ -150,13 +151,16 @@
             pointer-events: none;
         }
 
-        /* --- HEADER IMAGE (110% Scaling) --- */
+        /* --- HEADER IMAGE (LARGER, CENTERED/LEFT FRAMING) --- */
         .header-bg-img {
             position: absolute;
             top: 50%;
-            right: 0;
-            transform: translateY(-50%) translateX(10%);
-            height: 110%; 
+            /* Changed anchor from right:0 to left:50% to center horizontally */
+            left: 50%; 
+            /* Adjusted transform to center the larger image */
+            transform: translate(-50%, -50%);
+            /* Substantially larger height */
+            height: 150%; 
             width: auto;
             z-index: 1;
             pointer-events: none;
@@ -269,7 +273,7 @@
             .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
             .statement-hero { padding: 120px 20px 40px 20px; min-height: auto; }
-            .hero-title { font-size: 4rem; }
+            .hero-title { font-size: 3rem; }
             .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
