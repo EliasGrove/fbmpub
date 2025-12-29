@@ -133,7 +133,7 @@
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
             position: relative; z-index: 2;
         }
@@ -149,13 +149,13 @@
             pointer-events: none;
         }
 
-        /* --- HEADER IMAGE (INCREASED SIZE & FRAMING) --- */
+        /* --- HEADER IMAGE (ADJUSTED SIZE) --- */
         .header-bg-img {
             position: absolute;
             top: 50%;
             right: 0;
             transform: translateY(-50%) translateX(10%);
-            height: 120%; 
+            height: 110%; /* Reduced from 120% to be just a bit smaller */
             width: auto;
             z-index: 1;
             pointer-events: none;
@@ -179,6 +179,18 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-date {
+            font-family: var(--f-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--c-red); /* Using red accent for this page */
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Right Content Area */
@@ -260,8 +272,8 @@
             .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
-            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
-            .sticky-wrapper { position: relative; top: 0; }
+            .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 20px; }
+            .sticky-wrapper { position: relative; top: 0; flex-direction: row; justify-content: space-between; align-items: center; }
             
             .article-body { padding: 40px 20px; font-size: 1.1rem; }
             
@@ -312,7 +324,6 @@
     <header class="statement-hero">
         <div class="hero-meta">
             <span>Editorial Statement</span>
-            <span>Nov 18, 2025</span>
         </div>
         <h1 class="hero-title">The A.I.<br>Question</h1>
         <img src="blog-images/blog-ai.png" alt="AI Statement illustration" class="header-bg-img">
@@ -322,7 +333,9 @@
         
         <aside class="meta-sidebar">
             <div class="sticky-wrapper">
-                </div>
+                <div class="sidebar-date">Nov 18, 2025</div>
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 1px;">Words by Faun</p>
+            </div>
         </aside>
 
         <article class="article-body">
