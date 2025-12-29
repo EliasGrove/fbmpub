@@ -125,11 +125,14 @@
         .statement-hero {
             padding: 180px 40px 80px 40px;
             border-bottom: 1px solid var(--c-border);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-meta {
-            display: flex; justify-content: space-between; margin-bottom: 20px;
+            display: flex; justify-content: flex-start; margin-bottom: 20px;
             font-family: var(--f-body); text-transform: uppercase; letter-spacing: 2px; color: #666; font-size: 0.9rem;
+            position: relative; z-index: 2;
         }
 
         .hero-title {
@@ -139,6 +142,21 @@
             color: #fff;
             text-transform: uppercase;
             margin: 0;
+            position: relative; z-index: 2;
+        }
+
+        /* --- STANDARDIZED HEADER IMAGE --- */
+        .header-bg-img {
+            position: absolute;
+            top: 50%; 
+            right: 0;
+            transform: translateY(-50%) translateX(40%);
+            height: 130%; 
+            width: auto;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.8;
         }
 
         /* --- CONTENT GRID --- */
@@ -157,6 +175,9 @@
         .sticky-wrapper {
             position: sticky;
             top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* Right Content Area */
@@ -235,6 +256,7 @@
 
             .statement-hero { padding: 120px 20px 40px 20px; }
             .hero-title { font-size: 4rem; }
+            .header-bg-img { display: none; }
             
             .content-grid { grid-template-columns: 1fr; }
             .meta-sidebar { border-right: none; border-bottom: 1px solid var(--c-border); padding: 40px 20px; }
@@ -292,6 +314,7 @@
             <span>Nov 20, 2025</span>
         </div>
         <h1 class="hero-title">The Death of<br>Literature</h1>
+        <img src="blog-images/blog-literature.png" alt="Literature illustration" class="header-bg-img">
     </header>
 
     <main class="content-grid">
