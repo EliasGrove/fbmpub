@@ -196,12 +196,14 @@
             pointer-events: none;
         }
 
-        /* --- HEADER IMAGE (LARGER & BETTER FRAMED) --- */
+        /* --- HEADER IMAGE (PUSHED RIGHT) --- */
         .header-bg-img {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, 90%);
+            /* Anchor to the right edge */
+            right: 0;
+            /* Center vertically, shift right by 10% to bleed off screen */
+            transform: translateY(-50%) translateX(10%);
             height: 150%; 
             width: auto;
             z-index: 1;
@@ -409,7 +411,7 @@
         <div class="hero-meta">
             <span>PART 1: When Life Gives You Lemons</span>
         </div>
-        <h1 class="hero-title">Best Lemonade Stand<br>Inc.</h1>
+        <h1 class="hero-title">The Lemonade<br>Empire</h1>
         <img src="blog-images/blog-lemonade.png" alt="The Lemonade Empire illustration" class="header-bg-img">
     </header>
 
