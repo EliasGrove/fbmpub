@@ -108,7 +108,7 @@
         .mobile-menu-overlay { display: none; }
 
 
-        /* --- HEADER SECTION (Standardized) --- */
+        /* --- HEADER SECTION --- */
         .header-section {
             padding: 180px 40px 60px 40px;
             border-bottom: 1px solid var(--c-border);
@@ -131,17 +131,7 @@
             z-index: 2;
         }
 
-        .header-meta {
-            text-align: right;
-            font-family: var(--f-body);
-            color: #888;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            max-width: 300px;
-            position: relative; 
-            z-index: 2;
-        }
-        .header-meta strong { display: block; margin-bottom: 5px; font-size: 1.2rem; color: #fff; }
+        /* Header meta removed as requested */
 
         /* --- VIDEO STYLE --- */
         .header-bg-video {
@@ -194,13 +184,11 @@
             line-height: 1;
         }
         
-        /* THEME: WATCH (Blue) */
-        .column-left .cat-title { color: var(--c-blue); }
-        .column-left .review-card:hover .card-verdict { color: var(--c-blue); }
+        /* THEME: WATCH (RED) */
+        .column-left .cat-title { color: var(--c-red); }
         
-        /* THEME: READ (Yellow) */
+        /* THEME: READ (YELLOW) */
         .column-right .cat-title { color: var(--c-yellow); }
-        .column-right .review-card:hover .card-verdict { color: var(--c-yellow); }
 
 
         /* --- REVIEW CARD STYLE --- */
@@ -223,14 +211,14 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 20px;
+            gap: 30px;
         }
 
         .card-info { flex: 1; }
 
         .work-title {
             font-family: var(--f-head);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #fff;
             line-height: 1;
             margin-bottom: 10px;
@@ -239,47 +227,36 @@
         .work-meta {
             font-family: var(--f-body);
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
             color: #666;
+            display: block;
+            margin-bottom: 20px;
         }
 
+        /* UPDATED: Larger Image Size */
         .card-thumb {
-            width: 70px; height: 100px;
+            width: 150px; height: 225px;
             object-fit: cover;
             filter: grayscale(100%);
             border: 1px solid #333;
-            transition: 0.3s;
+            transition: 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-        .review-card:hover .card-thumb { filter: grayscale(0%); border-color: #fff; }
+        .review-card:hover .card-thumb { 
+            filter: grayscale(0%); 
+            border-color: #fff; 
+            transform: scale(1.02);
+        }
 
         .card-body {
             font-family: var(--f-body);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             color: #ccc;
         }
 
-        .card-footer {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px dashed #333;
-        }
-
-        .card-verdict {
-            font-family: var(--f-head);
-            font-size: 1.5rem;
-            color: #fff;
-            transition: color 0.3s;
-        }
-
-        .rating-stars { display: flex; gap: 4px; }
-        .star { width: 10px; height: 10px; background: #333; }
-        .star.filled { background: #fff; }
-
+        /* Footer elements removed as requested */
 
         /* --- SOCIALS SECTION --- */
         .socials-section {
@@ -367,7 +344,6 @@
                 opacity: 0; 
                 animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
             }
-            .header-meta { text-align: left; }
 
             /* 4. Layout Stacking */
             .reviews-grid { 
@@ -378,6 +354,15 @@
                 border-right: none; /* Remove vertical divider on mobile */
                 padding: 40px 20px;
             }
+
+            .card-top {
+                flex-direction: column-reverse; /* Put image above title on mobile */
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .card-thumb { width: 120px; height: 180px; } /* Slightly smaller on mobile */
+            .work-title { font-size: 2rem; }
 
             .category-header {
                 padding: 20px 20px;
@@ -436,12 +421,6 @@
 
     <header class="header-section">
         <h1 class="huge-title">Reviews</h1>
-        <div class="header-meta">
-            <strong>Flash Critique</strong>
-            Brief encounters with media.<br>
-            Short. Sharp. Subjective.
-        </div>
-
         <video class="header-bg-video" autoplay muted loop playsinline webkit-playsinline>
             <source src="images/movie-reviews.mp4" type="video/mp4">
         </video>
@@ -466,12 +445,6 @@
                     <div class="card-body">
                         A masterclass in the banality of evil. Glazer refuses to show us the horror, forcing us instead to listen to it from the garden next door. It is a film about compartmentalization, and how easily we tune out the screaming.
                     </div>
-                    <div class="card-footer">
-                        <span class="card-verdict">Essential</span>
-                        <div class="rating-stars">
-                            <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div>
-                        </div>
-                    </div>
                 </article>
 
                 <article class="review-card">
@@ -484,12 +457,6 @@
                     </div>
                     <div class="card-body">
                         Biological science fiction at its peak. The ecosystem is the antagonist here. It doesn't hate the survivors; it just wants to digest them. A stunning animated meditation on adaptation and symbiosis.
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-verdict">Hypnotic</span>
-                        <div class="rating-stars">
-                            <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div>
-                        </div>
                     </div>
                 </article>
 
@@ -512,12 +479,6 @@
                     <div class="card-body">
                         A prayer in slow motion. Fosse’s "slow prose" creates a hypnotic rhythm that dissolves the boundary between the narrator and the reader. It is about God, art, and the alternate lives we didn't lead.
                     </div>
-                    <div class="card-footer">
-                        <span class="card-verdict">Meditative</span>
-                        <div class="rating-stars">
-                            <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div>
-                        </div>
-                    </div>
                 </article>
 
                 <article class="review-card">
@@ -530,12 +491,6 @@
                     </div>
                     <div class="card-body">
                         Moshfegh abandons her bored urbanites for a medieval village defined by depravity, cannibalism, and magical thinking. It is disgusting, cruel, and oddly funny, but ultimately feels like a painting of hell with no exit.
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-verdict">Divisive</span>
-                        <div class="rating-stars">
-                            <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star"></div><div class="star"></div>
-                        </div>
                     </div>
                 </article>
                 
@@ -585,9 +540,9 @@
             interactive.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('hovered');
-                    // Check if inside a specific theme column
+                    // Check if inside a specific theme column to change cursor color
                     if (el.closest('.column-left')) {
-                        cursor.style.borderColor = 'var(--c-blue)';
+                        cursor.style.borderColor = 'var(--c-red)';
                     } else if (el.closest('.column-right')) {
                         cursor.style.borderColor = 'var(--c-yellow)';
                     }
