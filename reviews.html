@@ -355,6 +355,12 @@
                 flex-direction: column;
             }
             
+            /* Order Logic: 
+               1. Watch Header
+               2. Watch Cards
+               3. Read Header
+               4. Read Cards 
+            */
             .header-watch { order: 1; border-right: none; }
             .card-watch { order: 2; border-right: none; }
             .header-read { order: 3; border-top: 1px solid var(--c-border); }
@@ -491,6 +497,63 @@
                 A remarkable novel about a remarkably unremarkable man. In this, it embodies its story. Both the novel and its author are often ignored when discussing the great works—and workers—of literature.<br><br>
                 William Stoner is no hero, he is not the smartest man in the room, nor the most successful; he simply is. In this, there is a great comfort—that our lives don’t need to be a grand adventure for them to be worthy of telling. That you don’t need to be great to be anything at all.<br><br>
                 John Williams takes you on this journey with beautiful but economic prose. You will be left conflicted, frustrated, emotional, but never lost. This is a must-read for anyone with even a passing interest in the greatest works of literature.
+            </div>
+        </article>
+
+        <article class="review-card card-watch">
+            <div class="card-top">
+                <div class="card-info">
+                    <h2 class="work-title">Insomnia (1997)</h2>
+                    <span class="work-meta">Dir. Erik Skjoldbjærg</span>
+                    
+                    <div class="star-rating stars-watch">
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+
+                </div>
+                <img src="images/Insomnia.jpg" alt="Insomnia Cover" class="card-thumb"> 
+            </div>
+            <div class="card-body">
+                In this Norwegian crime thriller, there is little in the way of mystery. We know who got killed immediately, and fairly quickly we realize who did the killing.<br><br>
+                With this out of the way, we are left to watch instead. Watch how guilt, shame, and fear lead our main character down a path he may never lift himself out of.<br><br>
+                Stellan Skarsgård delivers a powerful, yet measured, performance of a man broken by the weight of himself. With no one to blame but himself for his own actions, we see this man’s descent, his moral decay, his professional despair, and his cursed insomnia.<br><br>
+                It is, unfortunately, almost impossible to find on any regular streaming service. Criterion has it, but it’s unavailable in Europe. I have tried with a VPN, but it won’t accept foreign cards. As such, I recommend that you pirate the movie, taking the necessary precautions, of course.
+            </div>
+        </article>
+
+        <article class="review-card card-read">
+            <div class="card-top">
+                <div class="card-info">
+                    <h2 class="work-title">I Deliver Parcels in Beijing</h2>
+                    <span class="work-meta">Hu Anyan</span>
+                    
+                    <div class="star-rating stars-read">
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg class="star-icon star-half" viewBox="0 0 24 24">
+                            <defs>
+                                <linearGradient id="halfGrad2">
+                                    <stop offset="50%" stop-color="var(--c-yellow)"/>
+                                    <stop offset="50%" stop-color="transparent" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <path fill="url(#halfGrad2)" stroke="var(--c-yellow)" stroke-width="1.5" stroke-opacity="0.3" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+
+                </div>
+                <img src="images/IDPIB.jpeg" alt="Parcels Cover" class="card-thumb">
+            </div>
+            <div class="card-body">
+                In this memoir, Hu Anyan, a courier working in various cities in China, describes his experiences in the trade: the challenges, the difficulties, and the relationships he made along the way. Although the premise is interesting, and I went into it with a burning curiosity to read firsthand what the life of such a precarious worker in China would be like, I was left astonished as to just how mundane and similar to Western working conditions it is.<br><br>
+                Just like in the West, Hu Anyan is overworked, overstimulated, and becomes a cynical and mean-spirited man to whom his deadlines matter more than anything else. Every second is to be measured; a lost parcel means lost wages; sleep after a long shift is hard to manage; alcohol becomes your best friend.<br><br>
+                For what it is, it does it perfectly. I will not deduct points for “boringness” because it is, at the end of the day, a memoir and the author is free to reveal or obscure what he so pleases, but the story is, at times, painfully repetitive. Although this does not distract much from the main narrative, you may find yourself power-skipping through some parts.
             </div>
         </article>
 
