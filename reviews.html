@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews - Faun by Moonlight</title>
+    <title>Who We Are - Faun by Moonlight</title>
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
@@ -17,7 +17,7 @@
     </script>
 
     <style>
-        /* --- RESET & VARIABLES --- */
+        /* --- RESET & VARIABLES (MATCHING REVIEWS PAGE) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
@@ -36,11 +36,9 @@
             font-family: var(--f-body);
             color: var(--c-text);
             overflow-x: hidden; 
-            min-height: 100vh;
-            display: flex; flex-direction: column;
         }
 
-        /* --- CUSTOM CURSOR --- */
+        /* --- CUSTOM CURSOR (UPDATED FORMAT) --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -56,11 +54,11 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid var(--c-red); /* Default accent */
+            border: 1px solid #fff; /* Default hover, can be overridden */
             mix-blend-mode: normal;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (UPDATED FORMAT) --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -104,293 +102,183 @@
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        .burger { display: none; } 
-        .mobile-menu-overlay { display: none; }
-
-
-        /* --- HEADER SECTION --- */
-        .header-section {
-            padding: 180px 40px 60px 40px;
-            border-bottom: 1px solid var(--c-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            position: relative; 
-            overflow: hidden;   
-            min-height: 50vh;
+        /* Burger & Mobile Menu (UPDATED STRUCTURE) */
+        .burger { 
+            display: none; 
+            background: none; border: none; 
+            flex-direction: column; gap: 6px; 
+            z-index: 1002; 
         }
+        .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        .mobile-menu-overlay { 
+            display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; flex-direction: column; justify-content: center; align-items: center;
+            gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1001;
+        }
+        .mobile-menu-overlay.active { transform: translateY(0); }
+        .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+        .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+
+        /* --- PAGE SPECIFIC LAYOUT (RETAINED BUT UPDATED TO NEW VARS) --- */
         
-        .huge-title {
-            font-family: var(--f-head);
-            font-size: 10vw;
-            line-height: 0.8;
-            color: #fff;
-            text-transform: uppercase;
-            margin: 0;
-            position: relative; 
-            z-index: 2;
+        /* Fixed Background Video */
+        #bg-video {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; 
+            height: 100%;
+            z-index: 0; 
+            object-fit: cover; 
+            object-position: center;
+            opacity: 1; 
         }
 
-        /* --- VIDEO STYLE --- */
-        .header-bg-video {
-            position: absolute;
-            top: 50%;
-            right: 0; 
-            transform: translateY(-45%) translateX(5%); 
-            height: 100%; 
-            width: auto;
-            z-index: 1; 
-            pointer-events: none;
-            mix-blend-mode: screen; 
-            opacity: 0.9;
-        }
-        .header-bg-video::-webkit-media-controls { display: none !important; }
-
-
-        /* --- REVIEWS LAYOUT --- */
-        .reviews-main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            width: 100%;
-        }
-
-        .grid-header {
-            padding: 40px;
-            border-bottom: 1px solid var(--c-border);
-            position: sticky;
-            top: 85px; 
-            background: var(--c-bg); 
-            z-index: 10;
-        }
-        .cat-title {
-            font-family: var(--f-head);
-            font-size: 3rem;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        .header-watch { border-right: 1px solid var(--c-border); color: var(--c-red); }
-        .header-read { color: var(--c-yellow); }
-
-
-        /* --- REVIEW CARD STYLE --- */
-        .review-card {
-            padding: 60px 40px;
-            border-bottom: 1px solid var(--c-border); 
+        /* Right Content Area */
+        .content-scroll {
+            position: relative;
+            width: 50vw; 
+            margin-left: 50vw; /* Pushes box to Right */
+            min-height: 100vh;
+            background-color: var(--c-bg); 
+            border-left: 1px solid var(--c-border);
+            z-index: 10; 
+            padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            transition: background 0.3s ease;
-            height: 100%; 
-        }
-
-        .card-watch { border-right: 1px solid var(--c-border); }
-
-        .review-card:hover { background: #111; }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 30px;
-        }
-
-        .card-info { flex: 1; display: flex; flex-direction: column; }
-
-        .work-title {
-            font-family: var(--f-head);
-            font-size: 2.5rem;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-        
-        .work-meta {
-            font-family: var(--f-body);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 15px;
-            transition: color 0.3s;
-        }
-
-        /* STAR RATING STYLE */
-        .star-rating {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px; /* Pushes stars down to fill space */
-            margin-bottom: 10px;
-        }
-        .star-icon {
-            width: 18px;
-            height: 18px;
-        }
-        
-        /* Watch Stars (Red) */
-        .stars-watch .star-filled { fill: var(--c-red); }
-        .stars-watch .star-empty { fill: none; stroke: var(--c-red); stroke-width: 1.5; opacity: 0.3; }
-        
-        /* Read Stars (Yellow) */
-        .stars-read .star-filled { fill: var(--c-yellow); }
-        .stars-read .star-half { fill: var(--c-yellow); }
-        .stars-read .star-empty { fill: none; stroke: var(--c-yellow); stroke-width: 1.5; opacity: 0.3; }
-
-
-        .card-watch .work-meta { color: #666; }
-        .card-read .work-meta { color: #666; }
-        .card-watch:hover .work-meta { color: var(--c-red); }
-        .card-read:hover .work-meta { color: var(--c-yellow); }
-
-        /* Large Image Size */
-        .card-thumb {
-            width: 280px; height: 420px; 
-            object-fit: cover;
-            filter: grayscale(100%);
-            border: 1px solid #333;
-            transition: 0.4s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-        .review-card:hover .card-thumb { 
-            filter: grayscale(0%); 
-            border-color: #fff; 
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
-        }
-
-        .card-body {
-            font-family: var(--f-body);
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #ccc;
-        }
-
-
-        /* --- SOCIALS SECTION --- */
-        .socials-section {
-            padding: 60px 20px;
-            display: flex;
             justify-content: center;
+        }
+
+        /* Socials Fixed Bottom */
+        .socials-fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50vw; 
+            width: 50vw; 
+            padding: 30px 60px 50px 60px; 
+            z-index: 20; 
+            background: linear-gradient(to top, var(--c-bg) 80%, transparent);
+            display: flex;
             align-items: center;
-            gap: 30px;
-            background-color: var(--c-bg);
-            border-top: 1px solid var(--c-border);
+            gap: 25px;
         }
 
         .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-            cursor: none;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: transform 0.3s ease;
         }
-
         .social-link svg {
-            width: 24px; height: 24px;
+            width: 20px; height: 20px;
             fill: rgba(255, 255, 255, 0.4);
             transition: fill 0.3s ease, filter 0.3s ease;
         }
-
         .social-link:hover svg {
             fill: #ffffff;
             filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
         }
-
         .social-link:hover { transform: translateY(-2px); }
 
-        /* --- FOOTER --- */
-        footer {
-            margin-top: auto;
-            padding: 40px;
-            text-align: center;
-            color: #555;
+        /* Typography */
+        .page-header {
+            margin-bottom: 50px;
+            border-bottom: 4px solid #fff; 
+            padding-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .sub-title {
+            font-family: var(--f-body);
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-top: 1px solid var(--c-border);
+            letter-spacing: 3px;
+            color: var(--c-red); /* Updated to new var */
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 700;
         }
+
+        .super-title {
+            font-family: var(--f-head);
+            font-size: 5.5rem;
+            line-height: 0.85;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .prose {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #ccc;
+            max-width: 650px;
+        }
+        .prose p { margin-bottom: 2rem; }
+        .prose strong { color: #fff; font-weight: 700; }
+        .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
+        .prose a:hover { color: var(--c-red); }
+
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
             
-            * { cursor: auto !important; }
+            * { cursor: auto !important; } 
             .cursor { display: none !important; }
 
+            /* Disable Video & Fix Background */
+            #bg-video { display: none !important; }
+            
+            .content-scroll { 
+                width: 100%; 
+                margin-left: 0; 
+                padding: 120px 30px 100px 30px; 
+                border-left: none; 
+                background: radial-gradient(circle at top right, #1a1a1a, #000); 
+                min-height: 100dvh;
+            }
+            
+            .socials-fixed-bottom { 
+                left: 0; 
+                width: 100%; 
+                padding: 30px; 
+                justify-content: center; 
+                background: linear-gradient(to top, #000 80%, transparent);
+            }
+            
+            /* Hide Desktop Nav, Show Burger */
             .desktop-menu { display: none; }
-            .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
-            .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
-            .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-            .burger.open span:nth-child(2) { opacity: 0; }
-            .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+            .burger { display: flex; }
 
-            .mobile-menu-overlay {
-                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background: #000; flex-direction: column; justify-content: center; align-items: center;
-                gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-                z-index: 1001;
-            }
-            .mobile-menu-overlay.active { transform: translateY(0); }
-            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
-            .mobile-menu-overlay .nav-link:hover { color: #fff; }
+            .super-title { font-size: 3.5rem; }
 
-            .header-bg-video { display: none !important; }
-
-            .header-section { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                padding: 120px 20px 40px 20px; 
-                gap: 20px;
-                background: radial-gradient(circle at top right, #1a1a1a, #000);
+            /* Animations */
+            .sub-title, .super-title, .prose p {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: mobileFadeUp 0.8s ease-out forwards;
             }
 
-            .huge-title { 
-                font-size: 15vw; 
-                opacity: 0; 
-                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
-            }
+            .sub-title { animation-delay: 0.1s; }
+            .super-title { animation-delay: 0.2s; }
+            .prose p:nth-of-type(1) { animation-delay: 0.3s; }
+            .prose p:nth-of-type(2) { animation-delay: 0.4s; }
+            .prose p:nth-of-type(3) { animation-delay: 0.5s; }
+            .prose p:nth-of-type(4) { animation-delay: 0.6s; }
+            .prose p:nth-of-type(5) { animation-delay: 0.7s; }
 
-            .reviews-main-grid { 
-                display: flex;
-                flex-direction: column;
-            }
-            
-            /* Order Logic: 
-               1. Watch Header
-               2. Watch Cards
-               3. Read Header
-               4. Read Cards 
-            */
-            .header-watch { order: 1; border-right: none; }
-            .card-watch { order: 2; border-right: none; }
-            .header-read { order: 3; border-top: 1px solid var(--c-border); }
-            .card-read { order: 4; }
-
-            .review-card { padding: 40px 20px; }
-            
-            .card-top {
-                flex-direction: column-reverse; 
-                align-items: flex-start;
-                gap: 20px;
-            }
-            
-            .card-thumb { width: 180px; height: 270px; }
-            .work-title { font-size: 2rem; }
-
-            .grid-header {
-                padding: 20px 20px;
-                top: 70px;
-            }
-            .cat-title { font-size: 2rem; }
-
-            @keyframes mobileSlideUp {
-                0% { opacity: 0; transform: translateY(30px); }
-                100% { opacity: 1; transform: translateY(0); }
+            @keyframes mobileFadeUp {
+                to { opacity: 1; transform: translateY(0); }
             }
         }
     </style>
 </head>
 <body>
+
     <div class="cursor" id="cursor"></div>
 
     <nav class="navbar">
@@ -401,10 +289,10 @@
         </a>
 
         <div class="desktop-menu">
-            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="who-we-are" class="nav-link active">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
             <a href="blog" class="nav-link">Blog</a>
-            <a href="reviews" class="nav-link active">Reviews</a>
+            <a href="reviews" class="nav-link">Reviews</a>
             <a href="submissions" class="nav-link">Submit</a>
             <a href="faq" class="nav-link">FAQ</a>
             <a href="support-us" class="nav-link">Support Us</a>
@@ -412,158 +300,44 @@
             <a href="contact" class="nav-link">Contact</a>
         </div>
 
-        <button class="burger" id="burgerBtn">
+        <button class="burger" id="burgerBtn" aria-label="Toggle Menu">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
     <div class="mobile-menu-overlay" id="navMenu">
-        <a href="who-we-are" class="nav-link">Who We Are</a>
+        <a href="who-we-are" class="nav-link active">Who We Are</a>
         <a href="volumes" class="nav-link">Volumes</a>
         <a href="blog" class="nav-link">Blog</a>
-        <a href="reviews" class="nav-link active">Reviews</a>
+        <a href="reviews" class="nav-link">Reviews</a>
         <a href="submissions" class="nav-link">Submit</a>
         <a href="faq" class="nav-link">FAQ</a>
         <a href="support-us" class="nav-link">Support Us</a>
         <a href="contact" class="nav-link">Contact</a>
     </div>
 
-    <header class="header-section">
-        <h1 class="huge-title">Reviews</h1>
-        <video class="header-bg-video" autoplay muted loop playsinline webkit-playsinline>
-            <source src="images/movie-reviews.mp4" type="video/mp4">
-        </video>
-    </header>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/who-we-are.mp4" type="video/mp4">
+    </video>
 
-    <main class="reviews-main-grid">
-        
-        <div class="grid-header header-watch">
-            <span class="cat-title">Watch</span>
+    <main class="content-scroll">
+        <header class="page-header">
+            <span class="sub-title">Mission Statement // Est. 2025</span>
+            <h1 class="super-title">Who<br>We Are</h1>
+        </header>
+
+        <div class="prose">
+            <p> Faun by Moonlight is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+
+            <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+
+            <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+
+            <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
         </div>
-        <div class="grid-header header-read">
-            <span class="cat-title">Read</span>
-        </div>
-
-        <article class="review-card card-watch">
-            <div class="card-top">
-                <div class="card-info">
-                    <h2 class="work-title">Poor Things</h2>
-                    <span class="work-meta">Dir. Yorgos Lanthimos</span>
-                    
-                    <div class="star-rating stars-watch">
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    </div>
-
-                </div>
-                <img src="images/poor-things.jpg" alt="Poor Things Cover" class="card-thumb"> 
-            </div>
-            <div class="card-body">
-                Poor Things is a beautifully shot, wonderfully acted, and amazingly designed movie that had me smiling in awe during its first half. The story is fresh, the color palette is delicious, and the set design is sensational—unfortunately, there was another hour after that.<br><br>
-                In this second half, it struggles with a grinding, repetitive plot that moves from a neo-Gothic retelling of Frankenstein into yet another exploitative, male-led, male-written depiction of what women’s liberation “truly” looks like: women becoming commodities, or “their own means of production” as the movie puts it, for men’s desires. Bella Baxter only finds enlightenment, and maturity, after she sells herself to men; men she explicitly doesn’t want to be with.<br><br>
-                But there’s more: All men are violent, depraved beasts; we are forced to consider if a woman with the mind of a child is being raped in front of us or not (the implication that she is capable of making that decision simply by virtue of looking like an adult poses some questions that I don’t think the movie wishes to invite); and we are told that a good partner is one who accepts all of your actions without judgment or opposition, regardless of how it affects them.<br><br>
-                Ultimately, I’d say that you should turn it off right when they arrive in Lisbon. You won’t miss much after that.
-            </div>
-        </article>
-
-        <article class="review-card card-read">
-            <div class="card-top">
-                <div class="card-info">
-                    <h2 class="work-title">Stoner</h2>
-                    <span class="work-meta">John Williams</span>
-                    
-                    <div class="star-rating stars-read">
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-half" viewBox="0 0 24 24">
-                            <defs>
-                                <linearGradient id="halfGrad">
-                                    <stop offset="50%" stop-color="var(--c-yellow)"/>
-                                    <stop offset="50%" stop-color="transparent" stop-opacity="0"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#halfGrad)" stroke="var(--c-yellow)" stroke-width="1.5" stroke-opacity="0.3" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-
-                </div>
-                <img src="images/stoner.jpeg" alt="Stoner Cover" class="card-thumb">
-            </div>
-            <div class="card-body">
-                A remarkable novel about a remarkably unremarkable man. In this sense, both the man and the book embody this story, as they are often ignored when discussing the great works, and workers, of literature.<br><br>
-                William Stoner is no hero. He is not the smartest man in the room, nor the most successful; he simply is. In this, there is a comfort that our lives don’t need to be grand adventures to be worthy of telling. That you don’t need to pursue greatness to be anything at all. That your life is worthy as is.<br><br>
-                John Williams takes you on this journey with beautiful but economical prose. You will be left conflicted, frustrated, and emotional, but never lost.<br><br>
-                There is little else to say other than this is a must-read for anyone with even a passing interest in the greatest works of literature.
-            </div>
-        </article>
-
-        <article class="review-card card-watch">
-            <div class="card-top">
-                <div class="card-info">
-                    <h2 class="work-title">Insomnia (1997)</h2>
-                    <span class="work-meta">Dir. Erik Skjoldbjærg</span>
-                    
-                    <div class="star-rating stars-watch">
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    </div>
-
-                </div>
-                <img src="images/Insomnia.jpg" alt="Insomnia Cover" class="card-thumb"> 
-            </div>
-            <div class="card-body">
-                In this Norwegian crime thriller, there is little in the way of mystery. We are told immediately who got killed, and not long after, who did the killing. With that out of the way, the audience is instead made to watch.<br><br>
-                Watch how guilt, shame, and fear lead our main character down a path he may never lift himself out of.<br><br>
-                Stellan Skarsgård delivers a powerful, yet measured, performance of a man broken by the weight of himself. With no one else to blame for his actions, the disgraced Swedish detective Jonas Engström spirals further down into moral decay, compounded by insomnia and the accidental killing of his partner.<br><br>
-                Unfortunately, it’s almost impossible to find it on any regular streaming service. Criterion has it, but it’s unavailable in Europe. I have tried with a VPN, but it won’t accept foreign cards.<br>
-                As such, I recommend that you pirate the movie, taking the necessary precautions, of course.
-            </div>
-        </article>
-
-        <article class="review-card card-read">
-            <div class="card-top">
-                <div class="card-info">
-                    <h2 class="work-title">I Deliver Parcels in Beijing</h2>
-                    <span class="work-meta">Hu Anyan</span>
-                    
-                    <div class="star-rating stars-read">
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-half" viewBox="0 0 24 24">
-                            <defs>
-                                <linearGradient id="halfGrad2">
-                                    <stop offset="50%" stop-color="var(--c-yellow)"/>
-                                    <stop offset="50%" stop-color="transparent" stop-opacity="0"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#halfGrad2)" stroke="var(--c-yellow)" stroke-width="1.5" stroke-opacity="0.3" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    </div>
-
-                </div>
-                <img src="images/IDPIB.jpeg" alt="Parcels Cover" class="card-thumb">
-            </div>
-            <div class="card-body">
-                In this memoir, Hu Anyan, a courier working in various cities in China, describes his experiences in the trade: the challenges, the difficulties, and the relationships he formed along the way.<br><br>
-                Although the premise itself is interesting enough, I confess I went into it with a burning curiosity to read firsthand what the life of such a precarious worker in China would be like. I was left astonished by just how mundane and similar to Western working conditions it is.<br><br>
-                Just as in the West, Hu Anyan is overworked, overstimulated, and becomes a cynical, mean-spirited man to whom deadlines matter more than anything else. Every second is measured; a lost parcel means lost wages; sleep after a long shift is hard to manage; and alcohol becomes your best friend.<br><br>
-                For what it is, the book succeeds perfectly. I will not deduct points for “boringness” because it is, at the end of the day, a memoir, and the author is free to reveal or obscure what he pleases. However, the story is, at times, painfully repetitive. Although this does not distract much from the main narrative, you may find yourself power-skipping through some parts.
-            </div>
-        </article>
-
     </main>
 
-    <div class="socials-section">
+    <div class="socials-fixed-bottom">
         <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
@@ -585,14 +359,11 @@
         </a>
     </div>
 
-    <footer>
-        © 2025 Faun by Moonlight. All rights reserved.
-    </footer>
-
     <script>
-        // --- CURSOR LOGIC ---
+        // --- CURSOR LOGIC (MATCHING REVIEWS PAGE) ---
         const cursor = document.getElementById('cursor');
-        const interactive = document.querySelectorAll('a, button, .review-card, .nav-link');
+        // Added .social-link to the list to ensure the socials trigger the hover
+        const interactive = document.querySelectorAll('a, button, .nav-link, .social-link');
 
         if (window.matchMedia("(hover: hover)").matches) {
             document.addEventListener('mousemove', (e) => {
@@ -603,21 +374,17 @@
             interactive.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('hovered');
-                    // Check theme based on class name
-                    if (el.classList.contains('card-watch')) {
-                        cursor.style.borderColor = 'var(--c-red)';
-                    } else if (el.classList.contains('card-read')) {
-                        cursor.style.borderColor = 'var(--c-yellow)';
-                    }
                 });
                 el.addEventListener('mouseleave', () => {
                     cursor.classList.remove('hovered');
-                    cursor.style.borderColor = '#fff'; // Reset
+                    // Reset styling if any specific colors were applied (safe reset)
+                    cursor.style.borderColor = '#fff';
+                    cursor.style.mixBlendMode = 'normal'; // or whatever default required
                 });
             });
         }
 
-        // --- MENU LOGIC ---
+        // --- MENU LOGIC (UPDATED TO OVERLAY STYLE) ---
         const burgerBtn = document.getElementById('burgerBtn');
         const navMenu = document.getElementById('navMenu');
 
@@ -631,15 +398,6 @@
                 burgerBtn.classList.remove('open');
                 navMenu.classList.remove('active');
             });
-        });
-
-        // --- VIDEO AUTOPLAY FIX (Safari/iOS) ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const vid = document.querySelector('.header-bg-video');
-            if(vid) {
-                vid.muted = true;
-                vid.play().catch(e => console.log("Autoplay blocked:", e));
-            }
         });
     </script>
 </body>
