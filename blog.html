@@ -128,12 +128,6 @@
         .word-b:hover { color: var(--c-blue); }
         .word-m:hover { color: var(--c-yellow); }
 
-        .nav-right-cluster {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
         .desktop-menu { display: flex; gap: 25px; }
         .nav-link {
             font-family: var(--f-body);
@@ -151,45 +145,6 @@
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        /* --- FILTER STYLES (NAV INTEGRATED) --- */
-        .nav-filter-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-right: 1px solid #333;
-            padding-right: 30px;
-        }
-
-        .filter-label {
-            font-family: var(--f-body);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-            color: #555;
-        }
-
-        .category-select {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-family: var(--f-body);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            outline: none;
-            cursor: none;
-            padding-right: 5px;
-        }
-
-        .category-select:hover { color: var(--c-red); }
-
-        .category-select option {
-            background-color: #000;
-            color: #fff;
-        }
-
         .burger { display: none; } 
         .mobile-menu-overlay { display: none; }
 
@@ -201,6 +156,7 @@
             align-items: flex-end;
             position: relative; 
             overflow: hidden; 
+            min-height: 70vh; /* Ensure height for video presence */
         }
         
         .huge-title {
@@ -214,13 +170,62 @@
             z-index: 2; 
         }
 
-        /* --- HEADER VIDEO (USER SETTINGS) --- */
+        /* --- HEADER CONTROLS (THE NEW FILTER LOCATION) --- */
+        .header-controls {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* Glassmorphism Effect */
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: border-color 0.3s ease;
+        }
+
+        .header-controls:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-label {
+            font-family: var(--f-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        .category-select {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: var(--f-body);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            outline: none;
+            cursor: none;
+            padding-right: 5px;
+        }
+
+        .category-select:hover { color: var(--c-yellow); }
+        .category-select option { background-color: #000; color: #fff; }
+
+
+        /* --- HEADER VIDEO --- */
         .header-bg-video {
             position: absolute;
-            top: 30%;
+            top: 50%;
             right: 0; 
-            transform: translateY(-30%) translateX(30%); 
-            height: 105%; 
+            transform: translateY(-50%) translateX(10%); 
+            height: 120%; 
             width: auto;
             z-index: 1; 
             pointer-events: none;
@@ -326,16 +331,11 @@
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 1100px) {
-            .nav-filter-wrap { border-right: none; padding-right: 0; }
-            .nav-right-cluster { gap: 20px; }
-        }
 
         @media (max-width: 900px) {
             * { cursor: auto !important; }
             .cursor { display: none !important; }
             .desktop-menu { display: none; }
-            .nav-filter-wrap { margin-left: auto; margin-right: 20px; border: none; padding: 0; }
             
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -350,12 +350,29 @@
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
+            
             .header-bg-video { display: none !important; }
+            
             .header-section { 
-                flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px;
+                flex-direction: column; 
+                align-items: flex-start; 
+                padding: 120px 20px 40px 20px; 
+                gap: 30px;
                 background: radial-gradient(circle at top right, #1a1a1a, #000);
+                min-height: auto;
             }
+
             .huge-title { font-size: 15vw; }
+
+            /* Mobile Filter Logic: Move it to flow below title */
+            .header-controls {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                align-self: flex-start;
+                margin-left: 0;
+            }
+
             .blog-row { grid-template-columns: 1fr; padding: 40px 20px; }
             .entry-title { font-size: 3rem; }
         }
@@ -397,42 +414,28 @@
             <span class="brand-word word-m">MOONLIGHT</span>
         </a>
 
-        <div class="nav-right-cluster">
-            <div class="nav-filter-wrap">
-                <span class="filter-label">Sort:</span>
-                <select class="category-select" id="categoryFilter">
-                    <option value="all">All</option>
-                    <option value="cinema">Cinema</option>
-                    <option value="culture">Culture</option>
-                    <option value="finance">Finance</option>
-                    <option value="literature">Literature</option>
-                    <option value="editorial">Editorial</option>
-                    <option value="philosophy">Philosophy</option>
-                </select>
-            </div>
-
-            <div class="desktop-menu">
-                <a href="who-we-are" class="nav-link">Who We Are</a>
-                <a href="volumes" class="nav-link">Volumes</a>
-                <a href="blog" class="nav-link active">Blog</a>
-                <a href="reviews" class="nav-link">Reviews</a>
-                <a href="submissions" class="nav-link">Submit</a>
-                <a href="faq" class="nav-link">FAQ</a>
-                <a href="support-us" class="nav-link">Support Us</a>
-                <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
-                <a href="contact" class="nav-link">Contact</a>
-            </div>
-            
-            <button class="burger" id="burgerBtn">
-                <span></span><span></span><span></span>
-            </button>
+        <div class="desktop-menu">
+            <a href="who-we-are" class="nav-link">Who We Are</a>
+            <a href="volumes" class="nav-link">Volumes</a>
+            <a href="blog" class="nav-link active">Blog</a>
+            <a href="reviews" class="nav-link">Reviews</a>
+            <a href="submissions" class="nav-link">Submit</a>
+            <a href="faq" class="nav-link">FAQ</a>
+            <a href="support-us" class="nav-link">Support Us</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
+            <a href="contact" class="nav-link">Contact</a>
         </div>
+            
+        <button class="burger" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
     <div class="mobile-menu-overlay" id="navMenu">
         <a href="who-we-are" class="nav-link">Who We Are</a>
         <a href="volumes" class="nav-link">Volumes</a>
         <a href="blog" class="nav-link active">Blog</a>
+        <a href="reviews" class="nav-link">Reviews</a>
         <a href="submissions" class="nav-link">Submit</a>
         <a href="faq" class="nav-link">FAQ</a>
         <a href="support-us" class="nav-link">Support Us</a>
@@ -441,6 +444,20 @@
 
     <header class="header-section">
         <h1 class="huge-title">The<br>Feed</h1>
+        
+        <div class="header-controls">
+            <span class="filter-label">Filter:</span>
+            <select class="category-select" id="categoryFilter">
+                <option value="all">All Stories</option>
+                <option value="cinema">Cinema</option>
+                <option value="culture">Culture</option>
+                <option value="finance">Finance</option>
+                <option value="literature">Literature</option>
+                <option value="editorial">Editorial</option>
+                <option value="philosophy">Philosophy</option>
+            </select>
+        </div>
+
         <video class="header-bg-video" autoplay muted loop playsinline>
             <source src="images/blog-video.mp4" type="video/mp4">
         </video>
@@ -534,17 +551,20 @@
         const cursor = document.getElementById('cursor');
         
         const updateInteractiveElements = () => {
-            const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item, select');
+            // Added .header-controls and .category-select to interactive list
+            const interactive = document.querySelectorAll('a, button, .blog-row, .ticker-item, .category-select, .header-controls');
             interactive.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
             });
         };
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        }
 
         // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
