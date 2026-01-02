@@ -17,95 +17,48 @@
     </script>
 
     <style>
-        /* --- RESET --- */
+        /* --- RESET & VARIABLES (MATCHING REVIEWS PAGE) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
+        :root {
+            --c-bg: #0a0a0a; 
+            --c-text: #e0e0e0;
+            --c-red: #E60026;
+            --c-blue: #0047BB;
+            --c-yellow: #FFD100;
+            --c-border: #333;
+            --f-head: "alfarn", serif;
+            --f-body: "neue-kabel", sans-serif;
+        }
+
         body { 
-            background-color: #050505; 
-            font-family: "neue-kabel", sans-serif;
-            color: #e0e0e0;
+            background-color: var(--c-bg); 
+            font-family: var(--f-body);
+            color: var(--c-text);
             overflow-x: hidden; 
         }
 
-        /* --- COLORS --- */
-        :root {
-            --color-f: #E60026;   /* Red */
-            --color-b: #0047BB;   /* Blue */
-            --color-m: #FFD100;   /* Yellow */
-            --color-border: #333;
-            --bg-text: #0a0a0a;
-        }
-
-        /* --- THE VIDEO (FIXED BACKGROUND) --- */
-        #bg-video {
+        /* --- CUSTOM CURSOR (UPDATED FORMAT) --- */
+        .cursor {
+            width: 12px; height: 12px; 
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; 
-            height: 100%;
-            z-index: 0; 
-            object-fit: cover; 
-            object-position: center;
-            opacity: 1; 
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, mix-blend-mode 0.3s;
+            mix-blend-mode: exclusion;
+        }
+        .cursor.hovered { 
+            width: 50px; height: 50px; 
+            background: transparent;
+            border: 1px solid #fff; /* Default hover, can be overridden */
+            mix-blend-mode: normal;
         }
 
-        /* --- RIGHT CONTENT (SCROLLABLE TEXT AREA) --- */
-        .content-scroll {
-            position: relative;
-            width: 50vw; 
-            margin-left: 50vw; /* Pushes box to Right */
-            min-height: 100vh;
-            /* Solid background on desktop covers the video behind it */
-            background-color: var(--bg-text); 
-            border-left: 1px solid var(--color-border);
-            z-index: 10; 
-            padding: 160px 60px 120px 60px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* --- SOCIALS (FIXED BOTTOM RIGHT) --- */
-        .socials-fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 50vw; 
-            width: 50vw; 
-            padding: 30px 60px 50px 60px; 
-            z-index: 20; 
-            background: linear-gradient(to top, var(--bg-text) 80%, transparent);
-            display: flex;
-            align-items: center;
-            gap: 25px; /* Spacing between icons */
-        }
-
-        /* Social Link & SVG Styling */
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-            cursor: none; /* Keep custom cursor logic on desktop */
-        }
-
-        .social-link svg {
-            width: 20px;
-            height: 20px;
-            fill: rgba(255, 255, 255, 0.4); /* Faded by default */
-            transition: fill 0.3s ease, filter 0.3s ease;
-        }
-
-        .social-link:hover svg {
-            fill: #ffffff; /* Bright white on hover */
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
-        }
-        
-        /* Slight scale up on hover */
-        .social-link:hover {
-            transform: translateY(-2px);
-        }
-
-        /* --- NAVIGATION BAR --- */
+        /* --- NAVIGATION (UPDATED FORMAT) --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -120,69 +73,117 @@
         }
 
         .nav-brand {
-            font-family: "alfarn", serif;
-            font-size: 1.8rem;
+            font-family: var(--f-head);
+            font-size: 1.5rem;
             color: #fff;
             text-decoration: none;
             letter-spacing: 1px;
-            white-space: nowrap;
-            display: flex; 
-            gap: 0.4rem;   
+            display: flex; gap: 0.4rem;
         }
+        .brand-word { transition: color 0.3s; }
+        .word-f:hover { color: var(--c-red); }
+        .word-b:hover { color: var(--c-blue); }
+        .word-m:hover { color: var(--c-yellow); }
 
-        .brand-word { transition: color 0.3s ease, text-shadow 0.3s ease; }
-
-        .brand-word.word-f:hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.5); }
-        .brand-word.word-b:hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.5); }
-        .brand-word.word-m:hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.5); }
-
-        .burger {
-            display: none;
-            background: none;
-            border: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: none; 
-            z-index: 1002;
-        }
-        .burger span {
-            display: block;
-            width: 30px;
-            height: 2px;
-            background-color: #fff;
-            transition: 0.3s;
-        }
-
-        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-        .burger.open span:nth-child(2) { opacity: 0; }
-        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
-        .nav-menu {
-            display: flex;
-            gap: 20px; 
-            flex-wrap: wrap; 
-            justify-content: flex-end;
-        }
-
+        .desktop-menu { display: flex; gap: 25px; }
         .nav-link {
-            font-family: "neue-kabel", sans-serif;
+            font-family: var(--f-body);
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #888;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             transition: color 0.3s, text-shadow 0.3s;
-            white-space: nowrap;
+        }
+        
+        .desktop-menu .nav-link:nth-child(3n+1):hover { color: var(--c-red); text-shadow: 0 0 10px rgba(230,0,38,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+2):hover { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,71,187,0.4); }
+        .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
+        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        /* Burger & Mobile Menu (UPDATED STRUCTURE) */
+        .burger { 
+            display: none; 
+            background: none; border: none; 
+            flex-direction: column; gap: 6px; 
+            z-index: 1002; 
+        }
+        .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        .mobile-menu-overlay { 
+            display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; flex-direction: column; justify-content: center; align-items: center;
+            gap: 30px; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1001;
+        }
+        .mobile-menu-overlay.active { transform: translateY(0); }
+        .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
+        .mobile-menu-overlay .nav-link:hover { color: #fff; }
+
+
+        /* --- PAGE SPECIFIC LAYOUT (RETAINED BUT UPDATED TO NEW VARS) --- */
+        
+        /* Fixed Background Video */
+        #bg-video {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; 
+            height: 100%;
+            z-index: 0; 
+            object-fit: cover; 
+            object-position: center;
+            opacity: 1; 
         }
 
-        .nav-menu .nav-link:nth-child(3n+1):hover { color: var(--color-f); text-shadow: 0 0 15px rgba(230, 0, 38, 0.4); }
-        .nav-menu .nav-link:nth-child(3n+2):hover { color: var(--color-b); text-shadow: 0 0 15px rgba(0, 71, 187, 0.4); }
-        .nav-menu .nav-link:nth-child(3n+3):hover { color: var(--color-m); text-shadow: 0 0 15px rgba(255, 209, 0, 0.4); }
-        .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
-        .nav-link.urgent { color: var(--color-f); }
+        /* Right Content Area */
+        .content-scroll {
+            position: relative;
+            width: 50vw; 
+            margin-left: 50vw; /* Pushes box to Right */
+            min-height: 100vh;
+            background-color: var(--c-bg); 
+            border-left: 1px solid var(--c-border);
+            z-index: 10; 
+            padding: 160px 60px 120px 60px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        /* --- TYPOGRAPHY --- */
+        /* Socials Fixed Bottom */
+        .socials-fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50vw; 
+            width: 50vw; 
+            padding: 30px 60px 50px 60px; 
+            z-index: 20; 
+            background: linear-gradient(to top, var(--c-bg) 80%, transparent);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .social-link {
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: transform 0.3s ease;
+        }
+        .social-link svg {
+            width: 20px; height: 20px;
+            fill: rgba(255, 255, 255, 0.4);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+        .social-link:hover svg {
+            fill: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+        }
+        .social-link:hover { transform: translateY(-2px); }
+
+        /* Typography */
         .page-header {
             margin-bottom: 50px;
             border-bottom: 4px solid #fff; 
@@ -192,18 +193,18 @@
         }
 
         .sub-title {
-            font-family: "neue-kabel", sans-serif;
+            font-family: var(--f-body);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--color-f);
+            color: var(--c-red); /* Updated to new var */
             margin-bottom: 15px;
             display: block;
             font-weight: 700;
         }
 
         .super-title {
-            font-family: "alfarn", serif;
+            font-family: var(--f-head);
             font-size: 5.5rem;
             line-height: 0.85;
             color: #fff;
@@ -220,30 +221,16 @@
         .prose p { margin-bottom: 2rem; }
         .prose strong { color: #fff; font-weight: 700; }
         .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
-        .prose a:hover { color: var(--color-f); }
+        .prose a:hover { color: var(--c-red); }
 
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            width: 10px; height: 10px; 
-            border: 1px solid #fff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background 0.3s;
-            mix-blend-mode: difference;
-        }
-        .cursor.hovered { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.3); }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
             
-            /* --- 1. REMOVE CUSTOM CURSOR ON MOBILE --- */
             * { cursor: auto !important; } 
             .cursor { display: none !important; }
 
-            /* --- 2. DISABLE VIDEO & FIX BACKGROUND --- */
+            /* Disable Video & Fix Background */
             #bg-video { display: none !important; }
             
             .content-scroll { 
@@ -251,7 +238,6 @@
                 margin-left: 0; 
                 padding: 120px 30px 100px 30px; 
                 border-left: none; 
-                /* Subtle radial spotlight instead of video */
                 background: radial-gradient(circle at top right, #1a1a1a, #000); 
                 min-height: 100dvh;
             }
@@ -264,39 +250,13 @@
                 background: linear-gradient(to top, #000 80%, transparent);
             }
             
-            /* -- BURGER MENU LOGIC -- */
-            .navbar { 
-                flex-direction: row; 
-                justify-content: space-between; 
-                padding: 15px 20px; 
-                align-items: center;
-                background: #000;
-            }
-
+            /* Hide Desktop Nav, Show Burger */
+            .desktop-menu { display: none; }
             .burger { display: flex; }
 
-            .nav-menu { 
-                display: none; 
-                position: absolute;
-                top: 100%; 
-                left: 0;
-                width: 100%;
-                background: #000;
-                flex-direction: column;
-                align-items: center;
-                gap: 25px;
-                padding: 40px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            }
-
-            .nav-menu.active { display: flex; }
-            .nav-link { font-size: 1.2rem; }
             .super-title { font-size: 3.5rem; }
 
-            /* --- 3. HIGH VALUE ANIMATIONS (Mobile Only) --- */
-            /* This creates a staggered cascade effect for text reading */
-            
+            /* Animations */
             .sub-title, .super-title, .prose p {
                 opacity: 0;
                 transform: translateY(20px);
@@ -305,7 +265,6 @@
 
             .sub-title { animation-delay: 0.1s; }
             .super-title { animation-delay: 0.2s; }
-            
             .prose p:nth-of-type(1) { animation-delay: 0.3s; }
             .prose p:nth-of-type(2) { animation-delay: 0.4s; }
             .prose p:nth-of-type(3) { animation-delay: 0.5s; }
@@ -313,10 +272,7 @@
             .prose p:nth-of-type(5) { animation-delay: 0.7s; }
 
             @keyframes mobileFadeUp {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                to { opacity: 1; transform: translateY(0); }
             }
         }
     </style>
@@ -332,13 +288,7 @@
             <span class="brand-word word-m">MOONLIGHT</span>
         </a>
 
-        <button class="burger" aria-label="Toggle Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <div class="nav-menu">
+        <div class="desktop-menu">
             <a href="who-we-are" class="nav-link active">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
             <a href="blog" class="nav-link">Blog</a>
@@ -346,10 +296,25 @@
             <a href="submissions" class="nav-link">Submit</a>
             <a href="faq" class="nav-link">FAQ</a>
             <a href="support-us" class="nav-link">Support Us</a>
-            <a href="urgent" class="nav-link urgent">Urgent Appeal</a>
+            <a href="urgent" class="nav-link" style="color: var(--c-red);">Urgent Appeal</a>
             <a href="contact" class="nav-link">Contact</a>
         </div>
+
+        <button class="burger" id="burgerBtn" aria-label="Toggle Menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+
+    <div class="mobile-menu-overlay" id="navMenu">
+        <a href="who-we-are" class="nav-link active">Who We Are</a>
+        <a href="volumes" class="nav-link">Volumes</a>
+        <a href="blog" class="nav-link">Blog</a>
+        <a href="reviews" class="nav-link">Reviews</a>
+        <a href="submissions" class="nav-link">Submit</a>
+        <a href="faq" class="nav-link">FAQ</a>
+        <a href="support-us" class="nav-link">Support Us</a>
+        <a href="contact" class="nav-link">Contact</a>
+    </div>
 
     <video autoplay muted loop playsinline id="bg-video">
         <source src="images/who-we-are.mp4" type="video/mp4">
@@ -390,42 +355,47 @@
         </a>
 
         <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
-             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         </a>
     </div>
 
     <script>
+        // --- CURSOR LOGIC (MATCHING REVIEWS PAGE) ---
         const cursor = document.getElementById('cursor');
-        // Added .burger to interactive elements
-        const allInteractive = document.querySelectorAll('a, button, .brand-word, .burger'); 
+        // Added .social-link to the list to ensure the socials trigger the hover
+        const interactive = document.querySelectorAll('a, button, .nav-link, .social-link');
 
-        // Only run mouse tracking on non-touch devices
         if (window.matchMedia("(hover: hover)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
 
-            allInteractive.forEach(item => {
-                item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-                item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            interactive.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hovered');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hovered');
+                    // Reset styling if any specific colors were applied (safe reset)
+                    cursor.style.borderColor = '#fff';
+                    cursor.style.mixBlendMode = 'normal'; // or whatever default required
+                });
             });
         }
 
-        // --- BURGER MENU LOGIC ---
-        const burger = document.querySelector('.burger');
-        const navMenu = document.querySelector('.nav-menu');
+        // --- MENU LOGIC (UPDATED TO OVERLAY STYLE) ---
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
 
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('open');
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when a link is clicked
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                burger.classList.remove('open');
+                burgerBtn.classList.remove('open');
                 navMenu.classList.remove('active');
             });
         });
