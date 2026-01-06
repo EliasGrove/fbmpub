@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who We Are - Faun by Moonlight</title>
+    <title>Reviews - Faun by Moonlight</title>
     
     <link rel="stylesheet" href="https://use.typekit.net/gyv5ntt.css">
 
@@ -17,7 +17,7 @@
     </script>
 
     <style>
-        /* --- RESET & VARIABLES (MATCHING REVIEWS PAGE) --- */
+        /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         :root {
@@ -38,7 +38,7 @@
             overflow-x: hidden; 
         }
 
-        /* --- CUSTOM CURSOR (UPDATED FORMAT) --- */
+        /* --- CUSTOM CURSOR --- */
         .cursor {
             width: 12px; height: 12px; 
             border: 1px solid #fff;
@@ -54,11 +54,11 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid #fff; /* Default hover, can be overridden */
+            border: 1px solid #fff;
             mix-blend-mode: normal;
         }
 
-        /* --- NAVIGATION (UPDATED FORMAT) --- */
+        /* --- NAVIGATION --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -102,7 +102,7 @@
         .desktop-menu .nav-link:nth-child(3n+3):hover { color: var(--c-yellow); text-shadow: 0 0 10px rgba(255,209,0,0.4); }
         .nav-link.active { color: #fff; border-bottom: 1px solid #fff; }
 
-        /* Burger & Mobile Menu (UPDATED STRUCTURE) */
+        /* Burger & Mobile Menu */
         .burger { 
             display: none; 
             background: none; border: none; 
@@ -125,7 +125,7 @@
         .mobile-menu-overlay .nav-link:hover { color: #fff; }
 
 
-        /* --- PAGE SPECIFIC LAYOUT (RETAINED BUT UPDATED TO NEW VARS) --- */
+        /* --- PAGE SPECIFIC LAYOUT --- */
         
         /* Fixed Background Video */
         #bg-video {
@@ -151,7 +151,7 @@
             padding: 160px 60px 120px 60px; 
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         /* Socials Fixed Bottom */
@@ -197,7 +197,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--c-red); /* Updated to new var */
+            color: var(--c-red);
             margin-bottom: 15px;
             display: block;
             font-weight: 700;
@@ -212,17 +212,84 @@
             margin: 0;
         }
 
+        /* Reviews Specific Styles */
+        .review-block {
+            margin-bottom: 80px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 60px;
+            opacity: 0; 
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .review-block:last-child { border-bottom: none; }
+        .review-block:nth-child(2) { animation-delay: 0.2s; }
+
+        .review-header { margin-bottom: 25px; }
+
+        .review-title {
+            font-family: var(--f-head);
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .review-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: var(--f-body);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Star Ratings */
+        .rating-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .stars { 
+            color: var(--c-yellow); 
+            font-size: 1.2rem; 
+            letter-spacing: 3px; 
+        }
+        
+        /* Struck Stars (For Iliad) */
+        .stars.struck {
+            position: relative;
+            color: #555; /* Dimmed */
+            display: inline-block;
+        }
+        .stars.struck::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            width: 110%;
+            height: 2px;
+            background-color: var(--c-red);
+            transform: rotate(-3deg);
+            box-shadow: 0 0 5px rgba(230,0,38,0.5);
+        }
+
         .prose {
-            font-size: 1.15rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: #ccc;
             max-width: 650px;
         }
-        .prose p { margin-bottom: 2rem; }
+        .prose p { margin-bottom: 1.5rem; }
         .prose strong { color: #fff; font-weight: 700; }
+        .prose em { font-style: italic; color: #fff; }
         .prose a { color: #fff; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
         .prose a:hover { color: var(--c-red); }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
@@ -255,25 +322,7 @@
             .burger { display: flex; }
 
             .super-title { font-size: 3.5rem; }
-
-            /* Animations */
-            .sub-title, .super-title, .prose p {
-                opacity: 0;
-                transform: translateY(20px);
-                animation: mobileFadeUp 0.8s ease-out forwards;
-            }
-
-            .sub-title { animation-delay: 0.1s; }
-            .super-title { animation-delay: 0.2s; }
-            .prose p:nth-of-type(1) { animation-delay: 0.3s; }
-            .prose p:nth-of-type(2) { animation-delay: 0.4s; }
-            .prose p:nth-of-type(3) { animation-delay: 0.5s; }
-            .prose p:nth-of-type(4) { animation-delay: 0.6s; }
-            .prose p:nth-of-type(5) { animation-delay: 0.7s; }
-
-            @keyframes mobileFadeUp {
-                to { opacity: 1; transform: translateY(0); }
-            }
+            .review-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -289,10 +338,10 @@
         </a>
 
         <div class="desktop-menu">
-            <a href="who-we-are" class="nav-link active">Who We Are</a>
+            <a href="who-we-are" class="nav-link">Who We Are</a>
             <a href="volumes" class="nav-link">Volumes</a>
             <a href="blog" class="nav-link">Blog</a>
-            <a href="reviews" class="nav-link">Reviews</a>
+            <a href="reviews" class="nav-link active">Reviews</a>
             <a href="submissions" class="nav-link">Submit</a>
             <a href="faq" class="nav-link">FAQ</a>
             <a href="support-us" class="nav-link">Support Us</a>
@@ -306,10 +355,10 @@
     </nav>
 
     <div class="mobile-menu-overlay" id="navMenu">
-        <a href="who-we-are" class="nav-link active">Who We Are</a>
+        <a href="who-we-are" class="nav-link">Who We Are</a>
         <a href="volumes" class="nav-link">Volumes</a>
         <a href="blog" class="nav-link">Blog</a>
-        <a href="reviews" class="nav-link">Reviews</a>
+        <a href="reviews" class="nav-link active">Reviews</a>
         <a href="submissions" class="nav-link">Submit</a>
         <a href="faq" class="nav-link">FAQ</a>
         <a href="support-us" class="nav-link">Support Us</a>
@@ -322,19 +371,56 @@
 
     <main class="content-scroll">
         <header class="page-header">
-            <span class="sub-title">Mission Statement // Est. 2025</span>
-            <h1 class="super-title">Who<br>We Are</h1>
+            <span class="sub-title">Critique // Analysis</span>
+            <h1 class="super-title">Recent<br>Reviews</h1>
         </header>
 
-        <div class="prose">
-            <p> Faun by Moonlight is an online literary magazine dedicated to literary fiction. We are not interested in the polite, the sterile, or the safe.</p>
+        <article class="review-block">
+            <div class="review-header">
+                <h2 class="review-title">HBO's Rome (2005)</h2>
+                <div class="review-meta">
+                    <span>TV Series</span>
+                    <span class="rating-wrapper">
+                        <span class="stars">★★★★★</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="prose">
+                <p>In a world where <em>The Rings of Power</em>—a near-universally hated series we may assume receives little more than hate-views—can cost $60 million per episode; where <em>Stranger Things</em>—a by-the-numbers teen adventure that doesn’t seem to know when it has outlasted the '80s nostalgia craze of the pandemic years—can cost $50–60 million per episode; or where <em>Citadel</em> (yeah, I’ve never heard of it either) costs about $50 million, it’s difficult to understand how the 2005 series <em>Rome</em> was cut short.</p>
 
-            <p>We publish works that resist simple genre classification. Works that aren't scared of pushing boundaries, bending rules, but above all, being creative. Our specialty is the exceptionally unmarketable.</p>
+                <p>Despite having only a third of its arc completed, it was cancelled for being “too expensive,” with a budget of roughly $8 million per episode (or $13 million in today’s money).</p>
 
-            <p>Our mission is to present you, our reader, with literature that both challenges and exceeds your expectations.</p>
+                <p>It will surprise you even more to learn that this show had impeccable reviews; that critics and audiences alike praised it for its phenomenal sets, incredible attention to detail, a story that educates as much as it entertains, and stellar performances across the board. The series even went on to win a BAFTA and seven Primetime Emmys.</p>
 
-            <p>If you're interested in submitting your work, visit our <a href="submissions">submissions page</a> for details.</p>
-        </div>
+                <p>Anyway, that show about the underwhelming, flaming CGI dragon is starting, and the one with the strangely marketable teenager is on, so I’ll be going.</p>
+            </div>
+        </article>
+
+        <article class="review-block">
+            <div class="review-header">
+                <h2 class="review-title">The Iliad</h2>
+                <div class="review-meta">
+                    <span>Literature</span>
+                    <span class="rating-wrapper">
+                        <span class="stars struck">★★★★★</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="prose">
+                <p>If you go on Amazon today and search for the <em>Iliad</em>, then scroll down to the reviews, you will see quite a few people rating the work one or two stars for a variety of reasons: it's too complicated, too boring, there's not enough action, and so on.</p>
+
+                <p>However, this is one of those few, extremely rare works that are truly beyond the opinion of anyone person, or group of them. This is <strong>the</strong> foundational text of Western civilization.</p>
+
+                <p>It has been “reviewed” by Socrates himself, and he came to the same conclusion: this work predates the very pursuit of knowledge for its own sake; it is, by definition, impervious to your categorization, much like the universe itself. Its influence is impossible to wash off.</p>
+
+                <p>And yet, if you find it in yourself to visit it, as I heartily recommend you do, I can assure you of a few things: 1. You will be thoroughly entertained. 2. You will be confused by the sheer number of names and how they occasionally intersect. 3. You will be left in awe of the imagination and machinations of some blind man on the shores of what is now Turkey.</p>
+
+                <p>I do recommend, however, that you avoid actually reading the book itself. Instead, listen to the audiobook. This was a story meant to be recited from memory, not read. You lose much of its beauty and soul if you simply read it.</p>
+            </div>
+        </article>
+
     </main>
 
     <div class="socials-fixed-bottom">
@@ -360,9 +446,8 @@
     </div>
 
     <script>
-        // --- CURSOR LOGIC (MATCHING REVIEWS PAGE) ---
+        // --- CURSOR LOGIC ---
         const cursor = document.getElementById('cursor');
-        // Added .social-link to the list to ensure the socials trigger the hover
         const interactive = document.querySelectorAll('a, button, .nav-link, .social-link');
 
         if (window.matchMedia("(hover: hover)").matches) {
@@ -377,14 +462,13 @@
                 });
                 el.addEventListener('mouseleave', () => {
                     cursor.classList.remove('hovered');
-                    // Reset styling if any specific colors were applied (safe reset)
                     cursor.style.borderColor = '#fff';
-                    cursor.style.mixBlendMode = 'normal'; // or whatever default required
+                    cursor.style.mixBlendMode = 'exclusion';
                 });
             });
         }
 
-        // --- MENU LOGIC (UPDATED TO OVERLAY STYLE) ---
+        // --- MENU LOGIC ---
         const burgerBtn = document.getElementById('burgerBtn');
         const navMenu = document.getElementById('navMenu');
 
