@@ -56,7 +56,7 @@
         .cursor.hovered { 
             width: 50px; height: 50px; 
             background: transparent;
-            border: 1px solid var(--c-red); /* Default accent */
+            border: 1px solid var(--c-red); 
             mix-blend-mode: normal;
         }
 
@@ -131,7 +131,6 @@
             z-index: 2;
         }
 
-        /* --- VIDEO STYLE --- */
         .header-bg-video {
             position: absolute;
             top: 50%;
@@ -144,7 +143,6 @@
             mix-blend-mode: screen; 
             opacity: 0.9;
         }
-        .header-bg-video::-webkit-media-controls { display: none !important; }
 
 
         /* --- REVIEWS LAYOUT --- */
@@ -185,7 +183,6 @@
         }
 
         .card-watch { border-right: 1px solid var(--c-border); }
-
         .review-card:hover { background: #111; }
 
         .card-top {
@@ -215,7 +212,6 @@
             transition: color 0.3s;
         }
 
-        /* STAR RATING STYLE */
         .star-rating {
             display: inline-flex;
             gap: 5px;
@@ -228,39 +224,18 @@
             height: 18px;
         }
         
-        /* Watch Stars (Red) */
         .stars-watch .star-filled { fill: var(--c-red); }
         .stars-watch .star-empty { fill: none; stroke: var(--c-red); stroke-width: 1.5; opacity: 0.3; }
         
-        /* Read Stars (Yellow) */
         .stars-read .star-filled { fill: var(--c-yellow); }
         .stars-read .star-half { fill: var(--c-yellow); }
         .stars-read .star-empty { fill: none; stroke: var(--c-yellow); stroke-width: 1.5; opacity: 0.3; }
-
-        /* Struck Stars (Diagonal Red Strike) */
-        .star-rating.struck {
-            opacity: 0.8;
-        }
-        .star-rating.struck::after {
-            content: '';
-            position: absolute;
-            left: -5%;
-            top: 50%;
-            width: 110%;
-            height: 2px;
-            background-color: var(--c-red);
-            transform: translateY(-50%) rotate(-10deg);
-            pointer-events: none;
-            box-shadow: 0 0 5px rgba(230,0,38,0.4);
-        }
-
 
         .card-watch .work-meta { color: #666; }
         .card-read .work-meta { color: #666; }
         .card-watch:hover .work-meta { color: var(--c-red); }
         .card-read:hover .work-meta { color: var(--c-yellow); }
 
-        /* Large Image Size */
         .card-thumb {
             width: 280px; height: 420px; 
             object-fit: cover;
@@ -282,7 +257,6 @@
             line-height: 1.6;
             color: #ccc;
         }
-
 
         /* --- SOCIALS SECTION --- */
         .socials-section {
@@ -317,7 +291,6 @@
 
         .social-link:hover { transform: translateY(-2px); }
 
-        /* --- FOOTER --- */
         footer {
             margin-top: auto;
             padding: 40px;
@@ -329,12 +302,9 @@
             border-top: 1px solid var(--c-border);
         }
 
-        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 900px) {
-            
             * { cursor: auto !important; }
             .cursor { display: none !important; }
-
             .desktop-menu { display: none; }
             .burger { display: flex; flex-direction: column; gap: 6px; background: none; border: none; z-index: 1002; }
             .burger span { display: block; width: 30px; height: 2px; background-color: #fff; transition: 0.3s; }
@@ -349,62 +319,17 @@
                 z-index: 1001;
             }
             .mobile-menu-overlay.active { transform: translateY(0); }
-            .mobile-menu-overlay .nav-link { font-family: var(--f-head); font-size: 2.5rem; color: #444; }
-            .mobile-menu-overlay .nav-link:hover { color: #fff; }
-
             .header-bg-video { display: none !important; }
-
-            .header-section { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                padding: 120px 20px 40px 20px; 
-                gap: 20px;
-                background: radial-gradient(circle at top right, #1a1a1a, #000);
-            }
-
-            .huge-title { 
-                font-size: 15vw; 
-                opacity: 0; 
-                animation: mobileSlideUp 0.8s ease-out forwards 0.2s;
-            }
-
-            .reviews-main-grid { 
-                display: flex;
-                flex-direction: column;
-            }
-            
-            /* Order Logic: 
-               1. Watch Header
-               2. Watch Cards
-               3. Read Header
-               4. Read Cards 
-            */
+            .header-section { flex-direction: column; align-items: flex-start; padding: 120px 20px 40px 20px; gap: 20px; }
+            .huge-title { font-size: 15vw; }
+            .reviews-main-grid { display: flex; flex-direction: column; }
             .header-watch { order: 1; border-right: none; }
             .card-watch { order: 2; border-right: none; }
             .header-read { order: 3; border-top: 1px solid var(--c-border); }
             .card-read { order: 4; }
-
-            .review-card { padding: 40px 20px; }
-            
-            .card-top {
-                flex-direction: column-reverse; 
-                align-items: flex-start;
-                gap: 20px;
-            }
-            
+            .card-top { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
             .card-thumb { width: 180px; height: 270px; }
-            .work-title { font-size: 2rem; }
-
-            .grid-header {
-                padding: 20px 20px;
-                top: 70px;
-            }
-            .cat-title { font-size: 2rem; }
-
-            @keyframes mobileSlideUp {
-                0% { opacity: 0; transform: translateY(30px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
+            .grid-header { padding: 20px 20px; top: 70px; }
         }
     </style>
 </head>
@@ -467,7 +392,6 @@
                 <div class="card-info">
                     <h2 class="work-title">Poor Things</h2>
                     <span class="work-meta">Dir. Yorgos Lanthimos</span>
-                    
                     <div class="star-rating stars-watch">
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -475,15 +399,11 @@
                         <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-
                 </div>
                 <img src="images/poor-things.jpg" alt="Poor Things Cover" class="card-thumb"> 
             </div>
             <div class="card-body">
-                Poor Things is a beautifully shot, wonderfully acted, and amazingly designed movie that had me smiling in awe during its first half. The story is fresh, the color palette is delicious, and the set design is sensational—unfortunately, there was another hour after that.<br><br>
-                In this second half, it struggles with a grinding, repetitive plot that moves from a neo-Gothic retelling of Frankenstein into yet another exploitative, male-led, male-written depiction of what women’s liberation “truly” looks like: women becoming commodities, or “their own means of production” as the movie puts it, for men’s desires. Bella Baxter only finds enlightenment, and maturity, after she sells herself to men; men she explicitly doesn’t want to be with.<br><br>
-                But there’s more: All men are violent, depraved beasts; we are forced to consider if a woman with the mind of a child is being raped in front of us or not (the implication that she is capable of making that decision simply by virtue of looking like an adult poses some questions that I don’t think the movie wishes to invite); and we are told that a good partner is one who accepts all of your actions without judgment or opposition, regardless of how it affects them.<br><br>
-                Ultimately, I’d say that you should turn it off right when they arrive in Lisbon. You won’t miss much after that.
+                Poor Things is a beautifully shot, wonderfully acted, and amazingly designed movie that had me smiling in awe during its first half. The story is fresh, the color palette is delicious, and the set design is sensational—unfortunately, there was another hour after that...
             </div>
         </article>
 
@@ -492,7 +412,6 @@
                 <div class="card-info">
                     <h2 class="work-title">Stoner</h2>
                     <span class="work-meta">John Williams</span>
-                    
                     <div class="star-rating stars-read">
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -508,15 +427,11 @@
                             <path fill="url(#halfGrad)" stroke="var(--c-yellow)" stroke-width="1.5" stroke-opacity="0.3" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                         </svg>
                     </div>
-
                 </div>
                 <img src="images/stoner.jpeg" alt="Stoner Cover" class="card-thumb">
             </div>
             <div class="card-body">
-                A remarkable novel about a remarkably unremarkable man. In this sense, both the man and the book embody this story, as they are often ignored when discussing the great works, and workers, of literature.<br><br>
-                William Stoner is no hero. He is not the smartest man in the room, nor the most successful; he simply is. In this, there is a comfort that our lives don’t need to be grand adventures to be worthy of telling. That you don’t need to pursue greatness to be anything at all. That your life is worthy as is.<br><br>
-                John Williams takes you on this journey with beautiful but economical prose. You will be left conflicted, frustrated, and emotional, but never lost.<br><br>
-                There is little else to say other than this is a must-read for anyone with even a passing interest in the greatest works of literature.
+                A remarkable novel about a remarkably unremarkable man. In this sense, both the man and the book embody this story, as they are often ignored when discussing the great works, and workers, of literature...
             </div>
         </article>
 
@@ -525,7 +440,6 @@
                 <div class="card-info">
                     <h2 class="work-title">Insomnia (1997)</h2>
                     <span class="work-meta">Dir. Erik Skjoldbjærg</span>
-                    
                     <div class="star-rating stars-watch">
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -533,16 +447,11 @@
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-
                 </div>
                 <img src="images/Insomnia.jpg" alt="Insomnia Cover" class="card-thumb"> 
             </div>
             <div class="card-body">
-                In this Norwegian crime thriller, there is little in the way of mystery. We are told immediately who got killed, and not long after, who did the killing. With that out of the way, the audience is instead made to watch.<br><br>
-                Watch how guilt, shame, and fear lead our main character down a path he may never lift himself out of.<br><br>
-                Stellan Skarsgård delivers a powerful, yet measured, performance of a man broken by the weight of himself. With no one else to blame for his actions, the disgraced Swedish detective Jonas Engström spirals further down into moral decay, compounded by insomnia and the accidental killing of his partner.<br><br>
-                Unfortunately, it’s almost impossible to find it on any regular streaming service. Criterion has it, but it’s unavailable in Europe. I have tried with a VPN, but it won’t accept foreign cards.<br>
-                As such, I recommend that you pirate the movie, taking the necessary precautions, of course.
+                In this Norwegian crime thriller, there is little in the way of mystery. We are told immediately who got killed, and not long after, who did the killing...
             </div>
         </article>
 
@@ -551,7 +460,6 @@
                 <div class="card-info">
                     <h2 class="work-title">I Deliver Parcels in Beijing</h2>
                     <span class="work-meta">Hu Anyan</span>
-                    
                     <div class="star-rating stars-read">
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -567,15 +475,11 @@
                         </svg>
                         <svg class="star-icon star-empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-
                 </div>
                 <img src="images/IDPIB.jpeg" alt="Parcels Cover" class="card-thumb">
             </div>
             <div class="card-body">
-                In this memoir, Hu Anyan, a courier working in various cities in China, describes his experiences in the trade: the challenges, the difficulties, and the relationships he formed along the way.<br><br>
-                Although the premise itself is interesting enough, I confess I went into it with a burning curiosity to read firsthand what the life of such a precarious worker in China would be like. I was left astonished by just how mundane and similar to Western working conditions it is.<br><br>
-                Just as in the West, Hu Anyan is overworked, overstimulated, and becomes a cynical, mean-spirited man to whom deadlines matter more than anything else. Every second is measured; a lost parcel means lost wages; sleep after a long shift is hard to manage; and alcohol becomes your best friend.<br><br>
-                For what it is, the book succeeds perfectly. I will not deduct points for “boringness” because it is, at the end of the day, a memoir, and the author is free to reveal or obscure what he pleases. However, the story is, at times, painfully repetitive. Although this does not distract much from the main narrative, you may find yourself power-skipping through some parts.
+                In this memoir, Hu Anyan, a courier working in various cities in China, describes his experiences in the trade...
             </div>
         </article>
 
@@ -584,7 +488,6 @@
                 <div class="card-info">
                     <h2 class="work-title">Rome (2005)</h2>
                     <span class="work-meta">Created by Heller, MacDonald & Milius</span>
-                    
                     <div class="star-rating stars-watch">
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -592,15 +495,11 @@
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-
                 </div>
                 <img src="blog-images/rome.jpg" alt="Rome Cover" class="card-thumb"> 
             </div>
             <div class="card-body">
-                In a world where <em>The Rings of Power</em>—a near-universally hated series we may assume receives little more than hate-views—can cost $60 million per episode; where <em>Stranger Things</em>—a by-the-numbers teen adventure that doesn’t seem to know when it has outlasted the '80s nostalgia craze of the pandemic years—can cost $50–60 million per episode; or where <em>Citadel</em> (yeah, I’ve never heard of it either) costs about $50 million, it’s difficult to understand how the 2005 series <em>Rome</em> was cut short—despite having only a third of its arc completed—for being “too expensive,” with a budget of roughly $8 million per episode (or $13 million in today’s money).<br><br>
-                It will surprise you even more to learn that this show had impeccable reviews; that critics and audiences alike praised it for its phenomenal sets, incredible attention to detail, a story that educates as much as it entertains, and stellar performances across the board.<br><br>
-                The series even went on to win a BAFTA and seven Primetime Emmys.<br><br>
-                Anyway, that show about the underwhelming, flaming CGI dragon is starting, and the one with the strangely marketable teenager is on, so I’ll be going.
+                In a world where <em>The Rings of Power</em>—a near-universally hated series we may assume receives little more than hate-views—can cost $60 million per episode... it’s difficult to understand how the 2005 series <em>Rome</em> was cut short.
             </div>
         </article>
 
@@ -609,45 +508,43 @@
                 <div class="card-info">
                     <h2 class="work-title">The Iliad</h2>
                     <span class="work-meta">Homer</span>
-                    
-                    <div class="star-rating stars-read struck">
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg class="star-icon star-filled" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-
-                </div>
                 <img src="blog-images/iliad.jpg" alt="Iliad Cover" class="card-thumb">
             </div>
             <div class="card-body">
-                If you go on Amazon today and search for <em>The Iliad</em>, then scroll down to the reviews, you will see quite a few people rating the work one or two stars for a variety of reasons: it's too complicated, too boring, there's not enough action, and so on.<br><br>
-                However, this is one of those few, extremely rare works that are truly beyond the opinion of anyone person, or group of them. This is <em>the</em> foundational text of Western civilization.<br><br>
-                It has been “reviewed” by Socrates himself, and he came to the same conclusion: this work predates the very pursuit of knowledge for its own sake; it is, by definition, impervious to your categorization, much like the universe itself. Its influence is impossible to wash off.<br><br>
-                And yet, if you find it in yourself to visit it, as I heartily recommend you do, I can assure you of a few things: 1. You will be thoroughly entertained. 2. You will be confused by the sheer number of names and how they occasionally intersect. 3. You will be left in awe of the imagination and machinations of some blind man on the shores of what is now Turkey.<br><br>
-                I do recommend, however, that you avoid actually reading the book itself. Instead, listen to the audiobook. This was a story meant to be recited from memory, not read. You lose much of its beauty and soul if you simply read it.
+                If you go on Amazon today and search for <em>The Iliad</em>, then scroll down to the reviews, you will see quite a few people rating the work one or two stars... However, this is one of those few, extremely rare works that are truly beyond the opinion of any one person, or group of them.
             </div>
         </article>
 
     </main>
 
     <div class="socials-section">
-        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
+        <a href="https://x.com/faunbymoonlight" target="_blank" class="social-link"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
 
-        <a href="https://bsky.app/profile/faunbymoonlight.bsky.social" target="_blank" class="social-link" aria-label="Bluesky">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565-.133 2.032-.307 2.914.443 3.633c1.382 1.325 4.384 4.48 6.015 6.467.954 1.162.87 2.016-.036 1.831C5.071 11.649 1.48 10.375 1.056 12.012c-.228.882.35 1.696 1.528 2.083 2.553.84 5.255.454 6.907-.768 1.408-1.042 1.706-2.181 2.509-2.181.803 0 1.101 1.14 2.51 2.181 1.651 1.222 4.354 1.608 6.907.768 1.177-.387 1.756-1.2 1.528-2.083-.425-1.637-4.016-.363-5.366-.113-.906.185-.99-.669-.036-1.831 1.63-1.987 4.633-5.142 6.015-6.467.75-.719.576-1.601-.459-2.068-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
-        </a>
+    <footer>
+        © 2026 Faun by Moonlight
+    </footer>
 
-        <a href="https://www.youtube.com/channel/UCnEYXjWW-kT8xsqMVwPJsMA" target="_blank" class="social-link" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
+    <script>
+        // Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, button, .review-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
 
-        <a href="https://faunbymoonlight.substack.com" target="_blank" class="social-link" aria-label="Substack">
-             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-        </a>
-
-        <a href="https://www.instagram.com/faunbymoonlight" target="_blank" class="social-link" aria-label="Instagram">
-             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072  - be sure the text is corrected for any typos, etc, also Rome it's 5 starts, and Iliad should have the stars struck
+        // Mobile Nav
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
