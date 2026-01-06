@@ -237,17 +237,21 @@
         .stars-read .star-half { fill: var(--c-yellow); }
         .stars-read .star-empty { fill: none; stroke: var(--c-yellow); stroke-width: 1.5; opacity: 0.3; }
 
-        /* Struck Stars (Crossed Out) */
+        /* Struck Stars (Diagonal Red Strike) */
+        .star-rating.struck {
+            opacity: 0.8;
+        }
         .star-rating.struck::after {
             content: '';
             position: absolute;
             left: -5%;
-            width: 110%;
             top: 50%;
-            height: 1px;
-            background-color: #888;
-            transform: translateY(-50%);
+            width: 110%;
+            height: 2px;
+            background-color: var(--c-red);
+            transform: translateY(-50%) rotate(-10deg);
             pointer-events: none;
+            box-shadow: 0 0 5px rgba(230,0,38,0.4);
         }
 
 
@@ -590,7 +594,7 @@
                     </div>
 
                 </div>
-                <img src="images/rome.jpg" alt="Rome Cover" class="card-thumb"> 
+                <img src="blog-images/rome.jpg" alt="Rome Cover" class="card-thumb"> 
             </div>
             <div class="card-body">
                 In a world where <em>The Rings of Power</em>—a near-universally hated series we may assume receives little more than hate-views—can cost $60 million per episode; where <em>Stranger Things</em>—a by-the-numbers teen adventure that doesn’t seem to know when it has outlasted the '80s nostalgia craze of the pandemic years—can cost $50–60 million per episode; or where <em>Citadel</em> (yeah, I’ve never heard of it either) costs about $50 million, it’s difficult to understand how the 2005 series <em>Rome</em> was cut short—despite having only a third of its arc completed—for being “too expensive,” with a budget of roughly $8 million per episode (or $13 million in today’s money).<br><br>
@@ -615,7 +619,7 @@
                     </div>
 
                 </div>
-                <img src="images/iliad.jpg" alt="Iliad Cover" class="card-thumb">
+                <img src="blog-images/iliad.jpg" alt="Iliad Cover" class="card-thumb">
             </div>
             <div class="card-body">
                 If you go on Amazon today and search for <em>The Iliad</em>, then scroll down to the reviews, you will see quite a few people rating the work one or two stars for a variety of reasons: it's too complicated, too boring, there's not enough action, and so on.<br><br>
